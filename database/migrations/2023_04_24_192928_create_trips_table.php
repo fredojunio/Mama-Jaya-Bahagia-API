@@ -11,9 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('vehicle_types', function (Blueprint $table) {
+        Schema::create('trips', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->integer("allowance")->default(0);
+            $table->integer("toll")->default(0);
+            $table->integer("gas")->default(0);
+            $table->text("note")->nullable();
+            $table->integer("toll_used")->default(0);
+            $table->integer("branch_to_main_tonnage")->nullable();
             $table->timestamps();
         });
     }
@@ -23,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('vehicle_types');
+        Schema::dropIfExists('trips');
     }
 };

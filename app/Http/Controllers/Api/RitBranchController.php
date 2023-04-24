@@ -3,25 +3,17 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\SuccessResource;
-use App\Models\CustomerType;
+use App\Models\RitBranch;
 use Illuminate\Http\Request;
 
-class CustomerTypeController extends Controller
+class RitBranchController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $customers = CustomerType::all();
-        $return = [
-            'api_code' => 200,
-            'api_status' => true,
-            'api_message' => 'Sukses',
-            'api_results' => $customers
-        ];
-        return SuccessResource::make($return);
+        //
     }
 
     /**
@@ -35,7 +27,7 @@ class CustomerTypeController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(CustomerType $customerType)
+    public function show(RitBranch $ritBranch)
     {
         //
     }
@@ -43,7 +35,7 @@ class CustomerTypeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, CustomerType $customerType)
+    public function update(Request $request, RitBranch $ritBranch)
     {
         //
     }
@@ -51,7 +43,7 @@ class CustomerTypeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(CustomerType $customerType)
+    public function destroy(RitBranch $ritBranch)
     {
         //
     }

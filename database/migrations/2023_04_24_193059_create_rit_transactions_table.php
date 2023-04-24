@@ -11,11 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('vehicles', function (Blueprint $table) {
+        Schema::create('rit_transactions', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->integer('trip_count')->default(0);
-            $table->string('type');
+            $table->integer("tonnage");
+            $table->integer("masak")->default(1);
+            $table->integer("item_price");
+            $table->integer("total_price");
+            $table->integer("tonnage_left");
             $table->timestamps();
         });
     }
@@ -25,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('vehicles');
+        Schema::dropIfExists('rit_transactions');
     }
 };

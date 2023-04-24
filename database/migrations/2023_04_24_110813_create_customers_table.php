@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('address');
             $table->integer('ongkir');
             $table->string('birthdate');
+            $table->string('type');
             $table->timestamps();
         });
     }

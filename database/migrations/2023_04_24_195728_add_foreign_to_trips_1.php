@@ -11,12 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('vehicles', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->integer('trip_count')->default(0);
-            $table->string('type');
-            $table->timestamps();
+        Schema::table('trips', function (Blueprint $table) {
+            $table->unsignedBigInteger('vehicle_id')->index()->nullable();
+            $table->foreign('vehicle_id')->references('id')->on('vehicles')->onDelete('cascade');
         });
     }
 
@@ -25,6 +22,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('vehicles');
+        Schema::table('trips', function (Blueprint $table) {
+            //
+        });
     }
 };

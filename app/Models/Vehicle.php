@@ -9,6 +9,12 @@ class Vehicle extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'name', 'trip_count', 'type_id'
+        'name',
+        'trip_count',
+        'type'
     ];
+    public function trips()
+    {
+        return $this->hasMany(Trip::class, 'vehicle_id', 'id');
+    }
 }

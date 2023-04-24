@@ -11,9 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('customers', function (Blueprint $table) {
-            $table->unsignedBigInteger('type_id')->index()->nullable();
-            $table->foreign('type_id')->references('id')->on('customer_types')->onDelete('cascade');
+        Schema::create('rit_branches', function (Blueprint $table) {
+            $table->id();
+            $table->string("name");
+            $table->integer("sent_tonnage");
+            $table->integer("income")->nullable();
+            $table->string("delivery_date");
+            $table->timestamps();
         });
     }
 
@@ -22,8 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('customers', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('rit_branches');
     }
 };

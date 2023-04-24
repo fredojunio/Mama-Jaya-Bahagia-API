@@ -3,25 +3,17 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\SuccessResource;
-use App\Models\VehicleType;
+use App\Models\Report;
 use Illuminate\Http\Request;
 
-class VehicleTypeController extends Controller
+class ReportController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $customers = VehicleType::all();
-        $return = [
-            'api_code' => 200,
-            'api_status' => true,
-            'api_message' => 'Sukses',
-            'api_results' => $customers
-        ];
-        return SuccessResource::make($return);
+        //
     }
 
     /**
@@ -35,7 +27,7 @@ class VehicleTypeController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(VehicleType $vehicleType)
+    public function show(Report $report)
     {
         //
     }
@@ -43,7 +35,7 @@ class VehicleTypeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, VehicleType $vehicleType)
+    public function update(Request $request, Report $report)
     {
         //
     }
@@ -51,7 +43,7 @@ class VehicleTypeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(VehicleType $vehicleType)
+    public function destroy(Report $report)
     {
         //
     }

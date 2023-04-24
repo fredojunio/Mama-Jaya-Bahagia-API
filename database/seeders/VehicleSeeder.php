@@ -15,12 +15,12 @@ class VehicleSeeder extends Seeder
     {
         $role = new Vehicle();
         $role->name = 'Truk A';
-        $role->type_id = 1;
+        $role->type = "Truk";
         $role->save();
 
         $role = new Vehicle();
         $role->name = 'Pickup A';
-        $role->type_id = 2;
+        $role->type = "Pickup";
         $role->save();
     }
 }

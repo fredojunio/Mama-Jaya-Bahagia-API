@@ -36,7 +36,7 @@ class CustomerController extends Controller
             'address' => $request->address,
             'ongkir' => $request->ongkir,
             'birthdate' => $request->birthdate,
-            'type_id' => $request->type_id,
+            'type' => $request->type,
         ]);
         $return = [
             'api_code' => 200,
@@ -73,7 +73,7 @@ class CustomerController extends Controller
             'address' => $request->address,
             'ongkir' => $request->ongkir,
             'birthdate' => $request->birthdate,
-            'type_id' => $request->type_id,
+            'type' => $request->type,
         ]);
         $return = [
             'api_code' => 200,
