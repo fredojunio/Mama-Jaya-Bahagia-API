@@ -64,7 +64,7 @@ class CustomerController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request,Customer $customer)
+    public function update(Request $request, Customer $customer)
     {
         $customer->update([
             'nik' => $request->nik,
@@ -96,6 +96,18 @@ class CustomerController extends Controller
             'api_results' => $customer
         ];
         $customer->delete();
+        return SuccessResource::make($return);
+    }
+    public function search(Request $request)
+    {
+        $customers = Customer::where('name', 'like', '%' . $request->search . '%')
+            ->orWhere('nickname', 'like', '%' . $request->search . '%')->get();
+        $return = [
+            'api_code' => 200,
+            'api_status' => true,
+            'api_message' => 'Sukses',
+            'api_results' => $customers
+        ];
         return SuccessResource::make($return);
     }
 }

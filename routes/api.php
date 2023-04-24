@@ -28,5 +28,6 @@ Route::group(['middleware' => 'auth:api', 'as' => 'api.user.'], function () {
 Route::group(['prefix' => 'admin'], function () {
     Route::apiResource('item', ItemController::class);
     Route::apiResource('customer', CustomerController::class);
+    Route::post('/customer/search', [CustomerController::class, 'search']);
     Route::apiResource('customertype', CustomerTypeController::class);
 });
