@@ -4,6 +4,8 @@ use App\Http\Controllers\Api\Auth\LoginController;
 use App\Http\Controllers\Api\CustomerController;
 use App\Http\Controllers\Api\CustomerTypeController;
 use App\Http\Controllers\Api\ItemController;
+use App\Http\Controllers\Api\VehicleController;
+use App\Http\Controllers\Api\VehicleTypeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -30,4 +32,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::apiResource('customer', CustomerController::class);
     Route::post('/customer/search', [CustomerController::class, 'search']);
     Route::apiResource('customertype', CustomerTypeController::class);
+    Route::apiResource('vehicle', VehicleController::class);
+    Route::post('/vehicle/search', [VehicleController::class, 'search']);
+    Route::apiResource('vehicletype', VehicleTypeController::class);
 });

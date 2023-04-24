@@ -3,7 +3,8 @@
     "scripts": {
         "dev": "vite",
         "build": "vite build",
-        "refresh": "php artisan migrate:fresh --seed && php artisan passport:install"
+        "refresh": "php artisan migrate:fresh --seed && php artisan passport:install",
+        "create_model": "php artisan make:model $NAME -ms"
     },
     "devDependencies": {
         "@popperjs/core": "^2.11.6",
