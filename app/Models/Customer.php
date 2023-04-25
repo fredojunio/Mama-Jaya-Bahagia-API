@@ -17,4 +17,12 @@ class Customer extends Model
         'birthdate',
         'type'
     ];
+    public function savings()
+    {
+        return $this->hasMany(Saving::class, 'customer_id', 'id');
+    }
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class, 'customer_id', 'id');
+    }
 }
