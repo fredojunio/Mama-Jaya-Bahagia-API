@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\SuccessResource;
+use App\Http\Resources\VehicleResource;
 use App\Models\Vehicle;
 use Illuminate\Http\Request;
 
@@ -19,7 +20,7 @@ class VehicleController extends Controller
             'api_code' => 200,
             'api_status' => true,
             'api_message' => 'Sukses',
-            'api_results' => $vehicles
+            'api_results' => VehicleResource::collection($vehicles)
         ];
         return SuccessResource::make($return);
     }
@@ -37,7 +38,7 @@ class VehicleController extends Controller
             'api_code' => 200,
             'api_status' => true,
             'api_message' => 'Sukses',
-            'api_results' => $vehicle
+            'api_results' => VehicleResource::make($vehicle)
         ];
         return SuccessResource::make($return);
     }
@@ -51,7 +52,7 @@ class VehicleController extends Controller
             'api_code' => 200,
             'api_status' => true,
             'api_message' => 'Sukses',
-            'api_results' => $vehicle
+            'api_results' => VehicleResource::make($vehicle)
         ];
         return SuccessResource::make($return);
     }
@@ -69,7 +70,7 @@ class VehicleController extends Controller
             'api_code' => 200,
             'api_status' => true,
             'api_message' => 'Sukses',
-            'api_results' => $vehicle
+            'api_results' => VehicleResource::make($vehicle)
         ];
         return SuccessResource::make($return);
     }
@@ -83,7 +84,7 @@ class VehicleController extends Controller
             'api_code' => 200,
             'api_status' => true,
             'api_message' => 'Sukses Terhapus.',
-            'api_results' => $vehicle
+            'api_results' => VehicleResource::make($vehicle)
         ];
         $vehicle->delete();
         return SuccessResource::make($return);
@@ -97,7 +98,7 @@ class VehicleController extends Controller
             'api_code' => 200,
             'api_status' => true,
             'api_message' => 'Sukses',
-            'api_results' => $vehicles
+            'api_results' => VehicleResource::collection($vehicles)
         ];
         return SuccessResource::make($return);
     }

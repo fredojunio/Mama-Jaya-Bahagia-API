@@ -2,19 +2,18 @@
 
 use App\Http\Controllers\Api\Auth\LoginController;
 use App\Http\Controllers\Api\CustomerController;
-use App\Http\Controllers\Api\CustomerTypeController;
 use App\Http\Controllers\Api\ExpenseController;
 use App\Http\Controllers\Api\IncomeController;
 use App\Http\Controllers\Api\ItemController;
 use App\Http\Controllers\Api\ReportController;
 use App\Http\Controllers\Api\ReportRitController;
 use App\Http\Controllers\Api\RitBranchController;
+use App\Http\Controllers\Api\RitController;
 use App\Http\Controllers\Api\RitTransactionController;
 use App\Http\Controllers\Api\SavingController;
 use App\Http\Controllers\Api\TransactionController;
 use App\Http\Controllers\Api\TripController;
 use App\Http\Controllers\Api\VehicleController;
-use App\Http\Controllers\Api\VehicleTypeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -44,12 +43,12 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('/vehicle/search', [VehicleController::class, 'search']);
     Route::apiResource('rit', RitController::class);
     Route::apiResource('ritbranch', RitBranchController::class);
-    Route::apiResource('Trip', TripController::class);
-    Route::apiResource('RitTransaction', RitTransactionController::class);
-    Route::apiResource('Transaction', TransactionController::class);
-    Route::apiResource('Saving', SavingController::class);
-    Route::apiResource('Report', ReportController::class);
-    Route::apiResource('Income', IncomeController::class);
-    Route::apiResource('Expense', ExpenseController::class);
-    Route::apiResource('ReportRit', ReportRitController::class);
+    Route::apiResource('trip', TripController::class);
+    Route::apiResource('rit_transaction', RitTransactionController::class);
+    Route::apiResource('transaction', TransactionController::class);
+    Route::apiResource('saving', SavingController::class);
+    Route::apiResource('report', ReportController::class);
+    Route::apiResource('income', IncomeController::class);
+    Route::apiResource('expense', ExpenseController::class);
+    Route::apiResource('report_rit', ReportRitController::class);
 });

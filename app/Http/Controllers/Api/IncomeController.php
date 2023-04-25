@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\SuccessResource;
 use App\Models\Income;
 use Illuminate\Http\Request;
 
@@ -13,7 +14,14 @@ class IncomeController extends Controller
      */
     public function index()
     {
-        //
+        $incomes = Income::all();
+        $return = [
+            'api_code' => 200,
+            'api_status' => true,
+            'api_message' => 'Sukses',
+            'api_results' => $incomes
+        ];
+        return SuccessResource::make($return);
     }
 
     /**
@@ -21,7 +29,18 @@ class IncomeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $income = Income::create([
+            "amount" => $request->amount,
+            "tonnage" => $request->tonnage,
+            "type" => $request->type,
+        ]);
+        $return = [
+            'api_code' => 200,
+            'api_status' => true,
+            'api_message' => 'Sukses',
+            'api_results' => $income
+        ];
+        return SuccessResource::make($return);
     }
 
     /**
@@ -29,7 +48,13 @@ class IncomeController extends Controller
      */
     public function show(Income $income)
     {
-        //
+        $return = [
+            'api_code' => 200,
+            'api_status' => true,
+            'api_message' => 'Sukses',
+            'api_results' => $income
+        ];
+        return SuccessResource::make($return);
     }
 
     /**
@@ -37,7 +62,18 @@ class IncomeController extends Controller
      */
     public function update(Request $request, Income $income)
     {
-        //
+        $income->update([
+            "amount" => $request->amount,
+            "tonnage" => $request->tonnage,
+            "type" => $request->type,
+        ]);
+        $return = [
+            'api_code' => 200,
+            'api_status' => true,
+            'api_message' => 'Sukses',
+            'api_results' => $income
+        ];
+        return SuccessResource::make($return);
     }
 
     /**
@@ -45,6 +81,13 @@ class IncomeController extends Controller
      */
     public function destroy(Income $income)
     {
-        //
+        $return = [
+            'api_code' => 200,
+            'api_status' => true,
+            'api_message' => 'Sukses Terhapus.',
+            'api_results' => $income
+        ];
+        $income->delete();
+        return SuccessResource::make($return);
     }
 }

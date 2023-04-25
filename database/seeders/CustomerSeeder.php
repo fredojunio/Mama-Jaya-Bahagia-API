@@ -19,7 +19,7 @@ class CustomerSeeder extends Seeder
         $role->nickname = "Pardi";
         $role->address = "Jl. Mawar 123";
         $role->ongkir = 24000;
-        $role->birthdate = "21/03/1980";
+        $role->birthdate = "2022-12-30";
         $role->type = "Owner";
         $role->save();
 
@@ -29,7 +29,7 @@ class CustomerSeeder extends Seeder
         $role->nickname = "Paijo";
         $role->address = "Jl. Mawar 124";
         $role->ongkir = 2000;
-        $role->birthdate = "21/03/1980";
+        $role->birthdate = "2022-12-30";
         $role->type = "Kiriman";
         $role->save();
 
@@ -39,7 +39,7 @@ class CustomerSeeder extends Seeder
         $role->nickname = "Kimin";
         $role->address = "Jl. Mawar 231";
         $role->ongkir = 0;
-        $role->birthdate = "21/03/1980";
+        $role->birthdate = "2022-12-30";
         $role->type = "Eceran";
         $role->save();
     }

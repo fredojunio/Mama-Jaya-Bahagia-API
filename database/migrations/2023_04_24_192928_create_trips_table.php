@@ -17,7 +17,7 @@ return new class extends Migration
             $table->integer("toll")->default(0);
             $table->integer("gas")->default(0);
             $table->text("note")->nullable();
-            $table->integer("toll_used")->default(0);
+            $table->integer("toll_used")->nullable();
             $table->integer("branch_to_main_tonnage")->nullable();
             $table->timestamps();
         });

@@ -18,8 +18,8 @@ class VehicleResource extends JsonResource
             "id" => $this->id,
             "created_at" => $this->created_at,
             'name' => $this->name,
-            'trip_count' => $this->trip_count,
             'type' => $this->type,
+            'trip_count' => $this->trip_count,
             'trips' => $this->trips,
         ];
     }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\SuccessResource;
 use App\Models\Expense;
 use Illuminate\Http\Request;
 
@@ -13,7 +14,14 @@ class ExpenseController extends Controller
      */
     public function index()
     {
-        //
+        $expenses = Expense::all();
+        $return = [
+            'api_code' => 200,
+            'api_status' => true,
+            'api_message' => 'Sukses',
+            'api_results' => $expenses
+        ];
+        return SuccessResource::make($return);
     }
 
     /**
@@ -21,7 +29,20 @@ class ExpenseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $expense = Expense::create([
+            "amount" => $request->amount,
+            "note" => $request->note,
+            "name" => $request->name,
+            "time" => $request->time,
+            "type" => $request->type,
+        ]);
+        $return = [
+            'api_code' => 200,
+            'api_status' => true,
+            'api_message' => 'Sukses',
+            'api_results' => $expense
+        ];
+        return SuccessResource::make($return);
     }
 
     /**
@@ -29,7 +50,13 @@ class ExpenseController extends Controller
      */
     public function show(Expense $expense)
     {
-        //
+        $return = [
+            'api_code' => 200,
+            'api_status' => true,
+            'api_message' => 'Sukses',
+            'api_results' => $expense
+        ];
+        return SuccessResource::make($return);
     }
 
     /**
@@ -37,7 +64,20 @@ class ExpenseController extends Controller
      */
     public function update(Request $request, Expense $expense)
     {
-        //
+        $expense->update([
+            "amount" => $request->amount,
+            "note" => $request->note,
+            "name" => $request->name,
+            "time" => $request->time,
+            "type" => $request->type,
+        ]);
+        $return = [
+            'api_code' => 200,
+            'api_status' => true,
+            'api_message' => 'Sukses',
+            'api_results' => $expense
+        ];
+        return SuccessResource::make($return);
     }
 
     /**
@@ -45,6 +85,13 @@ class ExpenseController extends Controller
      */
     public function destroy(Expense $expense)
     {
-        //
+        $return = [
+            'api_code' => 200,
+            'api_status' => true,
+            'api_message' => 'Sukses Terhapus.',
+            'api_results' => $expense
+        ];
+        $expense->delete();
+        return SuccessResource::make($return);
     }
 }

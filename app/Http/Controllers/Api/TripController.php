@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\SuccessResource;
+use App\Http\Resources\TripResource;
 use App\Models\Trip;
 use Illuminate\Http\Request;
 
@@ -13,7 +15,14 @@ class TripController extends Controller
      */
     public function index()
     {
-        //
+        $trips = Trip::all();
+        $return = [
+            'api_code' => 200,
+            'api_status' => true,
+            'api_message' => 'Sukses',
+            'api_results' => TripResource::collection($trips)
+        ];
+        return SuccessResource::make($return);
     }
 
     /**
@@ -21,7 +30,22 @@ class TripController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $trip = Trip::create([
+            "allowance" => $request->allowance,
+            "toll" => $request->toll,
+            "gas" => $request->gas,
+            "note" => $request->note,
+            "toll_used" => $request->toll_used,
+            "branch_to_main_tonnage" => $request->branch_to_main_tonnage,
+            "vehicle_id" => $request->vehicle_id,
+        ]);
+        $return = [
+            'api_code' => 200,
+            'api_status' => true,
+            'api_message' => 'Sukses',
+            'api_results' => TripResource::make($trip)
+        ];
+        return SuccessResource::make($return);
     }
 
     /**
@@ -29,7 +53,13 @@ class TripController extends Controller
      */
     public function show(Trip $trip)
     {
-        //
+        $return = [
+            'api_code' => 200,
+            'api_status' => true,
+            'api_message' => 'Sukses',
+            'api_results' => TripResource::make($trip)
+        ];
+        return SuccessResource::make($return);
     }
 
     /**
@@ -37,7 +67,22 @@ class TripController extends Controller
      */
     public function update(Request $request, Trip $trip)
     {
-        //
+        $trip->update([
+            "allowance" => $request->allowance,
+            "toll" => $request->toll,
+            "gas" => $request->gas,
+            "note" => $request->note,
+            "toll_used" => $request->toll_used,
+            "branch_to_main_tonnage" => $request->branch_to_main_tonnage,
+            "vehicle_id" => $request->vehicle_id,
+        ]);
+        $return = [
+            'api_code' => 200,
+            'api_status' => true,
+            'api_message' => 'Sukses',
+            'api_results' => TripResource::make($trip)
+        ];
+        return SuccessResource::make($return);
     }
 
     /**
@@ -45,6 +90,13 @@ class TripController extends Controller
      */
     public function destroy(Trip $trip)
     {
-        //
+        $return = [
+            'api_code' => 200,
+            'api_status' => true,
+            'api_message' => 'Sukses Terhapus.',
+            'api_results' => TripResource::make($trip)
+        ];
+        $trip->delete();
+        return SuccessResource::make($return);
     }
 }

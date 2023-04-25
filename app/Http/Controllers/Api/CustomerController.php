@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\CustomerResource;
 use App\Http\Resources\SuccessResource;
 use App\Models\Customer;
 use Illuminate\Http\Request;
@@ -19,7 +20,7 @@ class CustomerController extends Controller
             'api_code' => 200,
             'api_status' => true,
             'api_message' => 'Sukses',
-            'api_results' => $customers
+            'api_results' => CustomerResource::collection($customers)
         ];
         return SuccessResource::make($return);
     }
@@ -42,7 +43,7 @@ class CustomerController extends Controller
             'api_code' => 200,
             'api_status' => true,
             'api_message' => 'Sukses',
-            'api_results' => $customer
+            'api_results' => CustomerResource::make($customer)
         ];
         return SuccessResource::make($return);
     }
@@ -56,7 +57,7 @@ class CustomerController extends Controller
             'api_code' => 200,
             'api_status' => true,
             'api_message' => 'Sukses',
-            'api_results' => $customer
+            'api_results' => CustomerResource::make($customer)
         ];
         return SuccessResource::make($return);
     }
@@ -79,7 +80,7 @@ class CustomerController extends Controller
             'api_code' => 200,
             'api_status' => true,
             'api_message' => 'Sukses',
-            'api_results' => $customer
+            'api_results' => CustomerResource::make($customer)
         ];
         return SuccessResource::make($return);
     }
@@ -93,7 +94,7 @@ class CustomerController extends Controller
             'api_code' => 200,
             'api_status' => true,
             'api_message' => 'Sukses Terhapus.',
-            'api_results' => $customer
+            'api_results' => CustomerResource::make($customer)
         ];
         $customer->delete();
         return SuccessResource::make($return);
@@ -106,7 +107,7 @@ class CustomerController extends Controller
             'api_code' => 200,
             'api_status' => true,
             'api_message' => 'Sukses',
-            'api_results' => $customers
+            'api_results' => CustomerResource::collection($customers)
         ];
         return SuccessResource::make($return);
     }
