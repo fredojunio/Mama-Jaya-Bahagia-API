@@ -30,7 +30,6 @@ class RitResource extends JsonResource
             "buy_price" => $this->buy_price,
             "sack" => $this->sack,
             "finance_approved" => $this->finance_approved,
-            "owner_approved" => $this->owner_approved,
             "is_hold" => $this->is_hold,
             "item" => $this->item,
             "trip" => $this->trip,

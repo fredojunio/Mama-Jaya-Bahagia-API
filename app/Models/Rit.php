@@ -23,7 +23,7 @@ class Rit extends Model
         "buy_price",
         "sack",
         "finance_approved",
-        "owner_approved",
+        "customer_tonnage_sold",
         "is_hold",
         "item_id",
         "trip_id",

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Trip;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -12,6 +13,164 @@ class TripSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        $data = new Trip();
+        $data->allowance = 10000;
+        $data->toll = 10000;
+        $data->gas = 10000;
+        $data->note = "Pengambilan Rit K-ABC";
+        // $data->toll_used = "";
+        // $data->branch_to_main_tonnage = "";
+        $data->vehicle_id = 1;
+        $data->save();
+
+        $data = new Trip();
+        $data->allowance = 10000;
+        // $data->toll = 10000;
+        // $data->gas = 10000;
+        $data->note = "Pengambilan Rit K-ABC";
+        // $data->toll_used = "";
+        // $data->branch_to_main_tonnage = "";
+        $data->vehicle_id = 1;
+        $data->save();
+
+        $data = new Trip();
+        $data->allowance = 10000;
+        // $data->toll = 10000;
+        // $data->gas = 10000;
+        $data->note = "Pengambilan Rit K-ABC";
+        $data->toll_used = 1000;
+        // $data->branch_to_main_tonnage = "";
+        $data->vehicle_id = 1;
+        $data->save();
+
+        $data = new Trip();
+        $data->allowance = 10000;
+        // $data->toll = 10000;
+        // $data->gas = 10000;
+        $data->note = "Pengambilan Rit K-ABC";
+        // $data->toll_used = "";
+        // $data->branch_to_main_tonnage = "";
+        $data->vehicle_id = 1;
+        $data->save();
+
+        $data = new Trip();
+        $data->allowance = 10000;
+        // $data->toll = 10000;
+        // $data->gas = 10000;
+        $data->note = "Pengambilan Rit K-ABC";
+        $data->toll_used = 1000;
+        // $data->branch_to_main_tonnage = "";
+        $data->vehicle_id = 1;
+        $data->save();
+
+        $data = new Trip();
+        $data->allowance = 10000;
+        // $data->toll = 10000;
+        // $data->gas = 10000;
+        $data->note = "Pengambilan Rit K-ABC";
+        $data->toll_used = 1000;
+        // $data->branch_to_main_tonnage = "";
+        $data->vehicle_id = 1;
+        $data->save();
+
+        $data = new Trip();
+        $data->allowance = 10000;
+        // $data->toll = 10000;
+        // $data->gas = 10000;
+        $data->note = "Pengambilan Rit K-ABC";
+        $data->toll_used = 1000;
+        // $data->branch_to_main_tonnage = "";
+        $data->vehicle_id = 1;
+        $data->save();
+
+        $data = new Trip();
+        $data->allowance = 10000;
+        // $data->toll = 10000;
+        // $data->gas = 10000;
+        $data->note = "Pengambilan Rit K-ABC";
+        $data->toll_used = 1000;
+        // $data->branch_to_main_tonnage = "";
+        $data->vehicle_id = 1;
+        $data->save();
+
+        $data = new Trip();
+        $data->allowance = 10000;
+        // $data->toll = 10000;
+        // $data->gas = 10000;
+        $data->note = "Pengambilan Rit K-ABC";
+        $data->toll_used = 1000;
+        // $data->branch_to_main_tonnage = "";
+        $data->vehicle_id = 1;
+        $data->save();
+
+        $data = new Trip();
+        $data->allowance = 10000;
+        // $data->toll = 10000;
+        // $data->gas = 10000;
+        $data->note = "Retur Rit K-ABC";
+        $data->toll_used = 1000;
+        $data->branch_to_main_tonnage = 6980;
+        $data->vehicle_id = 1;
+        $data->save();
+
+        $data = new Trip();
+        $data->allowance = 10000;
+        // $data->toll = 10000;
+        // $data->gas = 10000;
+        $data->note = "Pengambilan Rit K-ABC";
+        $data->toll_used = 1000;
+        // $data->branch_to_main_tonnage = "";
+        $data->vehicle_id = 1;
+        $data->save();
+
+        $data = new Trip();
+        $data->allowance = 10000;
+        // $data->toll = 10000;
+        // $data->gas = 10000;
+        $data->note = "Penjualan ke Supaijo";
+        $data->toll_used = 1000;
+        // $data->branch_to_main_tonnage = "";
+        $data->vehicle_id = 1;
+        $data->save();
+
+        $data = new Trip();
+        $data->allowance = 10000;
+        // $data->toll = 10000;
+        // $data->gas = 10000;
+        $data->note = "Penjualan ke Supaijo";
+        $data->toll_used = 1000;
+        // $data->branch_to_main_tonnage = "";
+        $data->vehicle_id = 1;
+        $data->save();
+
+        $data = new Trip();
+        $data->allowance = 10000;
+        // $data->toll = 10000;
+        // $data->gas = 10000;
+        $data->note = "Pengambilan Rit K-ABC";
+        $data->toll_used = 1000;
+        // $data->branch_to_main_tonnage = "";
+        $data->vehicle_id = 1;
+        $data->save();
+
+        $data = new Trip();
+        $data->allowance = 10000;
+        // $data->toll = 10000;
+        // $data->gas = 10000;
+        $data->note = "Penjualan ke Supaijo";
+        $data->toll_used = 1000;
+        // $data->branch_to_main_tonnage = "";
+        $data->vehicle_id = 1;
+        $data->save();
+
+        $data = new Trip();
+        $data->allowance = 10000;
+        // $data->toll = 10000;
+        // $data->gas = 10000;
+        $data->note = "Pengiriman ke Cabang A";
+        $data->toll_used = 1000;
+        // $data->branch_to_main_tonnage = "";
+        $data->vehicle_id = 1;
+        $data->save();
     }
 }

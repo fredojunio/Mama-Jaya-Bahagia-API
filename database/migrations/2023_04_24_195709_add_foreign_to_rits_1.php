@@ -16,8 +16,8 @@ return new class extends Migration
             $table->foreign('item_id')->references('id')->on('items')->onDelete('cascade');
             $table->unsignedBigInteger('trip_id')->index()->nullable();
             $table->foreign('trip_id')->references('id')->on('trips')->onDelete('cascade');
-            $table->unsignedBigInteger('return_trip_id')->index()->nullable();
-            $table->foreign('return_trip_id')->references('id')->on('trips')->onDelete('cascade');
+            $table->unsignedBigInteger('retur_trip_id')->index()->nullable();
+            $table->foreign('retur_trip_id')->references('id')->on('trips')->onDelete('cascade');
         });
     }
 

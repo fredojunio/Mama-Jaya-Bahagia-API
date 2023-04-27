@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('nickname');
             $table->string('address');
             $table->integer('ongkir');
-            $table->string('birthdate');
+            $table->date('birthdate');
             $table->string('type');
             $table->timestamps();
         });

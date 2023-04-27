@@ -16,7 +16,7 @@ return new class extends Migration
             $table->integer("amount");
             $table->text("note")->nullable();
             $table->string("name")->nullable();
-            $table->string("time");
+            $table->dateTime("time");
             $table->string("type");
             $table->timestamps();
         });

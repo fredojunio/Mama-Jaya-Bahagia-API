@@ -18,5 +18,12 @@ class DatabaseSeeder extends Seeder
         $this->call(ItemSeeder::class);
         $this->call(CustomerSeeder::class);
         $this->call(VehicleSeeder::class);
+        $this->call(ExpenseSeeder::class);
+        $this->call(TripSeeder::class);
+        $this->call(RitSeeder::class);
+        $this->call(TransactionSeeder::class);
+        $this->call(RitTransactionSeeder::class);
+        $this->call(RitBranchSeeder::class);
+        $this->call(SavingSeeder::class);
     }
 }

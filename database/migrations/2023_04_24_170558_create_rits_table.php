@@ -20,14 +20,14 @@ return new class extends Migration
             $table->integer("retur_tonnage")->nullable();
             $table->integer("arrived_tonnage")->nullable();
             $table->integer("tonnage_left")->nullable();
-            $table->string("delivery_date")->nullable();
-            $table->string("arrival_date")->nullable();
-            $table->string("sold_date")->nullable();
+            $table->date("delivery_date")->nullable();
+            $table->date("arrival_date")->nullable();
+            $table->date("sold_date")->nullable();
             $table->integer("sell_price")->nullable();
             $table->integer("buy_price")->nullable();
             $table->integer("sack")->default(0);
             $table->integer("finance_approved")->default(0);
-            $table->integer("owner_approved")->default(0);
+            $table->integer("customer_tonnage_sold")->default(0);
             $table->integer("is_hold")->default(0);
             $table->timestamps();
         });

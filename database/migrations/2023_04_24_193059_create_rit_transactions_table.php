@@ -17,7 +17,7 @@ return new class extends Migration
             $table->integer("masak")->default(1);
             $table->integer("item_price");
             $table->integer("total_price");
-            $table->integer("tonnage_left");
+            $table->integer("tonnage_left")->nullable();
             $table->timestamps();
         });
     }

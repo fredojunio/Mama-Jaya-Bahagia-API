@@ -19,11 +19,11 @@ return new class extends Migration
             $table->integer("thr")->default(0);
             $table->integer("sack")->default(0);
             $table->integer("sack_price")->default(0);
-            $table->integer("item_price");
+            $table->integer("item_price")->nullable();
             $table->integer("discount")->default(0);
             $table->integer("ongkir")->default(0);
             $table->integer("total_price");
-            $table->integer("settled_date")->nullable();
+            $table->date("settled_date")->nullable();
             $table->integer("owner_approved")->default(0);
             $table->integer("finance_approved")->default(0);
             $table->timestamps();

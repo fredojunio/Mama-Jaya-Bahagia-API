@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string("name");
             $table->integer("sent_tonnage");
             $table->integer("income")->nullable();
-            $table->string("delivery_date");
+            $table->date("delivery_date");
             $table->timestamps();
         });
     }
