@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\CustomerResource;
 use App\Http\Resources\SuccessResource;
+use App\Models\Cashback;
 use App\Models\Customer;
+use App\Models\Saving;
 use Illuminate\Http\Request;
 
 class CustomerController extends Controller
@@ -108,6 +110,52 @@ class CustomerController extends Controller
             'api_status' => true,
             'api_message' => 'Sukses',
             'api_results' => CustomerResource::collection($customers)
+        ];
+        return SuccessResource::make($return);
+    }
+
+    public function withdraw_savings(Request $request, Customer $customer)
+    {
+        $saving = Saving::create([
+            "tb" => $request->tb,
+            "tw" => $request->tw,
+            "thr" => $request->thr,
+            "tonnage" => 0,
+            "total_tw" => $customer->tw - $request->tw,
+            "total_tb" => $customer->tb - $request->tb,
+            "total_thr" => $customer->thr - $request->thr,
+            "total_tonnage" => $customer->tonnage,
+            "type" => "Penarikan",
+            "customer_id" => $customer->id,
+        ]);
+        $customer->update([
+            "tb" => $saving->total_tb,
+            "tw" => $saving->total_tw,
+            "thr" => $saving->total_thr,
+        ]);
+        $return = [
+            'api_code' => 200,
+            'api_status' => true,
+            'api_message' => 'Sukses',
+            'api_results' => CustomerResource::make($customer)
+        ];
+        return SuccessResource::make($return);
+    }
+
+    public function approve_cashback(Request $request, Customer $customer)
+    {
+        $cashback = Cashback::create([
+            'amount' => $request->amount,
+            'customer_id' => $customer->id,
+        ]);
+        $customer->update([
+            'cashback_approved' => 1,
+        ]);
+        $return = [
+            'api_code' => 200,
+            'api_status' => true,
+            'api_message' => 'Sukses',
+            'api_results' => $cashback
         ];
         return SuccessResource::make($return);
     }

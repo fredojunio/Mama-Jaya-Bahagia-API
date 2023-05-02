@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\Auth\LoginController;
+use App\Http\Controllers\Api\CashbackController;
 use App\Http\Controllers\Api\CustomerController;
 use App\Http\Controllers\Api\ExpenseController;
 use App\Http\Controllers\Api\IncomeController;
@@ -37,8 +38,11 @@ Route::group(['middleware' => 'auth:api', 'as' => 'api.user.'], function () {
 //NOTE - KASIH MIDDLEWARE AUTH:API KALAU UDAH SELESAI
 Route::group(['prefix' => 'admin'], function () {
     Route::apiResource('item', ItemController::class);
+    Route::apiResource('cashback', CashbackController::class);
     Route::apiResource('customer', CustomerController::class);
     Route::post('/customer/search', [CustomerController::class, 'search']);
+    Route::post('/customer/{customer}/withdraw_savings', [CustomerController::class, 'withdraw_savings']);
+    Route::post('/customer/{customer}/approve_cashback', [CustomerController::class, 'approve_cashback']);
     Route::apiResource('vehicle', VehicleController::class);
     Route::post('/vehicle/search', [VehicleController::class, 'search']);
     Route::apiResource('rit', RitController::class);

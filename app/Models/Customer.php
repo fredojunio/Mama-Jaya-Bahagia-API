@@ -15,11 +15,20 @@ class Customer extends Model
         'address',
         'ongkir',
         'birthdate',
-        'type'
+        'type',
+        "tb",
+        "tw",
+        "thr",
+        "tonnage",
+        "cashback_approved",
     ];
     public function savings()
     {
         return $this->hasMany(Saving::class, 'customer_id', 'id');
+    }
+    public function cashbacks()
+    {
+        return $this->hasMany(Cashback::class, 'customer_id', 'id');
     }
     public function transactions()
     {

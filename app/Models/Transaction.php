@@ -35,7 +35,7 @@ class Transaction extends Model
     }
     public function savings()
     {
-        return $this->hasMany(Saving::class, 'transaction_id', 'id');
+        return $this->hasOne(Saving::class, 'transaction_id', 'id');
     }
     public function rits()
     {

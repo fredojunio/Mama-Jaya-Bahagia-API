@@ -22,7 +22,7 @@ class RitTransactionResource extends JsonResource
             "item_price" => $this->item_price,
             "total_price" => $this->total_price,
             "tonnage_left" => $this->tonnage_left,
-            "rit" => $this->rit,
+            "rit" => RitResource::make($this->rit),
             "transaction" => $this->transaction,
         ];
     }

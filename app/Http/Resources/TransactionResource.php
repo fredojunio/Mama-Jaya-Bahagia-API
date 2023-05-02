@@ -32,7 +32,7 @@ class TransactionResource extends JsonResource
             "finance_approved" => $this->finance_approved,
             "customer" => $this->customer,
             "trip" => $this->trip,
-            "rits" => $this->rits,
+            "rits" => RitTransactionResource::collection($this->rits),
             "savings" => $this->savings,
         ];
     }

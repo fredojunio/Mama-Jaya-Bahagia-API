@@ -20,6 +20,11 @@ return new class extends Migration
             $table->integer('ongkir');
             $table->date('birthdate');
             $table->string('type');
+            $table->integer("tb")->default(0);
+            $table->integer("tw")->default(0);
+            $table->integer("thr")->default(0);
+            $table->integer("tonnage")->default(0);
+            $table->integer("cashback_approved")->default(0);
             $table->timestamps();
         });
     }
