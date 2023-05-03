@@ -7,7 +7,9 @@ use App\Http\Resources\CustomerResource;
 use App\Http\Resources\SuccessResource;
 use App\Models\Cashback;
 use App\Models\Customer;
+use App\Models\Expense;
 use App\Models\Saving;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class CustomerController extends Controller
@@ -127,6 +129,20 @@ class CustomerController extends Controller
             "total_tonnage" => $customer->tonnage,
             "type" => "Penarikan",
             "customer_id" => $customer->id,
+        ]);
+        $type = "tb";
+        if ($request->tb != 0) {
+            $type = "TB";
+        } else if ($request->tw != 0) {
+            $type = "TW";
+        } else if ($request->thr != 0) {
+            $type = "THR";
+        }
+        $expense = Expense::create([
+            "amount" => $request->tw + $request->tb + $request->thr,
+            "note" => "Penarikan " . $type,
+            "name" => $customer->name,
+            "type" => $type,
         ]);
         $customer->update([
             "tb" => $saving->total_tb,

@@ -14,5 +14,11 @@ class Expense extends Model
         "name",
         "time",
         "type",
+        "trip_id"
     ];
+
+    public function trip()
+    {
+        return $this->belongsTo(Trip::class, 'trip_id', 'id');
+    }
 }

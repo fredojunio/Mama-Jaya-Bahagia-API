@@ -31,6 +31,8 @@ class CustomerSeeder extends Seeder
         $role->ongkir = 2000;
         $role->birthdate = "2022-12-30";
         $role->type = "Kiriman";
+        $role->tw = 1000;
+        $role->thr = 2000;
         $role->save();
 
         $role = new Customer();
@@ -41,6 +43,9 @@ class CustomerSeeder extends Seeder
         $role->ongkir = 0;
         $role->birthdate = "2022-12-30";
         $role->type = "Eceran";
+        $role->tb = 6000;
+        $role->tw = 6000;
+        $role->thr = 3000;
         $role->save();
     }
 }

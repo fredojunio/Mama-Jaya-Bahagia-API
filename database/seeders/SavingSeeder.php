@@ -68,5 +68,44 @@ class SavingSeeder extends Seeder
         $data->customer_id = 2;
         $data->transaction_id = 4;
         $data->save();
+
+        $data = new Saving();
+        $data->tb = 2000;
+        $data->tw = 0;
+        $data->thr = 0;
+        $data->tonnage = 2470;
+        $data->total_tb = 0;
+        $data->total_tw = 2000;
+        $data->total_thr = 2000;
+        $data->total_tonnage = 2470;
+        $data->type = "Penarikan";
+        $data->customer_id = 2;
+        $data->save();
+
+        $data = new Saving();
+        $data->tb = 0;
+        $data->tw = 1000;
+        $data->thr = 0;
+        $data->tonnage = 2470;
+        $data->total_tb = 0;
+        $data->total_tw = 1000;
+        $data->total_thr = 2000;
+        $data->total_tonnage = 2470;
+        $data->type = "Penarikan";
+        $data->customer_id = 2;
+        $data->save();
+
+        $data = new Saving();
+        $data->tb = 0;
+        $data->tw = 0;
+        $data->thr = 3000;
+        $data->tonnage = 2470;
+        $data->total_tb = 6000;
+        $data->total_tw = 6000;
+        $data->total_thr = 3000;
+        $data->total_tonnage = 2470;
+        $data->type = "Penarikan";
+        $data->customer_id = 3;
+        $data->save();
     }
 }

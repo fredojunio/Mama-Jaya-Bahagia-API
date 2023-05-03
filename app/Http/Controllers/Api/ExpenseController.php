@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\ExpenseResource;
 use App\Http\Resources\SuccessResource;
 use App\Models\Expense;
 use Illuminate\Http\Request;
@@ -19,7 +20,7 @@ class ExpenseController extends Controller
             'api_code' => 200,
             'api_status' => true,
             'api_message' => 'Sukses',
-            'api_results' => $expenses
+            'api_results' => ExpenseResource::collection($expenses),
         ];
         return SuccessResource::make($return);
     }
@@ -40,7 +41,7 @@ class ExpenseController extends Controller
             'api_code' => 200,
             'api_status' => true,
             'api_message' => 'Sukses',
-            'api_results' => $expense
+            'api_results' => ExpenseResource::make($expense),
         ];
         return SuccessResource::make($return);
     }
@@ -54,7 +55,7 @@ class ExpenseController extends Controller
             'api_code' => 200,
             'api_status' => true,
             'api_message' => 'Sukses',
-            'api_results' => $expense
+            'api_results' => ExpenseResource::make($expense),
         ];
         return SuccessResource::make($return);
     }
@@ -75,7 +76,7 @@ class ExpenseController extends Controller
             'api_code' => 200,
             'api_status' => true,
             'api_message' => 'Sukses',
-            'api_results' => $expense
+            'api_results' => ExpenseResource::make($expense),
         ];
         return SuccessResource::make($return);
     }
@@ -89,7 +90,7 @@ class ExpenseController extends Controller
             'api_code' => 200,
             'api_status' => true,
             'api_message' => 'Sukses Terhapus.',
-            'api_results' => $expense
+            'api_results' => ExpenseResource::make($expense),
         ];
         $expense->delete();
         return SuccessResource::make($return);

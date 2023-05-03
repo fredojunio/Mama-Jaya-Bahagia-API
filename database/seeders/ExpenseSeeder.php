@@ -30,27 +30,139 @@ class ExpenseSeeder extends Seeder
         $data->save();
 
         $data = new Expense();
-        $data->amount = 12000;
-        $data->note = "Penarikan TW";
-        // $data->name = "Andi";
-        $data->time = "2022-12-30";
-        $data->type = "TW";
-        $data->save();
-
-        $data = new Expense();
-        $data->amount = 12000;
+        $data->amount = 2000;
         $data->note = "Penarikan TB";
-        // $data->name = "Andi";
+        $data->name = "Supaijo";
         $data->time = "2022-12-30";
         $data->type = "TB";
         $data->save();
 
         $data = new Expense();
-        $data->amount = 12000;
+        $data->amount = 1000;
+        $data->note = "Penarikan TW";
+        $data->name = "Supaijo";
+        $data->time = "2022-12-30";
+        $data->type = "TW";
+        $data->save();
+
+        $data = new Expense();
+        $data->amount = 3000;
         $data->note = "Penarikan THR";
-        // $data->name = "Andi";
+        $data->name = "Tukimin";
         $data->time = "2022-12-30";
         $data->type = "THR";
+        $data->save();
+
+        $data = new Expense();
+        $data->amount = 30000;
+        $data->note = "Pengambilan Rit K-ABC";
+        $data->type = "Kendaraan";
+        $data->trip_id = 1;
+        $data->save();
+
+        $data = new Expense();
+        $data->amount = 10000;
+        $data->note = "Pengambilan Rit K-ABC";
+        $data->type = "Kendaraan";
+        $data->trip_id = 2;
+        $data->save();
+
+        $data = new Expense();
+        $data->amount = 10000;
+        $data->note = "Pengambilan Rit K-ABC";
+        $data->type = "Kendaraan";
+        $data->trip_id = 3;
+        $data->save();
+
+        $data = new Expense();
+        $data->amount = 10000;
+        $data->note = "Pengambilan Rit K-ABC";
+        $data->type = "Kendaraan";
+        $data->trip_id = 4;
+        $data->save();
+
+        $data = new Expense();
+        $data->amount = 10000;
+        $data->note = "Pengambilan Rit K-ABC";
+        $data->type = "Kendaraan";
+        $data->trip_id = 5;
+        $data->save();
+
+        $data = new Expense();
+        $data->amount = 10000;
+        $data->note = "Pengambilan Rit K-ABC";
+        $data->type = "Kendaraan";
+        $data->trip_id = 6;
+        $data->save();
+
+        $data = new Expense();
+        $data->amount = 10000;
+        $data->note = "Pengambilan Rit K-ABC";
+        $data->type = "Kendaraan";
+        $data->trip_id = 7;
+        $data->save();
+
+        $data = new Expense();
+        $data->amount = 10000;
+        $data->note = "Pengambilan Rit K-ABC";
+        $data->type = "Kendaraan";
+        $data->trip_id = 8;
+        $data->save();
+
+        $data = new Expense();
+        $data->amount = 10000;
+        $data->note = "Pengambilan Rit K-ABC";
+        $data->type = "Kendaraan";
+        $data->trip_id = 9;
+        $data->save();
+
+        $data = new Expense();
+        $data->amount = 10000;
+        $data->note = "Retur Rit K-ABC";
+        $data->type = "Kendaraan";
+        $data->trip_id = 10;
+        $data->save();
+
+        $data = new Expense();
+        $data->amount = 10000;
+        $data->note = "Pengambilan Rit K-ABC";
+        $data->type = "Kendaraan";
+        $data->trip_id = 11;
+        $data->save();
+
+        $data = new Expense();
+        $data->amount = 10000;
+        $data->note = "Penjualan ke Supaijo";
+        $data->type = "Kendaraan";
+        $data->trip_id = 12;
+        $data->save();
+
+        $data = new Expense();
+        $data->amount = 10000;
+        $data->note = "Penjualan ke Supaijo";
+        $data->type = "Kendaraan";
+        $data->trip_id = 13;
+        $data->save();
+
+        $data = new Expense();
+        $data->amount = 10000;
+        $data->note = "Pengambilan Rit K-ABC";
+        $data->type = "Kendaraan";
+        $data->trip_id = 14;
+        $data->save();
+
+        $data = new Expense();
+        $data->amount = 10000;
+        $data->note = "Penjualan ke Supaijo";
+        $data->type = "Kendaraan";
+        $data->trip_id = 15;
+        $data->save();
+
+        $data = new Expense();
+        $data->amount = 10000;
+        $data->note = "Pengiriman ke Cabang A";
+        $data->type = "Kendaraan";
+        $data->trip_id = 16;
         $data->save();
     }
 }
