@@ -32,7 +32,7 @@ class RitResource extends JsonResource
             "finance_approved" => $this->finance_approved,
             "is_hold" => $this->is_hold,
             "item" => $this->item,
-            "trip" => $this->trip,
+            "trip" => TripResource::make($this->trip),
             "retur_trip" => $this->retur_trip,
             "branches" => RitBranchResource::collection($this->branches),
             "transactions" => $this->transactions,

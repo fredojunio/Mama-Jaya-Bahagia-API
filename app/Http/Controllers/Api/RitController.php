@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\RitResource;
 use App\Http\Resources\SuccessResource;
 use App\Models\Rit;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class RitController extends Controller
@@ -119,6 +120,21 @@ class RitController extends Controller
             'api_results' => RitResource::make($rit)
         ];
         $rit->delete();
+        return SuccessResource::make($return);
+    }
+
+    public function approve_finance(Rit $rit)
+    {
+        $rit->update([
+            'finance_approved' => 1,
+            'delivery_date' => Carbon::now()
+        ]);
+        $return = [
+            'api_code' => 200,
+            'api_status' => true,
+            'api_message' => 'Sukses',
+            'api_results' => RitResource::make($rit)
+        ];
         return SuccessResource::make($return);
     }
 }
