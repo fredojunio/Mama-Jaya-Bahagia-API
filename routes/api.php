@@ -51,6 +51,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::apiResource('trip', TripController::class);
     Route::apiResource('rit_transaction', RitTransactionController::class);
     Route::apiResource('transaction', TransactionController::class);
+    Route::get('/transaction/{transaction}/approve_finance', [TransactionController::class, 'approve_finance']);
     Route::apiResource('saving', SavingController::class);
     Route::apiResource('report', ReportController::class);
     Route::apiResource('income', IncomeController::class);

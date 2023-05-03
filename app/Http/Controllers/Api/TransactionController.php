@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\SuccessResource;
 use App\Http\Resources\TransactionResource;
 use App\Models\Transaction;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class TransactionController extends Controller
@@ -113,6 +114,21 @@ class TransactionController extends Controller
             'api_results' => TransactionResource::make($transaction)
         ];
         $transaction->delete();
+        return SuccessResource::make($return);
+    }
+
+    public function approve_finance(Transaction $transaction)
+    {
+        $transaction->update([
+            "finance_approved" => 1,
+            "settled_date" => Carbon::now(),
+        ]);
+        $return = [
+            'api_code' => 200,
+            'api_status' => true,
+            'api_message' => 'Sukses',
+            'api_results' => TransactionResource::make($transaction)
+        ];
         return SuccessResource::make($return);
     }
 }

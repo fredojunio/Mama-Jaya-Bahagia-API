@@ -17,7 +17,7 @@ class ExpenseSeeder extends Seeder
         $data->amount = 12000;
         $data->note = "Pembelian Pulpen";
         // $data->name = "";
-        $data->time = "2022-12-30 13:32";
+        $data->time = "2023-05-3 13:32";
         $data->type = "Operasional";
         $data->save();
 
@@ -25,7 +25,7 @@ class ExpenseSeeder extends Seeder
         $data->amount = 12000;
         $data->note = "Gaji Hari Pertama";
         $data->name = "Andi";
-        $data->time = "2022-12-30";
+        $data->time = "2023-05-3";
         $data->type = "Gaji";
         $data->save();
 
@@ -33,7 +33,7 @@ class ExpenseSeeder extends Seeder
         $data->amount = 2000;
         $data->note = "Penarikan TB";
         $data->name = "Supaijo";
-        $data->time = "2022-12-30";
+        $data->time = "2023-05-3";
         $data->type = "TB";
         $data->save();
 
@@ -41,7 +41,7 @@ class ExpenseSeeder extends Seeder
         $data->amount = 1000;
         $data->note = "Penarikan TW";
         $data->name = "Supaijo";
-        $data->time = "2022-12-30";
+        $data->time = "2023-05-3";
         $data->type = "TW";
         $data->save();
 
@@ -49,7 +49,7 @@ class ExpenseSeeder extends Seeder
         $data->amount = 3000;
         $data->note = "Penarikan THR";
         $data->name = "Tukimin";
-        $data->time = "2022-12-30";
+        $data->time = "2023-05-3";
         $data->type = "THR";
         $data->save();
 
