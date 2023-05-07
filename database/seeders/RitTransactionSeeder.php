@@ -14,6 +14,8 @@ class RitTransactionSeeder extends Seeder
     public function run(): void
     {
         $data = new RitTransaction();
+        $data->daily_id = 1;
+        $data->customer_name = "Tukimin";
         $data->tonnage = 1000;
         $data->masak = 1;
         $data->item_price = 2000;
@@ -24,6 +26,8 @@ class RitTransactionSeeder extends Seeder
         $data->save();
 
         $data = new RitTransaction();
+        $data->daily_id = 2;
+        $data->customer_name = "Tukimin";
         $data->tonnage = 500;
         $data->masak = 2;
         $data->item_price = 2000;
@@ -34,6 +38,8 @@ class RitTransactionSeeder extends Seeder
         $data->save();
 
         $data = new RitTransaction();
+        $data->daily_id = 2;
+        $data->customer_name = "Tukimin";
         $data->tonnage = 100;
         $data->masak = 20;
         $data->item_price = 2000;
@@ -44,6 +50,8 @@ class RitTransactionSeeder extends Seeder
         $data->save();
 
         $data = new RitTransaction();
+        $data->daily_id = 3;
+        $data->customer_name = "Tukimin";
         $data->tonnage = 2740;
         $data->masak = 1;
         $data->item_price = 2000;
@@ -54,6 +62,8 @@ class RitTransactionSeeder extends Seeder
         $data->save();
 
         $data = new RitTransaction();
+        $data->daily_id = 4;
+        $data->customer_name = "Supaijo";
         $data->tonnage = 2740;
         $data->masak = 1;
         $data->item_price = 2000;
@@ -65,6 +75,8 @@ class RitTransactionSeeder extends Seeder
 
         //langsung ke customer
         $data = new RitTransaction();
+        $data->daily_id = 5;
+        $data->customer_name = "Supaijo";
         $data->tonnage = 2000;
         $data->masak = 1;
         $data->item_price = 2000;

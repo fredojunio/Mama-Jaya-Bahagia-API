@@ -18,6 +18,8 @@ return new class extends Migration
             $table->foreign('trip_id')->references('id')->on('trips')->onDelete('cascade');
             $table->unsignedBigInteger('retur_trip_id')->index()->nullable();
             $table->foreign('retur_trip_id')->references('id')->on('trips')->onDelete('cascade');
+            $table->unsignedBigInteger('customer_id')->index()->nullable();
+            $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
         });
     }
 

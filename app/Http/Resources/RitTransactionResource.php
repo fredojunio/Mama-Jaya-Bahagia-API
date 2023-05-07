@@ -17,6 +17,8 @@ class RitTransactionResource extends JsonResource
         return [
             "id" => $this->id,
             "created_at" => $this->created_at,
+            "daily_id" => $this->daily_id,
+            "customer_name" => $this->customer_name,
             "tonnage" => $this->tonnage,
             "masak" => $this->masak,
             "item_price" => $this->item_price,

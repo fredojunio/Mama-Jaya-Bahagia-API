@@ -15,6 +15,7 @@ class Trip extends Model
         "note",
         "toll_used",
         "branch_to_main_tonnage",
+        "finance_approved",
         "vehicle_id",
     ];
     public function vehicle()

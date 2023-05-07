@@ -9,6 +9,8 @@ class RitTransaction extends Model
 {
     use HasFactory;
     protected $fillable = [
+        "daily_id",
+        "customer_name",
         "tonnage",
         "masak",
         "item_price",

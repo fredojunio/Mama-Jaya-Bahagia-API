@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('rit_transactions', function (Blueprint $table) {
             $table->id();
+            $table->integer("daily_id");
+            $table->string("customer_name");
             $table->integer("tonnage");
             $table->integer("masak")->default(1);
             $table->integer("item_price");

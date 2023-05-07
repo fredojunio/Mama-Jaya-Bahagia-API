@@ -9,6 +9,7 @@ class Rit extends Model
 {
     use HasFactory;
     protected $fillable = [
+        "do_code",
         "expected_tonnage",
         "customer_tonnage",
         "branch_tonnage",
@@ -28,10 +29,15 @@ class Rit extends Model
         "item_id",
         "trip_id",
         "retur_trip_id",
+        "customer_id"
     ];
     public function item()
     {
         return $this->belongsTo(Item::class, 'item_id', 'id');
+    }
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class, 'customer_id', 'id');
     }
     public function trip()
     {

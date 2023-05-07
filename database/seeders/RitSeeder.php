@@ -15,6 +15,7 @@ class RitSeeder extends Seeder
     {
         //Belum di approve finance
         $data = new Rit();
+        $data->do_code = "Importir ABC";
         $data->expected_tonnage = 7000;
         $data->customer_tonnage = 2000;
         $data->branch_tonnage = 200;
@@ -37,6 +38,7 @@ class RitSeeder extends Seeder
 
         //Masih otw
         $data = new Rit();
+        $data->do_code = "Importir ABC";
         $data->expected_tonnage = 7000;
         $data->customer_tonnage = 2000;
         $data->branch_tonnage = 200;
@@ -59,6 +61,7 @@ class RitSeeder extends Seeder
 
         //Sampe - pusat, customer, branch - belum ada harga
         $data = new Rit();
+        $data->do_code = "Importir ABC";
         $data->expected_tonnage = 7000;
         $data->customer_tonnage = 2000;
         $data->branch_tonnage = 200;
@@ -81,6 +84,7 @@ class RitSeeder extends Seeder
 
         //Sampe - pusat, customer, branch
         $data = new Rit();
+        $data->do_code = "Importir ABC";
         $data->expected_tonnage = 7000;
         $data->customer_tonnage = 2000;
         $data->branch_tonnage = 200;
@@ -103,6 +107,7 @@ class RitSeeder extends Seeder
 
         //Sampe - pusat, customer
         $data = new Rit();
+        $data->do_code = "Importir ABC";
         $data->expected_tonnage = 7000;
         $data->customer_tonnage = 2000;
         // $data->branch_tonnage = 200;
@@ -126,6 +131,7 @@ class RitSeeder extends Seeder
 
         //Sampe - pusat, branch
         $data = new Rit();
+        $data->do_code = "Importir ABC";
         $data->expected_tonnage = 7000;
         // $data->customer_tonnage = 2000;
         $data->branch_tonnage = 200;
@@ -148,6 +154,7 @@ class RitSeeder extends Seeder
 
         //Sampe - pusat
         $data = new Rit();
+        $data->do_code = "Importir ABC";
         $data->expected_tonnage = 7000;
         // $data->customer_tonnage = 2000;
         // $data->branch_tonnage = 200;
@@ -170,6 +177,7 @@ class RitSeeder extends Seeder
 
         //Sampe - pusat - habis
         $data = new Rit();
+        $data->do_code = "Importir ABC";
         $data->expected_tonnage = 7000;
         // $data->customer_tonnage = 2000;
         // $data->branch_tonnage = 200;
@@ -192,6 +200,7 @@ class RitSeeder extends Seeder
 
         //Sampe - diretur
         $data = new Rit();
+        $data->do_code = "Importir ABC";
         $data->expected_tonnage = 7000;
         // $data->customer_tonnage = 2000;
         // $data->branch_tonnage = 200;
@@ -214,6 +223,7 @@ class RitSeeder extends Seeder
 
         //Sampe - pusat - di hold
         $data = new Rit();
+        $data->do_code = "Importir ABC";
         $data->expected_tonnage = 7000;
         // $data->customer_tonnage = 2000;
         // $data->branch_tonnage = 200;

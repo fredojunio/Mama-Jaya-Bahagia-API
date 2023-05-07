@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('rits', function (Blueprint $table) {
             $table->id();
+            $table->string("do_code");
             $table->integer("expected_tonnage");
             $table->integer("customer_tonnage")->nullable();
             $table->integer("branch_tonnage")->nullable();

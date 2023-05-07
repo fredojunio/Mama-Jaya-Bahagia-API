@@ -16,6 +16,7 @@ class RitResource extends JsonResource
     {
         return [
             "id" => $this->id,
+            "do_code" => $this->do_code,
             "expected_tonnage" => $this->expected_tonnage,
             "customer_tonnage" => $this->customer_tonnage,
             "branch_tonnage" => $this->branch_tonnage,
@@ -34,6 +35,7 @@ class RitResource extends JsonResource
             "item" => $this->item,
             "trip" => TripResource::make($this->trip),
             "retur_trip" => $this->retur_trip,
+            "customer" => $this->customer,
             "branches" => RitBranchResource::collection($this->branches),
             "transactions" => $this->transactions,
             "created_at" => $this->created_at,
