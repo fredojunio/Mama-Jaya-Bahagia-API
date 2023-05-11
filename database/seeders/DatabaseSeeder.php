@@ -25,5 +25,6 @@ class DatabaseSeeder extends Seeder
         $this->call(RitTransactionSeeder::class);
         $this->call(RitBranchSeeder::class);
         $this->call(SavingSeeder::class);
+        $this->call(SackSeeder::class);
     }
 }

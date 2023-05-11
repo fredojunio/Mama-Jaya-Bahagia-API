@@ -95,8 +95,8 @@ class RitSeeder extends Seeder
         $data->delivery_date = "2022-12-30";
         $data->arrival_date = "2023-01-01";
         // $data->sold_date = "";
-        $data->sell_price = 2000;
-        $data->buy_price = 1980;
+        $data->sell_price = 1000;
+        $data->buy_price = 980;
         $data->sack = 100;
         $data->finance_approved = 1;
         // $data->is_hold = "";
@@ -142,7 +142,7 @@ class RitSeeder extends Seeder
         $data->delivery_date = "2022-12-30";
         $data->arrival_date = "2023-01-01";
         // $data->sold_date = "";
-        $data->sell_price = 2000;
+        $data->sell_price = 3000;
         $data->buy_price = 1980;
         $data->sack = 100;
         $data->finance_approved = 1;
@@ -165,7 +165,7 @@ class RitSeeder extends Seeder
         $data->delivery_date = "2022-12-30";
         $data->arrival_date = "2023-01-01";
         // $data->sold_date = "";
-        $data->sell_price = 2000;
+        $data->sell_price = 4000;
         $data->buy_price = 1980;
         $data->sack = 100;
         $data->finance_approved = 1;
@@ -188,7 +188,7 @@ class RitSeeder extends Seeder
         $data->delivery_date = "2022-12-30";
         $data->arrival_date = "2023-01-01";
         $data->sold_date = "2023-01-02";
-        $data->sell_price = 2000;
+        $data->sell_price = 5000;
         $data->buy_price = 1980;
         $data->sack = 100;
         $data->finance_approved = 1;
@@ -211,7 +211,7 @@ class RitSeeder extends Seeder
         $data->delivery_date = "2022-12-30";
         $data->arrival_date = "2023-01-01";
         // $data->sold_date = "";
-        $data->sell_price = 2000;
+        $data->sell_price = 6000;
         $data->buy_price = 1980;
         $data->sack = 100;
         $data->finance_approved = 1;
@@ -234,7 +234,7 @@ class RitSeeder extends Seeder
         $data->delivery_date = "2022-12-30";
         $data->arrival_date = "2023-01-01";
         // $data->sold_date = "";
-        $data->sell_price = 2000;
+        $data->sell_price = 7000;
         $data->buy_price = 1980;
         $data->sack = 100;
         $data->finance_approved = 1;

@@ -160,25 +160,27 @@ class CustomerController extends Controller
 
     public function approve_cashback(Request $request, Customer $customer)
     {
-        $cashback = Cashback::create([
-            'amount' => $request->amount,
-            'customer_id' => $customer->id,
-        ]);
-        $expense = Expense::create([
-            "amount" => $request->amount,
-            "note" => "Cashback " . $customer->name,
-            "name" => $customer->name,
-            "time" => Carbon::now(),
-            "type" => "Cashback",
-        ]);
-        $customer->update([
-            'cashback_approved' => 1,
-        ]);
+        if ($customer->cashback_approved != 1) {
+            $cashback = Cashback::create([
+                'amount' => $request->amount,
+                'customer_id' => $customer->id,
+            ]);
+            $expense = Expense::create([
+                "amount" => $request->amount,
+                "note" => "Cashback " . $customer->name,
+                "name" => $customer->name,
+                "time" => Carbon::now(),
+                "type" => "Cashback",
+            ]);
+            $customer->update([
+                'cashback_approved' => 1,
+            ]);
+        }
         $return = [
             'api_code' => 200,
             'api_status' => true,
             'api_message' => 'Sukses',
-            'api_results' => $cashback
+            'api_results' => CustomerResource::make($customer)
         ];
         return SuccessResource::make($return);
     }

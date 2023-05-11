@@ -26,6 +26,7 @@ return new class extends Migration
             $table->date("settled_date")->nullable();
             $table->integer("owner_approved")->default(0);
             $table->integer("finance_approved")->default(0);
+            $table->string("type");
             $table->timestamps();
         });
     }

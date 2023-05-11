@@ -11,6 +11,7 @@ use App\Models\Expense;
 use App\Models\Item;
 use App\Models\Rit;
 use App\Models\RitBranch;
+use App\Models\Sack;
 use App\Models\Trip;
 use App\Models\Vehicle;
 use Carbon\Carbon;
@@ -156,7 +157,13 @@ class RitController extends Controller
                 "trip_count" => $vehicle->trip_count + 1,
             ]);
         }
-        //NOTE - Expense
+        Expense::create([
+            "amount" => $trip->allowance + $trip->toll + $trip->gas,
+            "note" => "Pengambilan Rit " . $rit->item->code,
+            "type" => "Kendaraan",
+            "trip_id" => $trip->id
+        ]);
+        //TODO - kalo ada ngirim ke customer, auto jadi transaction buat di jualin sama owner
         $return = [
             'api_code' => 200,
             'api_status' => true,
@@ -176,6 +183,10 @@ class RitController extends Controller
         $trip = Trip::find($rit->trip_id);
         $trip->update([
             "toll_used" => $request->toll_used
+        ]);
+        $sack = Sack::create([
+            "amount" => $rit->sack,
+            "rit_id" => $rit->id,
         ]);
         $return = [
             'api_code' => 200,
@@ -204,7 +215,7 @@ class RitController extends Controller
 
     public function transfer_to_branch(Request $request)
     {
-        //NOTE - ini mungkin perlu di pastiin langsung di approve finance atau ga
+        //TODO - ini mungkin perlu di pastiin langsung di approve finance atau ga
         $trip = Trip::create([
             "allowance" => $request->allowance,
             "toll" => $request->toll,

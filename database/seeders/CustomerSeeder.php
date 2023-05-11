@@ -40,7 +40,7 @@ class CustomerSeeder extends Seeder
         $role->name = "Tukimin";
         $role->nickname = "Kimin";
         $role->address = "Jl. Mawar 231";
-        $role->ongkir = 0;
+        $role->ongkir = 500;
         $role->birthdate = "2022-12-30";
         $role->type = "Eceran";
         $role->tb = 6000;

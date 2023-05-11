@@ -26,13 +26,14 @@ class TransactionSeeder extends Seeder
         $data->ongkir = 2000;
         $data->total_price = 2008000;
         // $data->settled_date = "";
-        // $data->owner_approved = "";
+        $data->owner_approved = 1;
         // $data->finance_approved = "";
         $data->customer_id = 3;
         $data->trip_id = 12;
+        $data->type = "Eceran";
         $data->save();
 
-        //Udah di approve finance untuk jalan
+        //Sama kayak atas
         $data = new Transaction();
         $data->daily_id = 2;
         $data->tb = 2000;
@@ -45,10 +46,11 @@ class TransactionSeeder extends Seeder
         $data->ongkir = 2000;
         $data->total_price = 4008000;
         // $data->settled_date = "";
-        // $data->owner_approved = "";
-        $data->finance_approved = 1;
+        $data->owner_approved = 1;
+        // $data->finance_approved = 1;
         $data->customer_id = 3;
         $data->trip_id = 13;
+        $data->type = "Eceran";
         $data->save();
 
         //Udah di approve finance LUNAS
@@ -64,10 +66,11 @@ class TransactionSeeder extends Seeder
         $data->ongkir = 2000;
         $data->total_price = 5488000;
         $data->settled_date = "2022-01-02";
-        // $data->owner_approved = "";
+        $data->owner_approved = 1;
         $data->finance_approved = 1;
         $data->customer_id = 3;
         $data->trip_id = 14;
+        $data->type = "Eceran";
         $data->save();
 
         //Udah di approve finance dan owner - ini kiriman
@@ -87,25 +90,27 @@ class TransactionSeeder extends Seeder
         $data->finance_approved = 1;
         $data->customer_id = 2;
         $data->trip_id = 15;
+        $data->type = "Kiriman";
         $data->save();
 
-        //Kiriman langsung ke customer owner - udah di masukin sama owner
+        //Kiriman - belum di approve owner
         $data = new Transaction();
-        $data->daily_id = 7;
-        // $data->tb = 2000;
-        // $data->tw = 2000;
-        // $data->thr = 2000;
-        // $data->sack = 2;
-        // $data->sack_price = 0;
-        // $data->item_price = 2000000;
+        $data->daily_id = 5;
+        $data->tb = 2000;
+        $data->tw = 2000;
+        $data->thr = 2000;
+        $data->sack = 2;
+        $data->sack_price = 0;
+        $data->item_price = 4000000;
         // $data->discount = 0;
         $data->ongkir = 2000;
-        $data->total_price = 4000000;
+        $data->total_price = 4008000;
         // $data->settled_date = "2022-01-02";
-        $data->owner_approved = 1;
-        $data->finance_approved = 1;
+        // $data->owner_approved = 1;
+        // $data->finance_approved = 1;
         $data->customer_id = 2;
         $data->trip_id = 5;
+        $data->type = "Kiriman";
         $data->save();
     }
 }

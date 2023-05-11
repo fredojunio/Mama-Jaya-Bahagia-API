@@ -24,6 +24,7 @@ class Transaction extends Model
         "finance_approved",
         "customer_id",
         "trip_id",
+        "type",
     ];
     public function customer()
     {

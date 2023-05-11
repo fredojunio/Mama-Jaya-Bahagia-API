@@ -5,7 +5,14 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\SuccessResource;
 use App\Http\Resources\TransactionResource;
+use App\Models\Customer;
+use App\Models\Expense;
+use App\Models\Rit;
+use App\Models\RitTransaction;
+use App\Models\Saving;
 use App\Models\Transaction;
+use App\Models\Trip;
+use App\Models\Vehicle;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -31,23 +38,48 @@ class TransactionController extends Controller
      */
     public function store(Request $request)
     {
+        // return $request;
+        $customer = Customer::find($request->customer_id);
+        $trip = null;
+        if ($customer->type == "Kiriman") {
+            $trip = Trip::create([
+                "allowance" => $request->allowance,
+                "toll" => $request->toll,
+                "gas" => $request->gas,
+                "note" => "Penjualan ke " . $customer->name,
+                "vehicle_id" => $request->vehicle_id,
+            ]);
+        }
         $transaction = Transaction::create([
-            "daily_id" => $request->daily_id,
+            "daily_id" => Transaction::whereDate('created_at', now()->toDateString())->get()->count() + 1,
             "tb" => $request->tb,
             "tw" => $request->tw,
             "thr" => $request->thr,
             "sack" => $request->sack,
-            "sack_price" => $request->sack_price,
-            "item_price" => $request->item_price,
-            "discount" => $request->discount,
+            "sack_price" => $request->sack_fee ? $request->sack * 1000 : 0,
+            "item_price" => $request->item_prices,
+            "discount" => $request->discount ?? 0,
             "ongkir" => $request->ongkir,
             "total_price" => $request->total_price,
-            "settled_date" => $request->settled_date,
-            "owner_approved" => $request->owner_approved,
-            "finance_approved" => $request->finance_approved,
+            "owner_approved" => $trip ? 0 : 1,
             "customer_id" => $request->customer_id,
-            "trip_id" => $request->trip_id,
+            "trip_id" => $trip ? $trip->id : null,
+            "type" => $customer->type
         ]);
+        foreach ($request->rits as $key => $rit) {
+            $rite = Rit::find($rit['item']['id']);
+            $rit_transaction = RitTransaction::create([
+                "daily_id" => $transaction->daily_id,
+                "customer_name" => $customer->name,
+                "tonnage" => $rit["tonnage"],
+                "masak" => $rit["masak"],
+                "item_price" => $rit["price"],
+                "total_price" => $rit["total_price"],
+                "tonnage_left" => $trip ? $rit["real_tonnage"] : $rite->tonnage_left,
+                "rit_id" => $rit["item"]["id"],
+                "transaction_id" => $transaction->id
+            ]);
+        }
         $return = [
             'api_code' => 200,
             'api_status' => true,
@@ -119,10 +151,99 @@ class TransactionController extends Controller
 
     public function approve_finance(Transaction $transaction)
     {
+        $customer = Customer::find($transaction->customer_id);
         $transaction->update([
             "finance_approved" => 1,
             "settled_date" => Carbon::now(),
         ]);
+        $tonnage_transaction = 0;
+        foreach ($transaction->rits as $key => $rit_transaction) {
+            $tonnage_transaction += $rit_transaction->tonnage;
+        }
+
+        $saving = Saving::create([
+            "tb" => $transaction->tb,
+            "tw" => $transaction->tw,
+            "thr" => $transaction->thr,
+            "tonnage" => $tonnage_transaction,
+            "total_tw" => $customer->tw + $transaction->tw,
+            "total_tb" => $customer->tb + $transaction->tb,
+            "total_thr" => $customer->thr + $transaction->thr,
+            "total_tonnage" => $customer->tonnage + $tonnage_transaction,
+            "type" => "Pemasukan",
+            "customer_id" => $transaction->customer_id,
+            "transaction_id" => $transaction->id,
+        ]);
+
+        $customer->update([
+            "tb" => $saving->total_tb,
+            "tw" => $saving->total_tw,
+            "thr" => $saving->total_thr,
+            "tonnage" => $saving->total_tonnage,
+        ]);
+
+        $return = [
+            'api_code' => 200,
+            'api_status' => true,
+            'api_message' => 'Sukses',
+            'api_results' => TransactionResource::make($transaction)
+        ];
+        return SuccessResource::make($return);
+    }
+
+    public function approve_nota(Transaction $transaction, Request $request)
+    {
+        if ($request->owner_approved == 1) {
+            //NOTE - Approved
+            $trip = Trip::find($transaction->trip_id);
+            $trip->update([
+                "finance_approved" => 1
+            ]);
+            $vehicle = Vehicle::find($trip->vehicle_id);
+            if ($trip->gas > 0) {
+                $vehicle->update([
+                    "trip_count" => 1,
+                ]);
+            } else {
+                $vehicle->update([
+                    "trip_count" => $vehicle->trip_count + 1,
+                ]);
+            }
+            $customer = Customer::find($transaction->customer_id);
+            Expense::create([
+                "amount" => $trip->allowance + $trip->toll + $trip->gas,
+                "note" => "Penjualan Ke " . $customer->name,
+                "type" => "Kendaraan",
+                "trip_id" => $trip->id
+            ]);
+            $transaction->update([
+                "owner_approved" => 1,
+            ]);
+            foreach ($transaction->rits as $key => $rit) {
+                $rite = Rit::find($rit->rit_id);
+                $rite->update([
+                    'tonnage_left' => $rit["tonnage_left"],
+                ]);
+                if ($rite->tonnage_left == 0) {
+                    $rite->update([
+                        "sold_date" => Carbon::now()
+                    ]);
+                }
+            }
+        } else if ($request->owner_approved == 2) {
+            //NOTE - Rejected
+            $transaction->update([
+                "owner_approved" => 2,
+            ]);
+            foreach ($transaction->rits as $key => $rit) {
+                $rite = Rit::find($rit->rit_id);
+                if ($rite->tonnage_left == 0) {
+                    $rite->update([
+                        "sold_date" => null
+                    ]);
+                }
+            }
+        }
         $return = [
             'api_code' => 200,
             'api_status' => true,

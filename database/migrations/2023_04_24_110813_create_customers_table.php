@@ -17,7 +17,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('nickname');
             $table->string('address');
-            $table->integer('ongkir');
+            $table->string('hp')->nullable();
+            $table->integer('ongkir')->default(0);
             $table->date('birthdate');
             $table->string('type');
             $table->integer("tb")->default(0);

@@ -34,6 +34,7 @@ class TransactionResource extends JsonResource
             "trip" => $this->trip,
             "rits" => RitTransactionResource::collection($this->rits),
             "savings" => $this->savings,
+            "type" => $this->type
         ];
     }
 }
