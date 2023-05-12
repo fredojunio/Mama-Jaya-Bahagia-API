@@ -12,6 +12,7 @@ use App\Models\Item;
 use App\Models\Rit;
 use App\Models\RitBranch;
 use App\Models\Sack;
+use App\Models\Transaction;
 use App\Models\Trip;
 use App\Models\Vehicle;
 use Carbon\Carbon;
@@ -163,7 +164,15 @@ class RitController extends Controller
             "type" => "Kendaraan",
             "trip_id" => $trip->id
         ]);
-        //TODO - kalo ada ngirim ke customer, auto jadi transaction buat di jualin sama owner
+        if ($rit->customer_tonnage > 0) {
+            $transaction = Transaction::create([
+                "daily_id" => Transaction::whereDate('created_at', now()->toDateString())->get()->count() + 1,
+                "owner_approved" => 0,
+                "customer_id" => $rit->customer_id,
+                "trip_id" => $trip->id,
+                "type" => "Owner"
+            ]);
+        }
         $return = [
             'api_code' => 200,
             'api_status' => true,
@@ -217,9 +226,9 @@ class RitController extends Controller
     {
         //TODO - ini mungkin perlu di pastiin langsung di approve finance atau ga
         $trip = Trip::create([
-            "allowance" => $request->allowance,
-            "toll" => $request->toll,
-            "gas" => $request->gas,
+            "allowance" => $request->allowance ?? 0,
+            "toll" => $request->toll ?? 0,
+            "gas" => $request->gas ?? 0,
             "note" => "Pengiriman ke " . $request->branch_name,
             "finance_approved" => 1,
             "vehicle_id" => $request->vehicle_id,
@@ -252,6 +261,7 @@ class RitController extends Controller
             ]);
             $rite = Rit::find($rit["id"]);
             $rite->update([
+                "branch_tonnage" => $rite->branch_tonnage ? $rite->branch_tonnage + $rit["amount"] : $rit["amount"],
                 "tonnage_left" => $rite->tonnage_left - $rit["amount"],
                 "sold_date" => $rite->tonnage_left == $rit["amount"] ? Carbon::now() : $rite->sold_date
             ]);
@@ -297,6 +307,51 @@ class RitController extends Controller
             'retur_tonnage' => $request->tonnage,
             'tonnage_left' => $rit->tonnage_left - $request->tonnage,
             'retur_trip_id' => $trip->id
+        ]);
+
+        $return = [
+            'api_code' => 200,
+            'api_status' => true,
+            'api_message' => 'Sukses',
+            'api_results' => RitResource::make($rit)
+        ];
+        return SuccessResource::make($return);
+    }
+    public function transfer_from_branch(Request $request, Rit $rit)
+    {
+        $rit->update([
+            "branch_tonnage" => $rit->branch_tonnage - $request->tonnage,
+            "tonnage_left" => $request->tonnage + $rit->tonnage_left,
+            "sold_date" => $rit->sold_date ? null : $rit->sold_date,
+            "is_hold" => $rit->sold_date ? 1 : $rit->is_hold,
+        ]);
+        $amount = $request->tonnage;
+        foreach ($rit->branches as $key => $ritBranch) {
+            $original_tonnage = $ritBranch->sent_tonnage;
+            $ritBranch->update([
+                "sent_tonnage" => $ritBranch->sent_tonnage < $amount ? 0 : $ritBranch->sent_tonnage - $amount
+            ]);
+            if ($amount < $original_tonnage) {
+                $amount = 0;
+            } else {
+                $amount -= $original_tonnage;
+            }
+        }
+        $trip = Trip::create([
+            "note" => "Pengiriman ke Pusat dari Cabang",
+            "finance_approved" => 1,
+            "vehicle_id" => $request->vehicle_id,
+        ]);
+        $vehicle = Vehicle::find($trip->vehicle_id);
+        $vehicle->update([
+            "trip_count" => $vehicle->trip_count + 1,
+        ]);
+
+        Expense::create([
+            "amount" => 0,
+            "note" => "Pengiriman ke Pusat dari Cabang",
+            "type" => "Kendaraan",
+            "trip_id" => $trip->id
         ]);
 
         $return = [

@@ -38,6 +38,7 @@ class RitResource extends JsonResource
             "customer" => $this->customer,
             "branches" => RitBranchResource::collection($this->branches),
             "transactions" => $this->transactions,
+            "customer_transaction" => $this->customer_transaction,
             "created_at" => $this->created_at,
         ];
     }

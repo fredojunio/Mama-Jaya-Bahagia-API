@@ -34,6 +34,7 @@ class RitSeeder extends Seeder
         $data->item_id = 1;
         $data->trip_id = 1;
         // $data->retur_trip_id = "";
+        $data->customer_id = 1;
         $data->save();
 
         //Masih otw
@@ -57,6 +58,7 @@ class RitSeeder extends Seeder
         $data->item_id = 1;
         $data->trip_id = 2;
         // $data->retur_trip_id = "";
+        $data->customer_id = 1;
         $data->save();
 
         //Sampe - pusat, customer, branch - belum ada harga
@@ -80,6 +82,7 @@ class RitSeeder extends Seeder
         $data->item_id = 1;
         $data->trip_id = 3;
         // $data->retur_trip_id = "";
+        $data->customer_id = 1;
         $data->save();
 
         //Sampe - pusat, customer, branch
@@ -103,6 +106,7 @@ class RitSeeder extends Seeder
         $data->item_id = 1;
         $data->trip_id = 4;
         // $data->retur_trip_id = "";
+        $data->customer_id = 1;
         $data->save();
 
         //Sampe - pusat, customer
@@ -127,6 +131,7 @@ class RitSeeder extends Seeder
         $data->item_id = 1;
         $data->trip_id = 5;
         // $data->retur_trip_id = "";
+        $data->customer_id = 1;
         $data->save();
 
         //Sampe - pusat, branch

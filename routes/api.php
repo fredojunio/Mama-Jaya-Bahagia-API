@@ -50,6 +50,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('/rit/{rit}/arrived', [RitController::class, 'arrived']);
     Route::post('/rit/{rit}/priced', [RitController::class, 'priced']);
     Route::post('/rit/transfer_to_branch', [RitController::class, 'transfer_to_branch']);
+    Route::post('/rit/{rit}/transfer_from_branch', [RitController::class, 'transfer_from_branch']);
     Route::post('/rit/{rit}/return', [RitController::class, 'return']);
     Route::apiResource('ritbranch', RitBranchController::class);
     Route::apiResource('trip', TripController::class);
@@ -57,6 +58,8 @@ Route::group(['prefix' => 'admin'], function () {
     Route::apiResource('transaction', TransactionController::class);
     Route::get('/transaction/{transaction}/approve_finance', [TransactionController::class, 'approve_finance']);
     Route::post('/transaction/{transaction}/approve_nota', [TransactionController::class, 'approve_nota']);
+    Route::post('/transaction/{transaction}/customer', [TransactionController::class, 'customer']);
+    Route::post('/transaction/{rit}/branch', [TransactionController::class, 'branch']);
     Route::apiResource('saving', SavingController::class);
     Route::apiResource('report', ReportController::class);
     Route::apiResource('income', IncomeController::class);

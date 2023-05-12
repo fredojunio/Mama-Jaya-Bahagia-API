@@ -109,8 +109,108 @@ class TransactionSeeder extends Seeder
         // $data->owner_approved = 1;
         // $data->finance_approved = 1;
         $data->customer_id = 2;
-        $data->trip_id = 5;
+        $data->trip_id = 11;
         $data->type = "Kiriman";
+        $data->save();
+
+        //Owner - belom di set harganya sama owner
+        $data = new Transaction();
+        $data->daily_id = 6;
+        // $data->tb = 2000;
+        // $data->tw = 2000;
+        // $data->thr = 2000;
+        // $data->sack = 2;
+        // $data->sack_price = 0;
+        // $data->item_price = 4000000;
+        // $data->discount = 0;
+        // $data->ongkir = 2000;
+        // $data->total_price = 4008000;
+        // $data->settled_date = "2022-01-02";
+        // $data->owner_approved = 1;
+        // $data->finance_approved = 1;
+        $data->customer_id = 1;
+        $data->trip_id = 1;
+        $data->type = "Owner";
+        $data->save();
+
+        //Owner - belom di set harganya sama owner
+        $data = new Transaction();
+        $data->daily_id = 7;
+        // $data->tb = 2000;
+        // $data->tw = 2000;
+        // $data->thr = 2000;
+        // $data->sack = 2;
+        // $data->sack_price = 0;
+        // $data->item_price = 4000000;
+        // $data->discount = 0;
+        // $data->ongkir = 2000;
+        // $data->total_price = 4008000;
+        // $data->settled_date = "2022-01-02";
+        // $data->owner_approved = 1;
+        // $data->finance_approved = 1;
+        $data->customer_id = 1;
+        $data->trip_id = 2;
+        $data->type = "Owner";
+        $data->save();
+
+        //Owner - belom di set harganya sama owner
+        $data = new Transaction();
+        $data->daily_id = 8;
+        // $data->tb = 2000;
+        // $data->tw = 2000;
+        // $data->thr = 2000;
+        // $data->sack = 2;
+        // $data->sack_price = 0;
+        // $data->item_price = 4000000;
+        // $data->discount = 0;
+        // $data->ongkir = 2000;
+        // $data->total_price = 4008000;
+        // $data->settled_date = "2022-01-02";
+        // $data->owner_approved = 1;
+        // $data->finance_approved = 1;
+        $data->customer_id = 1;
+        $data->trip_id = 3;
+        $data->type = "Owner";
+        $data->save();
+
+        //Owner - belom di set harganya sama owner
+        $data = new Transaction();
+        $data->daily_id = 9;
+        // $data->tb = 2000;
+        // $data->tw = 2000;
+        // $data->thr = 2000;
+        // $data->sack = 2;
+        // $data->sack_price = 0;
+        // $data->item_price = 4000000;
+        // $data->discount = 0;
+        // $data->ongkir = 2000;
+        // $data->total_price = 4008000;
+        // $data->settled_date = "2022-01-02";
+        // $data->owner_approved = 1;
+        // $data->finance_approved = 1;
+        $data->customer_id = 1;
+        $data->trip_id = 4;
+        $data->type = "Owner";
+        $data->save();
+
+        //Owner - belom di set harganya sama owner
+        $data = new Transaction();
+        $data->daily_id = 10;
+        // $data->tb = 2000;
+        // $data->tw = 2000;
+        // $data->thr = 2000;
+        // $data->sack = 2;
+        // $data->sack_price = 0;
+        // $data->item_price = 4000000;
+        // $data->discount = 0;
+        // $data->ongkir = 2000;
+        // $data->total_price = 4008000;
+        // $data->settled_date = "2022-01-02";
+        // $data->owner_approved = 1;
+        // $data->finance_approved = 1;
+        $data->customer_id = 1;
+        $data->trip_id = 5;
+        $data->type = "Owner";
         $data->save();
     }
 }

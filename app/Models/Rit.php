@@ -29,7 +29,8 @@ class Rit extends Model
         "item_id",
         "trip_id",
         "retur_trip_id",
-        "customer_id"
+        "customer_id",
+        "customer_transaction_id"
     ];
     public function item()
     {
@@ -38,6 +39,10 @@ class Rit extends Model
     public function customer()
     {
         return $this->belongsTo(Customer::class, 'customer_id', 'id');
+    }
+    public function customer_transaction()
+    {
+        return $this->belongsTo(Transaction::class, 'customer_transaction_id', 'id');
     }
     public function trip()
     {

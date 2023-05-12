@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('trips', function (Blueprint $table) {
             $table->id();
-            $table->integer("allowance")->default(0);
-            $table->integer("toll")->default(0);
-            $table->integer("gas")->default(0);
+            $table->integer("allowance")->default(0)->nullable();
+            $table->integer("toll")->default(0)->nullable();
+            $table->integer("gas")->default(0)->nullable();
             $table->text("note")->nullable();
             $table->integer("toll_used")->nullable();
             $table->integer("branch_to_main_tonnage")->nullable();
-            $table->integer("finance_approved")->default(0);
+            $table->integer("finance_approved")->default(0)->nullable();
             $table->timestamps();
         });
     }

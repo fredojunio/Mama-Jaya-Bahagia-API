@@ -18,14 +18,14 @@ return new class extends Migration
             $table->string('nickname');
             $table->string('address');
             $table->string('hp')->nullable();
-            $table->integer('ongkir')->default(0);
+            $table->integer('ongkir')->default(0)->nullable();
             $table->date('birthdate');
             $table->string('type');
-            $table->integer("tb")->default(0);
-            $table->integer("tw")->default(0);
-            $table->integer("thr")->default(0);
-            $table->integer("tonnage")->default(0);
-            $table->integer("cashback_approved")->default(0);
+            $table->integer("tb")->default(0)->nullable();
+            $table->integer("tw")->default(0)->nullable();
+            $table->integer("thr")->default(0)->nullable();
+            $table->integer("tonnage")->default(0)->nullable();
+            $table->integer("cashback_approved")->default(0)->nullable();
             $table->timestamps();
         });
     }

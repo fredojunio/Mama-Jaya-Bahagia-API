@@ -26,10 +26,10 @@ return new class extends Migration
             $table->date("sold_date")->nullable();
             $table->integer("sell_price")->nullable();
             $table->integer("buy_price")->nullable();
-            $table->integer("sack")->default(0);
-            $table->integer("finance_approved")->default(0);
-            $table->integer("customer_tonnage_sold")->default(0);
-            $table->integer("is_hold")->default(0);
+            $table->integer("sack")->default(0)->nullable();
+            $table->integer("finance_approved")->default(0)->nullable();
+            $table->integer("customer_tonnage_sold")->default(0)->nullable();
+            $table->integer("is_hold")->default(0)->nullable();
             $table->timestamps();
         });
     }

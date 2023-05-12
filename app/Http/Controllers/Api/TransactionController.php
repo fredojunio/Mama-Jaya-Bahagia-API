@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\RitResource;
 use App\Http\Resources\SuccessResource;
 use App\Http\Resources\TransactionResource;
 use App\Models\Customer;
 use App\Models\Expense;
 use App\Models\Rit;
+use App\Models\RitBranch;
 use App\Models\RitTransaction;
 use App\Models\Saving;
 use App\Models\Transaction;
@@ -79,6 +81,14 @@ class TransactionController extends Controller
                 "rit_id" => $rit["item"]["id"],
                 "transaction_id" => $transaction->id
             ]);
+            $rite->update([
+                'tonnage_left' => $trip ? $rit_transaction->tonnage_left : $rite->tonnage_left - $rit["tonnage"],
+            ]);
+            if ($rite->tonnage_left == 0) {
+                $rite->update([
+                    "sold_date" => Carbon::now()
+                ]);
+            }
         }
         $return = [
             'api_code' => 200,
@@ -219,17 +229,6 @@ class TransactionController extends Controller
             $transaction->update([
                 "owner_approved" => 1,
             ]);
-            foreach ($transaction->rits as $key => $rit) {
-                $rite = Rit::find($rit->rit_id);
-                $rite->update([
-                    'tonnage_left' => $rit["tonnage_left"],
-                ]);
-                if ($rite->tonnage_left == 0) {
-                    $rite->update([
-                        "sold_date" => Carbon::now()
-                    ]);
-                }
-            }
         } else if ($request->owner_approved == 2) {
             //NOTE - Rejected
             $transaction->update([
@@ -242,6 +241,9 @@ class TransactionController extends Controller
                         "sold_date" => null
                     ]);
                 }
+                $rite->update([
+                    'tonnage_left' => $rite->tonnage_left + $rit["tonnage"],
+                ]);
             }
         }
         $return = [
@@ -249,6 +251,79 @@ class TransactionController extends Controller
             'api_status' => true,
             'api_message' => 'Sukses',
             'api_results' => TransactionResource::make($transaction)
+        ];
+        return SuccessResource::make($return);
+    }
+
+    public function customer(Transaction $transaction, Request $request)
+    {
+        $customer = Customer::find($request->customer_id);
+        $transaction->update([
+            "item_price" => $request->item_prices,
+            "ongkir" => $request->ongkir,
+            "total_price" => $request->total_price,
+            "owner_approved" => 1,
+            "customer_id" => $request->customer_id,
+            "trip_id" => $transaction->trip_id,
+            "type" => "Owner"
+        ]);
+        foreach ($request->rits as $key => $rit) {
+            $rite = Rit::find($rit['item']['id']);
+            $rite->update([
+                "customer_transaction_id" => $transaction->id,
+            ]);
+            $rit_transaction = RitTransaction::create([
+                "daily_id" => $transaction->daily_id,
+                "customer_name" => $customer->name,
+                "tonnage" => $rit["tonnage"],
+                "masak" => $rit["masak"],
+                "item_price" => $rit["price"],
+                "total_price" => $rit["total_price"],
+                "rit_id" => $rit["item"]["id"],
+                "transaction_id" => $transaction->id
+            ]);
+        }
+        $return = [
+            'api_code' => 200,
+            'api_status' => true,
+            'api_message' => 'Sukses',
+            'api_results' => TransactionResource::make($transaction)
+        ];
+        return SuccessResource::make($return);
+    }
+
+    public function branch(Rit $rit, Request $request)
+    {
+        foreach ($request->branches as $key => $branch) {
+            $ritBranch = RitBranch::find($branch["id"]);
+            $ritBranch->update([
+                "income" => $branch["income"] ?? 0
+            ]);
+            $transaction = Transaction::create([
+                "daily_id" => Transaction::whereDate('created_at', now()->toDateString())->get()->count() + 1,
+                "total_price" => $branch["income"],
+                "owner_approved" => 1,
+                "finance_approved" => 1,
+                "settled_date" => Carbon::now(),
+                "trip_id" => $branch["trip"]["id"],
+                "type" => "Cabang"
+            ]);
+            $rit_transaction = RitTransaction::create([
+                "daily_id" => $transaction->daily_id,
+                "customer_name" => $branch["name"],
+                "tonnage" => $branch["sent_tonnage"],
+                "item_price" => 0,
+                "total_price" => $branch["income"] ?? 0,
+                "tonnage_left" => 0,
+                "rit_id" => $request->id,
+                "transaction_id" => $transaction->id
+            ]);
+        }
+        $return = [
+            'api_code' => 200,
+            'api_status' => true,
+            'api_message' => 'Sukses',
+            'api_results' => RitResource::make($rit)
         ];
         return SuccessResource::make($return);
     }
