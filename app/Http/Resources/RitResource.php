@@ -37,7 +37,7 @@ class RitResource extends JsonResource
             "retur_trip" => $this->retur_trip,
             "customer" => $this->customer,
             "branches" => RitBranchResource::collection($this->branches),
-            "transactions" => $this->transactions,
+            "transactions" => RitTransactionResourceVerOne::collection($this->transactions),
             "customer_transaction" => $this->customer_transaction,
             "created_at" => $this->created_at,
         ];
