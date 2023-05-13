@@ -13,7 +13,7 @@ class Customer extends Model
         'name',
         'nickname',
         'address',
-        'hp',
+        'phone',
         'ongkir',
         'birthdate',
         'type',

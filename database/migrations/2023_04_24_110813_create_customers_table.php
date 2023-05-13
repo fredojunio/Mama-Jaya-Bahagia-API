@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('nickname');
             $table->string('address');
-            $table->string('hp')->nullable();
+            $table->string('phone')->nullable();
             $table->integer('ongkir')->default(0)->nullable();
             $table->date('birthdate');
             $table->string('type');
