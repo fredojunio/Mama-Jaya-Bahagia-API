@@ -3,7 +3,12 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\CashbackResource;
+use App\Http\Resources\SuccessResource;
 use App\Models\Cashback;
+use App\Models\Customer;
+use App\Models\Expense;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class CashbackController extends Controller
@@ -13,7 +18,14 @@ class CashbackController extends Controller
      */
     public function index()
     {
-        //
+        $cashbacks = Cashback::all();
+        $return = [
+            'api_code' => 200,
+            'api_status' => true,
+            'api_message' => 'Sukses',
+            'api_results' => CashbackResource::collection($cashbacks),
+        ];
+        return SuccessResource::make($return);
     }
 
     /**
@@ -29,7 +41,27 @@ class CashbackController extends Controller
      */
     public function show(Cashback $cashback)
     {
-        //
+        $cashback->update([
+            "approval_date" => Carbon::now()
+        ]);
+
+        $customer = Customer::find($cashback->customer_id);
+
+        $expense = Expense::create([
+            "amount" => $cashback->amount,
+            "note" => "Cashback " . $customer->name,
+            "name" => $customer->name,
+            "time" => Carbon::now(),
+            "type" => "Cashback",
+        ]);
+
+        $return = [
+            'api_code' => 200,
+            'api_status' => true,
+            'api_message' => 'Sukses',
+            'api_results' => CashbackResource::make($cashback)
+        ];
+        return SuccessResource::make($return);
     }
 
     /**

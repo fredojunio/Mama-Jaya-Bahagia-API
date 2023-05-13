@@ -167,13 +167,6 @@ class CustomerController extends Controller
                 'amount' => $request->amount,
                 'customer_id' => $customer->id,
             ]);
-            $expense = Expense::create([
-                "amount" => $request->amount,
-                "note" => "Cashback " . $customer->name,
-                "name" => $customer->name,
-                "time" => Carbon::now(),
-                "type" => "Cashback",
-            ]);
             $customer->update([
                 'cashback_approved' => 1,
             ]);
