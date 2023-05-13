@@ -36,12 +36,13 @@ class ReportController extends Controller
         $income = Transaction::where('finance_approved', 1)
             ->whereDate('settled_date', Carbon::today())
             ->sum('total_price');
+        $allincome = Transaction::whereDate('settled_date', Carbon::today())
+            ->sum('total_price');
         $unpaidIncome = Transaction::where('finance_approved', 0)
             ->where('owner_approved', 1)
             ->sum('total_price');
         $expense = Expense::whereDate('time', Carbon::today())->sum('amount');
-        $tonnage = Transaction::where('owner_approved', 1)
-            ->whereDate('created_at', Carbon::today())
+        $tonnage = Transaction::whereDate('created_at', Carbon::today())
             ->with('rits')
             ->get()
             ->pluck('rits')
@@ -75,8 +76,8 @@ class ReportController extends Controller
             ->where('type', "Operasional")
             ->sum('amount');
         $report = Report::create([
-            "money" => $income - $expense - $unpaidIncome,
-            "income" => $income,
+            "money" => $income - $expense,
+            "income" => $allincome,
             "expense" => $expense,
             "tonnage" => $tonnage,
             "item_income" => $item_income,
