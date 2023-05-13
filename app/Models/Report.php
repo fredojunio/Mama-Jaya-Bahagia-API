@@ -27,4 +27,8 @@ class Report extends Model
     {
         return $this->hasMany(ReportRit::class, 'report_id', 'id');
     }
+    public function transactions()
+    {
+        return $this->hasMany(ReportTransaction::class, 'report_id', 'id');
+    }
 }

@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('report_rits', function (Blueprint $table) {
             $table->id();
-            $table->double("tonnage_left");
-            $table->double("tonnage_sold");
-            $table->double("total_tonnage_sold");
+            $table->double("tonnage_left")->nullable();
+            $table->double("tonnage_sold")->nullable();
+            $table->double("total_tonnage_sold")->nullable();
             $table->timestamps();
         });
     }

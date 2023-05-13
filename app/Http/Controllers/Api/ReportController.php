@@ -8,11 +8,13 @@ use App\Http\Resources\SuccessResource;
 use App\Models\Expense;
 use App\Models\Report;
 use App\Models\ReportRit;
+use App\Models\ReportTransaction;
 use App\Models\Rit;
 use App\Models\RitTransaction;
 use App\Models\Transaction;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ReportController extends Controller
 {
@@ -92,17 +94,46 @@ class ReportController extends Controller
         ]);
         $rits = Rit::where("tonnage_left", ">", 0)->orWhere("sold_date", Carbon::today())->get();
         foreach ($rits as $key => $rit) {
-            $tonnage_sold = RitTransaction::where('rit_id', $rit->id)
-                ->whereDate('created_at', Carbon::today())
-                ->sum('tonnage');
-            $total_tonnage_sold = RitTransaction::where('rit_id', $rit->id)
-                ->sum('tonnage');
+            $todayTransactions = DB::table('transactions')
+                ->whereDate('transactions.created_at', Carbon::today())
+                ->join('rit_transactions', 'transactions.id', '=', 'rit_transactions.transaction_id')
+                ->where('rit_transactions.rit_id', $rit->id)
+                ->select(DB::raw('SUM(rit_transactions.tonnage * rit_transactions.masak) AS total_tonnage_times_masak'))
+                ->first();
+            $totalTonnageTimesMasakToday = $todayTransactions->total_tonnage_times_masak;
+            $transactions = DB::table('transactions')
+                ->join('rit_transactions', 'transactions.id', '=', 'rit_transactions.transaction_id')
+                ->where('rit_transactions.rit_id', $rit->id)
+                ->select(DB::raw('SUM(rit_transactions.tonnage * rit_transactions.masak) AS total_tonnage_times_masak'))
+                ->first();
+            $totalTonnageTimesMasak = $transactions->total_tonnage_times_masak;
+
+
             $report_rit = ReportRit::create([
                 "tonnage_left" => $rit->tonnage_left,
-                "tonnage_sold" => $tonnage_sold,
-                "total_tonnage_sold" => $total_tonnage_sold,
+                "tonnage_sold" => $totalTonnageTimesMasakToday,
+                "total_tonnage_sold" => $totalTonnageTimesMasak,
                 "rit_id" => $rit->id,
                 "report_id" => $report->id
+            ]);
+        }
+        $transactions = Transaction::where("settled_date", Carbon::today())
+            ->orWhereNull("settled_date")
+            ->where(function ($query) {
+                $query->where('owner_approved', '<>', 2)
+                    ->orWhereNull('owner_approved');
+            })
+            ->where(function ($query) {
+                $query->whereNotNull('total_price');
+            })
+            ->get();
+        foreach ($transactions as $key => $transaction) {
+            ReportTransaction::create([
+                "amount" => $transaction->total_price,
+                "transaction_date" => $transaction->created_at,
+                "settled_date" => $transaction->settled_date,
+                "transaction_id" => $transaction->id,
+                "report_id" => $report->id,
             ]);
         }
         $return = [
