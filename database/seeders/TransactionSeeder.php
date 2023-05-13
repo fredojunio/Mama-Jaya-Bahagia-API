@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Transaction;
+use Carbon\Carbon;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -14,6 +15,26 @@ class TransactionSeeder extends Seeder
     public function run(): void
     {
         //Belum di approve finance
+        // for ($i=0; $i < 10000 ; $i++) {
+        //     $data = new Transaction();
+        //     $data->daily_id = 1;
+        //     $data->tb = 2000;
+        //     $data->tw = 2000;
+        //     $data->thr = 2000;
+        //     $data->sack = 2;
+        //     $data->sack_price = 0;
+        //     $data->item_price = 2000000;
+        //     $data->discount = 0;
+        //     $data->ongkir = 2000;
+        //     $data->total_price = 2008000;
+        //     // $data->settled_date = "";
+        //     $data->owner_approved = 1;
+        //     // $data->finance_approved = "";
+        //     $data->customer_id = 3;
+        //     $data->trip_id = 12;
+        //     $data->type = "Eceran";
+        //     $data->save();
+        // }
         $data = new Transaction();
         $data->daily_id = 1;
         $data->tb = 2000;
@@ -65,7 +86,7 @@ class TransactionSeeder extends Seeder
         $data->discount = 0;
         $data->ongkir = 2000;
         $data->total_price = 5488000;
-        $data->settled_date = "2022-01-02";
+        $data->settled_date = Carbon::now();
         $data->owner_approved = 1;
         $data->finance_approved = 1;
         $data->customer_id = 3;
@@ -85,7 +106,7 @@ class TransactionSeeder extends Seeder
         $data->discount = 0;
         $data->ongkir = 2000;
         $data->total_price = 5488000;
-        $data->settled_date = "2022-01-02";
+        $data->settled_date = Carbon::now();
         $data->owner_approved = 1;
         $data->finance_approved = 1;
         $data->customer_id = 2;
@@ -105,7 +126,7 @@ class TransactionSeeder extends Seeder
         // $data->discount = 0;
         $data->ongkir = 2000;
         $data->total_price = 4008000;
-        // $data->settled_date = "2022-01-02";
+        // $data->settled_date = Carbon::now();
         // $data->owner_approved = 1;
         // $data->finance_approved = 1;
         $data->customer_id = 2;
@@ -125,7 +146,7 @@ class TransactionSeeder extends Seeder
         // $data->discount = 0;
         // $data->ongkir = 2000;
         // $data->total_price = 4008000;
-        // $data->settled_date = "2022-01-02";
+        // $data->settled_date = Carbon::now();
         // $data->owner_approved = 1;
         // $data->finance_approved = 1;
         $data->customer_id = 1;
@@ -145,7 +166,7 @@ class TransactionSeeder extends Seeder
         // $data->discount = 0;
         // $data->ongkir = 2000;
         // $data->total_price = 4008000;
-        // $data->settled_date = "2022-01-02";
+        // $data->settled_date = Carbon::now();
         // $data->owner_approved = 1;
         // $data->finance_approved = 1;
         $data->customer_id = 1;
@@ -165,7 +186,7 @@ class TransactionSeeder extends Seeder
         // $data->discount = 0;
         // $data->ongkir = 2000;
         // $data->total_price = 4008000;
-        // $data->settled_date = "2022-01-02";
+        // $data->settled_date = Carbon::now();
         // $data->owner_approved = 1;
         // $data->finance_approved = 1;
         $data->customer_id = 1;
@@ -185,7 +206,7 @@ class TransactionSeeder extends Seeder
         // $data->discount = 0;
         // $data->ongkir = 2000;
         // $data->total_price = 4008000;
-        // $data->settled_date = "2022-01-02";
+        // $data->settled_date = Carbon::now();
         // $data->owner_approved = 1;
         // $data->finance_approved = 1;
         $data->customer_id = 1;
@@ -205,7 +226,7 @@ class TransactionSeeder extends Seeder
         // $data->discount = 0;
         // $data->ongkir = 2000;
         // $data->total_price = 4008000;
-        // $data->settled_date = "2022-01-02";
+        // $data->settled_date = Carbon::now();
         // $data->owner_approved = 1;
         // $data->finance_approved = 1;
         $data->customer_id = 1;

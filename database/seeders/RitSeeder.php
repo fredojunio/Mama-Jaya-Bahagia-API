@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Rit;
+use Carbon\Carbon;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -192,7 +193,7 @@ class RitSeeder extends Seeder
         $data->tonnage_left = 0;
         $data->delivery_date = "2022-12-30";
         $data->arrival_date = "2023-01-01";
-        $data->sold_date = "2023-01-02";
+        $data->sold_date = Carbon::now();
         $data->sell_price = 5000;
         $data->buy_price = 1980;
         $data->sack = 100;

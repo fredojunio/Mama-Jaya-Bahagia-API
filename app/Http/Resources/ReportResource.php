@@ -30,7 +30,7 @@ class ReportResource extends JsonResource
             "thr_expense" => $this->thr_expense,
             "salary_expense" => $this->salary_expense,
             "operational_expense" => $this->operational_expense,
-            "rits" => $this->rits
+            "rits" => ReportRitResource::collection($this->rits)
         ];
     }
 }

@@ -61,6 +61,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('/transaction/{transaction}/customer', [TransactionController::class, 'customer']);
     Route::post('/transaction/{rit}/branch', [TransactionController::class, 'branch']);
     Route::apiResource('saving', SavingController::class);
+    Route::get('/report/create_daily_report', [ReportController::class, 'create_daily_report']);
     Route::apiResource('report', ReportController::class);
     Route::apiResource('income', IncomeController::class);
     Route::apiResource('expense', ExpenseController::class);

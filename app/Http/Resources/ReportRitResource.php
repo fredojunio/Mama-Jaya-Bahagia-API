@@ -20,7 +20,7 @@ class ReportRitResource extends JsonResource
             "tonnage_left" => $this->tonnage_left,
             "tonnage_sold" => $this->tonnage_sold,
             "total_tonnage_sold" => $this->total_tonnage_sold,
-            "rit" => $this->rit,
+            "rit" => RitResource::make($this->rit),
             "report_id" => $this->report_id
         ];
     }
