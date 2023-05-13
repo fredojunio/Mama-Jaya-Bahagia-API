@@ -16,11 +16,11 @@ return new class extends Migration
             $table->integer("tb")->default(0);
             $table->integer("tw")->default(0);
             $table->integer("thr")->default(0);
-            $table->integer("tonnage")->default(0);
+            $table->double("tonnage")->default(0);
             $table->integer("total_tw")->default(0);
             $table->integer("total_tb")->default(0);
             $table->integer("total_thr")->default(0);
-            $table->integer("total_tonnage")->default(0);
+            $table->double("total_tonnage")->default(0);
             $table->string("type");
             $table->timestamps();
         });

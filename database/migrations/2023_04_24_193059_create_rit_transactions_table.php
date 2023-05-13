@@ -15,11 +15,11 @@ return new class extends Migration
             $table->id();
             $table->integer("daily_id");
             $table->string("customer_name");
-            $table->integer("tonnage");
+            $table->double("tonnage");
             $table->integer("masak")->default(1);
             $table->integer("item_price");
             $table->integer("total_price");
-            $table->integer("tonnage_left")->nullable();
+            $table->double("tonnage_left")->nullable();
             $table->timestamps();
         });
     }

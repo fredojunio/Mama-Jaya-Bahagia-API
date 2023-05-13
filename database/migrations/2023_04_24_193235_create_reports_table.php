@@ -16,7 +16,7 @@ return new class extends Migration
             $table->integer("money")->default(0);
             $table->integer("income")->default(0);
             $table->integer("expense")->default(0);
-            $table->integer("tonnage")->default(0);
+            $table->double("tonnage")->default(0);
             $table->integer("item_income")->default(0);
             $table->integer("tb_income")->default(0);
             $table->integer("tw_income")->default(0);

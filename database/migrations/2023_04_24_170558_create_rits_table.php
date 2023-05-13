@@ -14,13 +14,13 @@ return new class extends Migration
         Schema::create('rits', function (Blueprint $table) {
             $table->id();
             $table->string("do_code");
-            $table->integer("expected_tonnage");
-            $table->integer("customer_tonnage")->nullable();
-            $table->integer("branch_tonnage")->nullable();
-            $table->integer("main_tonnage")->nullable();
-            $table->integer("retur_tonnage")->nullable();
-            $table->integer("arrived_tonnage")->nullable();
-            $table->integer("tonnage_left")->nullable();
+            $table->double("expected_tonnage");
+            $table->double("customer_tonnage")->nullable();
+            $table->double("branch_tonnage")->nullable();
+            $table->double("main_tonnage")->nullable();
+            $table->double("retur_tonnage")->nullable();
+            $table->double("arrived_tonnage")->nullable();
+            $table->double("tonnage_left")->nullable();
             $table->date("delivery_date")->nullable();
             $table->date("arrival_date")->nullable();
             $table->date("sold_date")->nullable();
