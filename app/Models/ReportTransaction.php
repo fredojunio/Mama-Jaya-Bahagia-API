@@ -19,4 +19,8 @@ class ReportTransaction extends Model
     {
         return $this->belongsTo(Transaction::class, 'transaction_id', 'id');
     }
+    public function report()
+    {
+        return $this->belongsTo(Report::class, 'report_id', 'id');
+    }
 }

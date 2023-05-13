@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ReportResource;
 use App\Http\Resources\SuccessResource;
+use App\Models\Customer;
 use App\Models\Expense;
+use App\Models\Item;
 use App\Models\Report;
 use App\Models\ReportRit;
 use App\Models\ReportTransaction;
@@ -141,6 +143,127 @@ class ReportController extends Controller
             'api_status' => true,
             'api_message' => 'Sukses',
             'api_results' => ReportResource::make($report)
+        ];
+        return SuccessResource::make($return);
+    }
+    public function get_today_report()
+    {
+        $income = Transaction::where('finance_approved', 1)
+            ->whereDate('settled_date', Carbon::today())
+            ->sum('total_price');
+        $allincome = Transaction::whereDate('settled_date', Carbon::today())
+            ->sum('total_price');
+        $unpaidIncome = Transaction::where('finance_approved', 0)
+            ->where('owner_approved', 1)
+            ->sum('total_price');
+        $expense = Expense::whereDate('time', Carbon::today())->sum('amount');
+        $tonnage = Transaction::whereDate('created_at', Carbon::today())
+            ->with('rits')
+            ->get()
+            ->pluck('rits')
+            ->flatten()
+            ->sum('tonnage');
+        $item_income = Transaction::where('finance_approved', 1)
+            ->whereDate('settled_date', Carbon::today())
+            ->sum('item_price');
+        $tb_income = Transaction::where('finance_approved', 1)
+            ->whereDate('settled_date', Carbon::today())
+            ->sum('tb');
+        $tw_income = Transaction::where('finance_approved', 1)
+            ->whereDate('settled_date', Carbon::today())
+            ->sum('tw');
+        $thr_income = Transaction::where('finance_approved', 1)
+            ->whereDate('settled_date', Carbon::today())
+            ->sum('thr');
+        $tb_expense = Expense::whereDate('time', Carbon::today())
+            ->where('type', "TB")
+            ->sum('amount');
+        $tw_expense = Expense::whereDate('time', Carbon::today())
+            ->where('type', "TW")
+            ->sum('amount');
+        $thr_expense = Expense::whereDate('time', Carbon::today())
+            ->where('type', "THR")
+            ->sum('amount');
+        $salary_expense = Expense::whereDate('time', Carbon::today())
+            ->where('type', "Gaji")
+            ->sum('amount');
+        $operational_expense = Expense::whereDate('time', Carbon::today())
+            ->where('type', "Operasional")
+            ->sum('amount');
+        $report = new Report;
+        $report->money = $income - $expense;
+        $report->income = $allincome;
+        $report->expense = $expense;
+        $report->tonnage = $tonnage;
+        $report->item_income = $item_income;
+        $report->tb_income = $tb_income;
+        $report->tw_income = $tw_income;
+        $report->thr_income = $thr_income;
+        $report->tb_expense = $tb_expense;
+        $report->tw_expense = $tw_expense;
+        $report->thr_expense = $thr_expense;
+        $report->salary_expense = $salary_expense;
+        $report->operational_expense = $operational_expense;
+
+        $rits = Rit::where("tonnage_left", ">", 0)->orWhere("sold_date", Carbon::today())->get();
+        $report_rits = [];
+        foreach ($rits as $key => $rit) {
+            $todayTransactions = DB::table('transactions')
+                ->whereDate('transactions.created_at', Carbon::today())
+                ->join('rit_transactions', 'transactions.id', '=', 'rit_transactions.transaction_id')
+                ->where('rit_transactions.rit_id', $rit->id)
+                ->select(DB::raw('SUM(rit_transactions.tonnage * rit_transactions.masak) AS total_tonnage_times_masak'))
+                ->first();
+            $totalTonnageTimesMasakToday = $todayTransactions->total_tonnage_times_masak;
+            $transactions = DB::table('transactions')
+                ->join('rit_transactions', 'transactions.id', '=', 'rit_transactions.transaction_id')
+                ->where('rit_transactions.rit_id', $rit->id)
+                ->select(DB::raw('SUM(rit_transactions.tonnage * rit_transactions.masak) AS total_tonnage_times_masak'))
+                ->first();
+            $totalTonnageTimesMasak = $transactions->total_tonnage_times_masak;
+
+            $item = Item::find($rit->item_id);
+
+            $report_rit = new ReportRit;
+            $report_rit->tonnage_left = $rit->tonnage_left;
+            $report_rit->tonnage_sold = $totalTonnageTimesMasakToday;
+            $report_rit->total_tonnage_sold = $totalTonnageTimesMasak;
+            $report_rit->rit_id = $rit->id;
+            $report_rit->report_id = $report->id;
+            $report_rit->report()->associate($report);
+            $report_rit->rit()->associate($rit->item()->associate($item));
+            $report->rits()->save($report_rit);
+            $report_rits[] = $report_rit;
+        }
+        $transactions = Transaction::where("settled_date", Carbon::today())
+            ->orWhereNull("settled_date")
+            ->where(function ($query) {
+                $query->where('owner_approved', '<>', 2)
+                    ->orWhereNull('owner_approved');
+            })
+            ->where(function ($query) {
+                $query->whereNotNull('total_price');
+            })
+            ->get();
+        $report_transactions = [];
+        foreach ($transactions as $key => $transaction) {
+            $customer = Customer::find($transaction->customer_id);
+            $report_transaction = new ReportTransaction;
+            $report_transaction->amount = $transaction->total_price;
+            $report_transaction->transaction_date = $transaction->created_at;
+            $report_transaction->settled_date = $transaction->settled_date;
+            $report_transaction->transaction_id = $transaction->id;
+            $report_transaction->report_id = $report->id;
+            $report_transaction->report()->associate($report);
+            $report_transaction->transaction()->associate($transaction->customer()->associate($customer));
+            $report->transactions()->save($report_transaction);
+            $report_transactions[] = $report_transaction;
+        }
+        $return = [
+            'api_code' => 200,
+            'api_status' => true,
+            'api_message' => 'Sukses',
+            'api_results' => [ReportResource::make($report), $report_rits, $report_transactions]
         ];
         return SuccessResource::make($return);
     }

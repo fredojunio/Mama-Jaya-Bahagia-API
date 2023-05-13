@@ -19,4 +19,8 @@ class ReportRit extends Model
     {
         return $this->belongsTo(Rit::class, 'rit_id', 'id');
     }
+    public function report()
+    {
+        return $this->belongsTo(Report::class, 'report_id', 'id');
+    }
 }

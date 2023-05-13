@@ -18,7 +18,7 @@ return new class extends Migration
             $table->date("settled_date")->nullable();
             $table->unsignedBigInteger('transaction_id')->index();
             $table->foreign('transaction_id')->references('id')->on('transactions')->onDelete('cascade');
-            $table->unsignedBigInteger('report_id')->index();
+            $table->unsignedBigInteger('report_id')->index()->nullable();
             $table->foreign('report_id')->references('id')->on('reports')->onDelete('cascade');
             $table->timestamps();
         });

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::table('report_rits', function (Blueprint $table) {
             $table->unsignedBigInteger('rit_id')->index();
             $table->foreign('rit_id')->references('id')->on('rits')->onDelete('cascade');
-            $table->unsignedBigInteger('report_id')->index();
+            $table->unsignedBigInteger('report_id')->index()->nullable();
             $table->foreign('report_id')->references('id')->on('reports')->onDelete('cascade');
         });
     }
