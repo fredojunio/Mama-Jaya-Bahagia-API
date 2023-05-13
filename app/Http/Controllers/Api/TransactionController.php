@@ -77,7 +77,7 @@ class TransactionController extends Controller
                 "masak" => $rit["masak"],
                 "item_price" => $rit["price"],
                 "total_price" => $rit["total_price"],
-                "tonnage_left" => $trip ? $rit["real_tonnage"] : $rite->tonnage_left,
+                "tonnage_left" => $trip ? $rit["real_tonnage"] : $rite->tonnage_left - ($rit["tonnage"] * $rit["masak"]),
                 "rit_id" => $rit["item"]["id"],
                 "transaction_id" => $transaction->id
             ]);
