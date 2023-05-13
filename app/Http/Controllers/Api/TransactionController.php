@@ -82,7 +82,7 @@ class TransactionController extends Controller
                 "transaction_id" => $transaction->id
             ]);
             $rite->update([
-                'tonnage_left' => $trip ? $rit_transaction->tonnage_left : $rite->tonnage_left - $rit["tonnage"],
+                'tonnage_left' => $trip ? $rit_transaction->tonnage_left : $rite->tonnage_left - ($rit["tonnage"] * $rit["masak"]),
             ]);
             if ($rite->tonnage_left == 0) {
                 $rite->update([
@@ -171,10 +171,11 @@ class TransactionController extends Controller
             $tonnage_transaction += $rit_transaction->tonnage;
         }
 
+        //TODO - ini rusak
         $saving = Saving::create([
-            "tb" => $transaction->tb,
-            "tw" => $transaction->tw,
-            "thr" => $transaction->thr,
+            "tb" => $transaction->tb ?? 0,
+            "tw" => $transaction->tw ?? 0,
+            "thr" => $transaction->thr ?? 0,
             "tonnage" => $tonnage_transaction,
             "total_tw" => $customer->tw + $transaction->tw,
             "total_tb" => $customer->tb + $transaction->tb,
@@ -242,7 +243,7 @@ class TransactionController extends Controller
                     ]);
                 }
                 $rite->update([
-                    'tonnage_left' => $rite->tonnage_left + $rit["tonnage"],
+                    'tonnage_left' => $rite->tonnage_left + ($rit["tonnage"] * $rit["masak"]),
                 ]);
             }
         }

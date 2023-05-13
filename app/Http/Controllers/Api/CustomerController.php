@@ -121,9 +121,9 @@ class CustomerController extends Controller
     public function withdraw_savings(Request $request, Customer $customer)
     {
         $saving = Saving::create([
-            "tb" => $request->tb,
-            "tw" => $request->tw,
-            "thr" => $request->thr,
+            "tb" => $request->tb ?? 0,
+            "tw" => $request->tw ?? 0,
+            "thr" => $request->thr ?? 0,
             "tonnage" => 0,
             "total_tw" => $customer->tw - $request->tw,
             "total_tb" => $customer->tb - $request->tb,
