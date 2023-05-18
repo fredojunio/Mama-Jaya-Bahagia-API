@@ -41,7 +41,12 @@ class TransactionController extends Controller
      */
     public function store(Request $request)
     {
-        // return $request;
+        //NOTE - ini itu kalo misal dia nembak APInya lewat revisian ada variable old_id, yang buat ngeindikasi bahwa sudah di revisi
+        if ($request->old_id) {
+            $transaction = Transaction::find($request->old_id);
+            $transaction->owner_approved = 3;
+            $transaction->save();
+        }
         $customer = Customer::find($request->customer_id);
         $trip = null;
         if ($customer->type == "Kiriman") {
