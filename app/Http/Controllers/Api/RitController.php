@@ -54,9 +54,6 @@ class RitController extends Controller
             "note" => "Pengambilan Rit " . $item->code,
             "vehicle_id" => $request->vehicle_id,
         ]);
-        $vehicle->update([
-            "toll" => $vehicle->toll + $request->toll
-        ]);
 
         $rit = Rit::create([
             "do_code" => $request->do_code,
@@ -156,6 +153,9 @@ class RitController extends Controller
             "finance_approved" => 1
         ]);
         $vehicle = Vehicle::find($trip->vehicle_id);
+        $vehicle->update([
+            "toll" => $vehicle->toll + $trip->toll
+        ]);
         if ($trip->gas > 0) {
             $vehicle->update([
                 "trip_count" => 1,
@@ -186,6 +186,20 @@ class RitController extends Controller
             'api_message' => 'Sukses',
             'api_results' => RitResource::make($rit)
         ];
+        return SuccessResource::make($return);
+    }
+
+    public function reject_finance(Rit $rit)
+    {
+        $return = [
+            'api_code' => 200,
+            'api_status' => true,
+            'api_message' => 'Sukses',
+            'api_results' => RitResource::make($rit)
+        ];
+        $trip = Trip::find($rit->trip_id);
+        $trip->delete();
+        $rit->delete();
         return SuccessResource::make($return);
     }
 

@@ -46,6 +46,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::apiResource('vehicle', VehicleController::class);
     Route::post('/vehicle/search', [VehicleController::class, 'search']);
     Route::apiResource('rit', RitController::class);
+    Route::get('/rit/{rit}/reject_finance', [RitController::class, 'reject_finance']);
     Route::get('/rit/{rit}/approve_finance', [RitController::class, 'approve_finance']);
     Route::post('/rit/{rit}/arrived', [RitController::class, 'arrived']);
     Route::post('/rit/{rit}/priced', [RitController::class, 'priced']);
