@@ -11,6 +11,7 @@ use App\Models\Expense;
 use App\Models\Rit;
 use App\Models\RitBranch;
 use App\Models\RitTransaction;
+use App\Models\Sack;
 use App\Models\Saving;
 use App\Models\Transaction;
 use App\Models\Trip;
@@ -68,6 +69,23 @@ class TransactionController extends Controller
             "trip_id" => $trip ? $trip->id : null,
             "type" => $customer->type
         ]);
+        $remainingSacks = $transaction->sack;
+        if (!$trip) {
+            while ($remainingSacks > 0) {
+                $sack = Sack::where('amount', '>', 0)
+                    ->orderBy('created_at', 'asc')
+                    ->first();
+                if ($sack->amount < $remainingSacks) {
+                    $remainingSacks -= $sack->amount;
+                    $sack->amount = 0;
+                    $sack->save();
+                } else {
+                    $sack->amount = $sack->amount - $remainingSacks;
+                    $remainingSacks = 0;
+                    $sack->save();
+                }
+            }
+        }
         foreach ($request->rits as $key => $rit) {
             $rite = Rit::find($rit['item']['id']);
             $rit_transaction = RitTransaction::create([
@@ -230,6 +248,23 @@ class TransactionController extends Controller
             $transaction->update([
                 "owner_approved" => 1,
             ]);
+            $remainingSacks = $transaction->sack;
+            while ($remainingSacks > 0) {
+                $sack = Sack::where('amount', '>', 0)
+                    ->orderBy('created_at', 'asc')
+                    ->first();
+                if ($sack->amount < $remainingSacks) {
+                    $remainingSacks -= $sack->amount;
+                    $sack->update([
+                        "amount" => 0
+                    ]);
+                } else {
+                    $sack->update([
+                        "amount" => $sack->amount - $remainingSacks
+                    ]);
+                    $remainingSacks = 0;
+                }
+            }
         } else if ($request->owner_approved == 2) {
             //NOTE - Rejected
             $transaction->update([
@@ -325,6 +360,18 @@ class TransactionController extends Controller
             'api_status' => true,
             'api_message' => 'Sukses',
             'api_results' => RitResource::make($rit)
+        ];
+        return SuccessResource::make($return);
+    }
+
+    public function get_remaining_sack()
+    {
+        $totalAmount = Sack::sum('amount');
+        $return = [
+            'api_code' => 200,
+            'api_status' => true,
+            'api_message' => 'Sukses',
+            'api_results' => $totalAmount
         ];
         return SuccessResource::make($return);
     }

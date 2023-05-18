@@ -144,6 +144,10 @@ class RitController extends Controller
             'finance_approved' => 1,
             'delivery_date' => Carbon::now()
         ]);
+        $sack = Sack::create([
+            "sack" => $rit->sack,
+            "rit_id" => $rit->id
+        ]);
         $trip = Trip::find($rit->trip_id);
         $trip->update([
             "finance_approved" => 1
