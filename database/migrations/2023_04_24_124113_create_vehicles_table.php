@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->integer('trip_count')->default(0)->nullable();
             $table->string('type');
+            $table->integer("toll")->default(0);
             $table->timestamps();
         });
     }

@@ -11,7 +11,8 @@ class Vehicle extends Model
     protected $fillable = [
         'name',
         'trip_count',
-        'type'
+        'type',
+        'toll'
     ];
     public function trips()
     {

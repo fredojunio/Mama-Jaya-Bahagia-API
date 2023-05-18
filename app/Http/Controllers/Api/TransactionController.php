@@ -57,6 +57,10 @@ class TransactionController extends Controller
                 "note" => "Penjualan ke " . $customer->name,
                 "vehicle_id" => $request->vehicle_id,
             ]);
+            $vehicle = Vehicle::find($trip->vehicle_id);
+            $vehicle->update([
+                "toll" => $vehicle->toll + $request->toll
+            ]);
         }
         $transaction = Transaction::create([
             "daily_id" => Transaction::whereDate('created_at', now()->toDateString())->get()->count() + 1,

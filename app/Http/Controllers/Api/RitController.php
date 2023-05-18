@@ -54,6 +54,9 @@ class RitController extends Controller
             "note" => "Pengambilan Rit " . $item->code,
             "vehicle_id" => $request->vehicle_id,
         ]);
+        $vehicle->update([
+            "toll" => $vehicle->toll + $request->toll
+        ]);
 
         $rit = Rit::create([
             "do_code" => $request->do_code,
@@ -197,6 +200,10 @@ class RitController extends Controller
         $trip->update([
             "toll_used" => $request->toll_used
         ]);
+        $vehicle = Vehicle::find($trip->vehicle_id);
+        $vehicle->update([
+            "toll" => $vehicle->toll - $request->toll_used
+        ]);
         $sack = Sack::create([
             "amount" => $rit->sack,
             "rit_id" => $rit->id,
@@ -236,6 +243,10 @@ class RitController extends Controller
             "note" => "Pengiriman ke " . $request->branch_name,
             "finance_approved" => 1,
             "vehicle_id" => $request->vehicle_id,
+        ]);
+        $vehicle = Vehicle::find($request->vehicle_id);
+        $vehicle->update([
+            "toll" => $vehicle->toll + $request->toll
         ]);
         $vehicle = Vehicle::find($trip->vehicle_id);
         if ($trip->gas > 0) {
@@ -290,6 +301,9 @@ class RitController extends Controller
             "vehicle_id" => $request->vehicle_id,
         ]);
         $vehicle = Vehicle::find($trip->vehicle_id);
+        $vehicle->update([
+            "toll" => $vehicle->toll + $request->toll
+        ]);
         if ($trip->gas > 0) {
             $vehicle->update([
                 "trip_count" => 1,
