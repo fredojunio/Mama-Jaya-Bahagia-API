@@ -180,6 +180,8 @@ class RitController extends Controller
                 "type" => "Owner"
             ]);
         }
+        //TODO - E-Mail
+        // Mail::to(["shrallvierdo@gmail.com", "movierdo@student.ciputra.ac.id"])->send(new NotificationMail("Barang Dalam Perjalanan", "Ada barang yang sedang dalam perjalanan. Pastikan sudah dimasukan jumlah tonase yang datang."));
         $return = [
             'api_code' => 200,
             'api_status' => true,
@@ -294,6 +296,10 @@ class RitController extends Controller
                 "tonnage_left" => $rite->tonnage_left - $rit["amount"],
                 "sold_date" => $rite->tonnage_left == $rit["amount"] ? Carbon::now() : $rite->sold_date
             ]);
+            if ($rite->sold_date) {
+                //TODO - E-Mail
+                // Mail::to(["shrallvierdo@gmail.com", "movierdo@student.ciputra.ac.id"])->send(new NotificationMail("Barang Cabang", "Ada barang cabang yang belum terjual!"));
+            }
         }
         $return = [
             'api_code' => 200,

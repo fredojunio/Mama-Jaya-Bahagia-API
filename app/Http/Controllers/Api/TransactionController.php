@@ -257,6 +257,8 @@ class TransactionController extends Controller
             $transaction->update([
                 "owner_approved" => 1,
             ]);
+            //TODO - E-Mail
+            // Mail::to(["shrallvierdo@gmail.com", "movierdo@student.ciputra.ac.id"])->send(new NotificationMail("Input Pemasukan", "Ada penjualan yang sudah dikirim namun pemasukan yang didapat belum dicatat."));
             $remainingSacks = $transaction->sack;
             while ($remainingSacks > 0) {
                 $sack = Sack::where('amount', '>', 0)
@@ -312,6 +314,8 @@ class TransactionController extends Controller
             "trip_id" => $transaction->trip_id,
             "type" => "Owner"
         ]);
+        //TODO - E-Mail
+        // Mail::to(["shrallvierdo@gmail.com", "movierdo@student.ciputra.ac.id"])->send(new NotificationMail("Input Pemasukan", "Ada penjualan yang sudah dikirim namun pemasukan yang didapat belum dicatat."));
         foreach ($request->rits as $key => $rit) {
             $rite = Rit::find($rit['item']['id']);
             $rite->update([
