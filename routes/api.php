@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\CustomerController;
 use App\Http\Controllers\Api\ExpenseController;
 use App\Http\Controllers\Api\IncomeController;
 use App\Http\Controllers\Api\ItemController;
+use App\Http\Controllers\Api\NotificationController;
 use App\Http\Controllers\Api\ReportController;
 use App\Http\Controllers\Api\ReportRitController;
 use App\Http\Controllers\Api\RitBranchController;
@@ -37,6 +38,7 @@ Route::group(['middleware' => 'auth:api', 'as' => 'api.user.'], function () {
 
 //TODO - KASIH MIDDLEWARE AUTH:API KALAU UDAH SELESAI
 Route::group(['prefix' => 'admin'], function () {
+    Route::get('get_notification', [NotificationController::class, 'get_notification']);
     Route::apiResource('item', ItemController::class);
     Route::apiResource('cashback', CashbackController::class);
     Route::apiResource('customer', CustomerController::class);
