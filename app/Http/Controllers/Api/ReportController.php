@@ -119,10 +119,9 @@ class ReportController extends Controller
                 "report_id" => $report->id
             ]);
         }
-        $transactions = Transaction::where("settled_date", Carbon::today())
-            ->orWhereNull("settled_date")
+        $transactions = Transaction::whereNull("settled_date")
             ->where(function ($query) {
-                $query->where('owner_approved', '<>', 2)
+                $query->where('owner_approved', '<>', 2)->where('owner_approved', '<>', 3)
                     ->orWhereNull('owner_approved');
             })
             ->where(function ($query) {
@@ -235,8 +234,7 @@ class ReportController extends Controller
             $report->rits()->save($report_rit);
             $report_rits[] = $report_rit;
         }
-        $transactions = Transaction::where("settled_date", Carbon::today())
-            ->orWhereNull("settled_date")
+        $transactions = Transaction::whereNull("settled_date")
             ->where(function ($query) {
                 $query->where('owner_approved', '<>', 2)->where('owner_approved', '<>', 3)
                     ->orWhereNull('owner_approved');
