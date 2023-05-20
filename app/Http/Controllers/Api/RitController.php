@@ -61,7 +61,7 @@ class RitController extends Controller
     }
     public function get_empty_stock(Request $request)
     {
-        $rits = Rit::whereNotNull("sold_date")->where("arrival_date", $request->date)->get();
+        $rits = Rit::whereNotNull("sold_date")->where("arrival_date", ">=", $request->start_date)->where("arrival_date", "<=", $request->end_date)->where("item_id", $request->item_id)->get();
 
         $return = [
             'api_code' => 200,
