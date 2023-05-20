@@ -18,6 +18,10 @@ class NotificationController extends Controller
         if ($branches->isNotEmpty()) {
             array_push($notifications, ["title" => "Barang Cabang", "description" => "Ada barang cabang yang belum terjual!"]);
         }
+        $customers = Transaction::where("type", "Owner")->whereNull("item_price")->get();
+        if ($customers->isNotEmpty()) {
+            array_push($notifications, ["title" => "Penjualan Customer", "description" => "Ada penjualan customer yang belum di input!"]);
+        }
         $otwRits = Rit::where('finance_approved', 1)
             ->whereNull('arrival_date')
             ->get();
