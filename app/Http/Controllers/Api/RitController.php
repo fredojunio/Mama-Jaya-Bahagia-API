@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\RitResource;
 use App\Http\Resources\SuccessResource;
 use App\Http\Resources\TripResource;
+use App\Mail\NotificationMail;
 use App\Models\Customer;
 use App\Models\Expense;
 use App\Models\Item;
@@ -14,9 +15,11 @@ use App\Models\RitBranch;
 use App\Models\Sack;
 use App\Models\Transaction;
 use App\Models\Trip;
+use App\Models\User;
 use App\Models\Vehicle;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class RitController extends Controller
 {
@@ -229,8 +232,9 @@ class RitController extends Controller
                 "type" => "Owner"
             ]);
         }
-        //TODO - E-Mail
-        // Mail::to(["shrallvierdo@gmail.com", "movierdo@student.ciputra.ac.id"])->send(new NotificationMail("Barang Dalam Perjalanan", "Ada barang yang sedang dalam perjalanan. Pastikan sudah dimasukan jumlah tonase yang datang."));
+        $users = User::where("role_id", 1)->get();
+        $emailArray = $users->pluck('email')->toArray();
+        Mail::to($emailArray)->send(new NotificationMail("Barang Dalam Perjalanan", "Ada barang yang sedang dalam perjalanan. Pastikan sudah dimasukan jumlah tonase yang datang."));
         $return = [
             'api_code' => 200,
             'api_status' => true,
@@ -261,6 +265,11 @@ class RitController extends Controller
             'arrived_tonnage' => $request->tonnage,
             'tonnage_left' => $request->tonnage,
         ]);
+        if ($rit->customer_tonnage) {
+            $users = User::where("role_id", 1)->get();
+            $emailArray = $users->pluck('email')->toArray();
+            Mail::to($emailArray)->send(new NotificationMail("Penjualan Customer", "Ada penjualan customer yang belum di input!"));
+        }
         $trip = Trip::find($rit->trip_id);
         $trip->update([
             "toll_used" => $request->toll_used
@@ -346,8 +355,9 @@ class RitController extends Controller
                 "sold_date" => $rite->tonnage_left == $rit["amount"] ? Carbon::now() : $rite->sold_date
             ]);
             if ($rite->sold_date) {
-                //TODO - E-Mail
-                // Mail::to(["shrallvierdo@gmail.com", "movierdo@student.ciputra.ac.id"])->send(new NotificationMail("Barang Cabang", "Ada barang cabang yang belum terjual!"));
+                $users = User::where("role_id", 1)->get();
+                $emailArray = $users->pluck('email')->toArray();
+                Mail::to($emailArray)->send(new NotificationMail("Barang Cabang", "Ada barang cabang yang belum terjual!"));
             }
         }
         $return = [

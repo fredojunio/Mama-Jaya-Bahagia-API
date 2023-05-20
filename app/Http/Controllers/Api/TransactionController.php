@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\RitResource;
 use App\Http\Resources\SuccessResource;
 use App\Http\Resources\TransactionResource;
+use App\Mail\NotificationMail;
 use App\Models\Customer;
 use App\Models\Expense;
 use App\Models\Rit;
@@ -15,9 +16,11 @@ use App\Models\Sack;
 use App\Models\Saving;
 use App\Models\Transaction;
 use App\Models\Trip;
+use App\Models\User;
 use App\Models\Vehicle;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class TransactionController extends Controller
 {
@@ -257,8 +260,9 @@ class TransactionController extends Controller
             $transaction->update([
                 "owner_approved" => 1,
             ]);
-            //TODO - E-Mail
-            // Mail::to(["shrallvierdo@gmail.com", "movierdo@student.ciputra.ac.id"])->send(new NotificationMail("Input Pemasukan", "Ada penjualan yang sudah dikirim namun pemasukan yang didapat belum dicatat."));
+            $users = User::where("role_id", 1)->get();
+            $emailArray = $users->pluck('email')->toArray();
+            Mail::to($emailArray)->send(new NotificationMail("Input Pemasukan", "Ada penjualan yang sudah dikirim namun pemasukan yang didapat belum dicatat."));
             $remainingSacks = $transaction->sack;
             while ($remainingSacks > 0) {
                 $sack = Sack::where('amount', '>', 0)
@@ -314,8 +318,9 @@ class TransactionController extends Controller
             "trip_id" => $transaction->trip_id,
             "type" => "Owner"
         ]);
-        //TODO - E-Mail
-        // Mail::to(["shrallvierdo@gmail.com", "movierdo@student.ciputra.ac.id"])->send(new NotificationMail("Input Pemasukan", "Ada penjualan yang sudah dikirim namun pemasukan yang didapat belum dicatat."));
+        $users = User::where("role_id", 1)->get();
+        $emailArray = $users->pluck('email')->toArray();
+        Mail::to($emailArray)->send(new NotificationMail("Input Pemasukan", "Ada penjualan yang sudah dikirim namun pemasukan yang didapat belum dicatat."));
         foreach ($request->rits as $key => $rit) {
             $rite = Rit::find($rit['item']['id']);
             $rite->update([
