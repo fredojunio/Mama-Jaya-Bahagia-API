@@ -99,7 +99,7 @@ class TransactionController extends Controller
             $rite = Rit::find($rit['item']['id']);
             $rit_transaction = RitTransaction::create([
                 "daily_id" => $transaction->daily_id,
-                "customer_name" => $customer->name,
+                "customer_name" => $customer->nickname,
                 "tonnage" => $rit["tonnage"],
                 "masak" => $rit["masak"],
                 "item_price" => $rit["price"],
@@ -323,7 +323,7 @@ class TransactionController extends Controller
             ]);
             $rit_transaction = RitTransaction::create([
                 "daily_id" => $transaction->daily_id,
-                "customer_name" => $customer->name,
+                "customer_name" => $customer->nickname,
                 "tonnage" => $rit["tonnage"],
                 "masak" => $rit["masak"],
                 "item_price" => $rit["price"],
