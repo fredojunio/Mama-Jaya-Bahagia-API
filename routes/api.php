@@ -39,6 +39,10 @@ Route::group(['middleware' => 'auth:api', 'as' => 'api.user.'], function () {
 //TODO - KASIH MIDDLEWARE AUTH:API KALAU UDAH SELESAI
 Route::group(['prefix' => 'admin'], function () {
     Route::get('get_notification', [NotificationController::class, 'get_notification']);
+    Route::get('/rit/get_all_stock', [RitController::class, 'get_all_stock']);
+    Route::get('/rit/get_otw_stock', [RitController::class, 'get_otw_stock']);
+    Route::get('/rit/get_hold_stock', [RitController::class, 'get_hold_stock']);
+    Route::post('/rit/get_empty_stock', [RitController::class, 'get_empty_stock']);
     Route::apiResource('item', ItemController::class);
     Route::apiResource('cashback', CashbackController::class);
     Route::apiResource('customer', CustomerController::class);

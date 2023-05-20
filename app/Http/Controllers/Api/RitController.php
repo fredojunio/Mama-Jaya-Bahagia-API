@@ -23,6 +23,55 @@ class RitController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function get_all_stock()
+    {
+        $rits = Rit::whereNotNull("arrival_date")->where("sell_price", ">", 0)->where("is_hold", 0)->whereNull("sold_date")->get();
+
+        $return = [
+            'api_code' => 200,
+            'api_status' => true,
+            'api_message' => 'Sukses',
+            'api_results' => RitResource::collection($rits)
+        ];
+        return SuccessResource::make($return);
+    }
+    public function get_otw_stock()
+    {
+        $rits = Rit::whereNull("arrival_date")->where("finance_approved", 1)->get();
+
+        $return = [
+            'api_code' => 200,
+            'api_status' => true,
+            'api_message' => 'Sukses',
+            'api_results' => RitResource::collection($rits)
+        ];
+        return SuccessResource::make($return);
+    }
+    public function get_hold_stock()
+    {
+        $rits = Rit::whereNull("sold_date")->where("is_hold", 1)->get();
+
+        $return = [
+            'api_code' => 200,
+            'api_status' => true,
+            'api_message' => 'Sukses',
+            'api_results' => RitResource::collection($rits)
+        ];
+        return SuccessResource::make($return);
+    }
+    public function get_empty_stock(Request $request)
+    {
+        $rits = Rit::whereNotNull("sold_date")->where("arrival_date", $request->date)->get();
+
+        $return = [
+            'api_code' => 200,
+            'api_status' => true,
+            'api_message' => 'Sukses',
+            'api_results' => RitResource::collection($rits)
+        ];
+        return SuccessResource::make($return);
+    }
+
     public function index()
     {
         $rits = Rit::all();
