@@ -14,8 +14,7 @@ class NotificationController extends Controller
     public function get_notification()
     {
         $notifications = [];
-        $branches = RitBranch::whereNull('income')
-            ->get();
+        $branches = Rit::where("branch_tonnage", ">", 0)->whereNotNull("sold_date")->get();
         if ($branches->isNotEmpty()) {
             array_push($notifications, ["title" => "Barang Cabang", "description" => "Ada barang cabang yang belum terjual!"]);
         }
