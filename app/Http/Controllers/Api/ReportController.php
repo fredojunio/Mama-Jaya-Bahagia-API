@@ -238,7 +238,7 @@ class ReportController extends Controller
         $transactions = Transaction::where("settled_date", Carbon::today())
             ->orWhereNull("settled_date")
             ->where(function ($query) {
-                $query->where('owner_approved', '<>', 2)
+                $query->where('owner_approved', '<>', 2)->where('owner_approved', '<>', 3)
                     ->orWhereNull('owner_approved');
             })
             ->where(function ($query) {
