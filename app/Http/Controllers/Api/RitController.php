@@ -112,7 +112,6 @@ class RitController extends Controller
             "expected_tonnage" => $request->tonnage + ($request->send_to_customer ?  $request->customer["tonnage"] : 0),
             "customer_tonnage" => $request->send_to_customer ? $request->customer["tonnage"] : null,
             "main_tonnage" => $request->tonnage,
-            "sack" => $request->sack,
             "item_id" => $request->item_id,
             "trip_id" => $trip->id,
             "customer_id" => $request->send_to_customer ? $request->customer_id : null
@@ -196,10 +195,6 @@ class RitController extends Controller
             'finance_approved' => 1,
             'delivery_date' => Carbon::now()
         ]);
-        $sack = Sack::create([
-            "sack" => $rit->sack,
-            "rit_id" => $rit->id
-        ]);
         $trip = Trip::find($rit->trip_id);
         $trip->update([
             "finance_approved" => 1
@@ -261,6 +256,7 @@ class RitController extends Controller
     public function arrived(Request $request, Rit $rit)
     {
         $rit->update([
+            'sack' => $request->sack,
             'arrival_date' => Carbon::now(),
             'arrived_tonnage' => $request->tonnage,
             'tonnage_left' => $request->tonnage,
@@ -279,7 +275,7 @@ class RitController extends Controller
             "toll" => $vehicle->toll - $request->toll_used
         ]);
         $sack = Sack::create([
-            "amount" => $rit->sack,
+            "amount" => $request->sack,
             "rit_id" => $rit->id,
         ]);
         $return = [
