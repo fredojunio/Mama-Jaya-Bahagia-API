@@ -16,6 +16,7 @@ return new class extends Migration
             $table->integer("daily_id");
             $table->string("customer_name");
             $table->double("tonnage");
+            $table->double("actual_tonnage")->nullable();
             $table->integer("masak")->default(1);
             $table->integer("item_price");
             $table->integer("total_price");

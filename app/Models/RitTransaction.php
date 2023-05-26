@@ -16,6 +16,7 @@ class RitTransaction extends Model
         "item_price",
         "total_price",
         "tonnage_left",
+        "actual_tonnage",
         "rit_id",
         "transaction_id",
     ];

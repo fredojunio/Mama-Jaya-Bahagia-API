@@ -50,6 +50,18 @@ class RitController extends Controller
         ];
         return SuccessResource::make($return);
     }
+    public function get_owner_stock()
+    {
+        $rits = Rit::whereNull("sold_date")->get();
+
+        $return = [
+            'api_code' => 200,
+            'api_status' => true,
+            'api_message' => 'Sukses',
+            'api_results' => RitResource::collection($rits)
+        ];
+        return SuccessResource::make($return);
+    }
     public function get_hold_stock()
     {
         $rits = Rit::whereNull("sold_date")->where("is_hold", 1)->get();
