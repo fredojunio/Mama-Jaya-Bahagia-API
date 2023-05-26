@@ -302,6 +302,7 @@ class RitController extends Controller
     public function priced(Request $request, Rit $rit)
     {
         $rit->update([
+            "tonnage_left" => $request->tonnage,
             "sell_price" => $request->sell_price,
             "buy_price" => $request->buy_price,
             "is_hold" => $request->is_hold ? 1 : 0
