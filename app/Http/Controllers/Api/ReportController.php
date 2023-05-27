@@ -13,6 +13,7 @@ use App\Models\ReportRit;
 use App\Models\ReportTransaction;
 use App\Models\Rit;
 use App\Models\RitTransaction;
+use App\Models\Saving;
 use App\Models\Transaction;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -58,10 +59,19 @@ class ReportController extends Controller
         $tb_income = Transaction::where('finance_approved', 1)
             ->whereDate('settled_date', Carbon::today())
             ->sum('tb');
+        $tb_savings = Saving::whereNull('transaction_id')
+            ->whereDate('settled_date', Carbon::today())
+            ->sum('tb');
         $tw_income = Transaction::where('finance_approved', 1)
             ->whereDate('settled_date', Carbon::today())
             ->sum('tw');
+        $tw_savings = Saving::whereNull('transaction_id')
+            ->whereDate('settled_date', Carbon::today())
+            ->sum('tw');
         $thr_income = Transaction::where('finance_approved', 1)
+            ->whereDate('settled_date', Carbon::today())
+            ->sum('thr');
+        $thr_savings = Saving::whereNull('transaction_id')
             ->whereDate('settled_date', Carbon::today())
             ->sum('thr');
         $tb_expense = Expense::whereDate('time', Carbon::today())
@@ -85,9 +95,9 @@ class ReportController extends Controller
             "expense" => $expense,
             "tonnage" => $tonnage,
             "item_income" => $item_income,
-            "tb_income" => $tb_income,
-            "tw_income" => $tw_income,
-            "thr_income" => $thr_income,
+            "tb_income" => $tb_income + $tb_savings,
+            "tw_income" => $tw_income + $tw_savings,
+            "thr_income" => $thr_income + $thr_savings,
             "tb_expense" => $tb_expense,
             "tw_expense" => $tw_expense,
             "thr_expense" => $thr_expense,
@@ -168,10 +178,19 @@ class ReportController extends Controller
         $tb_income = Transaction::where('finance_approved', 1)
             ->whereDate('settled_date', Carbon::today())
             ->sum('tb');
+        $tb_savings = Saving::whereNull('transaction_id')
+            ->whereDate('settled_date', Carbon::today())
+            ->sum('tb');
         $tw_income = Transaction::where('finance_approved', 1)
             ->whereDate('settled_date', Carbon::today())
             ->sum('tw');
+        $tw_savings = Saving::whereNull('transaction_id')
+            ->whereDate('settled_date', Carbon::today())
+            ->sum('tw');
         $thr_income = Transaction::where('finance_approved', 1)
+            ->whereDate('settled_date', Carbon::today())
+            ->sum('thr');
+        $thr_savings = Saving::whereNull('transaction_id')
             ->whereDate('settled_date', Carbon::today())
             ->sum('thr');
         $tb_expense = Expense::whereDate('time', Carbon::today())
@@ -195,9 +214,9 @@ class ReportController extends Controller
         $report->expense = $expense;
         $report->tonnage = $tonnage;
         $report->item_income = $item_income;
-        $report->tb_income = $tb_income;
-        $report->tw_income = $tw_income;
-        $report->thr_income = $thr_income;
+        $report->tb_income = $tb_income + $tb_savings;
+        $report->tw_income = $tw_income + $tw_savings;
+        $report->thr_income = $thr_income + $thr_savings;
         $report->tb_expense = $tb_expense;
         $report->tw_expense = $tw_expense;
         $report->thr_expense = $thr_expense;

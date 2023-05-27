@@ -129,7 +129,7 @@ class CustomerController extends Controller
             "total_tb" => $customer->tb + $request->tb,
             "total_thr" => $customer->thr + $request->thr,
             "total_tonnage" => $customer->tonnage,
-            "type" => "Pemasukkan",
+            "type" => "Pemasukan",
             "customer_id" => $customer->id,
         ]);
         $customer->update([
