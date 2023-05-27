@@ -38,6 +38,19 @@ class RitController extends Controller
         ];
         return SuccessResource::make($return);
     }
+    public function get_created_stock()
+    {
+        $rits = Rit::whereNull("arrival_date")->where("finance_approved", 0)->get();
+
+        $return = [
+            'api_code' => 200,
+            'api_status' => true,
+            'api_message' => 'Sukses',
+            'api_results' => RitResource::collection($rits)
+        ];
+        return SuccessResource::make($return);
+    }
+
     public function get_otw_stock()
     {
         $rits = Rit::whereNull("arrival_date")->where("finance_approved", 1)->get();
