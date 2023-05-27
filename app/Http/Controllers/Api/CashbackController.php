@@ -18,7 +18,8 @@ class CashbackController extends Controller
      */
     public function index()
     {
-        $cashbacks = Cashback::all();
+        $cashbacks = Cashback::whereNull("approval_date")
+            ->get();
         $return = [
             'api_code' => 200,
             'api_status' => true,
