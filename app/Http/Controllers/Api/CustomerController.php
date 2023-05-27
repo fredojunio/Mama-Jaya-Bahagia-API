@@ -118,6 +118,34 @@ class CustomerController extends Controller
         return SuccessResource::make($return);
     }
 
+    public function deposit_savings(Request $request, Customer $customer)
+    {
+        $saving = Saving::create([
+            "tb" => $request->tb ?? 0,
+            "tw" => $request->tw ?? 0,
+            "thr" => $request->thr ?? 0,
+            "tonnage" => 0,
+            "total_tw" => $customer->tw + $request->tw,
+            "total_tb" => $customer->tb + $request->tb,
+            "total_thr" => $customer->thr + $request->thr,
+            "total_tonnage" => $customer->tonnage,
+            "type" => "Pemasukkan",
+            "customer_id" => $customer->id,
+        ]);
+        $customer->update([
+            "tb" => $saving->total_tb,
+            "tw" => $saving->total_tw,
+            "thr" => $saving->total_thr,
+        ]);
+        $return = [
+            'api_code' => 200,
+            'api_status' => true,
+            'api_message' => 'Sukses',
+            'api_results' => CustomerResource::make($customer)
+        ];
+        return SuccessResource::make($return);
+    }
+
     public function withdraw_savings(Request $request, Customer $customer)
     {
         $saving = Saving::create([

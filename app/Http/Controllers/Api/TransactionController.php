@@ -202,7 +202,6 @@ class TransactionController extends Controller
             $tonnage_transaction += $rit_transaction->tonnage;
         }
 
-        //TODO - ini rusak
         $saving = Saving::create([
             "tb" => $transaction->tb ?? 0,
             "tw" => $transaction->tw ?? 0,
