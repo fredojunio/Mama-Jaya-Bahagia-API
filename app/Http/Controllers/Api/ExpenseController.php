@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\ExpenseResource;
 use App\Http\Resources\SuccessResource;
 use App\Models\Expense;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class ExpenseController extends Controller
@@ -16,6 +17,45 @@ class ExpenseController extends Controller
     public function index()
     {
         $expenses = Expense::all();
+        $return = [
+            'api_code' => 200,
+            'api_status' => true,
+            'api_message' => 'Sukses',
+            'api_results' => ExpenseResource::collection($expenses),
+        ];
+        return SuccessResource::make($return);
+    }
+
+    public function filter(Request $request)
+    {
+        if ($request->filter == "Kendaraan") {
+            $expenses = Expense::where("type", "Kendaraan")
+                ->where("created_at", ">=", Carbon::createFromFormat('D M d Y H:i:s e+', $request->start_date)->toDateTimeString())
+                ->where("created_at", "<=", Carbon::createFromFormat('D M d Y H:i:s e+', $request->end_date)->toDateTimeString())
+                ->get();
+        } else if ($request->filter == "Tabungan") {
+            $expenses = Expense::where("type", "TW")
+                ->orWhere("type", "TB")
+                ->orWhere("type", "THR")
+                ->where("created_at", ">=", Carbon::createFromFormat('D M d Y H:i:s e+', $request->start_date)->toDateTimeString())
+                ->where("created_at", "<=", Carbon::createFromFormat('D M d Y H:i:s e+', $request->end_date)->toDateTimeString())
+                ->get();
+        } else if ($request->filter == "Cashback") {
+            $expenses = Expense::where("type", "Cashback")
+                ->where("created_at", ">=", Carbon::createFromFormat('D M d Y H:i:s e+', $request->start_date)->toDateTimeString())
+                ->where("created_at", "<=", Carbon::createFromFormat('D M d Y H:i:s e+', $request->end_date)->toDateTimeString())
+                ->get();
+        } else if ($request->filter == "Operasional") {
+            $expenses = Expense::where("type", "Operasional")
+                ->where("created_at", ">=", Carbon::createFromFormat('D M d Y H:i:s e+', $request->start_date)->toDateTimeString())
+                ->where("created_at", "<=", Carbon::createFromFormat('D M d Y H:i:s e+', $request->end_date)->toDateTimeString())
+                ->get();
+        } else if ($request->filter == "Gaji") {
+            $expenses = Expense::where("type", "Gaji")
+                ->where("created_at", ">=", Carbon::createFromFormat('D M d Y H:i:s e+', $request->start_date)->toDateTimeString())
+                ->where("created_at", "<=", Carbon::createFromFormat('D M d Y H:i:s e+', $request->end_date)->toDateTimeString())
+                ->get();
+        }
         $return = [
             'api_code' => 200,
             'api_status' => true,
