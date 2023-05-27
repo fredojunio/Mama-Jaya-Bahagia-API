@@ -9,6 +9,7 @@ use App\Http\Resources\TransactionResource;
 use App\Mail\NotificationMail;
 use App\Models\Customer;
 use App\Models\Expense;
+use App\Models\Payment;
 use App\Models\Rit;
 use App\Models\RitBranch;
 use App\Models\RitTransaction;
@@ -30,6 +31,20 @@ class TransactionController extends Controller
     public function index()
     {
         $transactions = Transaction::all();
+        $return = [
+            'api_code' => 200,
+            'api_status' => true,
+            'api_message' => 'Sukses',
+            'api_results' => TransactionResource::collection($transactions)
+        ];
+        return SuccessResource::make($return);
+    }
+    public function get_completed_transactions(Request $request)
+    {
+        $transactions = Transaction::where("created_at", ">=", Carbon::createFromFormat('D M d Y H:i:s e+', $request->start_date)->toDateTimeString())
+            ->where("created_at", "<=", Carbon::createFromFormat('D M d Y H:i:s e+', $request->end_date)->toDateTimeString())
+            ->where("owner_approved", 1)
+            ->get();
         $return = [
             'api_code' => 200,
             'api_status' => true,
@@ -190,38 +205,47 @@ class TransactionController extends Controller
         return SuccessResource::make($return);
     }
 
-    public function approve_finance(Transaction $transaction)
+    public function approve_finance(Transaction $transaction, Request $request)
     {
         $customer = Customer::find($transaction->customer_id);
-        $transaction->update([
-            "finance_approved" => 1,
-            "settled_date" => Carbon::now(),
+        $payment = Payment::create([
+            'amount' => $request->amount,
+            'customer_id' => $customer->id,
+            'transaction_id' => $transaction->id
         ]);
-        $tonnage_transaction = 0;
-        foreach ($transaction->rits as $key => $rit_transaction) {
-            $tonnage_transaction += $rit_transaction->tonnage;
+        $total_payments = Payment::where("transaction_id", $transaction->id)
+            ->sum("amount");
+        if ($total_payments == $transaction->total_price) {
+            $transaction->update([
+                "finance_approved" => 1,
+                "settled_date" => Carbon::now(),
+            ]);
+            $tonnage_transaction = 0;
+            foreach ($transaction->rits as $key => $rit_transaction) {
+                $tonnage_transaction += $rit_transaction->tonnage;
+            }
+
+            $saving = Saving::create([
+                "tb" => $transaction->tb ?? 0,
+                "tw" => $transaction->tw ?? 0,
+                "thr" => $transaction->thr ?? 0,
+                "tonnage" => $tonnage_transaction,
+                "total_tw" => $customer->tw + $transaction->tw,
+                "total_tb" => $customer->tb + $transaction->tb,
+                "total_thr" => $customer->thr + $transaction->thr,
+                "total_tonnage" => $customer->tonnage + $tonnage_transaction,
+                "type" => "Pemasukan",
+                "customer_id" => $transaction->customer_id,
+                "transaction_id" => $transaction->id,
+            ]);
+
+            $customer->update([
+                "tb" => $saving->total_tb,
+                "tw" => $saving->total_tw,
+                "thr" => $saving->total_thr,
+                "tonnage" => $saving->total_tonnage,
+            ]);
         }
-
-        $saving = Saving::create([
-            "tb" => $transaction->tb ?? 0,
-            "tw" => $transaction->tw ?? 0,
-            "thr" => $transaction->thr ?? 0,
-            "tonnage" => $tonnage_transaction,
-            "total_tw" => $customer->tw + $transaction->tw,
-            "total_tb" => $customer->tb + $transaction->tb,
-            "total_thr" => $customer->thr + $transaction->thr,
-            "total_tonnage" => $customer->tonnage + $tonnage_transaction,
-            "type" => "Pemasukan",
-            "customer_id" => $transaction->customer_id,
-            "transaction_id" => $transaction->id,
-        ]);
-
-        $customer->update([
-            "tb" => $saving->total_tb,
-            "tw" => $saving->total_tw,
-            "thr" => $saving->total_thr,
-            "tonnage" => $saving->total_tonnage,
-        ]);
 
         $return = [
             'api_code' => 200,

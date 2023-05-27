@@ -64,9 +64,10 @@ Route::group(['prefix' => 'admin'], function () {
     Route::apiResource('ritbranch', RitBranchController::class);
     Route::apiResource('trip', TripController::class);
     Route::apiResource('rit_transaction', RitTransactionController::class);
+    Route::post('/transaction/get_completed_transactions', [TransactionController::class, 'get_completed_transactions']);
     Route::get('/transaction/get_remaining_sack', [TransactionController::class, 'get_remaining_sack']);
     Route::apiResource('transaction', TransactionController::class);
-    Route::get('/transaction/{transaction}/approve_finance', [TransactionController::class, 'approve_finance']);
+    Route::post('/transaction/{transaction}/approve_finance', [TransactionController::class, 'approve_finance']);
     Route::post('/transaction/{transaction}/approve_nota', [TransactionController::class, 'approve_nota']);
     Route::post('/transaction/{transaction}/customer', [TransactionController::class, 'customer']);
     Route::post('/transaction/{rit}/branch', [TransactionController::class, 'branch']);

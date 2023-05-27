@@ -42,4 +42,8 @@ class Transaction extends Model
     {
         return $this->hasMany(RitTransaction::class, 'transaction_id', 'id');
     }
+    public function payments()
+    {
+        return $this->hasMany(Payment::class, 'transaction_id', 'id');
+    }
 }
