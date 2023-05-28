@@ -60,19 +60,19 @@ class ReportController extends Controller
             ->whereDate('settled_date', Carbon::today())
             ->sum('tb');
         $tb_savings = Saving::whereNull('transaction_id')
-            ->whereDate('settled_date', Carbon::today())
+            ->whereDate('created_at', Carbon::today())
             ->sum('tb');
         $tw_income = Transaction::where('finance_approved', 1)
             ->whereDate('settled_date', Carbon::today())
             ->sum('tw');
         $tw_savings = Saving::whereNull('transaction_id')
-            ->whereDate('settled_date', Carbon::today())
+            ->whereDate('created_at', Carbon::today())
             ->sum('tw');
         $thr_income = Transaction::where('finance_approved', 1)
             ->whereDate('settled_date', Carbon::today())
             ->sum('thr');
         $thr_savings = Saving::whereNull('transaction_id')
-            ->whereDate('settled_date', Carbon::today())
+            ->whereDate('created_at', Carbon::today())
             ->sum('thr');
         $tb_expense = Expense::whereDate('time', Carbon::today())
             ->where('type', "TB")
@@ -179,19 +179,19 @@ class ReportController extends Controller
             ->whereDate('settled_date', Carbon::today())
             ->sum('tb');
         $tb_savings = Saving::whereNull('transaction_id')
-            ->whereDate('settled_date', Carbon::today())
+            ->whereDate('created_at', Carbon::today())
             ->sum('tb');
         $tw_income = Transaction::where('finance_approved', 1)
             ->whereDate('settled_date', Carbon::today())
             ->sum('tw');
         $tw_savings = Saving::whereNull('transaction_id')
-            ->whereDate('settled_date', Carbon::today())
+            ->whereDate('created_at', Carbon::today())
             ->sum('tw');
         $thr_income = Transaction::where('finance_approved', 1)
             ->whereDate('settled_date', Carbon::today())
             ->sum('thr');
         $thr_savings = Saving::whereNull('transaction_id')
-            ->whereDate('settled_date', Carbon::today())
+            ->whereDate('created_at', Carbon::today())
             ->sum('thr');
         $tb_expense = Expense::whereDate('time', Carbon::today())
             ->where('type', "TB")
