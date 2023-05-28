@@ -89,11 +89,19 @@ class RitController extends Controller
     }
     public function get_empty_stock(Request $request)
     {
-        $rits = Rit::whereNotNull("sold_date")
-            ->where("arrival_date", ">=", Carbon::createFromFormat('D M d Y H:i:s e+', $request->start_date)->toDateTimeString())
-            ->where("arrival_date", "<=", Carbon::createFromFormat('D M d Y H:i:s e+', $request->end_date)->toDateTimeString())
-            ->where("item_id", $request->item_id)
-            ->get();
+        if ($request->item_id) {
+            $rits = Rit::whereNotNull("sold_date")
+                ->where("arrival_date", ">=", Carbon::createFromFormat('D M d Y H:i:s e+', $request->start_date)->toDateTimeString())
+                ->where("arrival_date", "<=", Carbon::createFromFormat('D M d Y H:i:s e+', $request->end_date)->toDateTimeString())
+                ->where("item_id", $request->item_id)
+                ->get();
+        } else {
+            // NOTE - Owner - Laba Rugi
+            $rits = Rit::whereNotNull("sold_date")
+                ->where("sold_date", ">=", Carbon::createFromFormat('D M d Y H:i:s e+', $request->start_date)->toDateTimeString())
+                ->where("sold_date", "<=", Carbon::createFromFormat('D M d Y H:i:s e+', $request->end_date)->toDateTimeString())
+                ->get();
+        }
 
         $return = [
             'api_code' => 200,
