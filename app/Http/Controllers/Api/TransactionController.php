@@ -40,6 +40,21 @@ class TransactionController extends Controller
         return SuccessResource::make($return);
     }
 
+    public function get_owner_nota()
+    {
+        $transactions = Transaction::where('owner_approved', 0)
+            ->where('type', 'Kiriman')
+            ->get();
+
+        $return = [
+            'api_code' => 200,
+            'api_status' => true,
+            'api_message' => 'Sukses',
+            'api_results' => TransactionResource::collection($transactions)
+        ];
+        return SuccessResource::make($return);
+    }
+
     public function get_nota(Request $request)
     {
         $transactions = Transaction::where("created_at", ">=", Carbon::createFromFormat('D M d Y H:i:s e+', $request->start_date)->toDateTimeString())

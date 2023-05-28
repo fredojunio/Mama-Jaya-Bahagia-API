@@ -38,6 +38,30 @@ class RitController extends Controller
         ];
         return SuccessResource::make($return);
     }
+    public function get_sell_owner_stock()
+    {
+        $rits = Rit::whereNotNull('arrival_date')
+            ->where(function ($query) {
+                $query->where(function ($query) {
+                    $query->where('customer_tonnage', '>', 0)
+                        ->whereNull('customer_transaction_id');
+                })->orWhere(function ($query) {
+                    $query->where('branch_tonnage', '>', 0)
+                        ->whereHas('branches', function ($query) {
+                            $query->whereNull('income');
+                        });
+                });
+            })
+            ->get();
+
+        $return = [
+            'api_code' => 200,
+            'api_status' => true,
+            'api_message' => 'Sukses',
+            'api_results' => RitResource::collection($rits)
+        ];
+        return SuccessResource::make($return);
+    }
     public function get_created_stock()
     {
         $rits = Rit::whereNull("arrival_date")->where("finance_approved", 0)->get();

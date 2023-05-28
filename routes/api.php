@@ -40,6 +40,7 @@ Route::group(['middleware' => 'auth:api', 'as' => 'api.user.'], function () {
 Route::group(['prefix' => 'admin'], function () {
     Route::get('get_notification', [NotificationController::class, 'get_notification']);
     Route::get('/rit/get_all_stock', [RitController::class, 'get_all_stock']);
+    Route::get('/rit/get_sell_owner_stock', [RitController::class, 'get_sell_owner_stock']);
     Route::get('/rit/get_created_stock', [RitController::class, 'get_created_stock']);
     Route::get('/rit/get_otw_stock', [RitController::class, 'get_otw_stock']);
     Route::get('/rit/get_owner_stock', [RitController::class, 'get_owner_stock']);
@@ -67,6 +68,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::apiResource('rit_transaction', RitTransactionController::class);
     Route::post('/transaction/get_completed_transactions', [TransactionController::class, 'get_completed_transactions']);
     Route::get('/transaction/get_remaining_sack', [TransactionController::class, 'get_remaining_sack']);
+    Route::get('/transaction/get_owner_nota', [TransactionController::class, 'get_owner_nota']);
     Route::apiResource('transaction', TransactionController::class);
     Route::post('/transaction/get_nota', [TransactionController::class, 'get_nota']);
     Route::post('/transaction/{transaction}/approve_finance', [TransactionController::class, 'approve_finance']);
