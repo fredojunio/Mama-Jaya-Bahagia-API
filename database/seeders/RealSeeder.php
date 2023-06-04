@@ -104,7 +104,7 @@ class RealSeeder extends Seeder
         $role->name = "Abd Halim";
         $role->nickname = "HALIM CANGKIR";
         $role->address = "Dsn. Wates RT 10/RW 06, Cangkir- Driyorejo";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->ongkir = 2000;
         $role->birthdate = "1972-08-16";
         $role->type = "Kiriman";
@@ -118,7 +118,7 @@ class RealSeeder extends Seeder
         $role->name = "Achmad Tohari";
         $role->nickname = "AHMAD";
         $role->address = "Dsn. Krajan RT 12/ RW 03, Nglongsor - Tugu";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1986-02-19";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -132,7 +132,7 @@ class RealSeeder extends Seeder
         $role->name = "Achmad Misbachul Munir";
         $role->nickname = "MUNIR";
         $role->address = "Masangan Kulon RT 01 / RW 01, Sukodono";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1961-06-06";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -146,7 +146,7 @@ class RealSeeder extends Seeder
         $role->name = "Aeidul Kohar";
         $role->nickname = "KOHAR";
         $role->address = "Kedungboto RT 18 / RW 03, Taman";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1980-07-06";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -160,7 +160,7 @@ class RealSeeder extends Seeder
         $role->name = "Adi Purwanto";
         $role->nickname = "HALIM";
         $role->address = "Tanah Merah Indah Syur 6/7 RT 24/ RW 04, Tanah Kali Kedinding";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1985-02-27";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -173,7 +173,7 @@ class RealSeeder extends Seeder
         $role->name = "Agus Priyanto";
         $role->nickname = "KIPLI TAHU";
         $role->address = "Kedungboto RT 17 / RW 03, Taman";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1982-08-18";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -187,7 +187,7 @@ class RealSeeder extends Seeder
         $role->name = "Agus Sutamaji";
         $role->nickname = "AJI YAYAK";
         $role->address = "Dsn. Krembangan RT 03 / RW 01, Taman";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1986-11-10";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -201,7 +201,7 @@ class RealSeeder extends Seeder
         $role->name = "Agustinus";
         $role->nickname = "AGUS JINGGO";
         $role->address = "Legok RT 16 / RW 06, Sukodono";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1974-09-13";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -214,7 +214,7 @@ class RealSeeder extends Seeder
         $role->name = "Agus Tono";
         $role->nickname = "AGUS VEGA";
         $role->address = "Dsn. Sadang RT 01/RW 01, Taman";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1975-08-17";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -227,7 +227,7 @@ class RealSeeder extends Seeder
         $role->name = "Aji Parminardi";
         $role->nickname = "DIDIK TAHU";
         $role->address = "Dsn. Sambisari RT 26/RW 05, Taman";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1978-11-19";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -240,7 +240,7 @@ class RealSeeder extends Seeder
         $role->name = "Alfin Ariyanto";
         $role->nickname = "ALPIN";
         $role->address = "Jelok RT 03/ RW 02, Kayen- Pacitan";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1979-05-10";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -253,7 +253,7 @@ class RealSeeder extends Seeder
         $role->name = "Amat Marulah";
         $role->nickname = "MARUL";
         $role->address = "Dk. Werdi Tengah RT 10/ RW 05, Wonokerto";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1994-05-22";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -267,7 +267,7 @@ class RealSeeder extends Seeder
         $role->name = "Andis Dwi Suranto";
         $role->nickname = "DWI";
         $role->address = "Dsn. Kevling Kalibader RT 21/ RW 03, Taman ";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1975-02-24";
         $role->type = "Eceran";
         $role->tb = 560000;
@@ -279,7 +279,7 @@ class RealSeeder extends Seeder
         $role->name = "Andi Nasir";
         $role->nickname = "ANDI TAHU";
         $role->address = "Taman RT 17/RW 03, Taman";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1987-12-25";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -292,7 +292,7 @@ class RealSeeder extends Seeder
         $role->name = "Andi Yulefi";
         $role->nickname = "ANDI WIYUNG";
         $role->address = "Wiyung RT 02/ RW 06";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1986-10-30";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -305,7 +305,7 @@ class RealSeeder extends Seeder
         $role->name = "Arik Masrufi";
         $role->nickname = "ARIK MENGANTI";
         $role->address = "Menganti RT 03/ RW 02 ";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->ongkir = 2000;
         $role->birthdate = "1980-06-14";
         $role->type = "Kiriman";
@@ -319,7 +319,7 @@ class RealSeeder extends Seeder
         $role->name = "Arnasih";
         $role->nickname = "ARNASIH";
         $role->address = "Dsn. Lopang RT 01/ RW 04, Driyorejo";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1967-12-06";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -333,7 +333,7 @@ class RealSeeder extends Seeder
         $role->name = "Aseh";
         $role->nickname = "BU ASIH";
         $role->address = "Jl. Merapi RT 07/ RW 02, Bambe- Driyorejo";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1974-04-14";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -347,7 +347,7 @@ class RealSeeder extends Seeder
         $role->name = "Astoi";
         $role->nickname = "TOIN";
         $role->address = "Jl. Sawunggaling I RT 15/ RW 03, Jemundo - Taman";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1971-11-24";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -360,7 +360,7 @@ class RealSeeder extends Seeder
         $role->name = "BAKRI";
         $role->nickname = "BAKRI JUANDA";
         $role->address = "Bondansari RT 06/ RW 03, Wiradesa";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->ongkir = 150000;
         $role->birthdate = "1971-11-24";
         $role->type = "Kiriman";
@@ -374,7 +374,7 @@ class RealSeeder extends Seeder
         $role->name = "Bambang Junaedi";
         $role->nickname = "JUNED";
         $role->address = "Bondansari RT 06/ RW 03, Wiradesa";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1975-06-13";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -387,7 +387,7 @@ class RealSeeder extends Seeder
         $role->name = "Basuki";
         $role->nickname = "ABAS";
         $role->address = "Taman Barat RT 01/ RW 01, Taman";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1972-03-23";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -401,7 +401,7 @@ class RealSeeder extends Seeder
         $role->name = "Bayu Aditama";
         $role->nickname = "BAYU";
         $role->address = "Kedungboto RT 17/ RW 03, Taman";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1990-10-02";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -414,7 +414,7 @@ class RealSeeder extends Seeder
         $role->name = "Budiaji";
         $role->nickname = "PAK JI AFIF";
         $role->address = "Jl. Bintan 2 RT 01/ RW 10, Palem - Pare";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1967-08-15";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -427,7 +427,7 @@ class RealSeeder extends Seeder
         $role->name = "Casirin";
         $role->nickname = "BIRIN";
         $role->address = "Jl. Ubi 1 RT 01/ RW 10, Wage -  Taman";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1965-06-30";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -440,7 +440,7 @@ class RealSeeder extends Seeder
         $role->name = "Dadan Suryanda";
         $role->nickname = "DADAN";
         $role->address = "Taman RT 17/ RW 03, Taman";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1968-04-03";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -453,7 +453,7 @@ class RealSeeder extends Seeder
         $role->name = "Dama";
         $role->nickname = "DAMAK";
         $role->address = "Jl. Bagus Santri RT 04/ RW 02, Bohar- Taman";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1978-03-19";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -466,7 +466,7 @@ class RealSeeder extends Seeder
         $role->name = "Dewi Wahyuni";
         $role->nickname = "KHOLIS";
         $role->address = "Taman RT 17/ RW 03, Taman";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1977-02-14";
         $role->type = "Eceran";
         $role->tb = 620000;
@@ -479,7 +479,7 @@ class RealSeeder extends Seeder
         $role->name = "Djunaidi";
         $role->nickname = "ZUNAIDI";
         $role->address = "Dsn. Sambisari RT 29/ RW 05, Sambibulu - Taman";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1955-07-06";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -492,7 +492,7 @@ class RealSeeder extends Seeder
         $role->name = "Doni Setiawan";
         $role->nickname = "DONI";
         $role->address = "Dsn. Boyoteluk 3 RT 02/ RW 06, Siwalan";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1992-03-25";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -506,7 +506,7 @@ class RealSeeder extends Seeder
         $role->name = "Dowo Wibowo";
         $role->nickname = "WIBOWO";
         $role->address = "Tenggilis Lama 4-A/12 RT 07/ RW 04, Tenggilis Mejoyo";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1968-12-07";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -520,7 +520,7 @@ class RealSeeder extends Seeder
         $role->name = "Edi Pramono";
         $role->nickname = "PRAMONO";
         $role->address = "Pekuncen RT 03/ RW 07, Wiradesa";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1987-07-15";
         $role->type = "Eceran";
         $role->tb = 600000;
@@ -534,7 +534,7 @@ class RealSeeder extends Seeder
         $role->name = "Edi Purwanto";
         $role->nickname = "ANTOK";
         $role->address = "Dk. Cangkring Kulon RT 01/ RW 08, Tengengwetan - Siwalan";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1996-06-09";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -547,7 +547,7 @@ class RealSeeder extends Seeder
         $role->name = "Edi Waluyo";
         $role->nickname = "WALUYO";
         $role->address = "Dk. Keludan RT 02/ RW 01, Werdi- Wonokerto";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1975-01-30";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -561,7 +561,7 @@ class RealSeeder extends Seeder
         $role->name = "EKO ADI W";
         $role->nickname = "ADI ABI";
         $role->address = "Kedungboto RT 17/ RW 03, Taman";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1982-09-19";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -575,7 +575,7 @@ class RealSeeder extends Seeder
         $role->name = "Elijas Boediono";
         $role->nickname = "PAK YAS";
         $role->address = "Sambisari Perintis 4 RT 36/ RW 07, Taman";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->ongkir = 2000;
         $role->birthdate = "1969-10-10";
         $role->type = "Kiriman";
@@ -589,7 +589,7 @@ class RealSeeder extends Seeder
         $role->name = "Erma Purnama ";
         $role->nickname = "KLIWON";
         $role->address = "Kemlaten 8/24 RT 01/ RW 06, Kebraon - Karangpilang";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1989-11-11";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -603,7 +603,7 @@ class RealSeeder extends Seeder
         $role->name = "Eman Sulaeman";
         $role->nickname = "EMAN";
         $role->address = "Dsn. Sukamulya RT 05/ RW 01, Gunungsari";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1970-02-12";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -617,7 +617,7 @@ class RealSeeder extends Seeder
         $role->name = "Erniatin";
         $role->nickname = "MBAK TIN";
         $role->address = "Saimbang RT 13/ RW 04, Kebon Agung- Sukodono";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->ongkir = 2000;
         $role->birthdate = "1975-11-28";
         $role->type = "Kiriman";
@@ -631,7 +631,7 @@ class RealSeeder extends Seeder
         $role->name = "Ernamawati, S.PD.";
         $role->nickname = "ERNA";
         $role->address = "Jl. Sawunggaling 1 RT 15/ RW 02, Jemundo -  Taman";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1971-06-19";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -645,7 +645,7 @@ class RealSeeder extends Seeder
         $role->name = "Giyanto";
         $role->nickname = "GIANTO";
         $role->address = "Sukolegok RT 16 / RW 06, Sukodono";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1980-01-06";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -659,7 +659,7 @@ class RealSeeder extends Seeder
         $role->name = "Gunawan";
         $role->nickname = "GUNAWAN TOMPEL";
         $role->address = "Dk. Blimbing Lor RT 02/ RW 02, Blimbing Wuluh - Siwalan";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1995-09-17";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -674,7 +674,7 @@ class RealSeeder extends Seeder
         $role->name = "H. Nur. Kholiq";
         $role->nickname = "H. KHOLIK";
         $role->address = "Geluran RT 11/ RW 03, Taman";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1967-11-07";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -688,7 +688,7 @@ class RealSeeder extends Seeder
         $role->name = "Hadi Kurniawan";
         $role->nickname = "ADI AJAY";
         $role->address = "Wonosari RT 02/ RW 04, Siwalan";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1990-07-15";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -701,7 +701,7 @@ class RealSeeder extends Seeder
         $role->name = "Haryanto";
         $role->nickname = "HARR";
         $role->address = "Dukuh Sawi RT 02/ RW 07, Klunjukan - Sragi";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1986-07-15";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -715,7 +715,7 @@ class RealSeeder extends Seeder
         $role->name = "Heri Setiyono";
         $role->nickname = "HERI SERUNI";
         $role->address = "Dsn. Ngudi RT 02/ RW 04, Punggul - Gedangan";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->ongkir = 2000;
         $role->birthdate = "1990-06-12";
         $role->type = "Kiriman";
@@ -729,7 +729,7 @@ class RealSeeder extends Seeder
         $role->name = "Imam Afandi";
         $role->nickname = "IMAM";
         $role->address = "Sukodono RT 05/ RW 01";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1979-12-20";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -743,7 +743,7 @@ class RealSeeder extends Seeder
         $role->name = "Iin Sugiarini";
         $role->nickname = "IIN";
         $role->address = "Saimbang RT 14/ RW 04, Kebon Agung - Sukodono";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->ongkir = 2000;
         $role->birthdate = "1974-10-07";
         $role->type = "Kiriman";
@@ -759,7 +759,7 @@ class RealSeeder extends Seeder
         $role->name = "Imam Rokhmad";
         $role->nickname = "TOTOK";
         $role->address = "Dsn. Sambibulu RT 04/ RW 01, Taman";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1973-04-10";
         $role->type = "Eceran";
         $role->tb = 210000;
@@ -774,7 +774,7 @@ class RealSeeder extends Seeder
         $role->name = "Indra Kurniawan";
         $role->nickname = "INDRA PAIJO";
         $role->address = "Terik RT 13 / RW 06, Krian";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1993-04-24";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -787,7 +787,7 @@ class RealSeeder extends Seeder
         $role->name = "Irwan";
         $role->nickname = "WAWAN A";
         $role->address = "Dsn. Watugaluh RT 01/ RW 02";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1984-12-10";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -800,7 +800,7 @@ class RealSeeder extends Seeder
         $role->name = "Jemakir";
         $role->nickname = "BAKIR";
         $role->address = "Dsn. Sambisaei Kav. Selatan blok E-13, Sambibulu- Taman";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1959-07-15";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -814,7 +814,7 @@ class RealSeeder extends Seeder
         $role->name = "Joko Suhendro";
         $role->nickname = "HENDRA MENGANTI";
         $role->address = "Peniron Kulon RT 02/ RW 01, Gading- Watu- Menganti";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->ongkir = 2000;
         $role->birthdate = "1984-11-21";
         $role->type = "Kiriman";
@@ -828,7 +828,7 @@ class RealSeeder extends Seeder
         $role->name = "Joko Vitono";
         $role->nickname = "JOKO TAHU";
         $role->address = "Kemlaten 10/2 RT 03/ RW 06, Kebraon – Karangpilang";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1986-05-06";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -842,7 +842,7 @@ class RealSeeder extends Seeder
         $role->name = "Joni Winarno Hadi W";
         $role->nickname = "JONI";
         $role->address = "Taman RT 18/ RW 03, Taman- Sidoarjo";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1979-01-05";
         $role->type = "Eceran";
         $role->tb = 8350000;
@@ -856,7 +856,7 @@ class RealSeeder extends Seeder
         $role->name = "Kusyono";
         $role->nickname = "AGUS K";
         $role->address = "Jl. Nanas RT 10/ RW 03, Geluran - Taman";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1968-01-21";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -869,7 +869,7 @@ class RealSeeder extends Seeder
         $role->name = "Kasturi";
         $role->nickname = "KASTURI";
         $role->address = "Krajan 1 Wangkelang RT 02/ RW 01, Moga";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1977-05-21";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -882,7 +882,7 @@ class RealSeeder extends Seeder
         $role->name = "Kartini";
         $role->nickname = "BU TINI";
         $role->address = "Jl. Ubi 2 Margomulyo RT 04/ RW 10, Wage - Taman";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1980-09-24";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -895,7 +895,7 @@ class RealSeeder extends Seeder
         $role->name = "Kisbandi";
         $role->nickname = "KISBANDI";
         $role->address = "Werdi RT 17/ RW 08, Wonokerto";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1985-09-29";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -909,7 +909,7 @@ class RealSeeder extends Seeder
         $role->name = "Kinto Surono";
         $role->nickname = "KINTO";
         $role->address = "Dsn. Dukuh RT 08/ RW 03, Bangsri – Sukodono ";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->ongkir = 2000;
         $role->birthdate = "1992-07-04";
         $role->type = "Kiriman";
@@ -923,7 +923,7 @@ class RealSeeder extends Seeder
         $role->name = "Kodofir";
         $role->nickname = "DOFIR";
         $role->address = "Dsn. Munggalan RT 08/ RW 05, Karangsono- Kanigaro";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1982-10-12";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -937,7 +937,7 @@ class RealSeeder extends Seeder
         $role->name = "Lestoro";
         $role->nickname = "TORO KEDURUS";
         $role->address = "Tenggilis Lama 3 Gang Longgar RT 05/ RW 05, Tenggilis Mejoyo";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->ongkir = 2000;
         $role->birthdate = "1977-10-12";
         $role->type = "Kiriman";
@@ -951,7 +951,7 @@ class RealSeeder extends Seeder
         $role->name = "Lia Fanani";
         $role->nickname = "RIDHO";
         $role->address = "Sambisari RT 31/ RW 06";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1984-05-13";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -964,7 +964,7 @@ class RealSeeder extends Seeder
         $role->name = "M. Yusuf";
         $role->nickname = "YUSUF ANDIK";
         $role->address = "Banjarsari RT 08 /RW 03, Pertapaan – Maduretno Taman";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1983-05-01";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -978,7 +978,7 @@ class RealSeeder extends Seeder
         $role->name = "Mahmudi ";
         $role->nickname = "MAHMUDI";
         $role->address = "Dsn. Mulung RT 07/ RW 04, Driyorejo";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1984-11-28";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -991,7 +991,7 @@ class RealSeeder extends Seeder
         $role->name = "Mas Afif";
         $role->nickname = "AFIF";
         $role->address = "Dsn. Tanjunganom RT 11/ RW 01, Taman";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1999-05-22";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -1004,7 +1004,7 @@ class RealSeeder extends Seeder
         $role->name = "Minto";
         $role->nickname = "MINTO";
         $role->address = "Dsn. Buduran RT 03/ RW 02, Jogoloyo";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1966-03-01";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -1017,7 +1017,7 @@ class RealSeeder extends Seeder
         $role->name = "Moch. Jimba Sunoto";
         $role->nickname = "JIMBA";
         $role->address = "Taman RT 15/ RW 03";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1963-06-02";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -1030,7 +1030,7 @@ class RealSeeder extends Seeder
         $role->name = "Much. Fadelul";
         $role->nickname = "FADELI";
         $role->address = "Jenek Wetan RT 14/ RW 03, Krembangan- Taman";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1990-10-06";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -1043,7 +1043,7 @@ class RealSeeder extends Seeder
         $role->name = "Mugiono";
         $role->nickname = "GOCO";
         $role->address = "Taman RT 17/ RW 03, Taman";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1960-07-22";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -1056,7 +1056,7 @@ class RealSeeder extends Seeder
         $role->name = "Moh. Irfan Shodiq";
         $role->nickname = "IRFAN TENARU";
         $role->address = "Tenaru RT 03/ RW 01, Driyorejo";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->ongkir = 2000;
         $role->birthdate = "1970-04-16";
         $role->type = "Kiriman";
@@ -1070,7 +1070,7 @@ class RealSeeder extends Seeder
         $role->name = "Muh. Kamat Yajib";
         $role->nickname = "YAJIB";
         $role->address = "Dsn. Cangak RT 01/ RW 05, Krandang";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1993-04-29";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -1084,7 +1084,7 @@ class RealSeeder extends Seeder
         $role->name = "Muhammad Roni";
         $role->nickname = "RONI";
         $role->address = "Dk. Saren RT 02/ RW 06, Blimbing Wuluh- Siwalan";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1990-06-15";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -1097,7 +1097,7 @@ class RealSeeder extends Seeder
         $role->name = "Muhammad Wahyu";
         $role->nickname = "WAHYU";
         $role->address = "Dk. Gemusuh RT 02/ RW 05, Siwalan";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1991-10-26";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -1110,7 +1110,7 @@ class RealSeeder extends Seeder
         $role->name = "Murtini";
         $role->nickname = "KARSAN";
         $role->address = "Dsn. Lopang RT 01/ RW 04, Driyorejo";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->ongkir = 2000;
         $role->birthdate = "1965-06-30";
         $role->type = "Kiriman";
@@ -1124,7 +1124,7 @@ class RealSeeder extends Seeder
         $role->name = "Muslikin";
         $role->nickname = "LIKIN";
         $role->address = "Sambisari RT 34/ RW 07, Sambibulu -  Taman";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1990-10-06";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -1137,7 +1137,7 @@ class RealSeeder extends Seeder
         $role->name = "Moh. Juwari";
         $role->nickname = "JUHARI";
         $role->address = "Sadang Taman RT 02/ RW 01";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1972-12-05";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -1150,7 +1150,7 @@ class RealSeeder extends Seeder
         $role->name = "Moh. Mustakim";
         $role->nickname = "TAKIM";
         $role->address = "Dsn. Krembangan RT 02/ RW 01, Taman";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1973-07-27";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -1163,7 +1163,7 @@ class RealSeeder extends Seeder
         $role->name = "Moh. Nurwahyudi";
         $role->nickname = "MAS YUDI";
         $role->address = "Sepande RT 07/ RW 02, Candi - Sidoarjo";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1987-07-11";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -1177,7 +1177,7 @@ class RealSeeder extends Seeder
         $role->name = "Muhajirin";
         $role->nickname = "MUHAJIRIN";
         $role->address = "Plabuhan RT 06/ RW 02, Plabuhan Rejo- Lamongan";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1981-12-24";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -1190,7 +1190,7 @@ class RealSeeder extends Seeder
         $role->name = "Muhamat Gunawan";
         $role->nickname = "AWAN";
         $role->address = "Dk. Gendogo Bondansari RT 06/ RW 03, Bondansari";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1988-01-08";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -1202,7 +1202,7 @@ class RealSeeder extends Seeder
         $role->name = "Muhammad Misdu";
         $role->nickname = "AZIZ TAHU";
         $role->address = "Taman Utara RT 07/ RW 02, Taman";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1985-11-18";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -1215,7 +1215,7 @@ class RealSeeder extends Seeder
         $role->name = "Moh. Maufiqur Rohman";
         $role->nickname = "MOUFIQUR";
         $role->address = "Medaeng Kulon RT 19/ RW 07, Kedungturi- Taman";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "2001-03-02";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -1228,7 +1228,7 @@ class RealSeeder extends Seeder
         $role->name = "Mohammad Mujib";
         $role->nickname = "MUJIB";
         $role->address = "Dsn. Sambisari RT 30/ RW 06, Sambibulu - Taman";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1972-03-22";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -1241,7 +1241,7 @@ class RealSeeder extends Seeder
         $role->name = "Mohammad Waziz";
         $role->nickname = "AZIZ TEMPE";
         $role->address = "Dk. Saren RT 02/ RW 08, Blimbing Wuluh - Siwalan";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1978-11-11";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -1254,7 +1254,7 @@ class RealSeeder extends Seeder
         $role->name = "Muslimin";
         $role->nickname = "MUSLIMIN";
         $role->address = "Dk. Blimbing Lor RT 02/ RW 02, Blimbing Wuluh - Siwalan";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1984-10-04";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -1267,7 +1267,7 @@ class RealSeeder extends Seeder
         $role->name = "Moh. Yusuf";
         $role->nickname = "YUSUF TENGGILIS";
         $role->address = "Dsn. Kesamben Barat RT 01/ RW 03, Plumpang";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1974-06-09";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -1280,7 +1280,7 @@ class RealSeeder extends Seeder
         $role->name = "Nanang Naiwatmoko";
         $role->nickname = "NANANG";
         $role->address = "Taman RT 17/ RW 03, Taman";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1984-06-15";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -1293,7 +1293,7 @@ class RealSeeder extends Seeder
         $role->name = "Nuryati Lutfiyah";
         $role->nickname = "NURYATI";
         $role->address = "Dsn. Kempreng RT25/ RW 04, Tanjungsari - Taman";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1968-02-17";
         $role->type = "Eceran";
         $role->tb = 100000;
@@ -1306,7 +1306,7 @@ class RealSeeder extends Seeder
         $role->name = "Nur Cahyo";
         $role->nickname = "NURCY";
         $role->address = "Medaeng Kulon RT 20/ RW 07, Kedungturi - Taman";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1969-08-06";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -1319,7 +1319,7 @@ class RealSeeder extends Seeder
         $role->name = "Paekun";
         $role->nickname = "YADI";
         $role->address = "Bandar RT 07/ RW 03, Sepanjang";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1962-12-10";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -1332,7 +1332,7 @@ class RealSeeder extends Seeder
         $role->name = "Pudjut Sujarwanto";
         $role->nickname = "JARWANTO";
         $role->address = "Sambibulu RT 29/ RW 05, Taman";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1971-01-01";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -1345,7 +1345,7 @@ class RealSeeder extends Seeder
         $role->name = "Panut";
         $role->nickname = "PANUT";
         $role->address = "Druju RT 05/ RW 01, Druju";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1973-04-14";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -1358,7 +1358,7 @@ class RealSeeder extends Seeder
         $role->name = "Purwanto";
         $role->nickname = "PUR TAHU";
         $role->address = "Dsn. Melik RT 05/ RW 05, Bedah Lawak - Tembelang";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1983-04-29";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -1371,7 +1371,7 @@ class RealSeeder extends Seeder
         $role->name = "Risda Mirwansyah";
         $role->nickname = "IWAN";
         $role->address = "Jl. Jeruk 1 No 28B, Geluran - Taman";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1980-12-23";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -1384,7 +1384,7 @@ class RealSeeder extends Seeder
         $role->name = "Reno Rela Hendrawan";
         $role->nickname = "HENDRA";
         $role->address = "Dsn. Sambisari Kav. Selatan Blok D19 RT 37/ RW 07, Sambibulu";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1986-02-27";
         $role->type = "Eceran";
         $role->tb = 1650000;
@@ -1397,7 +1397,7 @@ class RealSeeder extends Seeder
         $role->name = "Rochmad";
         $role->nickname = "ROHMAT";
         $role->address = "Jl. Nangka 1C RT 15/ RW 03, Geluran";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1963-08-19";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -1410,7 +1410,7 @@ class RealSeeder extends Seeder
         $role->name = "Sadali";
         $role->nickname = "SADELI";
         $role->address = "Legok RT 18/ RW06, Taman";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1974-05-04";
         $role->type = "Eceran";
         $role->tb = 310000;
@@ -1423,7 +1423,7 @@ class RealSeeder extends Seeder
         $role->name = "Saifudin";
         $role->nickname = "UDIN";
         $role->address = "Dsn. Pait RT 01/ RW 03, Siwalan";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1982-04-21";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -1438,7 +1438,7 @@ class RealSeeder extends Seeder
         $role->name = "Samuri B Kamari";
         $role->nickname = "SAMURI";
         $role->address = "PEDURENAN DEPOK RT.01/RW.01 CISALAK PASAR, CIMANGGIS";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1984-01-17";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -1452,7 +1452,7 @@ class RealSeeder extends Seeder
         $role->name = "Sanaji";
         $role->nickname = "SANAJI";
         $role->address = "Jl. Pagesangan Gg. Tambangan No.36 RT.01/RW.02, Jambangan";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1994-01-15";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -1466,7 +1466,7 @@ class RealSeeder extends Seeder
         $role->name = "Senen";
         $role->nickname = "SENEN";
         $role->address = "Sobo Widoro RT.01/RW.07 Trosobo, Taman";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1978-06-02";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -1480,7 +1480,7 @@ class RealSeeder extends Seeder
         $role->name = "Seger Purnomo";
         $role->nickname = "MINO";
         $role->address = "Simo Gunung Baru Jaya Blok E/02 RT.003/RW.15, Putat Jaya, Sawahan";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1975-10-25";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -1494,7 +1494,7 @@ class RealSeeder extends Seeder
         $role->name = "Seroja Dewi Saputri";
         $role->nickname = "PUTRI";
         $role->address = "Jl. Sambisari No.84 RT.31/RW.06 Sambibulu, Taman";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1988-12-07";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -1510,7 +1510,7 @@ class RealSeeder extends Seeder
         $role->name = "Siaman";
         $role->nickname = "SIAMAN";
         $role->address = "Pagesangan III-A/26-A RT.04/RW.03. Jambangan";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1974-10-16";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -1524,7 +1524,7 @@ class RealSeeder extends Seeder
         $role->name = "Siti Fatimah";
         $role->nickname = "BU SALI";
         $role->address = "Kalijaten RT.23/RW.03, Taman";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1975-08-25";
         $role->type = "Eceran";
         $role->tb = 1600000;
@@ -1538,7 +1538,7 @@ class RealSeeder extends Seeder
         $role->name = "Siti Jumayah";
         $role->nickname = "SOLIKIN SELEMPIT";
         $role->address = "Ds. Slempit RT.05/RW.01, Kedamean";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1976-01-20";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -1554,7 +1554,7 @@ class RealSeeder extends Seeder
         $role->name = "Slamet Darmo";
         $role->nickname = "DARMO";
         $role->address = "Dk. Gumelem RT.10/RW.03 Gumawang, Pecalungan";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1978-10-16";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -1568,7 +1568,7 @@ class RealSeeder extends Seeder
         $role->name = "Singgih Prasetiyo";
         $role->nickname = "SINGGIH";
         $role->address = "Taman RT.15/RW.03";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1992-07-16";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -1582,7 +1582,7 @@ class RealSeeder extends Seeder
         $role->name = "Siti Khotijah";
         $role->nickname = "RESTU";
         $role->address = "Dsn. Keben, RT.05/RW.01, Cangkringsari";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1984-09-09";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -1598,7 +1598,7 @@ class RealSeeder extends Seeder
         $role->name = "Slamet Hariadi";
         $role->nickname = "HARI S";
         $role->address = "Bebekan Timur RT.09/RW.03 Taman-Sidoarjo";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1984-09-06";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -1612,7 +1612,7 @@ class RealSeeder extends Seeder
         $role->name = "Slamet Raharjo";
         $role->nickname = "Slamet Tempe";
         $role->address = "Dk. Cangkring Kulon RT.001/RW.008 Tengenwetan,Siwalan";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1981-03-03";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -1626,7 +1626,7 @@ class RealSeeder extends Seeder
         $role->name = "Slamet Waluyo";
         $role->nickname = "WALUYO";
         $role->address = "Semut RT.03/RW.01, Wonokerto";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1983-02-17";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -1640,7 +1640,7 @@ class RealSeeder extends Seeder
         $role->name = "Soari";
         $role->nickname = "SOARI";
         $role->address = "Jl. Achmad II RT.01/RW.01 Pepelegi, Waru";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1979-03-17";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -1654,7 +1654,7 @@ class RealSeeder extends Seeder
         $role->name = "Sodiq Arianto";
         $role->nickname = "SODIK";
         $role->address = "Sambisari RT.032/RW.006, Taman";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1960-07-15";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -1668,7 +1668,7 @@ class RealSeeder extends Seeder
         $role->name = "Sri Wahono";
         $role->nickname = "WAHONO";
         $role->address = "Kedungturi RT.47/RW.13, Taman";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1969-11-08";
         $role->type = "Eceran";
         $role->tb = 330000;
@@ -1682,7 +1682,7 @@ class RealSeeder extends Seeder
         $role->name = "Subur Fauzi";
         $role->nickname = "Fauzi";
         $role->address = "Dsn. Tulung RT.05/RW.04 Rayung, Senori";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1977-05-03";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -1696,7 +1696,7 @@ class RealSeeder extends Seeder
         $role->name = "Sugeng Hariyadi";
         $role->nickname = "HARI EDY";
         $role->address = "Ketegan Barat Gg.03 RT05/RW.01, Taman";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1989-05-07";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -1710,7 +1710,7 @@ class RealSeeder extends Seeder
         $role->name = "Suherman Mahmudi";
         $role->nickname = "Mahmudi";
         $role->address = "Dsn. Kletek RT.10/RW.05 Taman";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1974-11-30";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -1730,7 +1730,7 @@ class RealSeeder extends Seeder
         $role->name = "SUKIRNO";
         $role->nickname = "SUKIR";
         $role->address = "TAMAN RT.08/RW.02";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1981-06-19";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -1744,7 +1744,7 @@ class RealSeeder extends Seeder
         $role->name = "SULAMI";
         $role->nickname = "SULAMI";
         $role->address = "DSN.KEBIN DALEM , RT.10/RW.03 DOMAS MENGANTI";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1985-01-21";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -1758,7 +1758,7 @@ class RealSeeder extends Seeder
         $role->name = "SUMADI";
         $role->nickname = "SUMADI";
         $role->address = "SAMBISARI KAV.UTARA, RT.35/RW.06 SAMBIBULU, TAMAN";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1966-06-12";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -1774,7 +1774,7 @@ class RealSeeder extends Seeder
         $role->name = "SUMADI";
         $role->nickname = "SUMADI TEMPE";
         $role->address = "WONOTUNGGAL";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1976-08-01";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -1788,7 +1788,7 @@ class RealSeeder extends Seeder
         $role->name = "SUMADJI";
         $role->nickname = "PAK JI ";
         $role->address = "JL.SAWUNGGALING I RT.15/RW.03 JEMUNDO, TAMAN ";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->ongkir = 100000;
         $role->birthdate = "1958-01-01";
         $role->type = "Kiriman";
@@ -1803,7 +1803,7 @@ class RealSeeder extends Seeder
         $role->name = "SUMANTO";
         $role->nickname = "MANTO";
         $role->address = "KEDUNGBOTO, RT.15/RW.03, TAMAN";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1954-01-31";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -1818,7 +1818,7 @@ class RealSeeder extends Seeder
         $role->name = "SUNARDI";
         $role->nickname = "SUNARDI";
         $role->address = "JL.SAWUNGGALING III RT.20/RW.04 JEMUNDO - TAMAN";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1993-08-25";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -1832,7 +1832,7 @@ class RealSeeder extends Seeder
         $role->name = "SUNARDI";
         $role->nickname = "NARDI";
         $role->address = "BEBEKAN SELATAN, RT.24/RW.07, TAMAN";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->ongkir = 100000;
         $role->birthdate = "";
         $role->type = "Kiriman";
@@ -1847,7 +1847,7 @@ class RealSeeder extends Seeder
         $role->name = "SUNARSIH";
         $role->nickname = "UNTUNG";
         $role->address = "JL.DR.SOETOMO , RT.05 NABARLIA NABIRE";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1969-12-26";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -1862,7 +1862,7 @@ class RealSeeder extends Seeder
         $role->name = "SUNARTO";
         $role->nickname = "NARTO";
         $role->address = "JL.PAGESANGAN RAYA NO.99 RT.04/RW.02, JAMBANGAN";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1967-02-01";
         $role->type = "Eceran";
         $role->tb = 810000;
@@ -1876,7 +1876,7 @@ class RealSeeder extends Seeder
         $role->name = "SUPRIADI";
         $role->nickname = "SUPRI TEMPE";
         $role->address = "CANGKIR, RT.03/RW.01, DRIYOREJO";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1975-08-10";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -1890,7 +1890,7 @@ class RealSeeder extends Seeder
         $role->name = "SUPRIANIK";
         $role->nickname = "ANIK";
         $role->address = "BOHAR TIMUR RT.12/RW.07";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1973-02-11";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -1906,7 +1906,7 @@ class RealSeeder extends Seeder
         $role->name = "SUROSO";
         $role->nickname = "SUROSO";
         $role->address = "TANJUNGSARI RT.16/RW.02, TAMAN ";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1982-02-05";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -1920,7 +1920,7 @@ class RealSeeder extends Seeder
         $role->name = "TIKNO";
         $role->nickname = "PAK TIK";
         $role->address = "KALIJATEN RT.17/RW.03, TAMAN";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1973-05-23";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -1934,7 +1934,7 @@ class RealSeeder extends Seeder
         $role->name = "SUWARDI";
         $role->nickname = "SUWARDI";
         $role->address = "DSN.KALIJINAK RT.01/RW.01, SUMBERBENDO, PUCANGLABAN";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1987-08-01";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -1950,7 +1950,7 @@ class RealSeeder extends Seeder
         $role->name = "SUWARNI";
         $role->nickname = "SUWARNI";
         $role->address = "DS.SUKO LEGOK IV RT.17/RW.06 SUKO, SUKODONO";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1973-01-01";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -1964,7 +1964,7 @@ class RealSeeder extends Seeder
         $role->name = "SUWARNO";
         $role->nickname = "SUWARNO";
         $role->address = "BANGSRI RT.17/RW.02 SUKODONO";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1968-09-10";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -1978,7 +1978,7 @@ class RealSeeder extends Seeder
         $role->name = "SUWARSO";
         $role->nickname = "WARSO";
         $role->address = "SAWO II, RT.02/RW.03, KARANGJATI";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1975-10-25";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -1994,7 +1994,7 @@ class RealSeeder extends Seeder
         $role->name = "SUWOTO";
         $role->nickname = "BROTO";
         $role->address = "TAMAN RT 17/ RW 03, TAMAN";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1969-05-01";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -2008,7 +2008,7 @@ class RealSeeder extends Seeder
         $role->name = "SYAIFUL ANAM";
         $role->nickname = "ANAM";
         $role->address = "DSN. CUMPLENG RT 14/ RW 05, BANGSRI - SUKODONO";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1984-03-10";
         $role->type = "Eceran";
         $role->tb = 660000;
@@ -2022,7 +2022,7 @@ class RealSeeder extends Seeder
         $role->name = "TAUFIK MASHUDI";
         $role->nickname = "HUDI";
         $role->address = "PAGESANGAN 2-A/10 RT 01/ RW 02 JAMBANGAN";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1975-05-25";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -2038,7 +2038,7 @@ class RealSeeder extends Seeder
         $role->name = "TARYONO";
         $role->nickname = "YONO";
         $role->address = "DUKUH GEMURUH RT 02/ RW 05, SIWALAN ";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1980-09-08";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -2052,7 +2052,7 @@ class RealSeeder extends Seeder
         $role->name = "TUNAS PRASETYO HADI";
         $role->nickname = "PRASS";
         $role->address = "DSN. SAMBIBULU RT 09/ RW 02, TAMAN";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1981-01-07";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -2066,7 +2066,7 @@ class RealSeeder extends Seeder
         $role->name = "UMAN ARIGONG";
         $role->nickname = "UMAN";
         $role->address = "WONOSARI RT 02/ RW 01";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1970-05-18";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -2082,7 +2082,7 @@ class RealSeeder extends Seeder
         $role->name = "UMRIYAH";
         $role->nickname = "UMRIYAH";
         $role->address = "WONOCOLO RT 04/ RW 02, TAMAN";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1973-04-26";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -2096,7 +2096,7 @@ class RealSeeder extends Seeder
         $role->name = "WAHYU SETIAWAN";
         $role->nickname = "WA-ONE";
         $role->address = "WONOCOLO SELATAN RT 16/ RW 06, TAMAN";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1976-04-23";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -2113,7 +2113,7 @@ class RealSeeder extends Seeder
         $role->name = "WAKHIDI RIYONO";
         $role->nickname = "DIDIK TEMPE";
         $role->address = "DK. CANGKRING KULON RT 01/ RW 08, TENGENGWETAN - SIWALAN";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1999-04-24";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -2126,7 +2126,7 @@ class RealSeeder extends Seeder
         $role->name = "WAKIDI";
         $role->nickname = "WAKIDI";
         $role->address = "MENYANGGONG RT 26/ RW 11, KLETEK";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1964-12-30";
         $role->type = "Eceran";
         $role->tb = 1550000;
@@ -2140,7 +2140,7 @@ class RealSeeder extends Seeder
         $role->name = "WALUYO SUKARSI";
         $role->nickname = "WALUYO BOHAR";
         $role->address = "BOHAR UTARA RT 03/ RW 02, TAMAN";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->ongkir = 100000;
         $role->birthdate = "1970-06-30";
         $role->type = "Kiriman";
@@ -2154,7 +2154,7 @@ class RealSeeder extends Seeder
         $role->name = "WARDOYO";
         $role->nickname = "WANDA";
         $role->address = "TAMAN RT 17/ RW 03, TAMAN";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1971-03-10";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -2171,7 +2171,7 @@ class RealSeeder extends Seeder
         $role->name = "WASJURI";
         $role->nickname = "BAJURI";
         $role->address = "DUKUH BANTARAN RT 15/ RW 04, KETANGGAN";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1981-07-09";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -2185,7 +2185,7 @@ class RealSeeder extends Seeder
         $role->name = "WIYONO";
         $role->nickname = "WIYONO BOHAR";
         $role->address = "JL. BAGUS SANTRI RT 04/ RW 02, BOHAR-TAMAN";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->ongkir = 100000;
         $role->birthdate = "1977-06-25";
         $role->type = "Kiriman";
@@ -2202,7 +2202,7 @@ class RealSeeder extends Seeder
         $role->name = "WONO SUTRIMO";
         $role->nickname = "TRIMO";
         $role->address = "DSN. SAMBISARI KAV. SELATAN BLOK B/20 RT 38/ RW 07, TAMAN";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1964-05-05";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -2215,7 +2215,7 @@ class RealSeeder extends Seeder
         $role->name = "YUDO ADI NUGROHO";
         $role->nickname = "YUDHO";
         $role->address = "DUSUN KRAJAN RT 01/ RW 01, TERBIS";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1979-07-02";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -2230,7 +2230,7 @@ class RealSeeder extends Seeder
         $role->name = "IMAM ARIFIN";
         $role->nickname = "IMAM ARIFIN";
         $role->address = "JL. TERATAI RT 01/ RW 01, KETAJEN - GEDANGAN ";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1991-01-21";
         $role->type = "Eceran";
         $role->tb = 140000;
@@ -2245,7 +2245,7 @@ class RealSeeder extends Seeder
         $role->name = "MOH. SAIKHU";
         $role->nickname = "SAIKU";
         $role->address = "JL. SAWUNGGALING 2 RT 01/ RW 01, JEMUNDO- TAMAN";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1975-10-12";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -2260,7 +2260,7 @@ class RealSeeder extends Seeder
         $role->name = "AGUNG PRASETIYO";
         $role->nickname = "AGUNG ALOHA";
         $role->address = "KUTEI 2/ 23-A RT 09/ RW 06, DARMO";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1980-01-22";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -2275,7 +2275,7 @@ class RealSeeder extends Seeder
         $role->name = "ALI JAHRI";
         $role->nickname = "P. ALI TENGGILIS";
         $role->address = "TENGGILIS LAMA III/ 39, TENGGILIS MEJOYO, SURABAYA";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->ongkir = 100000;
         $role->birthdate = "1970-04-30";
         $role->type = "Eceran";
@@ -2289,7 +2289,7 @@ class RealSeeder extends Seeder
         $role->name = "IMAM KHANAFI";
         $role->nickname = "HANAFI";
         $role->address = "TAMAN UTARA RT.007/RW.002, TAMAN";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1985-01-09";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -2301,7 +2301,7 @@ class RealSeeder extends Seeder
         $role->name = "HUDIN";
         $role->nickname = "HUDIN";
         $role->address = "DSN.SAMBIJAJAR RT.001/RW.022 DRENGES, KERTOSONO";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1969-12-16";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -2315,7 +2315,7 @@ class RealSeeder extends Seeder
         $role->name = "NUR SAIT";
         $role->nickname = "NUR SAIT";
         $role->address = "DK.LOROG RT.001/ RW.003 SIWALAN, PEKALONGAN";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "2001-03-21";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -2330,7 +2330,7 @@ class RealSeeder extends Seeder
         $role->name = "AKEMAT SUMANDI";
         $role->nickname = "AKEMAT SUMANDI";
         $role->address = "DUKUH MENANGGAL 6/61 RT.001 RW.002 GAYUNGAN";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "";
         $role->type = "Eceran";
         $role->tb = 0;
@@ -2346,7 +2346,7 @@ class RealSeeder extends Seeder
         $role->name = "ABD AZIZ";
         $role->nickname = "AZIZ";
         $role->address = "DSN SUDIMORO UTARA RT.002/RW.001 TULANGAN";
-        $role->hp = "08123123123";
+        $role->phone = "08123123123";
         $role->birthdate = "1968-09-12";
         $role->type = "Eceran";
         $role->tb = 0;
