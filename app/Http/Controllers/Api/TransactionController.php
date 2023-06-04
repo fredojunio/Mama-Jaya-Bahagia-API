@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\RitResource;
 use App\Http\Resources\SuccessResource;
+use App\Http\Resources\TransactionCompleteResource;
 use App\Http\Resources\TransactionResource;
 use App\Mail\NotificationMail;
 use App\Models\Customer;
@@ -82,7 +83,7 @@ class TransactionController extends Controller
             'api_code' => 200,
             'api_status' => true,
             'api_message' => 'Sukses',
-            'api_results' => TransactionResource::collection($transactions)
+            'api_results' => TransactionCompleteResource::collection($transactions)
         ];
         return SuccessResource::make($return);
     }
