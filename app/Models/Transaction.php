@@ -25,6 +25,7 @@ class Transaction extends Model
         "customer_id",
         "trip_id",
         "type",
+        "created_at"
     ];
     public function customer()
     {

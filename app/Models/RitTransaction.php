@@ -19,6 +19,7 @@ class RitTransaction extends Model
         "actual_tonnage",
         "rit_id",
         "transaction_id",
+        "created_at"
     ];
     public function rit()
     {

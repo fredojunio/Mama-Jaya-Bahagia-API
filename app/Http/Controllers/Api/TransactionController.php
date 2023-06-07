@@ -128,7 +128,8 @@ class TransactionController extends Controller
             "owner_approved" => $trip ? 0 : 1,
             "customer_id" => $request->customer_id,
             "trip_id" => $trip ? $trip->id : null,
-            "type" => $customer->type
+            "type" => $customer->type,
+            "created_at" => $customer->type == "Pabrik" ? $request->date : Carbon::now()
         ]);
         $remainingSacks = $transaction->sack;
         if (!$trip) {
@@ -159,7 +160,8 @@ class TransactionController extends Controller
                 "tonnage_left" => $rite->tonnage_left - ($rit["tonnage"] * $rit["masak"]),
                 "actual_tonnage" => $rit["real_tonnage"],
                 "rit_id" => $rit["item"]["id"],
-                "transaction_id" => $transaction->id
+                "transaction_id" => $transaction->id,
+                "created_at" => $customer->type == "Pabrik" ? $request->date : Carbon::now()
             ]);
             $rite->update([
                 'tonnage_left' => $rit_transaction->tonnage_left,
