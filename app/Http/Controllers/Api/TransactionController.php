@@ -78,6 +78,7 @@ class TransactionController extends Controller
         $transactions = Transaction::where("created_at", ">=", Carbon::createFromFormat('D M d Y H:i:s e+', $request->start_date)->toDateTimeString())
             ->where("created_at", "<=", Carbon::createFromFormat('D M d Y H:i:s e+', $request->end_date)->toDateTimeString())
             ->where("owner_approved", 1)
+            ->whereNot("type", "Cas")
             ->get();
         $return = [
             'api_code' => 200,
