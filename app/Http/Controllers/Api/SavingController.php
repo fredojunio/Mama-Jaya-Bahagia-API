@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\SavingResource;
 use App\Http\Resources\SuccessResource;
 use App\Models\Saving;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class SavingController extends Controller
@@ -16,6 +17,21 @@ class SavingController extends Controller
     public function index()
     {
         $savings = Saving::all();
+        $return = [
+            'api_code' => 200,
+            'api_status' => true,
+            'api_message' => 'Sukses',
+            'api_results' => SavingResource::collection($savings)
+        ];
+        return SuccessResource::make($return);
+    }
+
+    public function get_savings_incomes(Request $request)
+    {
+        $savings = Saving::where("created_at", ">=", Carbon::createFromFormat('D M d Y H:i:s e+', $request->start_date)->toDateTimeString())
+            ->where("created_at", "<=", Carbon::createFromFormat('D M d Y H:i:s e+', $request->end_date)->toDateTimeString())
+            ->where("type", "Pemasukan")
+            ->get();
         $return = [
             'api_code' => 200,
             'api_status' => true,

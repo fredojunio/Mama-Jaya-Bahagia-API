@@ -75,6 +75,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('/transaction/{transaction}/approve_nota', [TransactionController::class, 'approve_nota']);
     Route::post('/transaction/{transaction}/customer', [TransactionController::class, 'customer']);
     Route::post('/transaction/{rit}/branch', [TransactionController::class, 'branch']);
+    Route::post('/saving/get_savings_incomes', [SavingController::class, 'get_savings_incomes']);
     Route::apiResource('saving', SavingController::class);
     Route::get('/report/create_daily_report', [ReportController::class, 'create_daily_report']);
     Route::get('/report/get_today_report', [ReportController::class, 'get_today_report']);
