@@ -20,6 +20,7 @@ return new class extends Migration
             $table->integer("sepuluhribu")->nullable();
             $table->integer("duapuluhribu")->nullable();
             $table->integer("fee");
+            $table->integer("total");
             $table->timestamps();
         });
     }

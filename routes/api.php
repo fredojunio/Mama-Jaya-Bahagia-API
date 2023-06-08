@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\Auth\LoginController;
+use App\Http\Controllers\Api\CasController;
 use App\Http\Controllers\Api\CasDepositController;
 use App\Http\Controllers\Api\CashbackController;
 use App\Http\Controllers\Api\CustomerController;
@@ -86,4 +87,6 @@ Route::group(['prefix' => 'admin'], function () {
     Route::apiResource('expense', ExpenseController::class);
     Route::apiResource('report_rit', ReportRitController::class);
     Route::apiResource('cas_deposit', CasDepositController::class);
+    Route::post('/cas/get_cas', [CasController::class, 'get_cas']);
+    Route::apiResource('cas', CasController::class);
 });

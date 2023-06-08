@@ -14,6 +14,17 @@ class CasResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        return [
+            "id" => $this->id,
+            "created_at" => $this->created_at,
+            "koin" => $this->koin,
+            "seribu" => $this->seribu,
+            "duaribu" => $this->duaribu,
+            "limaribu" => $this->limaribu,
+            "sepuluhribu" => $this->sepuluhribu,
+            "duapuluhribu" => $this->duapuluhribu,
+            "fee" => $this->fee,
+            "total" => $this->total,
+        ];
     }
 }

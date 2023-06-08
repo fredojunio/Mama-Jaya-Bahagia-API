@@ -15,6 +15,7 @@ class Cas extends Model
         "limaribu",
         "sepuluhribu",
         "duapuluhribu",
-        "fee"
+        "fee",
+        "total"
     ];
 }
