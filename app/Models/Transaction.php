@@ -22,7 +22,7 @@ class Transaction extends Model
         "settled_date",
         "owner_approved",
         "finance_approved",
-        "customer_id",
+        "customer_id", "cas_id",
         "trip_id",
         "type",
         "created_at"
@@ -30,6 +30,10 @@ class Transaction extends Model
     public function customer()
     {
         return $this->belongsTo(Customer::class, 'customer_id', 'id');
+    }
+    public function cas()
+    {
+        return $this->belongsTo(Cas::class, 'cas_id', 'id');
     }
     public function trip()
     {

@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class TransactionCompleteResource extends JsonResource
+class CasDepositResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,12 +17,12 @@ class TransactionCompleteResource extends JsonResource
         return [
             "id" => $this->id,
             "created_at" => $this->created_at,
-            "daily_id" => $this->daily_id,
-            "total_price" => $this->total_price,
-            "finance_approved" => $this->finance_approved,
-            "customer" => $this->customer,
-            "payments" => $this->payments,
-            "cas" => $this->cas,
+            "koin" => $this->koin,
+            "seribu" => $this->seribu,
+            "duaribu" => $this->duaribu,
+            "limaribu" => $this->limaribu,
+            "sepuluhribu" => $this->sepuluhribu,
+            "duapuluhribu" => $this->duapuluhribu,
         ];
     }
 }
