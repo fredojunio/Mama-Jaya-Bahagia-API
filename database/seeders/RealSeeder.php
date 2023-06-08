@@ -9,6 +9,7 @@ use App\Models\Vehicle;
 use Carbon\Carbon;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class RealSeeder extends Seeder
@@ -18,6 +19,15 @@ class RealSeeder extends Seeder
      */
     public function run(): void
     {
+        DB::table('cas_deposits')->insert([
+            "koin" => 0,
+            "seribu" => 0,
+            "duaribu" => 0,
+            "limaribu" => 0,
+            "sepuluhribu" => 0,
+            "duapuluhribu" => 0,
+        ]);
+
         $user = new User();
         $user->name = "Angelia";
         $user->email = "angeliaveronikaa@gmail.com";
