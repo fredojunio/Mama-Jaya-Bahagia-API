@@ -41,6 +41,21 @@ class TransactionController extends Controller
         return SuccessResource::make($return);
     }
 
+    public function get_owner_transactions()
+    {
+        $transactions = Transaction::where('owner_approved', 0)
+            ->where('type', 'Owner')
+            ->get();
+
+        $return = [
+            'api_code' => 200,
+            'api_status' => true,
+            'api_message' => 'Sukses',
+            'api_results' => TransactionResource::collection($transactions)
+        ];
+        return SuccessResource::make($return);
+    }
+
     public function get_owner_nota()
     {
         $transactions = Transaction::where('owner_approved', 0)
