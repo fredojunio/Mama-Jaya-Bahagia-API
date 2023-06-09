@@ -23,6 +23,7 @@ class TransactionCompleteResource extends JsonResource
             "customer" => $this->customer,
             "payments" => $this->payments,
             "cas" => $this->cas,
+            "type" => $this->type,
         ];
     }
 }
