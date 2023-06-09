@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\SuccessResource;
+use App\Http\Resources\TripBranchResource;
 use App\Http\Resources\TripResource;
 use App\Models\Trip;
 use Illuminate\Http\Request;
@@ -58,6 +59,15 @@ class TripController extends Controller
             'api_status' => true,
             'api_message' => 'Sukses',
             'api_results' => TripResource::make($trip)
+        ];
+        return SuccessResource::make($return);
+    }
+    public function surat_jalan(Trip $trip){
+        $return = [
+            'api_code' => 200,
+            'api_status' => true,
+            'api_message' => 'Sukses',
+            'api_results' => TripBranchResource::make($trip)
         ];
         return SuccessResource::make($return);
     }

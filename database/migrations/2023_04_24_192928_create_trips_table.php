@@ -20,6 +20,7 @@ return new class extends Migration
             $table->integer("toll_used")->nullable();
             $table->double("branch_to_main_tonnage")->nullable();
             $table->integer("finance_approved")->default(0)->nullable();
+            $table->string("plate_number")->nullable();
             $table->timestamps();
         });
     }

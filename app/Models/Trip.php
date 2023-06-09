@@ -17,9 +17,14 @@ class Trip extends Model
         "branch_to_main_tonnage",
         "finance_approved",
         "vehicle_id",
+        "plate_number"
     ];
     public function vehicle()
     {
         return $this->belongsTo(Vehicle::class, 'vehicle_id', 'id');
+    }
+    public function branches()
+    {
+        return $this->hasMany(RitBranch::class, 'trip_id', 'id');
     }
 }

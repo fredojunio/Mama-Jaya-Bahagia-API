@@ -367,7 +367,6 @@ class RitController extends Controller
 
     public function transfer_to_branch(Request $request)
     {
-        //TODO - ini mungkin perlu di pastiin langsung di approve finance atau ga
         $trip = Trip::create([
             "allowance" => $request->allowance ?? 0,
             "toll" => $request->toll ?? 0,
@@ -375,6 +374,7 @@ class RitController extends Controller
             "note" => "Pengiriman ke " . $request->branch_name,
             "finance_approved" => 1,
             "vehicle_id" => $request->vehicle_id,
+            "plate_number" => $request->plate_number
         ]);
         $vehicle = Vehicle::find($request->vehicle_id);
         $vehicle->update([
