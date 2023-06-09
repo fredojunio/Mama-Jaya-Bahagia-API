@@ -3,12 +3,17 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\CustomerLeanResource;
 use App\Http\Resources\CustomerResource;
+use App\Http\Resources\SavingResource;
 use App\Http\Resources\SuccessResource;
+use App\Http\Resources\TransactionCompleteResource;
+use App\Http\Resources\TransactionResource;
 use App\Models\Cashback;
 use App\Models\Customer;
 use App\Models\Expense;
 use App\Models\Saving;
+use App\Models\Transaction;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -74,7 +79,37 @@ class CustomerController extends Controller
             'api_code' => 200,
             'api_status' => true,
             'api_message' => 'Sukses',
-            'api_results' => CustomerResource::make($customer)
+            'api_results' => CustomerLeanResource::make($customer)
+        ];
+        return SuccessResource::make($return);
+    }
+
+    public function get_customer_transactions(Request $request, Customer $customer)
+    {
+        $transactions = Transaction::where("created_at", ">=", Carbon::createFromFormat('D M d Y H:i:s e+', $request->start_date)->toDateTimeString())
+            ->where("created_at", "<=", Carbon::createFromFormat('D M d Y H:i:s e+', $request->end_date)->toDateTimeString())
+            ->where("customer_id", $customer->id)
+            ->get();
+        $return = [
+            'api_code' => 200,
+            'api_status' => true,
+            'api_message' => 'Sukses',
+            'api_results' => TransactionResource::collection($transactions)
+        ];
+        return SuccessResource::make($return);
+    }
+
+    public function get_customer_savings(Request $request, Customer $customer)
+    {
+        $savings = Saving::where("created_at", ">=", Carbon::createFromFormat('D M d Y H:i:s e+', $request->start_date)->toDateTimeString())
+            ->where("created_at", "<=", Carbon::createFromFormat('D M d Y H:i:s e+', $request->end_date)->toDateTimeString())
+            ->where("customer_id", $customer->id)
+            ->get();
+        $return = [
+            'api_code' => 200,
+            'api_status' => true,
+            'api_message' => 'Sukses',
+            'api_results' => SavingResource::collection($savings)
         ];
         return SuccessResource::make($return);
     }

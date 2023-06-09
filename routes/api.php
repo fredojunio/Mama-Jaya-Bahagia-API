@@ -53,6 +53,8 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/customer/get_lean_data', [CustomerController::class, 'get_lean_data']);
     Route::apiResource('customer', CustomerController::class);
     Route::post('/customer/search', [CustomerController::class, 'search']);
+    Route::post('/customer/{customer}/get_customer_transactions', [CustomerController::class, 'get_customer_transactions']);
+    Route::post('/customer/{customer}/get_customer_savings', [CustomerController::class, 'get_customer_savings']);
     Route::post('/customer/{customer}/deposit_savings', [CustomerController::class, 'deposit_savings']);
     Route::post('/customer/{customer}/withdraw_savings', [CustomerController::class, 'withdraw_savings']);
     Route::post('/customer/{customer}/approve_cashback', [CustomerController::class, 'approve_cashback']);
