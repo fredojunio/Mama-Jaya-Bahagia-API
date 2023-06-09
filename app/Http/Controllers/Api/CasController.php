@@ -60,7 +60,7 @@ class CasController extends Controller
         ]);
         $transaction = Transaction::create([
             "daily_id" => Transaction::whereDate('created_at', now()->toDateString())->get()->count() + 1,
-            "total_price" => $request->total + $request->fee,
+            "total_price" => $request->fee,
             "owner_approved" => 1,
             "type" => "Cas",
             "cas_id" => $cas->id

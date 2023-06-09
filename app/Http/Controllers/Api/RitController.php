@@ -401,6 +401,7 @@ class RitController extends Controller
         foreach ($request->rits as $key => $rit) {
             RitBranch::create([
                 "name" => $request->branch_name,
+                "address" => $request->branch_address,
                 "sent_tonnage" => $rit["amount"],
                 "delivery_date" => Carbon::now(),
                 "rit_id" => $rit["id"],

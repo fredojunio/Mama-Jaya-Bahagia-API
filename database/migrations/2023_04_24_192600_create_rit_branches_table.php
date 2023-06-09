@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('rit_branches', function (Blueprint $table) {
             $table->id();
             $table->string("name");
+            $table->string("address")->nullable();
             $table->double("sent_tonnage");
             $table->integer("income")->nullable();
             $table->date("delivery_date");

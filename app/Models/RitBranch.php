@@ -10,6 +10,7 @@ class RitBranch extends Model
     use HasFactory;
     protected $fillable = [
         "name",
+        "address",
         "sent_tonnage",
         "income",
         "delivery_date",
