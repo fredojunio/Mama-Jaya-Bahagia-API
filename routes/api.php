@@ -50,6 +50,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('/rit/get_empty_stock', [RitController::class, 'get_empty_stock']);
     Route::apiResource('item', ItemController::class);
     Route::apiResource('cashback', CashbackController::class);
+    Route::get('/customer/get_lean_data', [CustomerController::class, 'get_lean_data']);
     Route::apiResource('customer', CustomerController::class);
     Route::post('/customer/search', [CustomerController::class, 'search']);
     Route::post('/customer/{customer}/deposit_savings', [CustomerController::class, 'deposit_savings']);

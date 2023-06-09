@@ -29,6 +29,18 @@ class CustomerController extends Controller
         return SuccessResource::make($return);
     }
 
+    public function get_lean_data()
+    {
+        $customers = Customer::all();
+        $return = [
+            'api_code' => 200,
+            'api_status' => true,
+            'api_message' => 'Sukses',
+            'api_results' => $customers
+        ];
+        return SuccessResource::make($return);
+    }
+
     /**
      * Store a newly created resource in storage.
      */
