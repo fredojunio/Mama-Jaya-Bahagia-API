@@ -329,6 +329,7 @@ class TransactionController extends Controller
             Expense::create([
                 "amount" => $trip->allowance + $trip->toll + $trip->gas,
                 "note" => "Penjualan Ke " . $customer->name,
+                "time" => Carbon::now(),
                 "type" => "Kendaraan",
                 "trip_id" => $trip->id
             ]);

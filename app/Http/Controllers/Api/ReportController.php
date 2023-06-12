@@ -89,7 +89,7 @@ class ReportController extends Controller
         $operational_expense = Expense::whereDate('time', Carbon::today())
             ->where('type', "Operasional")
             ->sum('amount');
-        $vehicle_expense = Expense::whereDate('created_at', Carbon::today())
+        $vehicle_expense = Expense::whereDate('time', Carbon::today())
             ->where('type', "Kendaraan")
             ->sum('amount');
         $report = Report::create([
@@ -211,7 +211,7 @@ class ReportController extends Controller
         $operational_expense = Expense::whereDate('time', Carbon::today())
             ->where('type', "Operasional")
             ->sum('amount');
-        $vehicle_expense = Expense::whereDate('created_at', Carbon::today())
+        $vehicle_expense = Expense::whereDate('time', Carbon::today())
             ->where('type', "Kendaraan")
             ->sum('amount');
         $report = new Report;

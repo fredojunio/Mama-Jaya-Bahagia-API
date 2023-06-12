@@ -276,6 +276,7 @@ class RitController extends Controller
         Expense::create([
             "amount" => $trip->allowance + $trip->toll + $trip->gas,
             "note" => "Pengambilan Rit " . $rit->item->code,
+            "time" => Carbon::now(),
             "type" => "Kendaraan",
             "trip_id" => $trip->id
         ]);
@@ -394,6 +395,7 @@ class RitController extends Controller
         Expense::create([
             "amount" => $request->allowance + $request->toll + $request->gas,
             "note" => "Pengiriman ke " . $request->branch_name,
+            "time" => Carbon::now(),
             "type" => "Kendaraan",
             "trip_id" => $trip->id
         ]);
@@ -455,6 +457,7 @@ class RitController extends Controller
         Expense::create([
             "amount" => $request->allowance + $request->toll + $request->gas,
             "note" => "Retur Rit " . $rit->item->code,
+            "time" => Carbon::now(),
             "type" => "Kendaraan",
             "trip_id" => $trip->id
         ]);
@@ -506,6 +509,7 @@ class RitController extends Controller
         Expense::create([
             "amount" => 0,
             "note" => "Pengiriman ke Pusat dari Cabang",
+            "time" => Carbon::now(),
             "type" => "Kendaraan",
             "trip_id" => $trip->id
         ]);
