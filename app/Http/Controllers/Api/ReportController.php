@@ -286,7 +286,7 @@ class ReportController extends Controller
             'api_code' => 200,
             'api_status' => true,
             'api_message' => 'Sukses',
-            'api_results' => [ReportResource::make($report), $report_rits, $report_transactions]
+            'api_results' => [ReportResource::make($report), $report_rits, $report_transactions, $vehicle_expense, $expense]
         ];
         return SuccessResource::make($return);
     }
