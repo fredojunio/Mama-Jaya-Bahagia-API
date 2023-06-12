@@ -89,6 +89,9 @@ class ReportController extends Controller
         $operational_expense = Expense::whereDate('time', Carbon::today())
             ->where('type', "Operasional")
             ->sum('amount');
+        $vehicle_expense = Expense::whereDate('time', Carbon::today())
+            ->where('type', "Kendaraan")
+            ->sum('amount');
         $report = Report::create([
             "money" => $income - $expense,
             "income" => $allincome,
@@ -102,7 +105,7 @@ class ReportController extends Controller
             "tw_expense" => $tw_expense,
             "thr_expense" => $thr_expense,
             "salary_expense" => $salary_expense,
-            "operational_expense" => $operational_expense,
+            "operational_expense" => $operational_expense + $vehicle_expense,
         ]);
         $rits = Rit::where("tonnage_left", ">", 0)->orWhere("sold_date", Carbon::today())->get();
         foreach ($rits as $key => $rit) {
@@ -208,6 +211,9 @@ class ReportController extends Controller
         $operational_expense = Expense::whereDate('time', Carbon::today())
             ->where('type', "Operasional")
             ->sum('amount');
+        $vehicle_expense = Expense::whereDate('time', Carbon::today())
+            ->where('type', "Kendaraan")
+            ->sum('amount');
         $report = new Report;
         $report->money = $income - $expense;
         $report->income = $allincome;
@@ -221,7 +227,7 @@ class ReportController extends Controller
         $report->tw_expense = $tw_expense;
         $report->thr_expense = $thr_expense;
         $report->salary_expense = $salary_expense;
-        $report->operational_expense = $operational_expense;
+        $report->operational_expense = $operational_expense + $vehicle_expense;
 
         $rits = Rit::where("tonnage_left", ">", 0)->orWhere("sold_date", Carbon::today())->get();
         $report_rits = [];
