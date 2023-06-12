@@ -219,6 +219,7 @@ class CustomerController extends Controller
             "amount" => $request->tw + $request->tb + $request->thr,
             "note" => "Penarikan " . $type,
             "name" => $customer->name,
+            "time" => Carbon::now(),
             "type" => $type,
         ]);
         $customer->update([
