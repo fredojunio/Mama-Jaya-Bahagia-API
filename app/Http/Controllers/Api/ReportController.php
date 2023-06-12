@@ -89,7 +89,7 @@ class ReportController extends Controller
         $operational_expense = Expense::whereDate('time', Carbon::today())
             ->where('type', "Operasional")
             ->sum('amount');
-        $vehicle_expense = Expense::whereDate('time', Carbon::today())
+        $vehicle_expense = Expense::whereDate('created_at', Carbon::today())
             ->where('type', "Kendaraan")
             ->sum('amount');
         $report = Report::create([
@@ -211,7 +211,7 @@ class ReportController extends Controller
         $operational_expense = Expense::whereDate('time', Carbon::today())
             ->where('type', "Operasional")
             ->sum('amount');
-        $vehicle_expense = Expense::whereDate('time', Carbon::today())
+        $vehicle_expense = Expense::whereDate('created_at', Carbon::today())
             ->where('type', "Kendaraan")
             ->sum('amount');
         $report = new Report;
@@ -286,7 +286,7 @@ class ReportController extends Controller
             'api_code' => 200,
             'api_status' => true,
             'api_message' => 'Sukses',
-            'api_results' => [ReportResource::make($report), $report_rits, $report_transactions, $vehicle_expense, $expense]
+            'api_results' => [ReportResource::make($report), $report_rits, $report_transactions]
         ];
         return SuccessResource::make($return);
     }
