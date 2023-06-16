@@ -14,6 +14,7 @@ class Transaction extends Model
         "tw",
         "thr",
         "sack",
+        "sack_free",
         "sack_price",
         "item_price",
         "discount",

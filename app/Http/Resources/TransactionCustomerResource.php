@@ -22,6 +22,7 @@ class TransactionCustomerResource extends JsonResource
             "tw" => $this->tw,
             "thr" => $this->thr,
             "sack" => $this->sack,
+            "sack_free" => $this->sack_free,
             "sack_price" => $this->sack_price,
             "item_price" => $this->item_price,
             "discount" => $this->discount,

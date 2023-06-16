@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer("tw")->default(0)->nullable();
             $table->integer("thr")->default(0)->nullable();
             $table->integer("sack")->default(0)->nullable();
+            $table->integer("sack_free")->default(0)->nullable();
             $table->integer("sack_price")->default(0)->nullable();
             $table->integer("item_price")->nullable();
             $table->integer("discount")->default(0)->nullable();

@@ -135,7 +135,8 @@ class TransactionController extends Controller
             "tw" => $request->tw,
             "thr" => $request->thr,
             "sack" => $request->sack,
-            "sack_price" => $request->sack_fee ? $request->sack * 1000 : 0,
+            "sack_free" => $request->sack_free,
+            "sack_price" => $request->sack * 1000,
             "item_price" => $request->item_prices,
             "discount" => $request->discount ?? 0,
             "ongkir" => $request->ongkir,
@@ -146,7 +147,7 @@ class TransactionController extends Controller
             "type" => $customer->type,
             "created_at" => $customer->type == "Pabrik" ? $request->date : Carbon::now()
         ]);
-        $remainingSacks = $transaction->sack;
+        $remainingSacks = $transaction->sack + $transaction->sack_free;
         if (!$trip) {
             while ($remainingSacks > 0) {
                 $sack = Sack::where('amount', '>', 0)
@@ -339,7 +340,7 @@ class TransactionController extends Controller
             $users = User::where("role_id", 1)->get();
             $emailArray = $users->pluck('email')->toArray();
             Mail::to($emailArray)->send(new NotificationMail("Input Pemasukan", "Ada penjualan yang sudah dikirim namun pemasukan yang didapat belum dicatat."));
-            $remainingSacks = $transaction->sack;
+            $remainingSacks = $transaction->sack + $transaction->sack_free;
             while ($remainingSacks > 0) {
                 $sack = Sack::where('amount', '>', 0)
                     ->orderBy('created_at', 'asc')
