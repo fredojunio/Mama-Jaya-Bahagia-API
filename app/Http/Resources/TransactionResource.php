@@ -23,6 +23,7 @@ class TransactionResource extends JsonResource
             "thr" => $this->thr,
             "sack" => $this->sack,
             "sack_free" => $this->sack_free,
+            "other" => $this->other,
             "sack_price" => $this->sack_price,
             "item_price" => $this->item_price,
             "discount" => $this->discount,

@@ -137,6 +137,7 @@ class TransactionController extends Controller
             "sack" => $request->sack,
             "sack_free" => $request->sack_free,
             "sack_price" => $request->sack * 1000,
+            "other" => $request->other,
             "item_price" => $request->item_prices,
             "discount" => $request->discount ?? 0,
             "ongkir" => $request->ongkir,

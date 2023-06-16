@@ -16,6 +16,7 @@ class Transaction extends Model
         "sack",
         "sack_free",
         "sack_price",
+        "other",
         "item_price",
         "discount",
         "ongkir",
