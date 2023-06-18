@@ -161,7 +161,7 @@ class TransactionController extends Controller
             "customer_id" => $request->customer_id,
             "trip_id" => $trip ? $trip->id : null,
             "type" => $customer->type,
-            "created_at" => $customer->type == "Pabrik" ? $request->date : Carbon::now()
+            "created_at" => $customer->type != "Kiriman" ? $request->date : Carbon::now()
         ]);
         $remainingSacks = $transaction->sack + $transaction->sack_free;
         if (!$trip) {
@@ -193,7 +193,7 @@ class TransactionController extends Controller
                 "actual_tonnage" => $rit["real_tonnage"],
                 "rit_id" => $rit["item"]["id"],
                 "transaction_id" => $transaction->id,
-                "created_at" => $customer->type == "Pabrik" ? $request->date : Carbon::now()
+                "created_at" => $customer->type != "Kiriman" ? $request->date : Carbon::now()
             ]);
             $rite->update([
                 'tonnage_left' => $rit_transaction->tonnage_left,
@@ -277,7 +277,7 @@ class TransactionController extends Controller
             "total_price" => $request->new_transaction["total_price"],
             "revision_requested" => 0,
             "revision_allowed" => 0,
-            "created_at" => $customer->type == "Pabrik" ? $request->new_transaction["date"] : Carbon::now()
+            "created_at" => $customer->type != "Kiriman" ? $request->new_transaction["date"] : Carbon::now()
         ]);
         $return = [
             'api_code' => 200,
