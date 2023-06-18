@@ -89,7 +89,9 @@ class RitController extends Controller
     }
     public function get_owner_stock()
     {
-        $rits = Rit::whereNull("sold_date")->get();
+        $rits = Rit::whereNull("sold_date")
+            ->where("tonnage_left", ">", 0)
+            ->get();
 
         $return = [
             'api_code' => 200,
