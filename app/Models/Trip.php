@@ -27,4 +27,8 @@ class Trip extends Model
     {
         return $this->hasMany(RitBranch::class, 'trip_id', 'id');
     }
+    public function expense()
+    {
+        return $this->hasOne(Expense::class, 'trip_id', 'id');
+    }
 }

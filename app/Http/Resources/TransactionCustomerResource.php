@@ -32,6 +32,8 @@ class TransactionCustomerResource extends JsonResource
             "settled_date" => $this->settled_date,
             "owner_approved" => $this->owner_approved,
             "finance_approved" => $this->finance_approved,
+            "revision_requested" => $this->revision_requested,
+            "revision_allowed" => $this->revision_allowed,
             "customer" => $this->customer,
             "cas" => $this->cas,
             "trip" => $this->trip,

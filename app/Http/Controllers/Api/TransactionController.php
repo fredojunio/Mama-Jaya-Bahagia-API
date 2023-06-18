@@ -71,6 +71,21 @@ class TransactionController extends Controller
         return SuccessResource::make($return);
     }
 
+    public function get_requested_revisions()
+    {
+        $transactions = Transaction::where('revision_requested', 1)
+            ->where('revision_allowed', 0)
+            ->get();
+
+        $return = [
+            'api_code' => 200,
+            'api_status' => true,
+            'api_message' => 'Sukses',
+            'api_results' => TransactionResource::collection($transactions)
+        ];
+        return SuccessResource::make($return);
+    }
+
     public function get_nota(Request $request)
     {
         $transactions = Transaction::where("created_at", ">=", Carbon::createFromFormat('D M d Y H:i:s e+', $request->start_date)->toDateTimeString())
@@ -110,9 +125,9 @@ class TransactionController extends Controller
     {
         //NOTE - ini itu kalo misal dia nembak APInya lewat revisian ada variable old_id, yang buat ngeindikasi bahwa sudah di revisi
         if ($request->old_id) {
-            $transaction = Transaction::find($request->old_id);
-            $transaction->owner_approved = 3;
-            $transaction->save();
+            $old_transaction = Transaction::find($request->old_id);
+            $old_transaction->owner_approved = 3;
+            $old_transaction->save();
         }
         $customer = Customer::find($request->customer_id);
         $trip = null;
@@ -217,22 +232,52 @@ class TransactionController extends Controller
      */
     public function update(Request $request, Transaction $transaction)
     {
+        $customer = Customer::find($request->new_transaction["customer_id"]);
+        if ($transaction->trip_id && $customer->type == "Kiriman") {
+            // Sebelumnya kiriman, sekarang tetep kiriman
+            $trip = Trip::find($transaction->trip_id);
+            $vehicle = Vehicle::find($trip->vehicle_id);
+            $vehicle->update([
+                "toll" => $vehicle->toll - $trip->toll + $request->new_transaction["toll"]
+            ]);
+            $trip->update([
+                "allowance" => $request->allowance,
+                "toll" => $request->toll,
+                "gas" => $request->gas,
+            ]);
+            if ($trip->finance_approved == 1) {
+                $trip->expense->update([
+                    "amount" => $trip->allowance + $trip->toll + $trip->gas,
+                ]);
+            }
+        } else if ($transaction->trip_id && $customer->type != "Kiriman") {
+            // Sebelumnya kiriman, sekarang BUKAN kiriman
+            $trip = Trip::find($transaction->trip_id);
+            $vehicle = Vehicle::find($trip->vehicle_id);
+            $transaction->update([
+                "trip_id" => null,
+            ]);
+            $vehicle->update([
+                "toll" => $vehicle->toll - $trip->toll
+            ]);
+            if ($trip->finance_approved == 1) {
+                $trip->expense->delete();
+            }
+            $trip->delete();
+        }
         $transaction->update([
-            "daily_id" => $request->daily_id,
-            "tb" => $request->tb,
-            "tw" => $request->tw,
-            "thr" => $request->thr,
-            "sack" => $request->sack,
-            "sack_price" => $request->sack_price,
-            "item_price" => $request->item_price,
-            "discount" => $request->discount,
-            "ongkir" => $request->ongkir,
-            "total_price" => $request->total_price,
-            "settled_date" => $request->settled_date,
-            "owner_approved" => $request->owner_approved,
-            "finance_approved" => $request->finance_approved,
-            "customer_id" => $request->customer_id,
-            "trip_id" => $request->trip_id,
+            "tb" => $request->new_transaction["tb"],
+            "tw" => $request->new_transaction["tw"],
+            "thr" => $request->new_transaction["thr"],
+            "sack" => $request->new_transaction["sack"],
+            "sack_price" => $request->new_transaction["sack"] * 1000,
+            "item_price" => $request->new_transaction["item_prices"],
+            "discount" => $request->new_transaction["discount"],
+            "ongkir" => $request->new_transaction["ongkir"],
+            "total_price" => $request->new_transaction["total_price"],
+            "revision_requested" => 0,
+            "revision_allowed" => 0,
+            "created_at" => $customer->type == "Pabrik" ? $request->new_transaction["date"] : Carbon::now()
         ]);
         $return = [
             'api_code' => 200,
@@ -254,7 +299,7 @@ class TransactionController extends Controller
             'api_message' => 'Sukses Terhapus.',
             'api_results' => TransactionResource::make($transaction)
         ];
-        $transaction->delete();
+        // $transaction->delete();
         return SuccessResource::make($return);
     }
 
@@ -468,6 +513,55 @@ class TransactionController extends Controller
             'api_status' => true,
             'api_message' => 'Sukses',
             'api_results' => $totalAmount
+        ];
+        return SuccessResource::make($return);
+    }
+
+    public function request_revision(Transaction $transaction)
+    {
+        $transaction->update([
+            "revision_requested" => 1
+        ]);
+
+        $return = [
+            'api_code' => 200,
+            'api_status' => true,
+            'api_message' => 'Sukses',
+            'api_results' => TransactionResource::make($transaction)
+        ];
+        return SuccessResource::make($return);
+    }
+
+    public function approve_revision(Transaction $transaction)
+    {
+        $transaction->update([
+            "revision_allowed" => 1
+        ]);
+        if ($transaction->owner_approved == 1) {
+            $sack = Sack::where('amount', '>', 0)
+                ->orderBy('created_at', 'asc')
+                ->first();
+            $sack->update([
+                'amount' => $sack->amount + $transaction->sack
+            ]);
+        }
+        foreach ($transaction->rits as $key => $rit) {
+            $rite = Rit::find($rit->rit_id);
+            if ($rite->tonnage_left == 0) {
+                $rite->update([
+                    "sold_date" => null
+                ]);
+            }
+            $rite->update([
+                'tonnage_left' => $rite->tonnage_left + ($rit["tonnage"] * $rit["masak"]),
+            ]);
+        }
+
+        $return = [
+            'api_code' => 200,
+            'api_status' => true,
+            'api_message' => 'Sukses',
+            'api_results' => TransactionResource::make($transaction)
         ];
         return SuccessResource::make($return);
     }

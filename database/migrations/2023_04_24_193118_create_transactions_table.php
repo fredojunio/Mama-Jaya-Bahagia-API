@@ -28,6 +28,8 @@ return new class extends Migration
             $table->date("settled_date")->nullable();
             $table->integer("owner_approved")->default(0)->nullable();
             $table->integer("finance_approved")->default(0)->nullable();
+            $table->integer("revision_requested")->default(0)->nullable();
+            $table->integer("revision_allowed")->default(0)->nullable();
             $table->string("type");
             $table->timestamps();
         });

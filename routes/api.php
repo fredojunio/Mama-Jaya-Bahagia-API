@@ -76,6 +76,9 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/transaction/get_remaining_sack', [TransactionController::class, 'get_remaining_sack']);
     Route::get('/transaction/get_owner_nota', [TransactionController::class, 'get_owner_nota']);
     Route::get('/transaction/get_owner_transactions', [TransactionController::class, 'get_owner_transactions']);
+    Route::get('/transaction/get_requested_revisions', [TransactionController::class, 'get_requested_revisions']);
+    Route::get('/transaction/{transaction}/request_revision/', [TransactionController::class, 'request_revision']);
+    Route::get('/transaction/{transaction}/approve_revision/', [TransactionController::class, 'approve_revision']);
     Route::apiResource('transaction', TransactionController::class);
     Route::post('/transaction/get_nota', [TransactionController::class, 'get_nota']);
     Route::post('/transaction/{transaction}/approve_finance', [TransactionController::class, 'approve_finance']);

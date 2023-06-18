@@ -24,6 +24,8 @@ class Transaction extends Model
         "settled_date",
         "owner_approved",
         "finance_approved",
+        "revision_requested",
+        "revision_allowed",
         "customer_id", "cas_id",
         "trip_id",
         "type",
