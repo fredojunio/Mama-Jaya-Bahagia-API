@@ -26,6 +26,7 @@ return new class extends Migration
             $table->integer("thr")->default(0)->nullable();
             $table->double("tonnage")->default(0)->nullable();
             $table->integer("cashback_approved")->default(0)->nullable();
+            $table->integer("cashback_days")->default(0);
             $table->timestamps();
         });
     }

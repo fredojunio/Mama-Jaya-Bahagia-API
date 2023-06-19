@@ -29,8 +29,8 @@ class CustomerLeanResource extends JsonResource
             "thr" => $this->thr,
             "tonnage" => $this->tonnage,
             "cashback_approved" => $this->cashback_approved,
+            'cashback_days' => $this->cashback_days,
             'type' => $this->type,
-            'cashback_days' => $this->getUniqueDays($this->transactions)
         ];
     }
 

@@ -22,6 +22,7 @@ class Customer extends Model
         "thr",
         "tonnage",
         "cashback_approved",
+        "cashback_days"
     ];
     public function savings()
     {

@@ -128,6 +128,16 @@ class TransactionController extends Controller
             $old_transaction = Transaction::find($request->old_id);
             $old_transaction->owner_approved = 3;
             $old_transaction->save();
+        } else {
+            $customer = Customer::find($request->customer_id);
+            $hasTransactionToday = $customer->transactions()
+                ->whereDate('created_at', Carbon::today())
+                ->exists();
+            if (!$hasTransactionToday) {
+                $customer->update([
+                    "cashback_days" => $customer->cashback_days + 1
+                ]);
+            }
         }
         $customer = Customer::find($request->customer_id);
         $trip = null;
