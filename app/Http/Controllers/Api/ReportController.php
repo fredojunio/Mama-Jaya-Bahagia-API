@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\ReportLeanResource;
 use App\Http\Resources\ReportResource;
 use App\Http\Resources\SuccessResource;
 use App\Models\Customer;
@@ -31,13 +32,25 @@ class ReportController extends Controller
             'api_code' => 200,
             'api_status' => true,
             'api_message' => 'Sukses',
-            'api_results' => ReportResource::collection($reports)
+            'api_results' => ReportLeanResource::collection($reports)
         ];
         return SuccessResource::make($return);
     }
 
     public function create_daily_report()
     {
+        $transactions = Transaction::whereNull("settled_date")
+            ->where(function ($query) {
+                $query
+                    ->where('owner_approved', '<>', 2)
+                    ->where('owner_approved', '<>', 3)
+                    ->orWhereNull('owner_approved');
+            })
+            ->where(function ($query) {
+                $query->whereNotNull('total_price');
+            })
+            ->get();
+        return $transactions;
         $income = Transaction::where('finance_approved', 1)
             ->whereDate('settled_date', Carbon::today())
             ->sum('total_price');
@@ -134,7 +147,9 @@ class ReportController extends Controller
         }
         $transactions = Transaction::whereNull("settled_date")
             ->where(function ($query) {
-                $query->where('owner_approved', '<>', 2)->where('owner_approved', '<>', 3)
+                $query
+                    ->where('owner_approved', '<>', 2)
+                    ->where('owner_approved', '<>', 3)
                     ->orWhereNull('owner_approved');
             })
             ->where(function ($query) {
