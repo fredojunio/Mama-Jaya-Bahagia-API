@@ -1938,7 +1938,7 @@ class RealSeeder extends Seeder
         $role->address = "BEBEKAN SELATAN, RT.24/RW.07, TAMAN";
         $role->phone = "08123123123";
         $role->ongkir = 100000;
-        $role->birthdate = "";
+        $role->birthdate = Carbon::now();
         $role->type = "Kiriman";
         $role->tb = 0;
         $role->thr = 0;
@@ -2454,7 +2454,7 @@ class RealSeeder extends Seeder
         $role->nickname = "AKEMAT SUMANDI";
         $role->address = "DUKUH MENANGGAL 6/61 RT.001 RW.002 GAYUNGAN";
         $role->phone = "08123123123";
-        $role->birthdate = "";
+        $role->birthdate = Carbon::now();
         $role->type = "Eceran";
         $role->tb = 0;
         $role->tw = 0;
