@@ -59,6 +59,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('/customer/{customer}/withdraw_savings', [CustomerController::class, 'withdraw_savings']);
     Route::post('/customer/{customer}/approve_cashback', [CustomerController::class, 'approve_cashback']);
     Route::apiResource('vehicle', VehicleController::class);
+    Route::post('/vehicle/{vehicle}/get_vehicle_trips', [VehicleController::class, 'get_vehicle_trips']);
     Route::post('/vehicle/search', [VehicleController::class, 'search']);
     Route::apiResource('rit', RitController::class);
     Route::get('/rit/{rit}/reject_finance', [RitController::class, 'reject_finance']);

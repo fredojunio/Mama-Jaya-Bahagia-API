@@ -4,8 +4,12 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\SuccessResource;
+use App\Http\Resources\TripLeanResource;
+use App\Http\Resources\VehicleLeanResource;
 use App\Http\Resources\VehicleResource;
+use App\Models\Trip;
 use App\Models\Vehicle;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class VehicleController extends Controller
@@ -20,7 +24,7 @@ class VehicleController extends Controller
             'api_code' => 200,
             'api_status' => true,
             'api_message' => 'Sukses',
-            'api_results' => VehicleResource::collection($vehicles)
+            'api_results' => VehicleLeanResource::collection($vehicles)
         ];
         return SuccessResource::make($return);
     }
@@ -99,6 +103,21 @@ class VehicleController extends Controller
             'api_status' => true,
             'api_message' => 'Sukses',
             'api_results' => VehicleResource::collection($vehicles)
+        ];
+        return SuccessResource::make($return);
+    }
+
+    public function get_vehicle_trips(Request $request, Vehicle $vehicle)
+    {
+        $trips = Trip::where("created_at", ">=", Carbon::createFromFormat('D M d Y H:i:s e+', $request->start_date)->toDateTimeString())
+            ->where("created_at", "<=", Carbon::createFromFormat('D M d Y H:i:s e+', $request->end_date)->toDateTimeString())
+            ->where("vehicle_id", $vehicle->id)
+            ->get();
+        $return = [
+            'api_code' => 200,
+            'api_status' => true,
+            'api_message' => 'Sukses',
+            'api_results' => TripLeanResource::collection($trips)
         ];
         return SuccessResource::make($return);
     }
