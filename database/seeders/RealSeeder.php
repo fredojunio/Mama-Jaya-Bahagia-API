@@ -1,4 +1,4 @@
-<?pphone
+<?php
 
 namespace Database\Seeders;
 
