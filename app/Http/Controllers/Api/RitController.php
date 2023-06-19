@@ -90,8 +90,11 @@ class RitController extends Controller
     public function get_owner_stock()
     {
         $rits = Rit::whereNull("sold_date")
-            ->where("tonnage_left", "!=", 0)
             ->where("finance_approved", 1)
+            ->where(function ($query) {
+                $query->whereNull("tonnage_left")
+                    ->orWhere("tonnage_left", ">", 0);
+            })
             ->get();
 
         $return = [
