@@ -89,6 +89,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('/saving/get_savings_incomes', [SavingController::class, 'get_savings_incomes']);
     Route::apiResource('saving', SavingController::class);
     Route::get('/report/create_daily_report', [ReportController::class, 'create_daily_report']);
+    Route::get('/report/check_daily_report', [ReportController::class, 'check_daily_report']);
     Route::get('/report/get_today_report', [ReportController::class, 'get_today_report']);
     Route::apiResource('report', ReportController::class);
     Route::apiResource('income', IncomeController::class);

@@ -37,20 +37,21 @@ class ReportController extends Controller
         return SuccessResource::make($return);
     }
 
+    public function check_daily_report()
+    {
+        $report = Report::whereDate('created_at', Carbon::today())
+            ->first();
+        $return = [
+            'api_code' => 200,
+            'api_status' => true,
+            'api_message' => 'Sukses',
+            'api_results' => ReportLeanResource::make($report)
+        ];
+        return SuccessResource::make($return);
+    }
+
     public function create_daily_report()
     {
-        $transactions = Transaction::whereNull("settled_date")
-            ->where(function ($query) {
-                $query
-                    ->where('owner_approved', '<>', 2)
-                    ->where('owner_approved', '<>', 3)
-                    ->orWhereNull('owner_approved');
-            })
-            ->where(function ($query) {
-                $query->whereNotNull('total_price');
-            })
-            ->get();
-        return $transactions;
         $income = Transaction::where('finance_approved', 1)
             ->whereDate('settled_date', Carbon::today())
             ->sum('total_price');
