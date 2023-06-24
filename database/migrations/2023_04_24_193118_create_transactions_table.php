@@ -30,6 +30,7 @@ return new class extends Migration
             $table->integer("finance_approved")->default(0)->nullable();
             $table->integer("revision_requested")->default(0)->nullable();
             $table->integer("revision_allowed")->default(0)->nullable();
+            $table->text("revision_note")->nullable();
             $table->string("type");
             $table->timestamps();
         });

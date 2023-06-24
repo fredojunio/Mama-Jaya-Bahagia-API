@@ -26,6 +26,7 @@ class Transaction extends Model
         "finance_approved",
         "revision_requested",
         "revision_allowed",
+        "revision_note",
         "customer_id", "cas_id",
         "trip_id",
         "type",

@@ -527,10 +527,11 @@ class TransactionController extends Controller
         return SuccessResource::make($return);
     }
 
-    public function request_revision(Transaction $transaction)
+    public function request_revision(Transaction $transaction, Request $request)
     {
         $transaction->update([
-            "revision_requested" => 1
+            "revision_requested" => 1,
+            "revision_note" => $request->note,
         ]);
 
         $return = [
