@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\ReportLeanResource;
 use App\Http\Resources\ReportResource;
 use App\Http\Resources\SuccessResource;
+use App\Models\Cas;
 use App\Models\Customer;
 use App\Models\Expense;
 use App\Models\Item;
@@ -88,6 +89,10 @@ class ReportController extends Controller
         $thr_savings = Saving::whereNull('transaction_id')
             ->whereDate('created_at', Carbon::today())
             ->sum('thr');
+        $sack_income = Transaction::whereDate('created_at', Carbon::today())
+            ->sum('sack_price');
+        $cas_income = Cas::whereDate('created_at', Carbon::today())
+            ->sum('fee');
         $tb_expense = Expense::whereDate('time', Carbon::today())
             ->where('type', "TB")
             ->sum('amount');
@@ -115,6 +120,7 @@ class ReportController extends Controller
             "tb_income" => $tb_income + $tb_savings,
             "tw_income" => $tw_income + $tw_savings,
             "thr_income" => $thr_income + $thr_savings,
+            "other_income" => $sack_income + $cas_income,
             "tb_expense" => $tb_expense,
             "tw_expense" => $tw_expense,
             "thr_expense" => $thr_expense,
@@ -212,6 +218,10 @@ class ReportController extends Controller
         $thr_savings = Saving::whereNull('transaction_id')
             ->whereDate('created_at', Carbon::today())
             ->sum('thr');
+        $sack_income = Transaction::whereDate('created_at', Carbon::today())
+            ->sum('sack_price');
+        $cas_income = Cas::whereDate('created_at', Carbon::today())
+            ->sum('fee');
         $tb_expense = Expense::whereDate('time', Carbon::today())
             ->where('type', "TB")
             ->sum('amount');
@@ -239,6 +249,7 @@ class ReportController extends Controller
         $report->tb_income = $tb_income + $tb_savings;
         $report->tw_income = $tw_income + $tw_savings;
         $report->thr_income = $thr_income + $thr_savings;
+        $report->other_income = $sack_income + $cas_income;
         $report->tb_expense = $tb_expense;
         $report->tw_expense = $tw_expense;
         $report->thr_expense = $thr_expense;

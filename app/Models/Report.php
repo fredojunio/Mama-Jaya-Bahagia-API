@@ -17,6 +17,7 @@ class Report extends Model
         "tb_income",
         "tw_income",
         "thr_income",
+        "other_income",
         "tb_expense",
         "tw_expense",
         "thr_expense",

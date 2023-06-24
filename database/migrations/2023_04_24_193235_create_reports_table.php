@@ -21,6 +21,7 @@ return new class extends Migration
             $table->integer("tb_income")->default(0);
             $table->integer("tw_income")->default(0);
             $table->integer("thr_income")->default(0);
+            $table->integer("other_income")->default(0);
             $table->integer("tb_expense")->default(0);
             $table->integer("tw_expense")->default(0);
             $table->integer("thr_expense")->default(0);

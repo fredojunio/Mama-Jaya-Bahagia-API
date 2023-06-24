@@ -25,6 +25,7 @@ class ReportResource extends JsonResource
             "tb_income" => $this->tb_income,
             "tw_income" => $this->tw_income,
             "thr_income" => $this->thr_income,
+            "other_income" => $this->other_income,
             "tb_expense" => $this->tb_expense,
             "tw_expense" => $this->tw_expense,
             "thr_expense" => $this->thr_expense,
