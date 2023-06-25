@@ -91,6 +91,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/report/create_daily_report', [ReportController::class, 'create_daily_report']);
     Route::get('/report/check_daily_report', [ReportController::class, 'check_daily_report']);
     Route::get('/report/get_today_report', [ReportController::class, 'get_today_report']);
+    Route::post('/report/get_monthly_report', [ReportController::class, 'get_monthly_report']);
     Route::apiResource('report', ReportController::class);
     Route::apiResource('income', IncomeController::class);
     Route::post('/expense/filter', [ExpenseController::class, 'filter']);

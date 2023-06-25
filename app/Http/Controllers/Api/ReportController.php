@@ -50,7 +50,6 @@ class ReportController extends Controller
         ];
         return SuccessResource::make($return);
     }
-
     public function create_daily_report()
     {
         $income = Transaction::where('finance_approved', 1)
@@ -318,11 +317,29 @@ class ReportController extends Controller
         return SuccessResource::make($return);
     }
 
+    public function get_monthly_report(Request $request)
+    {
+        $requestedMonth = $request->input('month');
+
+        $reports = Report::whereYear('created_at', '=', substr($requestedMonth, 0, 4))
+            ->whereMonth('created_at', '=', substr($requestedMonth, 5, 2))
+            ->get();
+
+        $return = [
+            'api_code' => 200,
+            'api_status' => true,
+            'api_message' => 'Sukses',
+            'api_results' => ReportResource::collection($reports)
+        ];
+        return SuccessResource::make($return);
+    }
+
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
+        return "asd";
         $report = Report::create([
             "money" => $request->money,
             "income" => $request->income,
