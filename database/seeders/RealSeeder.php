@@ -135,9 +135,9 @@ class RealSeeder extends Seeder
         $role->birthdate = "1970-06-26";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->thr = 3100000;
-        $role->cashback_days = 17;
-        $role->tonnage = 232.5;
+        $role->thr = 3450000;
+        $role->cashback_days = 22;
+        $role->tonnage = 325.5;
         $role->save();
 
 
@@ -165,9 +165,9 @@ class RealSeeder extends Seeder
         $role->birthdate = "1961-06-06";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->thr = 720000;
-        $role->cashback_days = 15;
-        $role->tonnage = 284;
+        $role->thr = 840000;
+        $role->cashback_days = 21;
+        $role->tonnage = 393.85;
         $role->save();
 
 
@@ -207,9 +207,9 @@ class RealSeeder extends Seeder
         $role->birthdate = "1982-08-18";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->thr = 104900;
-        $role->cashback_days = 19;
-        $role->tonnage = 720;
+        $role->thr = 311700;
+        $role->cashback_days = 26;
+        $role->tonnage = 985.5;
         $role->save();
 
 
@@ -222,9 +222,9 @@ class RealSeeder extends Seeder
         $role->birthdate = "1986-11-10";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->thr = 1000000;
-        $role->cashback_days = 2;
-        $role->tonnage = 3000;
+        $role->thr = 1200000;
+        $role->cashback_days = 3;
+        $role->tonnage = 4100;
         $role->save();
 
 
@@ -237,9 +237,9 @@ class RealSeeder extends Seeder
         $role->birthdate = "1974-09-13";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->thr = 2550000;
-        $role->cashback_days = 19;
-        $role->tonnage = 2800;
+        $role->thr = 2900000;
+        $role->cashback_days = 26;
+        $role->tonnage = 3791.5;
         $role->save();
 
         $role = new Customer();
@@ -253,6 +253,9 @@ class RealSeeder extends Seeder
         $role->tb = 0;
         $role->tw = 0;
         $role->thr = 0;
+        $role->cashback_days = 12;
+        $role->tonnage = 425;
+
         $role->save();
 
         $role = new Customer();
@@ -266,6 +269,8 @@ class RealSeeder extends Seeder
         $role->tb = 0;
         $role->tw = 0;
         $role->thr = 0;
+        $role->cashback_days = 20;
+        $role->tonnage = 578.5;
         $role->save();
 
         $role = new Customer();
@@ -277,9 +282,9 @@ class RealSeeder extends Seeder
         $role->birthdate = "1979-05-10";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->thr = 777100;
-        $role->cashback_days = 16;
-        $role->tonnage = 504;
+        $role->thr = 500000;
+        $role->cashback_days = 22;
+        $role->tonnage = 663;
         $role->save();
 
         $role = new Customer();
@@ -291,10 +296,53 @@ class RealSeeder extends Seeder
         $role->birthdate = "1994-05-22";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->thr = 1175000;
-        $role->cashback_days = 19;
-        $role->tonnage = 1565;
+        $role->thr = 1350000;
+        $role->cashback_days = 26;
+        $role->tonnage = 2147;
         $role->save();
+
+        $role = new Customer();
+        $role->nik = "0000000000000000";
+        $role->name = "Martda Angelia Veronika";
+        $role->nickname = "MARTDA";
+        $role->address = "Perum, Taman Permata Indah E5";
+        $role->phone = "085730034703";
+        $role->birthdate = "2001-03-14";
+        $role->type = "Eceran";
+        $role->tb = 0;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
+        $role->save();
+
+        $role = new Customer();
+        $role->nik = "0000000000000000";
+        $role->name = "Meilidya Purnamasari";
+        $role->nickname = "MEILING";
+        $role->address = "Perum, Taman Permata Indah E5";
+        $role->phone = "085730034703";
+        $role->birthdate = "2004-05-13";
+        $role->type = "Eceran";
+        $role->tb = 4500;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
+        $role->save();
+
+        $role = new Customer();
+        $role->nik = "0000000000000000";
+        $role->name = "Michael Angelo Marcellino";
+        $role->nickname = "MICHAEL";
+        $role->address = "Perum, Taman Permata Indah E5";
+        $role->phone = "085730034703";
+        $role->birthdate = "2010-10-09";
+        $role->type = "Eceran";
+        $role->tb = 1455000;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
+        $role->save();
+
 
 
         $role = new Customer();
@@ -305,10 +353,10 @@ class RealSeeder extends Seeder
         $role->phone = "08123123123";
         $role->birthdate = "1975-02-24";
         $role->type = "Eceran";
-        $role->tb = 900000;
-        $role->thr = 440000;
-        $role->cashback_days = 19;
-        $role->tonnage = 323;
+        $role->tb = 1040000;
+        $role->thr = 510000;
+        $role->cashback_days = 26;
+        $role->tonnage = 442;
         $role->save();
 
 
@@ -322,7 +370,9 @@ class RealSeeder extends Seeder
         $role->type = "Eceran";
         $role->tb = 0;
         $role->tw = 0;
-        $role->thr = 0;
+        $role->thr = 50000;
+        $role->cashback_days = 1;
+        $role->tonnage = 48;
         $role->save();
 
         $role = new Customer();
@@ -334,9 +384,9 @@ class RealSeeder extends Seeder
         $role->birthdate = "1986-10-30";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->thr = 1500000;
-        $role->cashback_days = 18;
-        $role->tonnage = 506;
+        $role->thr = 1675000;
+        $role->cashback_days = 25;
+        $role->tonnage = 723;
         $role->save();
 
         $role = new Customer();
@@ -367,6 +417,30 @@ class RealSeeder extends Seeder
         $role->thr = 3407800;
         $role->save();
 
+        $role = new Customer();
+        $role->nik = "0000000000000000";
+        $role->name = "Abas";
+        $role->nickname = "ABAS";
+        $role->address = "xxxxxxxxxxxxxxxxxx";
+        $role->phone = "0000000000000000";
+        $role->birthdate = "1967-01-07";
+        $role->type = "Eceran";
+        $role->tb = 0;
+        $role->thr =0;
+        $role->cashback_days = 8;
+        $role->tonnage = 750;
+        $role->save();
+
+        $role->nik = "0000000000000000";
+        $role->name = "Abah";
+        $role->nickname = "ABAH";
+        $role->address = "xxxxxxxxxxxxxxxxxx";
+        $role->phone = "0000000000000000";
+        $role->birthdate = "1967-01-09";
+        $role->type = "Eceran";
+        $role->tb = 500000;
+        $role->thr =0;
+        $role->save();
 
         $role = new Customer();
         $role->nik = "3525154104740003";
@@ -378,8 +452,8 @@ class RealSeeder extends Seeder
         $role->type = "Eceran";
         $role->tb = 0;
         $role->thr = 15000;
-        $role->cashback_days = 18;
-        $role->tonnage = 219.3;
+        $role->cashback_days = 24;
+        $role->tonnage = 289.3;
         $role->save();
 
 
@@ -392,10 +466,35 @@ class RealSeeder extends Seeder
         $role->birthdate = "1971-11-24";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->thr = 800000;
-        $role->cashback_days = 3;
-        $role->tonnage = 300;
+        $role->thr = 900000;
+        $role->cashback_days = 4;
+        $role->tonnage = 400;
         $role->save();
+
+        $role->name = "Amin";
+        $role->nickname = "AMIN COMONG";
+        $role->address = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
+        $role->phone = "000000000000";
+        $role->birthdate = "1971-10-14";
+        $role->type = "Eceran";
+        $role->tb = 0;
+        $role->thr = 0;
+        $role->cashback_days = 9;
+        $role->tonnage = 400;
+        $role->save();
+
+        $role->name = "Benu";
+        $role->nickname = "BENU 1212";
+        $role->address = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
+        $role->phone = "000000000000";
+        $role->birthdate = "1971-09-17";
+        $role->type = "Eceran";
+        $role->tb = 0;
+        $role->thr = 120000;
+        $role->cashback_days = 11;
+        $role->tonnage = 229.5;
+        $role->save();
+
 
         $role = new Customer();
         $role->nik = "3328162881830021";
@@ -421,9 +520,9 @@ class RealSeeder extends Seeder
         $role->birthdate = "1975-06-13";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->thr = 2450000;
-        $role->cashback_days = 19;
-        $role->tonnage = 2577;
+        $role->thr = 2800000;
+        $role->cashback_days = 26;
+        $role->tonnage = 3387;
         $role->save();
 
         $role = new Customer();
@@ -463,8 +562,9 @@ class RealSeeder extends Seeder
         $role->birthdate = "1967-08-15";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->tw = 0;
         $role->thr = 0;
+        $role->cashback_days = 6;
+        $role->tonnage = 93;
         $role->save();
 
         $role = new Customer();
@@ -489,9 +589,9 @@ class RealSeeder extends Seeder
         $role->birthdate = "1968-04-03";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->thr = 153800;
-        $role->cashback_days = 16;
-        $role->tonnage = 385;
+        $role->thr = 181800;
+        $role->cashback_days = 22;
+        $role->tonnage = 517;
         $role->save();
 
         $role = new Customer();
@@ -504,8 +604,8 @@ class RealSeeder extends Seeder
         $role->type = "Eceran";
         $role->tb = 0;
         $role->thr = 22500000;
-        $role->cashback_days = 14;
-        $role->tonnage = 1765;
+        $role->cashback_days = 21;
+        $role->tonnage = 2745;
         $role->save();
 
         $role = new Customer();
@@ -516,10 +616,10 @@ class RealSeeder extends Seeder
         $role->phone = "08123123123";
         $role->birthdate = "1977-02-14";
         $role->type = "Eceran";
-        $role->tb = 940000;
-        $role->thr = 2350000;
-        $role->cashback_days = 18;
-        $role->tonnage = 1696.5;
+        $role->tb = 40000;
+        $role->thr = 2600000;
+        $role->cashback_days = 24;
+        $role->tonnage = 2265.5;
         $role->save();
 
         $role = new Customer();
@@ -571,10 +671,10 @@ class RealSeeder extends Seeder
         $role->phone = "08123123123";
         $role->birthdate = "1987-07-15";
         $role->type = "Eceran";
-        $role->tb = 1080000;
-        $role->thr = 720000;
-        $role->cashback_days = 18;
-        $role->tonnage = 900;
+        $role->tb = 1260000;
+        $role->thr = 840000;
+        $role->cashback_days = 24;
+        $role->tonnage = 1200;
         $role->save();
 
 
@@ -615,9 +715,9 @@ class RealSeeder extends Seeder
         $role->birthdate = "1982-09-19";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->thr = 4900000;
-        $role->cashback_days = 17;
-        $role->tonnage = 1026;
+        $role->thr = 5500000;
+        $role->cashback_days = 23;
+        $role->tonnage = 1404;
         $role->save();
 
 
@@ -645,9 +745,9 @@ class RealSeeder extends Seeder
         $role->birthdate = "1989-11-11";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->thr = 6000000;
-        $role->cashback_days = 19;
-        $role->tonnage = 849.5;
+        $role->thr = 600000;
+        $role->cashback_days = 26;
+        $role->tonnage = 1084;
         $role->save();
 
 
@@ -662,6 +762,8 @@ class RealSeeder extends Seeder
         $role->tb = 0;
         $role->tw = 0;
         $role->thr = 0;
+        $role->cashback_days = 24;
+        $role->tonnage = 1180;
         $role->save();
 
 
@@ -689,9 +791,9 @@ class RealSeeder extends Seeder
         $role->birthdate = "1971-06-19";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->thr = 404200;
-        $role->cashback_days = 18;
-        $role->tonnage = 180;
+        $role->thr = 164200;
+        $role->cashback_days = 24;
+        $role->tonnage = 240;
         $role->save();
 
 
@@ -704,10 +806,24 @@ class RealSeeder extends Seeder
         $role->birthdate = "1980-01-06";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->thr = 700000;
-        $role->cashback_days = 14;
-        $role->tonnage = 673.5;
+        $role->thr = 950000;
+        $role->cashback_days = 19;
+        $role->tonnage = 957;
         $role->save();
+        $role = new Customer();
+        $role->nik = "0000000000000000";
+        $role->name = "Gatot";
+        $role->nickname = "GATOT";
+        $role->address = "xxxxxxxxxxxxxxxxxxxxxxxxxxxx";
+        $role->phone = "08123123123";
+        $role->birthdate = "1980-01-07";
+        $role->type = "Eceran";
+        $role->tb = 0;
+        $role->thr = 0;
+        $role->cashback_days = 15;
+        $role->tonnage = 691.5;
+        $role->save();
+
 
 
         $role = new Customer();
@@ -734,9 +850,9 @@ class RealSeeder extends Seeder
         $role->birthdate = "1967-11-07";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->thr = 1640000;
-        $role->cashback_days = 19;
-        $role->tonnage = 2216;
+        $role->thr = 1820000;
+        $role->cashback_days = 26;
+        $role->tonnage = 2975.5;
         $role->save();
 
 
@@ -754,6 +870,21 @@ class RealSeeder extends Seeder
         $role->save();
 
         $role = new Customer();
+        $role->nik = "00000000000000000";
+        $role->name = "Hadi";
+        $role->nickname = "HADI KEPUTIH";
+        $role->address = "XXXXXXXXXXXXXXXXXXXXXX";
+        $role->phone = "0000000000000";
+        $role->birthdate = "1990-07-05";
+        $role->type = "Eceran";
+        $role->tb = 0;
+        $role->tw = 0;
+        $role->thr = 0;
+        $role->cashback_days = 1;
+        $role->tonnage = 500;
+        $role->save();
+
+        $role = new Customer();
         $role->nik = "3326101507860002";
         $role->name = "Haryanto";
         $role->nickname = "HARR";
@@ -761,10 +892,10 @@ class RealSeeder extends Seeder
         $role->phone = "08123123123";
         $role->birthdate = "1986-07-15";
         $role->type = "Eceran";
-        $role->tb = 2300000;
-        $role->thr = 2300000;
-        $role->cashback_days = 18;
-        $role->tonnage = 930;
+        $role->tb = 2650000;
+        $role->thr = 2650000;
+        $role->cashback_days = 25;
+        $role->tonnage = 1290;
         $role->save();
 
 
@@ -779,8 +910,8 @@ class RealSeeder extends Seeder
         $role->type = "Kiriman";
         $role->tb = 0;
         $role->thr = 0;
-        $role->cashback_days = 1;
-        $role->tonnage = 550;
+        $role->cashback_days = 2;
+        $role->tonnage = 1150;
         $role->save();
 
         $role = new Customer();
@@ -792,8 +923,9 @@ class RealSeeder extends Seeder
         $role->birthdate = "1979-12-20";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->tw = 0;
-        $role->thr = 700000;
+        $role->thr = 0;
+        $role->cashback_days = 1;
+        $role->tonnage = 50;
         $role->save();
 
 
@@ -808,10 +940,23 @@ class RealSeeder extends Seeder
         $role->type = "Kiriman";
         $role->tb = 0;
         $role->thr = 0;
-        $role->cashback_days = 4;
-        $role->tonnage = 8000;
+        $role->cashback_days = 6;
+        $role->tonnage = 12000;
         $role->save();
 
+        $role->nik = "XXXXXXXXXXXXXXXX";
+        $role->name = "Ruhiyat";
+        $role->nickname = "RUHIYAT SEMAMBUNG";
+        $role->address = "Semambung";
+        $role->phone = "08123123123";
+        $role->ongkir = 125000;
+        $role->birthdate = "2023-10-07";
+        $role->type = "Kiriman";
+        $role->tb = 0;
+        $role->thr = 0;
+        $role->cashback_days = 4;
+        $role->tonnage = 4600;
+        $role->save();
 
 
         $role = new Customer();
@@ -822,11 +967,25 @@ class RealSeeder extends Seeder
         $role->phone = "08123123123";
         $role->birthdate = "1973-04-10";
         $role->type = "Eceran";
-        $role->tb = 210000;
-        $role->tw = 0;
-        $role->thr = 50000;
+        $role->tb = 0;
+        $role->thr = 0;
+        $role->cashback_days = 10;
+        $role->tonnage = 421;
         $role->save();
 
+        $role = new Customer();
+        $role->nik = "XXXXXXXXXXXXXXXX";
+        $role->name = "Mahmudi";
+        $role->nickname = "MAHMUDI";
+        $role->address = "xxxxxxxxxxxxxxxxxxxxxx";
+        $role->phone = "08123123123";
+        $role->birthdate = "2023-04-10";
+        $role->type = "Eceran";
+        $role->tb = 0;
+        $role->thr = 0;
+        $role->cashback_days = 8;
+        $role->tonnage = 750;
+        $role->save();
 
 
         $role = new Customer();
@@ -838,10 +997,25 @@ class RealSeeder extends Seeder
         $role->birthdate = "1993-04-24";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->thr = 1700000;
-        $role->cashback_days = 17;
-        $role->tonnage = 772.5;
+        $role->thr = 2050000;
+        $role->cashback_days = 24;
+        $role->tonnage = 1081.5;
         $role->save();
+
+        $role = new Customer();
+        $role->nik = "0000000000000000";
+        $role->name = "Akemat";
+        $role->nickname = "AKEMAT";
+        $role->address = "xxxxxxxxxxxxxxxxx";
+        $role->phone = "0000000000000000";
+        $role->birthdate = "1984-11-9";
+        $role->type = "Eceran";
+        $role->tb = 0;
+        $role->thr = 0;
+        $role->cashback_days = 18;
+        $role->tonnage = 335;
+        $role->save();
+
 
         $role = new Customer();
         $role->nik = "3517081012840007";
@@ -865,9 +1039,9 @@ class RealSeeder extends Seeder
         $role->birthdate = "1959-07-15";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->thr = 1150000;
-        $role->cashback_days = 14;
-        $role->tonnage = 610;
+        $role->thr = 550000;
+        $role->cashback_days = 19;
+        $role->tonnage = 840;
         $role->save();
 
 
@@ -894,9 +1068,9 @@ class RealSeeder extends Seeder
         $role->birthdate = "1986-05-06";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->thr = 1350000;
-        $role->cashback_days = 18;
-        $role->tonnage = 887.25;
+        $role->thr = 1700000;
+        $role->cashback_days = 25;
+        $role->tonnage = 1214;
         $role->save();
 
 
@@ -908,10 +1082,10 @@ class RealSeeder extends Seeder
         $role->phone = "08123123123";
         $role->birthdate = "1979-01-05";
         $role->type = "Eceran";
-        $role->tb = 10150000;
-        $role->thr = 670000;
-        $role->cashback_days = 18;
-        $role->tonnage = 626;
+        $role->tb = 10500000;
+        $role->thr = 880000;
+        $role->cashback_days = 24;
+        $role->tonnage = 798;
         $role->save();
 
 
@@ -926,6 +1100,8 @@ class RealSeeder extends Seeder
         $role->tb = 0;
         $role->tw = 0;
         $role->thr = 0;
+        $role->cashback_days = 13;
+        $role->tonnage = 650;
         $role->save();
 
         $role = new Customer();
@@ -937,9 +1113,9 @@ class RealSeeder extends Seeder
         $role->birthdate = "1977-05-21";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->thr = 312500;
-        $role->cashback_days = 16;
-        $role->tonnage = 840;
+        $role->thr = 812500;
+        $role->cashback_days = 21;
+        $role->tonnage = 10070;
         $role->save();
 
         $role = new Customer();
@@ -951,9 +1127,9 @@ class RealSeeder extends Seeder
         $role->birthdate = "1980-09-24";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->thr = 6600000;
-        $role->cashback_days = 3;
-        $role->tonnage = 150;
+        $role->thr = 7400000;
+        $role->cashback_days = 4;
+        $role->tonnage = 200;
         $role->save();
 
         $role = new Customer();
@@ -965,9 +1141,9 @@ class RealSeeder extends Seeder
         $role->birthdate = "1985-09-29";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->thr = 960000;
-        $role->cashback_days = 19;
-        $role->tonnage = 1125;
+        $role->thr = 1100000;
+        $role->cashback_days = 26;
+        $role->tonnage = 1545;
         $role->save();
 
 
@@ -1023,8 +1199,9 @@ class RealSeeder extends Seeder
         $role->birthdate = "1984-05-13";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->tw = 0;
         $role->thr = 0;
+        $role->cashback_days = 26;
+        $role->tonnage = 832;
         $role->save();
 
         $role = new Customer();
@@ -1036,7 +1213,6 @@ class RealSeeder extends Seeder
         $role->birthdate = "1983-05-01";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->tw = 0;
         $role->thr = 0;
         $role->save();
 
@@ -1049,8 +1225,6 @@ class RealSeeder extends Seeder
         $role->phone = "08123123123";
         $role->birthdate = "1984-11-28";
         $role->type = "Eceran";
-        $role->tb = 0;
-        $role->tw = 0;
         $role->thr = 0;
         $role->save();
 
@@ -1063,7 +1237,6 @@ class RealSeeder extends Seeder
         $role->birthdate = "1999-05-22";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->tw = 0;
         $role->thr = 0;
         $role->save();
 
@@ -1076,9 +1249,9 @@ class RealSeeder extends Seeder
         $role->birthdate = "1966-03-01";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->thr = 2800000;
-        $role->cashback_days = 10;
-        $role->tonnage = 458;
+        $role->thr = 3200000;
+        $role->cashback_days = 14;
+        $role->tonnage = 686;
         $role->save();
 
         $role = new Customer();
@@ -1104,8 +1277,37 @@ class RealSeeder extends Seeder
         $role->type = "Eceran";
         $role->tb = 0;
         $role->thr = 2000000;
-        $role->cashback_days = 19;
-        $role->tonnage = 6847;
+        $role->cashback_days = 26;
+        $role->tonnage = 9150;
+        $role->save();
+
+        $role = new Customer();
+        $role->nik = "0000000000000000";
+        $role->name = "Tifany M";
+        $role->nickname = "FANI";
+        $role->address = "xxxxxxxxxxxxxxxxxxxxxxxxxxx";
+        $role->phone = "0859171683244";
+        $role->birthdate = "1991-05-23";
+        $role->type = "Eceran";
+        $role->tb = 0;
+        $role->thr = 300000;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
+        $role->save();
+
+
+        $role = new Customer();
+        $role->nik = "0000000000000000";
+        $role->name = "Firman";
+        $role->nickname = "FIRMAN";
+        $role->address = "xxxxxxxxxxxxxxxxxxxxxxxxxxx";
+        $role->phone = "000000000000";
+        $role->birthdate = "1991-04-20";
+        $role->type = "Eceran";
+        $role->tb = 0;
+        $role->thr = 0;
+        $role->cashback_days = 5;
+        $role->tonnage = 8560;
         $role->save();
 
         $role = new Customer();
@@ -1122,6 +1324,21 @@ class RealSeeder extends Seeder
         $role->save();
 
         $role = new Customer();
+        $role->nik = "0000000000000000";
+        $role->name = "Gondrong";
+        $role->nickname = "Gondrong";
+        $role->address = "xxxxxxxxxxxxxxxxxxxxxxxxxxx";
+        $role->phone = "0000000000000000";
+        $role->birthdate = "1991-05-27";
+        $role->type = "Eceran";
+        $role->tb = 0;
+        $role->thr = 0;
+        $role->cashback_days = 2;
+        $role->tonnage = 200;
+        $role->save();
+
+
+        $role = new Customer();
         $role->nik = "3525151604700002";
         $role->name = "Moh. Irfan Shodiq";
         $role->nickname = "IRFAN TENARU";
@@ -1131,9 +1348,9 @@ class RealSeeder extends Seeder
         $role->birthdate = "1970-04-16";
         $role->type = "Kiriman";
         $role->tb = 0;
-        $role->thr = 550000;
-        $role->cashback_days = 0;
-        $role->tonnage = 0;
+        $role->thr = 0;
+        $role->cashback_days = 1;
+        $role->tonnage = 1000;
         $role->save();
 
         $role = new Customer();
@@ -1145,9 +1362,9 @@ class RealSeeder extends Seeder
         $role->birthdate = "1993-04-29";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->thr = 3084800;
-        $role->cashback_days = 16;
-        $role->tonnage = 768;
+        $role->thr = 3000000;
+        $role->cashback_days = 22;
+        $role->tonnage = 1040;
         $role->save();
 
 
@@ -1160,10 +1377,24 @@ class RealSeeder extends Seeder
         $role->birthdate = "1990-06-15";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->thr = 840000;
-        $role->cashback_days = 19;
-        $role->tonnage = 812;
+        $role->thr = 980000;
+        $role->cashback_days = 26;
+        $role->tonnage = 1104;
         $role->save();
+
+        $role->nik = "XXXXXXXXXXXXXXXX";
+        $role->name = "SUPRI TEMPE";
+        $role->nickname = "SUPRI TEMPE";
+        $role->address = "xxxxxxxxxxxxxxxxxxxxxxxxx";
+        $role->phone = "08123123123";
+        $role->birthdate = "2023-06-15";
+        $role->type = "Eceran";
+        $role->tb = 0;
+        $role->thr = 0;
+        $role->cashback_days = 8;
+        $role->tonnage = 400;
+        $role->save();
+
 
         $role = new Customer();
         $role->nik = "3326172610910002";
@@ -1174,9 +1405,9 @@ class RealSeeder extends Seeder
         $role->birthdate = "1991-10-26";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->thr = 2100000;
-        $role->cashback_days = 14;
-        $role->tonnage = 455;
+        $role->thr = 2700000;
+        $role->cashback_days = 20;
+        $role->tonnage = 665;
         $role->save();
 
         $role = new Customer();
@@ -1203,9 +1434,9 @@ class RealSeeder extends Seeder
         $role->birthdate = "1990-10-06";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->thr = 1100000;
-        $role->cashback_days = 19;
-        $role->tonnage = 1127.5;
+        $role->thr = 1240000;
+        $role->cashback_days = 26;
+        $role->tonnage = 1547.5;
         $role->save();
 
         $role = new Customer();
@@ -1216,10 +1447,10 @@ class RealSeeder extends Seeder
         $role->phone = "08123123123";
         $role->birthdate = "1972-12-05";
         $role->type = "Eceran";
-        $role->tb = 1410000;
-        $role->thr = 1410000;
-        $role->cashback_days = 18;
-        $role->tonnage = 630;
+        $role->tb = 1620000;
+        $role->thr = 1620000;
+        $role->cashback_days = 25;
+        $role->tonnage = 875;
         $role->save();
 
         $role = new Customer();
@@ -1244,9 +1475,9 @@ class RealSeeder extends Seeder
         $role->birthdate = "1987-07-11";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->thr = 2000000;
-        $role->cashback_days = 19;
-        $role->tonnage = 491;
+        $role->thr = 1500000;
+        $role->cashback_days = 26;
+        $role->tonnage = 666;
         $role->save();
 
 
@@ -1259,9 +1490,25 @@ class RealSeeder extends Seeder
         $role->birthdate = "1981-12-24";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->tw = 0;
         $role->thr = 0;
+        $role->cashback_days = 20;
+        $role->tonnage = 1411.5;
         $role->save();
+
+        $role = new Customer();
+        $role->nik = "XXXXXXXXXXXXXXXX";
+        $role->name = "Mimi";
+        $role->nickname = "MIMI";
+        $role->address = "xxxxxxxxxxxxxxxxxxxxxxxxxxx";
+        $role->phone = "08123123123";
+        $role->birthdate = "2023-12-24";
+        $role->type = "Eceran";
+        $role->tb = 0;
+        $role->thr = 0;
+        $role->cashback_days = 4;
+        $role->tonnage = 250;
+        $role->save();
+
 
         $role = new Customer();
         $role->nik = "3326160801880001";
@@ -1272,9 +1519,9 @@ class RealSeeder extends Seeder
         $role->birthdate = "1988-01-08";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->thr = 12700000;
-        $role->cashback_days = 19;
-        $role->tonnage = 1990;
+        $role->thr = 7200000;
+        $role->cashback_days = 26;
+        $role->tonnage = 2730;
         $role->save();
 
 
@@ -1288,9 +1535,9 @@ class RealSeeder extends Seeder
         $role->birthdate = "1985-11-18";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->thr = 960000;
-        $role->cashback_days = 18;
-        $role->tonnage = 612;
+        $role->thr = 1080000;
+        $role->cashback_days = 24;
+        $role->tonnage = 814;
         $role->save();
 
         $role = new Customer();
@@ -1302,9 +1549,9 @@ class RealSeeder extends Seeder
         $role->birthdate = "2001-03-02";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->thr = 700000;
-        $role->cashback_days = 4;
-        $role->tonnage = 200;
+        $role->thr = 800000;
+        $role->cashback_days = 5;
+        $role->tonnage = 250;
         $role->save();
 
         $role = new Customer();
@@ -1319,6 +1566,21 @@ class RealSeeder extends Seeder
         $role->tw = 0;
         $role->thr = 0;
         $role->save();
+
+        $role = new Customer();
+        $role->nik = "XXXXXXXXXXXXXXXX";
+        $role->name = "Nur Sait";
+        $role->nickname = "NUR SAIT";
+        $role->address = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
+        $role->phone = "08123123123";
+        $role->birthdate = "2023-03-22";
+        $role->type = "Eceran";
+        $role->tb = 0;
+        $role->thr = 0;
+        $role->cashback_days = 12;
+        $role->tonnage = 580;
+        $role->save();
+
 
         $role = new Customer();
         $role->nik = "3326171111780001";
@@ -1381,9 +1643,9 @@ class RealSeeder extends Seeder
         $role->birthdate = "1968-02-17";
         $role->type = "Eceran";
         $role->tb = 150000;
-        $role->thr = 125000;
-        $role->cashback_days = 2;
-        $role->tonnage = 100;
+        $role->thr = 200000;
+        $role->cashback_days = 3;
+        $role->tonnage = 150;
         $role->save();
 
         $role = new Customer();
@@ -1397,6 +1659,8 @@ class RealSeeder extends Seeder
         $role->tb = 0;
         $role->tw = 0;
         $role->thr = 0;
+        $role->cashback_days = 18;
+        $role->tonnage = 442;
         $role->save();
 
         $role = new Customer();
@@ -1410,6 +1674,8 @@ class RealSeeder extends Seeder
         $role->tb = 0;
         $role->tw = 0;
         $role->thr = 0;
+        $role->cashback_days = 4;
+        $role->tonnage = 160;
         $role->save();
 
         $role = new Customer();
@@ -1421,9 +1687,9 @@ class RealSeeder extends Seeder
         $role->birthdate = "1971-01-01";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->thr = 7000000;
-        $role->cashback_days = 18;
-        $role->tonnage = 900;
+        $role->thr = 7600000;
+        $role->cashback_days = 24;
+        $role->tonnage = 1200;
         $role->save();
 
         $role = new Customer();
@@ -1435,8 +1701,9 @@ class RealSeeder extends Seeder
         $role->birthdate = "1973-04-14";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->tw = 0;
         $role->thr = 0;
+        $role->cashback_days = 19;
+        $role->tonnage = 743;
         $role->save();
 
         $role = new Customer();
@@ -1448,10 +1715,25 @@ class RealSeeder extends Seeder
         $role->birthdate = "1983-04-29";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->thr = 6800000;
-        $role->cashback_days = 14;
-        $role->tonnage = 768;
+        $role->thr = 8950000;
+        $role->cashback_days = 18;
+        $role->tonnage = 1056;
         $role->save();
+
+        $role = new Customer();
+        $role->nik = "0000000000000000";
+        $role->name = "Ribut Lipurwanto";
+        $role->nickname = "PUR GUDANG";
+        $role->address = " xxxxxxxxxxxxxxxxxxxx";
+        $role->phone = "000000000000";
+        $role->birthdate = "1983-04-13";
+        $role->type = "Eceran";
+        $role->tb = 0;
+        $role->thr = 190000;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
+        $role->save();
+
 
         $role = new Customer();
         $role->nik = "3326176312800002";
@@ -1474,10 +1756,10 @@ class RealSeeder extends Seeder
         $role->phone = "08123123123";
         $role->birthdate = "1986-02-27";
         $role->type = "Eceran";
-        $role->tb = 2400000;
-        $role->thr = 2400000;
-        $role->cashback_days = 17;
-        $role->tonnage = 515;
+        $role->tb = 2750000;
+        $role->thr = 2750000;
+        $role->cashback_days = 24;
+        $role->tonnage = 770;
         $role->save();
 
         $role = new Customer();
@@ -1501,10 +1783,10 @@ class RealSeeder extends Seeder
         $role->phone = "08123123123";
         $role->birthdate = "1974-05-04";
         $role->type = "Eceran";
-        $role->tb = 760000;
-        $role->thr = 3360000;
-        $role->cashback_days = 17;
-        $role->tonnage = 2635;
+        $role->tb = 970000;
+        $role->thr = 3570000;
+        $role->cashback_days = 24;
+        $role->tonnage = 3630;
         $role->save();
 
         $role = new Customer();
@@ -1518,6 +1800,8 @@ class RealSeeder extends Seeder
         $role->tb = 0;
         $role->tw = 0;
         $role->thr = 0;
+        $role->cashback_days = 4;
+        $role->tonnage = 240;
         $role->save();
 
 
@@ -1531,9 +1815,9 @@ class RealSeeder extends Seeder
         $role->birthdate = "1984-01-17";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->thr = 1015000;
-        $role->cashback_days = 12;
-        $role->tonnage = 755;
+        $role->thr = 1265000;
+        $role->cashback_days = 17;
+        $role->tonnage = 1055;
         $role->save();
 
 
@@ -1546,9 +1830,9 @@ class RealSeeder extends Seeder
         $role->birthdate = "1994-01-15";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->thr = 2500000;
-        $role->cashback_days = 18;
-        $role->tonnage = 1650;
+        $role->thr = 2850000;
+        $role->cashback_days = 25;
+        $role->tonnage = 2912;
         $role->save();
 
 
@@ -1561,9 +1845,9 @@ class RealSeeder extends Seeder
         $role->birthdate = "1978-06-02";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->thr = 420000;
-        $role->cashback_days = 9;
-        $role->tonnage = 540;
+        $role->thr = 500000;
+        $role->cashback_days = 13;
+        $role->tonnage = 780;
         $role->save();
 
 
@@ -1606,9 +1890,9 @@ class RealSeeder extends Seeder
         $role->birthdate = "1974-10-16";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->thr = 36750000;
-        $role->cashback_days = 19;
-        $role->tonnage = 5737.4;
+        $role->thr = 39250000;
+        $role->cashback_days = 26;
+        $role->tonnage = 7225.9;
         $role->save();
 
 
@@ -1620,10 +1904,10 @@ class RealSeeder extends Seeder
         $role->phone = "08123123123";
         $role->birthdate = "1975-08-25";
         $role->type = "Eceran";
-        $role->tb = 2150000;
-        $role->thr = 3400000;
-        $role->cashback_days = 17;
-        $role->tonnage = 1102.5;
+        $role->tb = 0;
+        $role->thr = 4000000;
+        $role->cashback_days = 23;
+        $role->tonnage = 1487.5;
         $role->save();
 
 
@@ -1668,9 +1952,9 @@ class RealSeeder extends Seeder
         $role->birthdate = "1992-07-16";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->thr = 280000;
-        $role->cashback_days = 14;
-        $role->tonnage = 248;
+        $role->thr = 330000;
+        $role->cashback_days = 19;
+        $role->tonnage = 341;
         $role->save();
 
 
@@ -1699,9 +1983,9 @@ class RealSeeder extends Seeder
         $role->birthdate = "1984-09-06";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->thr = 2700000;
-        $role->cashback_days = 16;
-        $role->tonnage = 433;
+        $role->thr = 2100000;
+        $role->cashback_days = 22;
+        $role->tonnage = 579;
         $role->save();
 
 
@@ -1757,9 +2041,9 @@ class RealSeeder extends Seeder
         $role->birthdate = "1960-07-15";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->thr = 340000;
-        $role->cashback_days = 7;
-        $role->tonnage = 216;
+        $role->thr = 400000;
+        $role->cashback_days = 10;
+        $role->tonnage = 324;
         $role->save();
 
 
@@ -1771,10 +2055,10 @@ class RealSeeder extends Seeder
         $role->phone = "08123123123";
         $role->birthdate = "1969-11-08";
         $role->type = "Eceran";
-        $role->tb = 490000;
-        $role->thr = 450000;
-        $role->cashback_days = 9;
-        $role->tonnage = 442;
+        $role->tb = 510000;
+        $role->thr = 550000;
+        $role->cashback_days = 11;
+        $role->tonnage = 615;
         $role->save();
 
 
@@ -1801,9 +2085,9 @@ class RealSeeder extends Seeder
         $role->birthdate = "1989-05-07";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->thr = 500000;
-        $role->cashback_days = 19;
-        $role->tonnage = 311.5;
+        $role->thr = 640000;
+        $role->cashback_days = 26;
+        $role->tonnage = 444;
         $role->save();
 
 
@@ -1880,9 +2164,9 @@ class RealSeeder extends Seeder
         $role->birthdate = "1976-08-01";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->thr = 3220000;
-        $role->cashback_days = 16;
-        $role->tonnage = 1600;
+        $role->thr = 3920000;
+        $role->cashback_days = 23;
+        $role->tonnage = 2300;
         $role->save();
 
 
@@ -1942,8 +2226,8 @@ class RealSeeder extends Seeder
         $role->type = "Kiriman";
         $role->tb = 0;
         $role->thr = 0;
-        $role->cashback_days = 2;
-        $role->tonnage = 4000;
+        $role->cashback_days = 3;
+        $role->tonnage = 6000;
         $role->save();
 
 
@@ -1972,9 +2256,24 @@ class RealSeeder extends Seeder
         $role->type = "Eceran";
         $role->tb = 270000;
         $role->thr = 30000;
-        $role->cashback_days = 19;
-        $role->tonnage = 891;
+        $role->cashback_days = 26;
+        $role->tonnage = 1221;
         $role->save();
+
+        $role = new Customer();
+        $role->nik = "XXXXXXXXXXXXXXXX";
+        $role->name = "Putri";
+        $role->nickname = "PUTRI";
+        $role->address = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
+        $role->phone = "08123123123";
+        $role->birthdate = "2023-02-01";
+        $role->type = "Eceran";
+        $role->tb = 0;
+        $role->thr = 0;
+        $role->cashback_days = 7;
+        $role->tonnage = 145;
+        $role->save();
+
 
 
         $role = new Customer();
@@ -1986,7 +2285,6 @@ class RealSeeder extends Seeder
         $role->birthdate = "1975-08-10";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->tw = 0;
         $role->thr = 0;
         $role->save();
 
@@ -2000,9 +2298,9 @@ class RealSeeder extends Seeder
         $role->birthdate = "1973-02-11";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->thr = 1109800;
-        $role->cashback_days = 18;
-        $role->tonnage = 948;
+        $role->thr = 1099800;
+        $role->cashback_days = 25;
+        $role->tonnage = 1298;
         $role->save();
 
 
@@ -2025,16 +2323,46 @@ class RealSeeder extends Seeder
         $role = new Customer();
         $role->nik = "3516172305730001";
         $role->name = "TIKNO";
-        $role->nickname = "PAK TIK";
+        $role->nickname = "TIKNO";
         $role->address = "KALIJATEN RT.17/RW.03, TAMAN";
         $role->phone = "08123123123";
         $role->birthdate = "1973-05-23";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->thr = 3360000;
-        $role->cashback_days = 18;
-        $role->tonnage = 475;
+        $role->thr = 3850000;
+        $role->cashback_days = 25;
+        $role->tonnage = 672;
         $role->save();
+
+        $role = new Customer();
+        $role->nik = "0000000000000000";
+        $role->name = "TORO";
+        $role->nickname = "TORO KEDURUS";
+        $role->address = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ";
+        $role->phone = "000000000000";
+        $role->birthdate = "1973-06-11";
+        $role->type = "Kiriman";
+        $role->tb = 60000;
+        $role->thr = 50000;
+        $role->cashback_days = 1;
+        $role->tonnage = 1000;
+        $role->save();
+
+
+        $role = new Customer();
+        $role->nik = "XXXXXXXXXXXXXXXX";
+        $role->name = "PAK DAR";
+        $role->nickname = "PAK DAR";
+        $role->address = "xxxxxxxxxxxxxxxxxxxxxxxxx";
+        $role->phone = "08123123123";
+        $role->birthdate = "2023-05-23";
+        $role->type = "Eceran";
+        $role->tb = 0;
+        $role->thr = 3600000;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
+        $role->save();
+
 
 
         $role = new Customer();
@@ -2076,9 +2404,23 @@ class RealSeeder extends Seeder
         $role->birthdate = "1968-09-10";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->thr = 500000;
-        $role->cashback_days = 19;
-        $role->tonnage = 840;
+        $role->thr = 570000;
+        $role->cashback_days = 26;
+        $role->tonnage = 1140;
+        $role->save();
+
+        $role = new Customer();
+        $role->nik = "XXXXXXXXXXXXXXXX";
+        $role->name = "SAMSURI";
+        $role->nickname = "SAMSURI";
+        $role->address = "xxxxxxxxxxxxxxxxxxxxxxxxxxx";
+        $role->phone = "08123123123";
+        $role->birthdate = "2023-09-10";
+        $role->type = "Eceran";
+        $role->tb = 0;
+        $role->thr = 0;
+        $role->cashback_days = 6;
+        $role->tonnage = 216;
         $role->save();
 
 
@@ -2109,6 +2451,8 @@ class RealSeeder extends Seeder
         $role->tb = 0;
         $role->tw = 0;
         $role->thr = 0;
+        $role->cashback_days = 18;
+        $role->tonnage = 312;
         $role->save();
 
 
@@ -2120,10 +2464,10 @@ class RealSeeder extends Seeder
         $role->phone = "08123123123";
         $role->birthdate = "1984-03-10";
         $role->type = "Eceran";
-        $role->tb = 920000;
-        $role->thr = 460000;
-        $role->cashback_days = 15;
-        $role->tonnage = 1530;
+        $role->tb = 1040000;
+        $role->thr = 520000;
+        $role->cashback_days = 21;
+        $role->tonnage = 2138;
         $role->save();
 
 
@@ -2152,9 +2496,9 @@ class RealSeeder extends Seeder
         $role->birthdate = "1980-09-08";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->thr = 2480000;
-        $role->cashback_days = 16;
-        $role->tonnage = 520;
+        $role->thr = 2960000;
+        $role->cashback_days = 23;
+        $role->tonnage = 725;
         $role->save();
 
 
@@ -2167,9 +2511,9 @@ class RealSeeder extends Seeder
         $role->birthdate = "1981-01-07";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->thr = 530000;
-        $role->cashback_days = 13;
-        $role->tonnage = 396;
+        $role->thr = 620000;
+        $role->cashback_days = 17;
+        $role->tonnage = 525;
         $role->save();
 
 
@@ -2182,9 +2526,9 @@ class RealSeeder extends Seeder
         $role->birthdate = "1970-05-18";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->thr = 2150000;
-        $role->cashback_days = 19;
-        $role->tonnage = 1072.5;
+        $role->thr = 2450000;
+        $role->cashback_days = 25;
+        $role->tonnage = 1385.5;
         $role->save();
 
 
@@ -2198,10 +2542,10 @@ class RealSeeder extends Seeder
         $role->phone = "08123123123";
         $role->birthdate = "1973-04-26";
         $role->type = "Eceran";
-        $role->tb = 700000;
-        $role->thr = 2400000;
-        $role->cashback_days = 19;
-        $role->tonnage = 1150;
+        $role->tb = 2750000;
+        $role->thr = 1050000;
+        $role->cashback_days = 26;
+        $role->tonnage = 1565;
         $role->save();
 
 
@@ -2214,9 +2558,9 @@ class RealSeeder extends Seeder
         $role->birthdate = "1976-04-23";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->thr = 580000;
-        $role->cashback_days = 12;
-        $role->tonnage = 416;
+        $role->thr = 680000;
+        $role->cashback_days = 17;
+        $role->tonnage = 592;
         $role->save();
 
 
@@ -2244,10 +2588,10 @@ class RealSeeder extends Seeder
         $role->phone = "08123123123";
         $role->birthdate = "1964-12-30";
         $role->type = "Eceran";
-        $role->tb = 3150000;
-        $role->thr = 3150000;
-        $role->cashback_days = 6;
-        $role->tonnage = 1228;
+        $role->tb = 3550000;
+        $role->thr = 3550000;
+        $role->cashback_days = 8;
+        $role->tonnage = 1561;
         $role->save();
 
 
@@ -2292,10 +2636,39 @@ class RealSeeder extends Seeder
         $role->birthdate = "1981-07-09";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->thr = 390000;
-        $role->cashback_days = 16;
-        $role->tonnage = 839;
+        $role->thr = 450000;
+        $role->cashback_days = 22;
+        $role->tonnage = 1175;
         $role->save();
+
+        $role = new Customer();
+        $role->nik = "0000000000000000";
+        $role->name = "Barokah";
+        $role->nickname = "BAROKAH";
+        $role->address = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
+        $role->phone = "000000000000";
+        $role->birthdate = "1981-06-08";
+        $role->type = "Eceran";
+        $role->tb = 0;
+        $role->thr = 0;
+        $role->cashback_days = 8;
+        $role->tonnage = 2871;
+        $role->save();
+
+        $role = new Customer();
+        $role->nik = "0000000000000000";
+        $role->name = "Bandi";
+        $role->nickname = "BANDI";
+        $role->address = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
+        $role->phone = "000000000000";
+        $role->birthdate = "1981-06-08";
+        $role->type = "Eceran";
+        $role->tb = 0;
+        $role->thr = 0;
+        $role->cashback_days = 1;
+        $role->tonnage = 100;
+        $role->save();
+
 
 
         $role = new Customer();
@@ -2325,9 +2698,9 @@ class RealSeeder extends Seeder
         $role->birthdate = "1964-05-05";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->thr = 2050000;
-        $role->cashback_days = 18;
-        $role->tonnage = 1147;
+        $role->thr = 2400000;
+        $role->cashback_days = 25;
+        $role->tonnage = 1597;
         $role->save();
 
         $role = new Customer();
@@ -2339,9 +2712,9 @@ class RealSeeder extends Seeder
         $role->birthdate = "1979-07-02";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->thr = 330000;
-        $role->cashback_days = 17;
-        $role->tonnage = 435;
+        $role->thr = 130000;
+        $role->cashback_days = 20;
+        $role->tonnage = 595;
         $role->save();
 
 
@@ -2386,9 +2759,9 @@ class RealSeeder extends Seeder
         $role->birthdate = "1980-01-22";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->thr = 10000;
-        $role->cashback_days = 16;
-        $role->tonnage = 498;
+        $role->thr = 80000;
+        $role->cashback_days = 23;
+        $role->tonnage = 680;
         $role->save();
 
         $role = new Customer();
@@ -2407,15 +2780,16 @@ class RealSeeder extends Seeder
 
         $role = new Customer();
         $role->nik = "3515130901850006";
-        $role->name = "IMAM KHANAFI";
+        $role->name = "IMAM HANAFI";
         $role->nickname = "HANAFI";
         $role->address = "TAMAN UTARA RT.007/RW.002, TAMAN";
         $role->phone = "08123123123";
         $role->birthdate = "1985-01-09";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->tw = 0;
         $role->thr = 0;
+        $role->cashback_days = 8;
+        $role->tonnage = 404;
         $role->save();
 
         $role = new Customer();
@@ -2427,9 +2801,23 @@ class RealSeeder extends Seeder
         $role->birthdate = "1969-12-16";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->thr = 2500000;
-        $role->cashback_days = 5;
-        $role->tonnage = 712;
+        $role->thr = 2700000;
+        $role->cashback_days = 6;
+        $role->tonnage = 860;
+        $role->save();
+
+        $role = new Customer();
+        $role->nik = "xxxxxxxxxxxxxxxx";
+        $role->name = "HUDIN";
+        $role->nickname = "HUDIN";
+        $role->address = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
+        $role->phone = "08123123123";
+        $role->birthdate = "2023-12-16";
+        $role->type = "Eceran";
+        $role->tb = 0;
+        $role->thr = 0;
+        $role->cashback_days = 14;
+        $role->tonnage = 240;
         $role->save();
 
 
@@ -2473,9 +2861,9 @@ class RealSeeder extends Seeder
         $role->birthdate = "1968-09-12";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->thr = 250000;
-        $role->cashback_days = 9;
-        $role->tonnage = 466;
+        $role->thr = 350000;
+        $role->cashback_days = 11;
+        $role->tonnage = 566;
         $role->save();
 
 
@@ -2488,9 +2876,9 @@ class RealSeeder extends Seeder
         $role->birthdate = Carbon::now();
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->thr = 3784000;
-        $role->cashback_days = 19;
-        $role->tonnage = 608;
+        $role->thr = 4234400;
+        $role->cashback_days = 26;
+        $role->tonnage = 826;
         $role->save();
 
         $role = new Customer();
@@ -2502,9 +2890,9 @@ class RealSeeder extends Seeder
         $role->birthdate = Carbon::now();
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->thr = 580000;
-        $role->cashback_days = 12;
-        $role->tonnage = 600;
+        $role->thr = 660000;
+        $role->cashback_days = 16;
+        $role->tonnage = 800;
         $role->save();
 
         $role = new Customer();
@@ -2530,9 +2918,9 @@ class RealSeeder extends Seeder
         $role->birthdate = Carbon::now();
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->thr = 350000;
-        $role->cashback_days = 2;
-        $role->tonnage = 100;
+        $role->thr = 400000;
+        $role->cashback_days = 3;
+        $role->tonnage = 150;
         $role->save();
 
         $role = new Customer();
@@ -2544,9 +2932,9 @@ class RealSeeder extends Seeder
         $role->birthdate = Carbon::now();
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->thr = 80000;
-        $role->cashback_days = 6;
-        $role->tonnage = 176;
+        $role->thr = 120000;
+        $role->cashback_days = 8;
+        $role->tonnage = 236;
         $role->save();
 
         $item = new Item();
