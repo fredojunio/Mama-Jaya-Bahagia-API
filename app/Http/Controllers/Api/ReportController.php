@@ -10,6 +10,7 @@ use App\Models\Cas;
 use App\Models\Customer;
 use App\Models\Expense;
 use App\Models\Item;
+use App\Models\Payment;
 use App\Models\Report;
 use App\Models\ReportRit;
 use App\Models\ReportTransaction;
@@ -50,15 +51,12 @@ class ReportController extends Controller
         ];
         return SuccessResource::make($return);
     }
+
     public function create_daily_report()
     {
-        $income = Transaction::where('finance_approved', 1)
-            ->whereDate('settled_date', Carbon::today())
-            ->sum('total_price');
+        $income = Payment::whereDate('created_at', Carbon::today())
+            ->sum('amount');
         $allincome = Transaction::whereDate('settled_date', Carbon::today())
-            ->sum('total_price');
-        $unpaidIncome = Transaction::where('finance_approved', 0)
-            ->where('owner_approved', 1)
             ->sum('total_price');
         $expense = Expense::whereDate('time', Carbon::today())->sum('amount');
         $tonnage = Transaction::whereDate('created_at', Carbon::today())
@@ -67,28 +65,29 @@ class ReportController extends Controller
             ->pluck('rits')
             ->flatten()
             ->sum('tonnage');
-        $item_income = Transaction::where('finance_approved', 1)
-            ->whereDate('settled_date', Carbon::today())
+        $item_income = Transaction::where('owner_approved', 1)
+            ->whereDate('created_at', Carbon::today())
             ->sum('item_price');
-        $tb_income = Transaction::where('finance_approved', 1)
-            ->whereDate('settled_date', Carbon::today())
+        $tb_income = Transaction::where('owner_approved', 1)
+            ->whereDate('created_at', Carbon::today())
             ->sum('tb');
         $tb_savings = Saving::whereNull('transaction_id')
             ->whereDate('created_at', Carbon::today())
             ->sum('tb');
-        $tw_income = Transaction::where('finance_approved', 1)
-            ->whereDate('settled_date', Carbon::today())
+        $tw_income = Transaction::where('owner_approved', 1)
+            ->whereDate('created_at', Carbon::today())
             ->sum('tw');
         $tw_savings = Saving::whereNull('transaction_id')
             ->whereDate('created_at', Carbon::today())
             ->sum('tw');
-        $thr_income = Transaction::where('finance_approved', 1)
-            ->whereDate('settled_date', Carbon::today())
+        $thr_income = Transaction::where('owner_approved', 1)
+            ->whereDate('created_at', Carbon::today())
             ->sum('thr');
         $thr_savings = Saving::whereNull('transaction_id')
             ->whereDate('created_at', Carbon::today())
             ->sum('thr');
-        $sack_income = Transaction::whereDate('created_at', Carbon::today())
+        $sack_income = Transaction::where('owner_approved', 1)
+            ->whereDate('created_at', Carbon::today())
             ->sum('sack_price');
         $cas_income = Cas::whereDate('created_at', Carbon::today())
             ->sum('fee');
@@ -179,15 +178,12 @@ class ReportController extends Controller
         ];
         return SuccessResource::make($return);
     }
+
     public function get_today_report()
     {
-        $income = Transaction::where('finance_approved', 1)
-            ->whereDate('settled_date', Carbon::today())
-            ->sum('total_price');
+        $income = Payment::whereDate('created_at', Carbon::today())
+            ->sum('amount');
         $allincome = Transaction::whereDate('settled_date', Carbon::today())
-            ->sum('total_price');
-        $unpaidIncome = Transaction::where('finance_approved', 0)
-            ->where('owner_approved', 1)
             ->sum('total_price');
         $expense = Expense::whereDate('time', Carbon::today())->sum('amount');
         $tonnage = Transaction::whereDate('created_at', Carbon::today())
@@ -196,28 +192,29 @@ class ReportController extends Controller
             ->pluck('rits')
             ->flatten()
             ->sum('tonnage');
-        $item_income = Transaction::where('finance_approved', 1)
-            ->whereDate('settled_date', Carbon::today())
+        $item_income = Transaction::where('owner_approved', 1)
+            ->whereDate('created_at', Carbon::today())
             ->sum('item_price');
-        $tb_income = Transaction::where('finance_approved', 1)
-            ->whereDate('settled_date', Carbon::today())
+        $tb_income = Transaction::where('owner_approved', 1)
+            ->whereDate('created_at', Carbon::today())
             ->sum('tb');
         $tb_savings = Saving::whereNull('transaction_id')
             ->whereDate('created_at', Carbon::today())
             ->sum('tb');
-        $tw_income = Transaction::where('finance_approved', 1)
-            ->whereDate('settled_date', Carbon::today())
+        $tw_income = Transaction::where('owner_approved', 1)
+            ->whereDate('created_at', Carbon::today())
             ->sum('tw');
         $tw_savings = Saving::whereNull('transaction_id')
             ->whereDate('created_at', Carbon::today())
             ->sum('tw');
-        $thr_income = Transaction::where('finance_approved', 1)
-            ->whereDate('settled_date', Carbon::today())
+        $thr_income = Transaction::where('owner_approved', 1)
+            ->whereDate('created_at', Carbon::today())
             ->sum('thr');
         $thr_savings = Saving::whereNull('transaction_id')
             ->whereDate('created_at', Carbon::today())
             ->sum('thr');
-        $sack_income = Transaction::whereDate('created_at', Carbon::today())
+        $sack_income = Transaction::where('owner_approved', 1)
+            ->whereDate('created_at', Carbon::today())
             ->sum('sack_price');
         $cas_income = Cas::whereDate('created_at', Carbon::today())
             ->sum('fee');
