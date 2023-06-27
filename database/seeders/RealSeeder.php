@@ -471,6 +471,7 @@ class RealSeeder extends Seeder
         $role->tonnage = 400;
         $role->save();
 
+        $role = new Customer();
         $role->name = "Amin";
         $role->nickname = "AMIN COMONG";
         $role->address = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
@@ -483,6 +484,7 @@ class RealSeeder extends Seeder
         $role->tonnage = 400;
         $role->save();
 
+        $role = new Customer();
         $role->name = "Benu";
         $role->nickname = "BENU 1212";
         $role->address = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
@@ -944,6 +946,7 @@ class RealSeeder extends Seeder
         $role->tonnage = 12000;
         $role->save();
 
+        $role = new Customer();
         $role->nik = "XXXXXXXXXXXXXXXX";
         $role->name = "Ruhiyat";
         $role->nickname = "RUHIYAT SEMAMBUNG";
@@ -1382,6 +1385,7 @@ class RealSeeder extends Seeder
         $role->tonnage = 1104;
         $role->save();
 
+        $role = new Customer();
         $role->nik = "XXXXXXXXXXXXXXXX";
         $role->name = "SUPRI TEMPE";
         $role->nickname = "SUPRI TEMPE";
