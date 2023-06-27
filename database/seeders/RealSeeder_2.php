@@ -15,20 +15,7 @@ class RealSeeder_2 extends Seeder
     public function run(): void
     {
         $role = new Customer();
-        $role->nik = "3515132411710005";
-        $role->name = "Astoi";
-        $role->nickname = "TOIN";
-        $role->address = "Jl. Sawunggaling I RT 15/ RW 03, Jemundo - Taman";
-        $role->phone = "08123123123";
-        $role->birthdate = "1971-11-24";
-        $role->type = "Eceran";
-        $role->tb = 0;
-        $role->thr = 900000;
-        $role->cashback_days = 4;
-        $role->tonnage = 400;
-        $role->save();
-
-        $role = new Customer();
+        $role->nik = "000000000000000";
         $role->name = "Amin";
         $role->nickname = "AMIN COMONG";
         $role->address = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
