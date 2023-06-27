@@ -363,6 +363,49 @@ class TransactionController extends Controller
         ];
         return SuccessResource::make($return);
     }
+    public function reject_finance(Transaction $transaction, Request $request)
+    {
+        if ($transaction->trip_id) {
+            //NOTE - Ini kalo tipenya tadi buat nota
+            $trip = Trip::find($transaction->trip_id);
+            $vehicle = Vehicle::find($trip->vehicle_id);
+            $vehicle->update([
+                "trip_count" => $vehicle->trip_count - 1,
+                "toll" => $vehicle->toll - $trip->toll
+            ]);
+            $trip->expense->delete();
+            $trip->delete();
+        }
+        $remainingSacks = $transaction->sack + $transaction->sack_free;
+        $sack = Sack::where('amount', '>', 0)
+            ->orderBy('created_at', 'asc')
+            ->first();
+        $sack->update([
+            "amount" => $sack->amount + $remainingSacks
+        ]);
+
+        foreach ($transaction->rits as $key => $rit) {
+            $rite = Rit::find($rit->rit_id);
+            if ($rite->tonnage_left == 0) {
+                $rite->update([
+                    "sold_date" => null
+                ]);
+            }
+            $rite->update([
+                'tonnage_left' => $rite->tonnage_left + ($rit["tonnage"] * $rit["masak"]),
+            ]);
+        }
+
+        $return = [
+            'api_code' => 200,
+            'api_status' => true,
+            'api_message' => 'Sukses',
+            'api_results' => TransactionResource::make($transaction)
+        ];
+
+        $transaction->delete();
+        return SuccessResource::make($return);
+    }
 
     public function approve_nota(Transaction $transaction, Request $request)
     {

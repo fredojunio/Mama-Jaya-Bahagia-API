@@ -80,6 +80,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/transaction/get_requested_revisions', [TransactionController::class, 'get_requested_revisions']);
     Route::post('/transaction/{transaction}/request_revision/', [TransactionController::class, 'request_revision']);
     Route::get('/transaction/{transaction}/approve_revision/', [TransactionController::class, 'approve_revision']);
+    Route::get('/transaction/{transaction}/reject_finance', [TransactionController::class, 'reject_finance']);
     Route::apiResource('transaction', TransactionController::class);
     Route::post('/transaction/get_nota', [TransactionController::class, 'get_nota']);
     Route::post('/transaction/{transaction}/approve_finance', [TransactionController::class, 'approve_finance']);
