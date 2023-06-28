@@ -18,6 +18,7 @@ class VehicleLeanResource extends JsonResource
             "id" => $this->id,
             'name' => $this->name,
             'type' => $this->type,
+            'trip_count' => $this->trip_count
         ];
     }
 }
