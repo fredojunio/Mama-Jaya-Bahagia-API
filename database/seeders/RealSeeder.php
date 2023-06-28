@@ -426,7 +426,7 @@ class RealSeeder extends Seeder
         $role->birthdate = "1967-01-07";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->thr =0;
+        $role->thr = 0;
         $role->cashback_days = 8;
         $role->tonnage = 750;
         $role->save();
@@ -439,7 +439,7 @@ class RealSeeder extends Seeder
         $role->birthdate = "1967-01-09";
         $role->type = "Eceran";
         $role->tb = 500000;
-        $role->thr =0;
+        $role->thr = 0;
         $role->save();
 
         $role = new Customer();
