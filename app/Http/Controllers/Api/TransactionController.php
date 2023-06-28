@@ -318,7 +318,7 @@ class TransactionController extends Controller
         $customer = Customer::find($transaction->customer_id);
         $payment = Payment::create([
             'amount' => $request->amount,
-            'customer_id' => $customer->id,
+            'customer_id' => $customer ? $customer->id : null,
             'transaction_id' => $transaction->id
         ]);
         $total_payments = Payment::where("transaction_id", $transaction->id)
@@ -333,26 +333,28 @@ class TransactionController extends Controller
                 $tonnage_transaction += $rit_transaction->tonnage;
             }
 
-            $saving = Saving::create([
-                "tb" => $transaction->tb ?? 0,
-                "tw" => $transaction->tw ?? 0,
-                "thr" => $transaction->thr ?? 0,
-                "tonnage" => $tonnage_transaction,
-                "total_tw" => $customer->tw + $transaction->tw,
-                "total_tb" => $customer->tb + $transaction->tb,
-                "total_thr" => $customer->thr + $transaction->thr,
-                "total_tonnage" => $customer->tonnage + $tonnage_transaction,
-                "type" => "Pemasukan",
-                "customer_id" => $transaction->customer_id,
-                "transaction_id" => $transaction->id,
-            ]);
+            if ($transaction->type != "Cas") {
+                $saving = Saving::create([
+                    "tb" => $transaction->tb ?? 0,
+                    "tw" => $transaction->tw ?? 0,
+                    "thr" => $transaction->thr ?? 0,
+                    "tonnage" => $tonnage_transaction,
+                    "total_tw" => $customer->tw + $transaction->tw,
+                    "total_tb" => $customer->tb + $transaction->tb,
+                    "total_thr" => $customer->thr + $transaction->thr,
+                    "total_tonnage" => $customer->tonnage + $tonnage_transaction,
+                    "type" => "Pemasukan",
+                    "customer_id" => $transaction->customer_id,
+                    "transaction_id" => $transaction->id,
+                ]);
 
-            $customer->update([
-                "tb" => $saving->total_tb,
-                "tw" => $saving->total_tw,
-                "thr" => $saving->total_thr,
-                "tonnage" => $saving->total_tonnage,
-            ]);
+                $customer->update([
+                    "tb" => $saving->total_tb,
+                    "tw" => $saving->total_tw,
+                    "thr" => $saving->total_thr,
+                    "tonnage" => $saving->total_tonnage,
+                ]);
+            }
         }
 
         $return = [
