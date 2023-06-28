@@ -20,7 +20,10 @@ class ReportTransactionResource extends JsonResource
             "amount" => $this->amount,
             "transaction_date" => $this->transaction_date,
             "settled_date" => $this->settled_date,
-            "transaction" => ["customer" => ["nickname" => $this->transaction->customer->nickname]],
+            "transaction" => [
+                "customer" => $this->transaction->customer_id ? ["nickname" => $this->transaction->customer->nickname] : null,
+                "type" => $this->transaction->type
+            ],
             "report_id" => $this->report_id
         ];
     }
