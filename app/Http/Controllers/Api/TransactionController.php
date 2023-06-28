@@ -143,7 +143,7 @@ class TransactionController extends Controller
         }
         $customer = Customer::find($request->customer_id);
         $trip = null;
-        if ($customer->type == "Kiriman") {
+        if ($customer->type == "Kiriman" && $request->vehicle_id) {
             $trip = Trip::create([
                 "allowance" => $request->allowance,
                 "toll" => $request->toll,
@@ -169,7 +169,7 @@ class TransactionController extends Controller
             "discount" => $request->discount ?? 0,
             "ongkir" => $request->ongkir,
             "total_price" => $request->total_price,
-            "owner_approved" => $trip ? 0 : 1,
+            "owner_approved" => $customer->type == "Kiriman" ? 0 : 1,
             "customer_id" => $request->customer_id,
             "trip_id" => $trip ? $trip->id : null,
             "type" => $customer->type,
@@ -429,28 +429,30 @@ class TransactionController extends Controller
     {
         if ($request->owner_approved == 1) {
             //NOTE - Approved
-            $trip = Trip::find($transaction->trip_id);
-            $trip->update([
-                "finance_approved" => 1
-            ]);
-            $vehicle = Vehicle::find($trip->vehicle_id);
-            if ($trip->gas > 0) {
-                $vehicle->update([
-                    "trip_count" => 1,
+            if ($transaction->trip_id) {
+                $trip = Trip::find($transaction->trip_id);
+                $trip->update([
+                    "finance_approved" => 1
                 ]);
-            } else {
-                $vehicle->update([
-                    "trip_count" => $vehicle->trip_count + 1,
+                $vehicle = Vehicle::find($trip->vehicle_id);
+                if ($trip->gas > 0) {
+                    $vehicle->update([
+                        "trip_count" => 1,
+                    ]);
+                } else {
+                    $vehicle->update([
+                        "trip_count" => $vehicle->trip_count + 1,
+                    ]);
+                }
+                $customer = Customer::find($transaction->customer_id);
+                Expense::create([
+                    "amount" => $trip->allowance + $trip->toll + $trip->gas,
+                    "note" => "Penjualan Ke " . $customer->name,
+                    "time" => Carbon::now(),
+                    "type" => "Kendaraan",
+                    "trip_id" => $trip->id
                 ]);
             }
-            $customer = Customer::find($transaction->customer_id);
-            Expense::create([
-                "amount" => $trip->allowance + $trip->toll + $trip->gas,
-                "note" => "Penjualan Ke " . $customer->name,
-                "time" => Carbon::now(),
-                "type" => "Kendaraan",
-                "trip_id" => $trip->id
-            ]);
             $transaction->update([
                 "owner_approved" => 1,
             ]);
