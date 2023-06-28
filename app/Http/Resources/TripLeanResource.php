@@ -19,6 +19,7 @@ class TripLeanResource extends JsonResource
             "created_at" => $this->created_at,
             "allowance" => $this->allowance,
             "toll" => $this->toll,
+            "toll_used" => $this->toll_used,
             "gas" => $this->gas,
             "note" => $this->note,
             "finance_approved" => $this->finance_approved,
