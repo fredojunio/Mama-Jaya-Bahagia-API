@@ -19,6 +19,7 @@ class ReportRitResource extends JsonResource
             "created_at" => $this->created_at,
             "tonnage_left" => $this->tonnage_left,
             "tonnage_sold" => $this->tonnage_sold,
+            "real_tonnage" => $this->real_tonnage,
             "total_tonnage_sold" => $this->total_tonnage_sold,
             "rit" => [
                 "item" => ["code" => $this->rit->item->code],

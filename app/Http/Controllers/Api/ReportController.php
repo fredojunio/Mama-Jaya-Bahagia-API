@@ -52,7 +52,7 @@ class ReportController extends Controller
         return SuccessResource::make($return);
     }
 
-    public function create_daily_report()
+    public function create_daily_report(Request $request)
     {
         $income = Payment::whereDate('created_at', Carbon::today())
             ->sum('amount');
@@ -141,10 +141,10 @@ class ReportController extends Controller
                 ->first();
             $totalTonnageTimesMasak = $transactions->total_tonnage_times_masak;
 
-
             $report_rit = ReportRit::create([
                 "tonnage_left" => $rit->tonnage_left,
                 "tonnage_sold" => $totalTonnageTimesMasakToday,
+                "real_tonnage" => $request->rits[$key]["real_tonnage"],
                 "total_tonnage_sold" => $totalTonnageTimesMasak,
                 "rit_id" => $rit->id,
                 "report_id" => $report->id
@@ -181,6 +181,8 @@ class ReportController extends Controller
 
     public function get_today_report()
     {
+        ReportRit::whereNull('report_id')->delete();
+        ReportTransaction::whereNull('report_id')->delete();
         $income = Payment::whereDate('created_at', Carbon::today())
             ->sum('amount');
         $allincome = Transaction::whereDate('settled_date', Carbon::today())
@@ -274,6 +276,7 @@ class ReportController extends Controller
             $report_rit = new ReportRit;
             $report_rit->tonnage_left = $rit->tonnage_left;
             $report_rit->tonnage_sold = $totalTonnageTimesMasakToday;
+            $report_rit->real_tonnage = null;
             $report_rit->total_tonnage_sold = $totalTonnageTimesMasak;
             $report_rit->rit_id = $rit->id;
             $report_rit->report_id = $report->id;
@@ -336,7 +339,6 @@ class ReportController extends Controller
      */
     public function store(Request $request)
     {
-        return "asd";
         $report = Report::create([
             "money" => $request->money,
             "income" => $request->income,
