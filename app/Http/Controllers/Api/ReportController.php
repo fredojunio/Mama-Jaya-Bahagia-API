@@ -134,6 +134,9 @@ class ReportController extends Controller
                 ->select(DB::raw('SUM(rit_transactions.tonnage * rit_transactions.masak) AS total_tonnage_times_masak'))
                 ->first();
             $totalTonnageTimesMasakToday = $todayTransactions->total_tonnage_times_masak;
+            $totalItemPrice = RitTransaction::where('rit_id', $rit->id)
+                ->whereDate('created_at', Carbon::today())
+                ->sum('total_price');
             $transactions = DB::table('transactions')
                 ->join('rit_transactions', 'transactions.id', '=', 'rit_transactions.transaction_id')
                 ->where('rit_transactions.rit_id', $rit->id)
@@ -144,6 +147,7 @@ class ReportController extends Controller
             $report_rit = ReportRit::create([
                 "tonnage_left" => $rit->tonnage_left,
                 "tonnage_sold" => $totalTonnageTimesMasakToday,
+                "tonnage_sold_price" => $totalItemPrice,
                 "real_tonnage" => $request->rits[$key]["real_tonnage"],
                 "total_tonnage_sold" => $totalTonnageTimesMasak,
                 "rit_id" => $rit->id,
@@ -264,6 +268,9 @@ class ReportController extends Controller
                 ->select(DB::raw('SUM(rit_transactions.tonnage * rit_transactions.masak) AS total_tonnage_times_masak'))
                 ->first();
             $totalTonnageTimesMasakToday = $todayTransactions->total_tonnage_times_masak;
+            $totalItemPrice = RitTransaction::where('rit_id', $rit->id)
+                ->whereDate('created_at', Carbon::today())
+                ->sum('total_price');
             $transactions = DB::table('transactions')
                 ->join('rit_transactions', 'transactions.id', '=', 'rit_transactions.transaction_id')
                 ->where('rit_transactions.rit_id', $rit->id)
@@ -276,6 +283,7 @@ class ReportController extends Controller
             $report_rit = new ReportRit;
             $report_rit->tonnage_left = $rit->tonnage_left;
             $report_rit->tonnage_sold = $totalTonnageTimesMasakToday;
+            $report_rit->tonnage_sold_price = $totalItemPrice;
             $report_rit->real_tonnage = null;
             $report_rit->total_tonnage_sold = $totalTonnageTimesMasak;
             $report_rit->rit_id = $rit->id;

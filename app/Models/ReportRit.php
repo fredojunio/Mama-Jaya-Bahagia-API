@@ -11,6 +11,7 @@ class ReportRit extends Model
     protected $fillable = [
         "tonnage_left",
         "tonnage_sold",
+        "tonnage_sold_price",
         "real_tonnage",
         "total_tonnage_sold",
         "rit_id",
