@@ -315,6 +315,10 @@ class RitController extends Controller
             'api_results' => RitResource::make($rit)
         ];
         $trip = Trip::find($rit->trip_id);
+        if ($rit->customer_tonnage > 0) {
+            $transaction = Transaction::where("trip_id", $trip->id)->first();
+            $transaction->delete();
+        }
         $trip->delete();
         $rit->delete();
         return SuccessResource::make($return);
