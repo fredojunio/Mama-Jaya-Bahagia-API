@@ -320,6 +320,7 @@ class TransactionController extends Controller
         $customer = Customer::find($transaction->customer_id);
         $payment = Payment::create([
             'amount' => $request->amount,
+            'type' => $request->transfer ? 'Transfer' : 'Cash',
             'customer_id' => $customer ? $customer->id : null,
             'transaction_id' => $transaction->id
         ]);

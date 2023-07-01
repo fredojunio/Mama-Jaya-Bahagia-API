@@ -18,6 +18,7 @@ class PaymentResource extends JsonResource
             "id" => $this->id,
             "created_at" => $this->created_at,
             "amount" => $this->amount,
+            "type" => $this->type,
             "customer_id" => $this->customer_id,
             "transaction_id" => $this->transaction_id
         ];

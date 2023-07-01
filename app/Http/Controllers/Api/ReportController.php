@@ -55,6 +55,7 @@ class ReportController extends Controller
     public function create_daily_report(Request $request)
     {
         $income = Payment::whereDate('created_at', Carbon::today())
+            ->where('type', 'Cash')
             ->sum('amount');
         $allincome = Transaction::whereDate('settled_date', Carbon::today())
             ->sum('total_price');
@@ -188,6 +189,7 @@ class ReportController extends Controller
         ReportRit::whereNull('report_id')->delete();
         ReportTransaction::whereNull('report_id')->delete();
         $income = Payment::whereDate('created_at', Carbon::today())
+            ->where('type', 'Cash')
             ->sum('amount');
         $allincome = Transaction::whereDate('settled_date', Carbon::today())
             ->sum('total_price');
