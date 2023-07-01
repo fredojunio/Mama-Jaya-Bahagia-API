@@ -57,7 +57,7 @@ class ReportController extends Controller
         $income = Payment::whereDate('created_at', Carbon::today())
             ->where('type', 'Cash')
             ->sum('amount');
-        $allincome = Transaction::whereDate('settled_date', Carbon::today())
+        $allincome = Transaction::whereDate('created_at', Carbon::today())
             ->sum('total_price');
         $expense = Expense::whereDate('time', Carbon::today())->sum('amount');
         $tonnage = Transaction::whereDate('created_at', Carbon::today())
@@ -191,7 +191,7 @@ class ReportController extends Controller
         $income = Payment::whereDate('created_at', Carbon::today())
             ->where('type', 'Cash')
             ->sum('amount');
-        $allincome = Transaction::whereDate('settled_date', Carbon::today())
+        $allincome = Transaction::whereDate('created_at', Carbon::today())
             ->sum('total_price');
         $expense = Expense::whereDate('time', Carbon::today())->sum('amount');
         $tonnage = Transaction::whereDate('created_at', Carbon::today())
