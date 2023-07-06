@@ -184,7 +184,7 @@ class RitController extends Controller
             "customer_id" => $request->send_to_customer ? $request->customer_id : null
         ]);
         RitHistory::create([
-            "info" => "Buat rit baru ID: " . $rit->id,
+            "info" => "Buat rit baru. ID: " . $rit->id,
             "rit_id" => $rit->id
         ]);
 
@@ -267,7 +267,7 @@ class RitController extends Controller
             'delivery_date' => Carbon::now()
         ]);
         RitHistory::create([
-            "info" => "Rit di approve finance. ",
+            "info" => "Rit di approve finance.",
             "rit_id" => $rit->id
         ]);
         $trip = Trip::find($rit->trip_id);
@@ -342,7 +342,7 @@ class RitController extends Controller
             'tonnage_left' => $request->tonnage,
         ]);
         RitHistory::create([
-            "info" => "Rit sudah datang. " . " | Tonase datang: $request->tonnage",
+            "info" => "Rit sudah datang, Tonase datang: $request->tonnage",
             "rit_id" => $rit->id
         ]);
         if ($rit->customer_tonnage) {
@@ -519,7 +519,7 @@ class RitController extends Controller
             "is_hold" => $rit->sold_date ? 1 : $rit->is_hold,
         ]);
         RitHistory::create([
-            "info" => "Rit ditambah dari cabang. " . " Tonase yang ditambahkan: $request->tonnage, Sisa tonase setelah ditambahkan: $rit->tonnage_left",
+            "info" => "Rit ditambah dari cabang. Tonase yang ditambahkan: $request->tonnage, Sisa tonase setelah ditambahkan: $rit->tonnage_left",
             "rit_id" => $rit->id
         ]);
         $amount = $request->tonnage;
