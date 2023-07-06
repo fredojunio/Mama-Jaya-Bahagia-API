@@ -19,6 +19,7 @@ class ReportResource extends JsonResource
             "created_at" => $this->created_at,
             "money" => $this->money,
             "income" => $this->income,
+            "real_income" => $this->real_income,
             "expense" => $this->expense,
             "tonnage" => $this->tonnage,
             "item_income" => $this->item_income,

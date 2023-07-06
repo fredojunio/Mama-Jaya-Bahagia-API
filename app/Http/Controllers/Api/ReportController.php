@@ -113,6 +113,7 @@ class ReportController extends Controller
         $report = Report::create([
             "money" => $income - $expense,
             "income" => $allincome,
+            "real_income" => $request->real_income,
             "expense" => $expense,
             "tonnage" => $tonnage,
             "item_income" => $item_income,

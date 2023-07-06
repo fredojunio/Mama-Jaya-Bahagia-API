@@ -11,6 +11,7 @@ class Report extends Model
     protected $fillable = [
         "money",
         "income",
+        "real_income",
         "expense",
         "tonnage",
         "item_income",
