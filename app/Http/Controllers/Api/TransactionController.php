@@ -15,6 +15,7 @@ use App\Models\Expense;
 use App\Models\Payment;
 use App\Models\Rit;
 use App\Models\RitBranch;
+use App\Models\RitHistory;
 use App\Models\RitTransaction;
 use App\Models\Sack;
 use App\Models\Saving;
@@ -210,9 +211,17 @@ class TransactionController extends Controller
             $rite->update([
                 'tonnage_left' => $rit_transaction->tonnage_left,
             ]);
+            RitHistory::create([
+                "info" => "Rit dibeli oleh: $customer->nickname, Jumlah tonase: " . ($rit["tonnage"] * $rit["masak"]) . " Tonase sisa: $rite->tonnage_left",
+                "rit_id" => $rite->id
+            ]);
             if ($rite->tonnage_left == 0) {
                 $rite->update([
                     "sold_date" => Carbon::now()
+                ]);
+                RitHistory::create([
+                    "info" => "Rit habis terjual.",
+                    "rit_id" => $rite->id
                 ]);
             }
         }
@@ -408,7 +417,15 @@ class TransactionController extends Controller
                     $rite->update([
                         "sold_date" => null
                     ]);
+                    RitHistory::create([
+                        "info" => "Rit tidak jadi habis terjual karena nota di reject oleh finance.",
+                        "rit_id" => $rite->id
+                    ]);
                 }
+                RitHistory::create([
+                    "info" => "Rit di reject oleh finance, Tonase asli: $rite->tonnage_left, Tambahan tonase karena direject: " . ($rit["tonnage"] * $rit["masak"]),
+                    "rit_id" => $rite->id
+                ]);
                 $rite->update([
                     'tonnage_left' => $rite->tonnage_left + ($rit["tonnage"] * $rit["masak"]),
                 ]);
@@ -488,7 +505,15 @@ class TransactionController extends Controller
                     $rite->update([
                         "sold_date" => null
                     ]);
+                    RitHistory::create([
+                        "info" => "Rit tidak jadi habis terjual karena nota di reject oleh owner.",
+                        "rit_id" => $rite->id
+                    ]);
                 }
+                RitHistory::create([
+                    "info" => "Rit di reject oleh owner, Tonase asli: $rite->tonnage_left, Tambahan tonase karena direject: " . ($rit["tonnage"] * $rit["masak"]),
+                    "rit_id" => $rite->id
+                ]);
                 $rite->update([
                     'tonnage_left' => $rite->tonnage_left + ($rit["tonnage"] * $rit["masak"]),
                 ]);
@@ -522,6 +547,10 @@ class TransactionController extends Controller
             $rite = Rit::find($rit['item']['id']);
             $rite->update([
                 "customer_transaction_id" => $transaction->id,
+            ]);
+            RitHistory::create([
+                "info" => "Rit untuk customer sudah terjual. Harga: " . $request->item_prices,
+                "rit_id" => $rite->id
             ]);
             $rit_transaction = RitTransaction::create([
                 "daily_id" => $transaction->daily_id,
@@ -626,7 +655,15 @@ class TransactionController extends Controller
                 $rite->update([
                     "sold_date" => null
                 ]);
+                RitHistory::create([
+                    "info" => "Rit tidak jadi habis terjual karena di approve untuk revisi.",
+                    "rit_id" => $rite->id
+                ]);
             }
+            RitHistory::create([
+                "info" => "Rit di approve untuk revisi, Tonase asli: $rite->tonnage_left, Tambahan tonase karena direvisi: " . ($rit["tonnage"] * $rit["masak"]),
+                "rit_id" => $rite->id
+            ]);
             $rite->update([
                 'tonnage_left' => $rite->tonnage_left + ($rit["tonnage"] * $rit["masak"]),
             ]);

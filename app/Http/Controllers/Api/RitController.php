@@ -12,6 +12,7 @@ use App\Models\Expense;
 use App\Models\Item;
 use App\Models\Rit;
 use App\Models\RitBranch;
+use App\Models\RitHistory;
 use App\Models\Sack;
 use App\Models\Transaction;
 use App\Models\Trip;
@@ -182,6 +183,10 @@ class RitController extends Controller
             "trip_id" => $trip->id,
             "customer_id" => $request->send_to_customer ? $request->customer_id : null
         ]);
+        RitHistory::create([
+            "info" => "Buat rit baru ID: " . $rit->id,
+            "rit_id" => $rit->id
+        ]);
 
         $return = [
             'api_code' => 200,
@@ -261,6 +266,10 @@ class RitController extends Controller
             'finance_approved' => 1,
             'delivery_date' => Carbon::now()
         ]);
+        RitHistory::create([
+            "info" => "Rit di approve finance. ",
+            "rit_id" => $rit->id
+        ]);
         $trip = Trip::find($rit->trip_id);
         $trip->update([
             "finance_approved" => 1
@@ -332,6 +341,10 @@ class RitController extends Controller
             'arrived_tonnage' => $request->tonnage,
             'tonnage_left' => $request->tonnage,
         ]);
+        RitHistory::create([
+            "info" => "Rit sudah datang. " . " | Tonase datang: $request->tonnage",
+            "rit_id" => $rit->id
+        ]);
         if ($rit->customer_tonnage) {
             $users = User::where("role_id", 1)->get();
             $emailArray = $users->pluck('email')->toArray();
@@ -365,6 +378,10 @@ class RitController extends Controller
             "sell_price" => $request->sell_price,
             "buy_price" => $request->buy_price,
             "is_hold" => $request->is_hold ? 1 : 0
+        ]);
+        RitHistory::create([
+            "info" => "Rit pengubahan status dari owner. " . " Harga Jual: $request->sell_price, Harga Beli: $request->buy_price, Hold: $request->is_hold, Tonase sisa: $request->tonnage",
+            "rit_id" => $rit->id
         ]);
         $return = [
             'api_code' => 200,
@@ -424,6 +441,10 @@ class RitController extends Controller
                 "tonnage_left" => $rite->tonnage_left - $rit["amount"],
                 "sold_date" => $rite->tonnage_left == $rit["amount"] ? Carbon::now() : $rite->sold_date
             ]);
+            RitHistory::create([
+                "info" => "Rit dikirim ke cabang. Jumlah tonase yang dikirim: " . $rit['amount'],
+                "rit_id" => $rite->id
+            ]);
             if ($rite->sold_date) {
                 $users = User::where("role_id", 1)->get();
                 $emailArray = $users->pluck('email')->toArray();
@@ -476,6 +497,10 @@ class RitController extends Controller
             'tonnage_left' => $rit->tonnage_left - $request->tonnage,
             'retur_trip_id' => $trip->id
         ]);
+        RitHistory::create([
+            "info" => "Rit di retur. " . " Jumlah Tonase retur: $request->tonnage, Trip ID: $trip->id, Sisa Tonase setelah retur: $rit->tonnage_left",
+            "rit_id" => $rit->id
+        ]);
 
         $return = [
             'api_code' => 200,
@@ -492,6 +517,10 @@ class RitController extends Controller
             "tonnage_left" => $request->tonnage + $rit->tonnage_left,
             "sold_date" => $rit->sold_date ? null : $rit->sold_date,
             "is_hold" => $rit->sold_date ? 1 : $rit->is_hold,
+        ]);
+        RitHistory::create([
+            "info" => "Rit ditambah dari cabang. " . " Tonase yang ditambahkan: $request->tonnage, Sisa tonase setelah ditambahkan: $rit->tonnage_left",
+            "rit_id" => $rit->id
         ]);
         $amount = $request->tonnage;
         foreach ($rit->branches as $key => $ritBranch) {

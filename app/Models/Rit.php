@@ -60,4 +60,8 @@ class Rit extends Model
     {
         return $this->hasMany(RitTransaction::class, 'rit_id', 'id');
     }
+    public function histories()
+    {
+        return $this->hasMany(RitHistory::class, 'rit_id', 'id');
+    }
 }
