@@ -23,6 +23,7 @@ class Report extends Model
         "thr_expense",
         "salary_expense",
         "operational_expense",
+        "created_at"
     ];
     public function rits()
     {

@@ -54,126 +54,132 @@ class ReportController extends Controller
 
     public function create_daily_report(Request $request)
     {
-        $income = Payment::whereDate('created_at', Carbon::today())
-            ->where('type', 'Cash')
-            ->sum('amount');
-        $allincome = Transaction::whereDate('created_at', Carbon::today())
-            ->sum('total_price');
-        $expense = Expense::whereDate('time', Carbon::today())->sum('amount');
-        $tonnage = Transaction::whereDate('created_at', Carbon::today())
-            ->with('rits')
-            ->get()
-            ->pluck('rits')
-            ->flatten()
-            ->sum('tonnage');
-        $item_income = Transaction::where('owner_approved', 1)
-            ->whereDate('created_at', Carbon::today())
-            ->sum('item_price');
-        $tb_income = Transaction::where('owner_approved', 1)
-            ->whereDate('created_at', Carbon::today())
-            ->sum('tb');
-        $tb_savings = Saving::whereNull('transaction_id')
-            ->whereDate('created_at', Carbon::today())
-            ->sum('tb');
-        $tw_income = Transaction::where('owner_approved', 1)
-            ->whereDate('created_at', Carbon::today())
-            ->sum('tw');
-        $tw_savings = Saving::whereNull('transaction_id')
-            ->whereDate('created_at', Carbon::today())
-            ->sum('tw');
-        $thr_income = Transaction::where('owner_approved', 1)
-            ->whereDate('created_at', Carbon::today())
-            ->sum('thr');
-        $thr_savings = Saving::whereNull('transaction_id')
-            ->whereDate('created_at', Carbon::today())
-            ->sum('thr');
-        $sack_income = Transaction::where('owner_approved', 1)
-            ->whereDate('created_at', Carbon::today())
-            ->sum('sack_price');
-        $cas_income = Cas::whereDate('created_at', Carbon::today())
-            ->sum('fee');
-        $tb_expense = Expense::whereDate('time', Carbon::today())
-            ->where('type', "TB")
-            ->sum('amount');
-        $tw_expense = Expense::whereDate('time', Carbon::today())
-            ->where('type', "TW")
-            ->sum('amount');
-        $thr_expense = Expense::whereDate('time', Carbon::today())
-            ->where('type', "THR")
-            ->sum('amount');
-        $salary_expense = Expense::whereDate('time', Carbon::today())
-            ->where('type', "Gaji")
-            ->sum('amount');
-        $operational_expense = Expense::whereDate('time', Carbon::today())
-            ->where('type', "Operasional")
-            ->sum('amount');
-        $vehicle_expense = Expense::whereDate('time', Carbon::today())
-            ->where('type', "Kendaraan")
-            ->sum('amount');
-        $report = Report::create([
-            "money" => $income - $expense,
-            "income" => $allincome,
-            "expense" => $expense,
-            "tonnage" => $tonnage,
-            "item_income" => $item_income,
-            "tb_income" => $tb_income + $tb_savings,
-            "tw_income" => $tw_income + $tw_savings,
-            "thr_income" => $thr_income + $thr_savings,
-            "other_income" => $sack_income + $cas_income,
-            "tb_expense" => $tb_expense,
-            "tw_expense" => $tw_expense,
-            "thr_expense" => $thr_expense,
-            "salary_expense" => $salary_expense,
-            "operational_expense" => $operational_expense + $vehicle_expense,
-        ]);
-        $rits = Rit::where("tonnage_left", ">", 0)->orWhere("sold_date", Carbon::today())->get();
-        foreach ($rits as $key => $rit) {
-            $todayTransactions = DB::table('transactions')
-                ->whereDate('transactions.created_at', Carbon::today())
-                ->join('rit_transactions', 'transactions.id', '=', 'rit_transactions.transaction_id')
-                ->where('rit_transactions.rit_id', $rit->id)
-                ->select(DB::raw('SUM(rit_transactions.tonnage * rit_transactions.masak) AS total_tonnage_times_masak'))
-                ->first();
-            $totalTonnageTimesMasakToday = $todayTransactions->total_tonnage_times_masak;
-            $totalItemPrice = RitTransaction::where('rit_id', $rit->id)
-                ->whereDate('created_at', Carbon::today())
+        $exists = Report::whereDate('created_at', $request->report_date)->exists();
+        if ($exists) {
+            // Report::whereDate('created_at', $request->report_date)->first()->delete();
+        } else {
+            $income = Payment::whereDate('created_at', $request->report_date)
+                ->where('type', 'Cash')
+                ->sum('amount');
+            $allincome = Transaction::whereDate('created_at', $request->report_date)
                 ->sum('total_price');
-            $transactions = DB::table('transactions')
-                ->join('rit_transactions', 'transactions.id', '=', 'rit_transactions.transaction_id')
-                ->where('rit_transactions.rit_id', $rit->id)
-                ->select(DB::raw('SUM(rit_transactions.tonnage * rit_transactions.masak) AS total_tonnage_times_masak'))
-                ->first();
-            $totalTonnageTimesMasak = $transactions->total_tonnage_times_masak;
+            $expense = Expense::whereDate('time', $request->report_date)->sum('amount');
+            $tonnage = Transaction::whereDate('created_at', $request->report_date)
+                ->with('rits')
+                ->get()
+                ->pluck('rits')
+                ->flatten()
+                ->sum('tonnage');
+            $item_income = Transaction::where('owner_approved', 1)
+                ->whereDate('created_at', $request->report_date)
+                ->sum('item_price');
+            $tb_income = Transaction::where('owner_approved', 1)
+                ->whereDate('created_at', $request->report_date)
+                ->sum('tb');
+            $tb_savings = Saving::whereNull('transaction_id')
+                ->whereDate('created_at', $request->report_date)
+                ->sum('tb');
+            $tw_income = Transaction::where('owner_approved', 1)
+                ->whereDate('created_at', $request->report_date)
+                ->sum('tw');
+            $tw_savings = Saving::whereNull('transaction_id')
+                ->whereDate('created_at', $request->report_date)
+                ->sum('tw');
+            $thr_income = Transaction::where('owner_approved', 1)
+                ->whereDate('created_at', $request->report_date)
+                ->sum('thr');
+            $thr_savings = Saving::whereNull('transaction_id')
+                ->whereDate('created_at', $request->report_date)
+                ->sum('thr');
+            $sack_income = Transaction::where('owner_approved', 1)
+                ->whereDate('created_at', $request->report_date)
+                ->sum('sack_price');
+            $cas_income = Cas::whereDate('created_at', $request->report_date)
+                ->sum('fee');
+            $tb_expense = Expense::whereDate('time', $request->report_date)
+                ->where('type', "TB")
+                ->sum('amount');
+            $tw_expense = Expense::whereDate('time', $request->report_date)
+                ->where('type', "TW")
+                ->sum('amount');
+            $thr_expense = Expense::whereDate('time', $request->report_date)
+                ->where('type', "THR")
+                ->sum('amount');
+            $salary_expense = Expense::whereDate('time', $request->report_date)
+                ->where('type', "Gaji")
+                ->sum('amount');
+            $operational_expense = Expense::whereDate('time', $request->report_date)
+                ->where('type', "Operasional")
+                ->sum('amount');
+            $vehicle_expense = Expense::whereDate('time', $request->report_date)
+                ->where('type', "Kendaraan")
+                ->sum('amount');
+            $report = Report::create([
+                "money" => $income - $expense,
+                "income" => $allincome,
+                "expense" => $expense,
+                "tonnage" => $tonnage,
+                "item_income" => $item_income,
+                "tb_income" => $tb_income + $tb_savings,
+                "tw_income" => $tw_income + $tw_savings,
+                "thr_income" => $thr_income + $thr_savings,
+                "other_income" => $sack_income + $cas_income,
+                "tb_expense" => $tb_expense,
+                "tw_expense" => $tw_expense,
+                "thr_expense" => $thr_expense,
+                "salary_expense" => $salary_expense,
+                "operational_expense" => $operational_expense + $vehicle_expense,
+                "created_at" => $request->report_date
+            ]);
+            $rits = Rit::where("tonnage_left", ">", 0)->orWhere("sold_date", $request->report_date)->get();
+            foreach ($rits as $key => $rit) {
+                $todayTransactions = DB::table('transactions')
+                    ->whereDate('transactions.created_at', $request->report_date)
+                    ->join('rit_transactions', 'transactions.id', '=', 'rit_transactions.transaction_id')
+                    ->where('rit_transactions.rit_id', $rit->id)
+                    ->select(DB::raw('SUM(rit_transactions.tonnage * rit_transactions.masak) AS total_tonnage_times_masak'))
+                    ->first();
+                $totalTonnageTimesMasakToday = $todayTransactions->total_tonnage_times_masak;
+                $totalItemPrice = RitTransaction::where('rit_id', $rit->id)
+                    ->whereDate('created_at', $request->report_date)
+                    ->sum('total_price');
+                $transactions = DB::table('transactions')
+                    ->join('rit_transactions', 'transactions.id', '=', 'rit_transactions.transaction_id')
+                    ->where('rit_transactions.rit_id', $rit->id)
+                    ->select(DB::raw('SUM(rit_transactions.tonnage * rit_transactions.masak) AS total_tonnage_times_masak'))
+                    ->first();
+                $totalTonnageTimesMasak = $transactions->total_tonnage_times_masak;
 
-            $report_rit = ReportRit::create([
-                "tonnage_left" => $rit->tonnage_left,
-                "tonnage_sold" => $totalTonnageTimesMasakToday,
-                "tonnage_sold_price" => $totalItemPrice,
-                "real_tonnage" => $request->rits[$key]["real_tonnage"],
-                "total_tonnage_sold" => $totalTonnageTimesMasak,
-                "rit_id" => $rit->id,
-                "report_id" => $report->id
-            ]);
-        }
-        $transactions = Transaction::whereNull("settled_date")
-            ->where(function ($query) {
-                $query
-                    ->where('owner_approved', '<>', 2)
-                    ->where('owner_approved', '<>', 3)
-                    ->orWhereNull('owner_approved');
-            })
-            ->where(function ($query) {
-                $query->whereNotNull('total_price');
-            })
-            ->get();
-        foreach ($transactions as $key => $transaction) {
-            ReportTransaction::create([
-                "amount" => $transaction->total_price,
-                "transaction_date" => $transaction->created_at,
-                "settled_date" => $transaction->settled_date,
-                "transaction_id" => $transaction->id,
-                "report_id" => $report->id,
-            ]);
+                $report_rit = ReportRit::create([
+                    "tonnage_left" => $rit->tonnage_left,
+                    "tonnage_sold" => $totalTonnageTimesMasakToday,
+                    "tonnage_sold_price" => $totalItemPrice,
+                    "real_tonnage" => $request->rits[$key]["real_tonnage"],
+                    "total_tonnage_sold" => $totalTonnageTimesMasak,
+                    "rit_id" => $rit->id,
+                    "report_id" => $report->id
+                ]);
+            }
+            $transactions = Transaction::whereNull("settled_date")
+                ->where(function ($query) {
+                    $query
+                        ->where('owner_approved', '<>', 2)
+                        ->where('owner_approved', '<>', 3)
+                        ->orWhereNull('owner_approved');
+                })
+                ->where(function ($query) {
+                    $query->whereNotNull('total_price');
+                })
+                ->get();
+            foreach ($transactions as $key => $transaction) {
+                ReportTransaction::create([
+                    "amount" => $transaction->total_price,
+                    "transaction_date" => $transaction->created_at,
+                    "settled_date" => $transaction->settled_date,
+                    "transaction_id" => $transaction->id,
+                    "report_id" => $report->id,
+                ]);
+            }
         }
         $return = [
             'api_code' => 200,
