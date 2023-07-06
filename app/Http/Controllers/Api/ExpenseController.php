@@ -34,9 +34,11 @@ class ExpenseController extends Controller
                 ->where("time", "<=", Carbon::createFromFormat('D M d Y H:i:s e+', $request->end_date)->toDateTimeString())
                 ->get();
         } else if ($request->filter == "Tabungan") {
-            $expenses = Expense::where("type", "TW")
-                ->orWhere("type", "TB")
-                ->orWhere("type", "THR")
+            $expenses = Expense::where(function ($query) {
+                $query->where("type", "TW")
+                    ->orWhere("type", "TB")
+                    ->orWhere("type", "THR");
+            })
                 ->where("time", ">=", Carbon::createFromFormat('D M d Y H:i:s e+', $request->start_date)->toDateTimeString())
                 ->where("time", "<=", Carbon::createFromFormat('D M d Y H:i:s e+', $request->end_date)->toDateTimeString())
                 ->get();
