@@ -93,7 +93,8 @@ class RitController extends Controller
         $rits = Rit::whereNull("sold_date")
             ->where(function ($query) {
                 $query->whereNull("tonnage_left")
-                    ->orWhere("tonnage_left", ">", 0);
+                    ->orWhere("tonnage_left", ">", 0)
+                    ->orWhere("tonnage_left", "<", 0);
             })
             ->get();
 
