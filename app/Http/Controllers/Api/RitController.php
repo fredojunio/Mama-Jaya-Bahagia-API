@@ -380,6 +380,15 @@ class RitController extends Controller
             "buy_price" => $request->buy_price,
             "is_hold" => $request->is_hold ? 1 : 0
         ]);
+        if ($rit->tonnage_left == 0) {
+            $rit->update([
+                "sold_date" => Carbon::now()
+            ]);
+            RitHistory::create([
+                "info" => "Rit habis terjual.",
+                "rit_id" => $rit->id
+            ]);
+        }
         RitHistory::create([
             "info" => "Rit pengubahan status dari owner. " . " Harga Jual: $request->sell_price, Harga Beli: $request->buy_price, Hold: $request->is_hold, Tonase sisa: $request->tonnage",
             "rit_id" => $rit->id
