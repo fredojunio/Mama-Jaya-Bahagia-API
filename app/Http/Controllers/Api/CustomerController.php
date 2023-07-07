@@ -34,6 +34,19 @@ class CustomerController extends Controller
         return SuccessResource::make($return);
     }
 
+    public function only_get_owner()
+    {
+        $customers = Customer::where('type', 'Owner')
+            ->get();
+        $return = [
+            'api_code' => 200,
+            'api_status' => true,
+            'api_message' => 'Sukses',
+            'api_results' => $customers
+        ];
+        return SuccessResource::make($return);
+    }
+
     public function get_lean_data()
     {
         $customers = Customer::all();

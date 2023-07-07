@@ -51,6 +51,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::apiResource('item', ItemController::class);
     Route::apiResource('cashback', CashbackController::class);
     Route::get('/customer/get_lean_data', [CustomerController::class, 'get_lean_data']);
+    Route::get('/customer/only_get_owner', [CustomerController::class, 'only_get_owner']);
     Route::apiResource('customer', CustomerController::class);
     Route::post('/customer/search', [CustomerController::class, 'search']);
     Route::post('/customer/{customer}/get_customer_transactions', [CustomerController::class, 'get_customer_transactions']);
