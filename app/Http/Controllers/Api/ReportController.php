@@ -335,6 +335,8 @@ class ReportController extends Controller
         $income = Payment::whereDate('created_at', Carbon::now()->subDays($request->days))
             ->where('type', 'Cash')
             ->sum('amount');
+        $transactions = Transaction::whereDate('created_at', Carbon::now()->subDays($request->days))->get();
+        return $transactions;
         $allincome = Transaction::whereDate('created_at', Carbon::now()->subDays($request->days))
             ->sum('total_price');
         $expense = Expense::whereDate('time', Carbon::now()->subDays($request->days))->sum('amount');
