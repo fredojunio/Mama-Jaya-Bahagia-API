@@ -374,6 +374,10 @@ class RitController extends Controller
 
     public function priced(Request $request, Rit $rit)
     {
+        RitHistory::create([
+            "info" => "Rit pengubahan status dari owner. " . " Harga Jual: $request->sell_price, Harga Beli: $request->buy_price, Hold: $request->is_hold, Tonase sisa baru: $request->tonnage, Tonase sisa sebelumnya: $rit->tonnage_left",
+            "rit_id" => $rit->id
+        ]);
         $rit->update([
             "tonnage_left" => $request->tonnage,
             "sell_price" => $request->sell_price,
@@ -389,10 +393,6 @@ class RitController extends Controller
                 "rit_id" => $rit->id
             ]);
         }
-        RitHistory::create([
-            "info" => "Rit pengubahan status dari owner. " . " Harga Jual: $request->sell_price, Harga Beli: $request->buy_price, Hold: $request->is_hold, Tonase sisa: $request->tonnage",
-            "rit_id" => $rit->id
-        ]);
         $return = [
             'api_code' => 200,
             'api_status' => true,
