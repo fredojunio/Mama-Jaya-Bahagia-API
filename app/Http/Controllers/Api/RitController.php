@@ -177,7 +177,7 @@ class RitController extends Controller
 
         $rit = Rit::create([
             "do_code" => $request->do_code,
-            "expected_tonnage" => $request->tonnage + ($request->send_to_customer ?  $request->customer["tonnage"] : 0),
+            "expected_tonnage" => $request->tonnage,
             "customer_tonnage" => $request->send_to_customer ? $request->customer["tonnage"] : null,
             "main_tonnage" => $request->tonnage,
             "item_id" => $request->item_id,
