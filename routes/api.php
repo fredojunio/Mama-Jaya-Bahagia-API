@@ -75,6 +75,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/trip/{trip}/surat_jalan/', [TripController::class, 'surat_jalan']);
     Route::apiResource('rit_transaction', RitTransactionController::class);
     Route::post('/transaction/get_completed_transactions', [TransactionController::class, 'get_completed_transactions']);
+    Route::post('/transaction/get_completed_owner_transactions', [TransactionController::class, 'get_completed_owner_transactions']);
     Route::get('/transaction/get_remaining_sack', [TransactionController::class, 'get_remaining_sack']);
     Route::get('/transaction/get_owner_nota', [TransactionController::class, 'get_owner_nota']);
     Route::get('/transaction/get_owner_transactions', [TransactionController::class, 'get_owner_transactions']);

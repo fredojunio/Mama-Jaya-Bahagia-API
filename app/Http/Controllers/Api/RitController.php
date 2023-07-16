@@ -297,7 +297,7 @@ class RitController extends Controller
         ]);
         if ($rit->customer_tonnage > 0) {
             $transaction = Transaction::create([
-                "daily_id" => Transaction::whereDate('created_at', now()->toDateString())->where('daily_id', '>', 90000)->get()->count() + 90000,
+                "daily_id" => Transaction::whereDate('created_at', now()->toDateString())->where('daily_id', '>=', 90000)->get()->count() + 90000,
                 "owner_approved" => 0,
                 "customer_id" => $rit->customer_id,
                 "trip_id" => $trip->id,
