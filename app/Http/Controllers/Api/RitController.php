@@ -384,7 +384,7 @@ class RitController extends Controller
             "buy_price" => $request->buy_price,
             "is_hold" => $request->is_hold ? 1 : 0
         ]);
-        if ($rit->tonnage_left == 0) {
+        if ($rit->tonnage_left == 0 && $rit->arrival_date) {
             $rit->update([
                 "sold_date" => Carbon::now()
             ]);
