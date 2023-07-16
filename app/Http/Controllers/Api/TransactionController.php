@@ -111,6 +111,7 @@ class TransactionController extends Controller
         $transactions = Transaction::where("created_at", ">=", Carbon::createFromFormat('D M d Y H:i:s e+', $request->start_date)->toDateTimeString())
             ->where("created_at", "<=", Carbon::createFromFormat('D M d Y H:i:s e+', $request->end_date)->toDateTimeString())
             ->where("owner_approved", 1)
+            ->where("daily_id", "<", 90000)
             ->get();
         $return = [
             'api_code' => 200,
@@ -158,7 +159,7 @@ class TransactionController extends Controller
             ]);
         }
         $transaction = Transaction::create([
-            "daily_id" => Transaction::whereDate('created_at', now()->toDateString())->get()->count() + 1,
+            "daily_id" => Transaction::whereDate('created_at', now()->toDateString())->where('daily_id', '<', 90000)->get()->count() + 1,
             "tb" => $request->tb,
             "tw" => $request->tw,
             "thr" => $request->thr,
@@ -580,7 +581,7 @@ class TransactionController extends Controller
                 "income" => $branch["income"] ?? 0
             ]);
             $transaction = Transaction::create([
-                "daily_id" => Transaction::whereDate('created_at', now()->toDateString())->get()->count() + 1,
+                "daily_id" => Transaction::whereDate('created_at', now()->toDateString())->where('daily_id', '>', 90000)->get()->count() + 90000,
                 "total_price" => $branch["income"],
                 "owner_approved" => 1,
                 "finance_approved" => 1,
