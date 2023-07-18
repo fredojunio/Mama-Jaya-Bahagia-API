@@ -143,21 +143,14 @@ class TransactionController extends Controller
      */
     public function store(Request $request)
     {
-        //NOTE - ini itu kalo misal dia nembak APInya lewat revisian ada variable old_id, yang buat ngeindikasi bahwa sudah di revisi
-        if ($request->old_id) {
-            $old_transaction = Transaction::find($request->old_id);
-            $old_transaction->owner_approved = 3;
-            $old_transaction->save();
-        } else {
-            $customer = Customer::find($request->customer_id);
-            $hasTransactionToday = $customer->transactions()
-                ->whereDate('created_at', Carbon::today())
-                ->exists();
-            if (!$hasTransactionToday) {
-                $customer->update([
-                    "cashback_days" => $customer->cashback_days + 1
-                ]);
-            }
+        $customer = Customer::find($request->customer_id);
+        $hasTransactionToday = $customer->transactions()
+            ->whereDate('created_at', Carbon::today())
+            ->exists();
+        if (!$hasTransactionToday) {
+            $customer->update([
+                "cashback_days" => $customer->cashback_days + 1
+            ]);
         }
         $customer = Customer::find($request->customer_id);
         $trip = null;
@@ -279,9 +272,9 @@ class TransactionController extends Controller
                 "toll" => $vehicle->toll - $trip->toll + $request->new_transaction["toll"]
             ]);
             $trip->update([
-                "allowance" => $request->allowance,
-                "toll" => $request->toll,
-                "gas" => $request->gas,
+                "allowance" => $request->new_transaction["allowance"],
+                "toll" => $request->new_transaction["toll"],
+                "gas" => $request->new_transaction["gas"],
             ]);
             if ($trip->finance_approved == 1) {
                 $trip->expense->update([
@@ -308,14 +301,18 @@ class TransactionController extends Controller
             "tw" => $request->new_transaction["tw"],
             "thr" => $request->new_transaction["thr"],
             "sack" => $request->new_transaction["sack"],
+            "sack_free" => $request->new_transaction["sack_free"],
             "sack_price" => $request->new_transaction["sack"] * 1500,
+            "other" => $request->new_transaction["other"],
             "item_price" => $request->new_transaction["item_prices"],
             "discount" => $request->new_transaction["discount"],
             "ongkir" => $request->new_transaction["ongkir"],
             "total_price" => $request->new_transaction["total_price"],
+            "customer_id" => $request->new_transaction["customer_id"],
+            "trip_id" => $customer->type == "Kiriman" ? $transaction->trip_id : null,
+            "type" => $customer->type,
             "revision_requested" => 0,
             "revision_allowed" => 0,
-            "created_at" => $customer->type != "Kiriman" ? $request->new_transaction["date"] : Carbon::now()
         ]);
         $return = [
             'api_code' => 200,
