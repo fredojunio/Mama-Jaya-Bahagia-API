@@ -222,7 +222,7 @@ class TransactionController extends Controller
                 'tonnage_left' => $rit_transaction->tonnage_left,
             ]);
             RitHistory::create([
-                "info" => "Rit dibeli oleh: $customer->nickname, Jumlah tonase: " . ($rit["tonnage"] * $rit["masak"]) . " Tonase sisa: $rite->tonnage_left",
+                "info" => "Rit dibeli oleh: {$customer->nickname}, Jumlah tonase: " . ($rit["tonnage"] * $rit["masak"]) . " Tonase sisa: {$rite->tonnage_left}",
                 "rit_id" => $rite->id
             ]);
             if ($rite->tonnage_left == 0) {
@@ -437,7 +437,7 @@ class TransactionController extends Controller
                     ]);
                 }
                 RitHistory::create([
-                    "info" => "Rit di reject oleh finance, Tonase asli: $rite->tonnage_left, Tambahan tonase karena direject: " . ($rit["tonnage"] * $rit["masak"]),
+                    "info" => "Rit di reject oleh finance, Tonase asli: {$rite->tonnage_left}, Tambahan tonase karena direject: " . ($rit["tonnage"] * $rit["masak"]),
                     "rit_id" => $rite->id
                 ]);
                 $rite->update([
@@ -525,7 +525,7 @@ class TransactionController extends Controller
                     ]);
                 }
                 RitHistory::create([
-                    "info" => "Rit di reject oleh owner, Tonase asli: $rite->tonnage_left, Tambahan tonase karena direject: " . ($rit["tonnage"] * $rit["masak"]),
+                    "info" => "Rit di reject oleh owner, Tonase asli: {$rite->tonnage_left}, Tambahan tonase karena direject: " . ($rit["tonnage"] * $rit["masak"]),
                     "rit_id" => $rite->id
                 ]);
                 $rite->update([
@@ -675,7 +675,7 @@ class TransactionController extends Controller
                 ]);
             }
             RitHistory::create([
-                "info" => "Rit di approve untuk revisi, Tonase asli: $rite->tonnage_left, Tambahan tonase karena direvisi: " . ($rit["tonnage"] * $rit["masak"]),
+                "info" => "Rit di approve untuk revisi, Tonase asli: {$rite->tonnage_left}, Tambahan tonase karena direvisi: " . ($rit["tonnage"] * $rit["masak"]),
                 "rit_id" => $rite->id
             ]);
             $rite->update([

@@ -375,7 +375,7 @@ class RitController extends Controller
     public function priced(Request $request, Rit $rit)
     {
         RitHistory::create([
-            "info" => "Rit pengubahan status dari owner. " . " Harga Jual: $request->sell_price, Harga Beli: $request->buy_price, Hold: $request->is_hold, Tonase sisa baru: $request->tonnage, Tonase sisa sebelumnya: $rit->tonnage_left",
+            "info" => "Rit pengubahan status dari owner. " . " Harga Jual: {$request->sell_price}, Harga Beli: {$request->buy_price}, Hold: {$request->is_hold}, Tonase sisa baru: {$request->tonnage}, Tonase sisa sebelumnya: {$rit->tonnage_left}",
             "rit_id" => $rit->id
         ]);
         $rit->update([
@@ -508,7 +508,7 @@ class RitController extends Controller
             'retur_trip_id' => $trip->id
         ]);
         RitHistory::create([
-            "info" => "Rit di retur. " . " Jumlah Tonase retur: $request->tonnage, Trip ID: $trip->id, Sisa Tonase setelah retur: $rit->tonnage_left",
+            "info" => "Rit di retur. " . " Jumlah Tonase retur: {$request->tonnage}, Trip ID: {$trip->id}, Sisa Tonase setelah retur: {$rit->tonnage_left}",
             "rit_id" => $rit->id
         ]);
 
@@ -529,7 +529,7 @@ class RitController extends Controller
             "is_hold" => $rit->sold_date ? 1 : $rit->is_hold,
         ]);
         RitHistory::create([
-            "info" => "Rit ditambah dari cabang. Tonase yang ditambahkan: $request->tonnage, Sisa tonase setelah ditambahkan: $rit->tonnage_left",
+            "info" => "Rit ditambah dari cabang. Tonase yang ditambahkan: {$request->tonnage}, Sisa tonase setelah ditambahkan: {$rit->tonnage_left}",
             "rit_id" => $rit->id
         ]);
         $amount = $request->tonnage;

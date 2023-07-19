@@ -58,9 +58,11 @@ class ReportController extends Controller
             ->where('type', 'Cash')
             ->sum('amount');
         $allincome = Transaction::whereDate('created_at', Carbon::today())
+            ->whereNotIn('type', ['Owner', 'Cabang'])
             ->sum('total_price');
         $expense = Expense::whereDate('time', Carbon::today())->sum('amount');
         $tonnage = Transaction::whereDate('created_at', Carbon::today())
+            ->whereNotIn('type', ['Owner', 'Cabang'])
             ->with('rits')
             ->get()
             ->pluck('rits')
@@ -68,6 +70,7 @@ class ReportController extends Controller
             ->sum('tonnage');
         $item_income = Transaction::where('owner_approved', 1)
             ->whereDate('created_at', Carbon::today())
+            ->whereNotIn('type', ['Owner', 'Cabang'])
             ->sum('item_price');
         $tb_income = Transaction::where('owner_approved', 1)
             ->whereDate('created_at', Carbon::today())
@@ -131,15 +134,20 @@ class ReportController extends Controller
         foreach ($rits as $key => $rit) {
             $todayTransactions = DB::table('transactions')
                 ->whereDate('transactions.created_at', Carbon::today())
+                ->whereNotIn('transactions.type', ['Owner', 'Cabang'])
                 ->join('rit_transactions', 'transactions.id', '=', 'rit_transactions.transaction_id')
                 ->where('rit_transactions.rit_id', $rit->id)
                 ->select(DB::raw('SUM(rit_transactions.tonnage * rit_transactions.masak) AS total_tonnage_times_masak'))
                 ->first();
             $totalTonnageTimesMasakToday = $todayTransactions->total_tonnage_times_masak;
             $totalItemPrice = RitTransaction::where('rit_id', $rit->id)
+                ->whereHas('transaction', function ($query) {
+                    $query->whereNotIn('type', ['Owner', 'Cabang']);
+                })
                 ->whereDate('created_at', Carbon::today())
                 ->sum('total_price');
             $transactions = DB::table('transactions')
+                ->whereNotIn('transactions.type', ['Owner', 'Cabang'])
                 ->join('rit_transactions', 'transactions.id', '=', 'rit_transactions.transaction_id')
                 ->where('rit_transactions.rit_id', $rit->id)
                 ->select(DB::raw('SUM(rit_transactions.tonnage * rit_transactions.masak) AS total_tonnage_times_masak'))
@@ -193,9 +201,11 @@ class ReportController extends Controller
             ->where('type', 'Cash')
             ->sum('amount');
         $allincome = Transaction::whereDate('created_at', Carbon::today())
+            ->whereNotIn('type', ['Owner', 'Cabang'])
             ->sum('total_price');
         $expense = Expense::whereDate('time', Carbon::today())->sum('amount');
         $tonnage = Transaction::whereDate('created_at', Carbon::today())
+            ->whereNotIn('type', ['Owner', 'Cabang'])
             ->with('rits')
             ->get()
             ->pluck('rits')
@@ -203,6 +213,7 @@ class ReportController extends Controller
             ->sum('tonnage');
         $item_income = Transaction::where('owner_approved', 1)
             ->whereDate('created_at', Carbon::today())
+            ->whereNotIn('type', ['Owner', 'Cabang'])
             ->sum('item_price');
         $tb_income = Transaction::where('owner_approved', 1)
             ->whereDate('created_at', Carbon::today())
@@ -266,15 +277,20 @@ class ReportController extends Controller
         foreach ($rits as $key => $rit) {
             $todayTransactions = DB::table('transactions')
                 ->whereDate('transactions.created_at', Carbon::today())
+                ->whereNotIn('transactions.type', ['Owner', 'Cabang'])
                 ->join('rit_transactions', 'transactions.id', '=', 'rit_transactions.transaction_id')
                 ->where('rit_transactions.rit_id', $rit->id)
                 ->select(DB::raw('SUM(rit_transactions.tonnage * rit_transactions.masak) AS total_tonnage_times_masak'))
                 ->first();
             $totalTonnageTimesMasakToday = $todayTransactions->total_tonnage_times_masak;
             $totalItemPrice = RitTransaction::where('rit_id', $rit->id)
+                ->whereHas('transaction', function ($query) {
+                    $query->whereNotIn('type', ['Owner', 'Cabang']);
+                })
                 ->whereDate('created_at', Carbon::today())
                 ->sum('total_price');
             $transactions = DB::table('transactions')
+                ->whereNotIn('transactions.type', ['Owner', 'Cabang'])
                 ->join('rit_transactions', 'transactions.id', '=', 'rit_transactions.transaction_id')
                 ->where('rit_transactions.rit_id', $rit->id)
                 ->select(DB::raw('SUM(rit_transactions.tonnage * rit_transactions.masak) AS total_tonnage_times_masak'))
