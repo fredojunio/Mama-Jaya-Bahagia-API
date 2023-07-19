@@ -54,6 +54,11 @@ class ReportController extends Controller
 
     public function create_daily_report(Request $request)
     {
+        $old_report = Report::whereDate('created_at', Carbon::today())
+            ->first();
+        if ($old_report) {
+            $old_report->delete();
+        }
         $income = Payment::whereDate('created_at', Carbon::today())
             ->where('type', 'Cash')
             ->sum('amount');
@@ -352,7 +357,6 @@ class ReportController extends Controller
             ->where('type', 'Cash')
             ->sum('amount');
         $transactions = Transaction::whereDate('created_at', Carbon::now()->subDays($request->days))->get();
-        return $transactions;
         $allincome = Transaction::whereDate('created_at', Carbon::now()->subDays($request->days))
             ->sum('total_price');
         $expense = Expense::whereDate('time', Carbon::now()->subDays($request->days))->sum('amount');
