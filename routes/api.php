@@ -87,7 +87,8 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('/transaction/get_nota', [TransactionController::class, 'get_nota']);
     Route::post('/transaction/{transaction}/approve_finance', [TransactionController::class, 'approve_finance']);
     Route::post('/transaction/{transaction}/approve_nota', [TransactionController::class, 'approve_nota']);
-    Route::post('/transaction/{transaction}/customer', [TransactionController::class, 'customer']);
+    Route::post('/transaction/{transaction}/approve_owner', [TransactionController::class, 'approve_owner']);
+    Route::get('/transaction/{transaction}/reject_owner', [TransactionController::class, 'reject_owner']);
     Route::post('/transaction/{rit}/branch', [TransactionController::class, 'branch']);
     Route::post('/saving/get_savings_incomes', [SavingController::class, 'get_savings_incomes']);
     Route::apiResource('saving', SavingController::class);

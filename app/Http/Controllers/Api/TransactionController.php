@@ -391,7 +391,8 @@ class TransactionController extends Controller
         ];
         return SuccessResource::make($return);
     }
-    public function reject_finance(Transaction $transaction, Request $request)
+
+    public function reject_finance(Transaction $transaction)
     {
         if ($transaction->type == "Cas") {
             $cas = Cas::find($transaction->cas_id);
@@ -542,7 +543,7 @@ class TransactionController extends Controller
         return SuccessResource::make($return);
     }
 
-    public function customer(Transaction $transaction, Request $request)
+    public function approve_owner(Transaction $transaction, Request $request)
     {
         $customer = Customer::find($request->customer_id);
         $transaction->update([
@@ -550,9 +551,6 @@ class TransactionController extends Controller
             "ongkir" => $request->ongkir,
             "total_price" => $request->total_price,
             "owner_approved" => 1,
-            "customer_id" => $request->customer_id,
-            "trip_id" => $transaction->trip_id,
-            "type" => "Owner"
         ]);
         $users = User::where("role_id", 1)->get();
         $emailArray = $users->pluck('email')->toArray();
@@ -577,6 +575,34 @@ class TransactionController extends Controller
                 "transaction_id" => $transaction->id
             ]);
         }
+        $return = [
+            'api_code' => 200,
+            'api_status' => true,
+            'api_message' => 'Sukses',
+            'api_results' => TransactionResource::make($transaction)
+        ];
+        return SuccessResource::make($return);
+    }
+
+    public function reject_owner(Transaction $transaction)
+    {
+        foreach ($transaction->rits as $key => $ritTransaction) {
+            RitHistory::create([
+                "info" => "Penjualan rit customer di reject.",
+                "rit_id" => $ritTransaction->rit_id
+            ]);
+            $rite = Rit::find($ritTransaction->rit_id);
+            $rite->update([
+                "customer_transaction_id" => null,
+            ]);
+            $ritTransaction->delete();
+        }
+        $transaction->update([
+            "item_price" => null,
+            "ongkir" => null,
+            "total_price" => null,
+            "owner_approved" => 0,
+        ]);
         $return = [
             'api_code' => 200,
             'api_status' => true,
