@@ -296,6 +296,16 @@ class TransactionController extends Controller
             }
             $trip->delete();
         }
+        //NOTE - ini ngurangin tabungan customer sebelumnya
+        if ($transaction->finance_approved == 1) {
+            $old_customer = Customer::find($transaction->customer_id);
+            $old_customer->update([
+                "tb" => $old_customer->tb - $transaction->tb,
+                "tw" => $old_customer->tw - $transaction->tw,
+                "thr" => $old_customer->thr - $transaction->thr,
+                "tonnage" => $old_customer->tonnage - $transaction->rits->sum("tonnage"),
+            ]);
+        }
         $transaction->update([
             "tb" => $request->new_transaction["tb"],
             "tw" => $request->new_transaction["tw"],
@@ -314,6 +324,29 @@ class TransactionController extends Controller
             "revision_requested" => 0,
             "revision_allowed" => 0,
         ]);
+        //NOTE - Ini update data tabungan yang sebelumnya jadi ke yang baru + id customer yang baru
+        if ($transaction->finance_approved == 1) {
+            $old_savings = $transaction->savings;
+            $old_savings->update([
+                "tb" => $transaction->tb,
+                "tw" => $transaction->tw,
+                "thr" => $transaction->thr,
+                "tonnage" => $transaction->rits->sum("tonnage"),
+                "total_tb" => $transaction->customer->tb + $transaction->tb,
+                "total_tw" => $transaction->customer->tw + $transaction->tw,
+                "total_thr" => $transaction->customer->thr + $transaction->thr,
+                "total_tonnage" => $transaction->customer->tonnage + $transaction->rits->sum("tonnage"),
+                "customer_id" => $transaction->customer_id,
+            ]);
+
+            // NOTE - Ini update data payment yang sebelumnya jadi ke id customer yang baru
+            $old_payments = $transaction->payments;
+            foreach ($old_payments as $key => $old_payment) {
+                $old_payment->update([
+                    "customer_id" => $transaction->customer_id,
+                ]);
+            }
+        };
         $return = [
             'api_code' => 200,
             'api_status' => true,
