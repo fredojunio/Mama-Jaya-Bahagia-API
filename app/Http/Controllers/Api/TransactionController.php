@@ -297,13 +297,20 @@ class TransactionController extends Controller
             $trip->delete();
         }
         //NOTE - ini ngurangin tabungan customer sebelumnya
-        if ($transaction->finance_approved == 1) {
+        if ($transaction->finance_approved == 1 && $transaction->customer_id != $request->new_transaction["customer_id"]) {
             $old_customer = Customer::find($transaction->customer_id);
             $old_customer->update([
                 "tb" => $old_customer->tb - $transaction->tb,
                 "tw" => $old_customer->tw - $transaction->tw,
                 "thr" => $old_customer->thr - $transaction->thr,
                 "tonnage" => $old_customer->tonnage - $transaction->rits->sum("tonnage"),
+            ]);
+            // NOTE - Ini nambahin tabungan customer yang baru
+            $customer->update([
+                "tb" => $customer->tb + $request->new_transaction["tb"],
+                "tw" => $customer->tw + $request->new_transaction["tw"],
+                "thr" => $customer->thr + $request->new_transaction["thr"],
+                "tonnage" => $customer->tonnage + $transaction->rits->sum("tonnage"),
             ]);
         }
         $transaction->update([
@@ -332,9 +339,9 @@ class TransactionController extends Controller
                 "tw" => $transaction->tw,
                 "thr" => $transaction->thr,
                 "tonnage" => $transaction->rits->sum("tonnage"),
-                "total_tb" => $transaction->customer->tb + $transaction->tb,
-                "total_tw" => $transaction->customer->tw + $transaction->tw,
-                "total_thr" => $transaction->customer->thr + $transaction->thr,
+                "total_tb" => $transaction->customer->tb,
+                "total_tw" => $transaction->customer->tw,
+                "total_thr" => $transaction->customer->thr,
                 "total_tonnage" => $transaction->customer->tonnage + $transaction->rits->sum("tonnage"),
                 "customer_id" => $transaction->customer_id,
             ]);
@@ -343,6 +350,7 @@ class TransactionController extends Controller
             $old_payments = $transaction->payments;
             foreach ($old_payments as $key => $old_payment) {
                 $old_payment->update([
+                    "amount" => $transaction->total_price,
                     "customer_id" => $transaction->customer_id,
                 ]);
             }

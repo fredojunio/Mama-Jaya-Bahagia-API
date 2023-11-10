@@ -60,5 +60,18 @@ class CustomerSeeder extends Seeder
         $role->tw = 6000;
         $role->thr = 3000;
         $role->save();
+
+        $role = new Customer();
+        $role->nik = "5555555555";
+        $role->name = "Single";
+        $role->nickname = "Single";
+        $role->address = "Jl. Lima 231";
+        $role->ongkir = 500;
+        $role->birthdate = "2022-12-30";
+        $role->type = "Eceran";
+        $role->tb = 0;
+        $role->tw = 0;
+        $role->thr = 0;
+        $role->save();
     }
 }
