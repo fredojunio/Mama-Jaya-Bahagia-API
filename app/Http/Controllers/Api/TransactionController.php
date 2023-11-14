@@ -331,13 +331,71 @@ class TransactionController extends Controller
             "revision_requested" => 0,
             "revision_allowed" => 0,
         ]);
-        //NOTE - Ini update data tabungan yang sebelumnya jadi ke yang baru + id customer yang baru
+
+        // NOTE - Ini update yang dilakuin kalo udah di approve sama finance
         if ($transaction->finance_approved == 1) {
+
+            // NOTE - Ini ngebalikin stok rit yang sebelumnya terjual
+            foreach ($transaction->rits as $key => $rit) {
+                $rite = Rit::find($rit['id']);
+                $rite->update([
+                    "tonnage_left" => $rite->tonnage_left + ($rit["tonnage"] * $rit["masak"]),
+                ]);
+                RitHistory::create([
+                    "info" => "Stok rit kembali karena nota di edit oleh finance, Tonase asli: {$rite->tonnage_left}, Tambahan tonase karena direvisi: " . ($rit["tonnage"] * $rit["masak"]),
+                    "rit_id" => $rite->id
+                ]);
+                if ($rite->tonnage_left != 0) {
+                    $rite->update([
+                        "sold_date" => null
+                    ]);
+                    RitHistory::create([
+                        "info" => "Rit tidak jadi terjual karena nota di edit oleh finance, Tonase asli: {$rite->tonnage_left}, Tambahan tonase karena direvisi: " . ($rit["tonnage"] * $rit["masak"]),
+                        "rit_id" => $rite->id
+                    ]);
+                }
+                $rit->delete();
+            }
+
+            // NOTE - Ini nguranginya stok rit yang baru
+            foreach ($request->new_transaction["rits"] as $key => $rit) {
+                $rite = Rit::find($rit['item']['id']);
+                $rit_transaction = RitTransaction::create([
+                    "daily_id" => $transaction->daily_id,
+                    "customer_name" => $customer->nickname,
+                    "tonnage" => $rit["tonnage"],
+                    "masak" => $rit["masak"],
+                    "item_price" => $rit["price"],
+                    "total_price" => $rit["total_price"],
+                    "tonnage_left" => $rite->tonnage_left - ($rit["tonnage"] * $rit["masak"]),
+                    "actual_tonnage" => $rit["real_tonnage"],
+                    "rit_id" => $rit["item"]["id"],
+                    "transaction_id" => $transaction->id,
+                    "created_at" => $customer->type != "Kiriman" ? $request->date : Carbon::now()
+                ]);
+                $rite->update([
+                    'tonnage_left' => $rit_transaction->tonnage_left,
+                ]);
+                RitHistory::create([
+                    "info" => "Rit dibeli oleh: {$customer->nickname}, Jumlah tonase: " . ($rit["tonnage"] * $rit["masak"]) . " Tonase sisa: {$rite->tonnage_left}",
+                    "rit_id" => $rite->id
+                ]);
+                if ($rite->tonnage_left == 0) {
+                    $rite->update([
+                        "sold_date" => Carbon::now()
+                    ]);
+                    RitHistory::create([
+                        "info" => "Rit habis terjual.",
+                        "rit_id" => $rite->id
+                    ]);
+                }
+            }
+            //NOTE - Ini update data tabungan yang sebelumnya jadi ke yang baru + id customer yang baru
             $old_savings = $transaction->savings;
             $old_savings->update([
-                "tb" => $transaction->tb,
-                "tw" => $transaction->tw,
-                "thr" => $transaction->thr,
+                "tb" => $transaction->tb ?? 0,
+                "tw" => $transaction->tw ?? 0,
+                "thr" => $transaction->thr ?? 0,
                 "tonnage" => $transaction->rits->sum("tonnage"),
                 "total_tb" => $transaction->customer->tb,
                 "total_tw" => $transaction->customer->tw,
