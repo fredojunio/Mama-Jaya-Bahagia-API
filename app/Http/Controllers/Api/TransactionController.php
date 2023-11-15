@@ -296,8 +296,9 @@ class TransactionController extends Controller
             }
             $trip->delete();
         }
-        //NOTE - ini ngurangin tabungan customer sebelumnya
+        // NOTE - Ini jalan kalo financenya udah di approve & customernya berubah
         if ($transaction->finance_approved == 1 && $transaction->customer_id != $request->new_transaction["customer_id"]) {
+            //NOTE - ini ngurangin tabungan customer sebelumnya
             $old_customer = Customer::find($transaction->customer_id);
             $old_customer->update([
                 "tb" => $old_customer->tb - $transaction->tb,
@@ -306,11 +307,33 @@ class TransactionController extends Controller
                 "tonnage" => $old_customer->tonnage - $transaction->rits->sum("tonnage"),
             ]);
             // NOTE - Ini nambahin tabungan customer yang baru
+            $newTonnage = 0;
+            foreach ($request->new_transaction["rits"] as $item) {
+                if (isset($item['tonnage'])) {
+                    $newTonnage += $item['tonnage'];
+                }
+            }
             $customer->update([
                 "tb" => $customer->tb + $request->new_transaction["tb"],
                 "tw" => $customer->tw + $request->new_transaction["tw"],
                 "thr" => $customer->thr + $request->new_transaction["thr"],
-                "tonnage" => $customer->tonnage + $transaction->rits->sum("tonnage"),
+                "tonnage" => $customer->tonnage + $newTonnage,
+            ]);
+            // NOTE - Ini kalo financenya udah di approve tapi customernya sama
+        } else if ($transaction->finance_approved == 1 && $transaction->customer_id == $request->new_transaction["customer_id"]) {
+            //NOTE - ini ngurangin tabungan customer sebelumnya
+            $newTonnage = 0;
+            foreach ($request->new_transaction["rits"] as $item) {
+                if (isset($item['tonnage'])) {
+                    $newTonnage += $item['tonnage'];
+                }
+            }
+            $old_customer = Customer::find($transaction->customer_id);
+            $customer->update([
+                "tb" => $old_customer->tb - $transaction->tb + $request->new_transaction["tb"],
+                "tw" => $old_customer->tw - $transaction->tw + $request->new_transaction["tw"],
+                "thr" => $old_customer->thr - $transaction->thr + $request->new_transaction["thr"],
+                "tonnage" => $old_customer->tonnage - $transaction->rits->sum("tonnage") + $newTonnage,
             ]);
         }
         $transaction->update([
@@ -334,10 +357,9 @@ class TransactionController extends Controller
 
         // NOTE - Ini update yang dilakuin kalo udah di approve sama finance
         if ($transaction->finance_approved == 1) {
-
             // NOTE - Ini ngebalikin stok rit yang sebelumnya terjual
             foreach ($transaction->rits as $key => $rit) {
-                $rite = Rit::find($rit['id']);
+                $rite = Rit::find($rit['rit_id']);
                 $rite->update([
                     "tonnage_left" => $rite->tonnage_left + ($rit["tonnage"] * $rit["masak"]),
                 ]);
