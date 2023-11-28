@@ -216,7 +216,7 @@ class TransactionController extends Controller
                 "actual_tonnage" => $rit["real_tonnage"],
                 "rit_id" => $rit["item"]["id"],
                 "transaction_id" => $transaction->id,
-                "created_at" => $customer->type != "Kiriman" ? $request->date : Carbon::now()
+                "created_at" => $transaction->created_at
             ]);
             $rite->update([
                 'tonnage_left' => $rit_transaction->tonnage_left,
@@ -393,7 +393,7 @@ class TransactionController extends Controller
                     "actual_tonnage" => $rit["real_tonnage"],
                     "rit_id" => $rit["item"]["id"],
                     "transaction_id" => $transaction->id,
-                    "created_at" => $customer->type != "Kiriman" ? $request->date : Carbon::now()
+                    "created_at" => $transaction->created_at
                 ]);
                 $rite->update([
                     'tonnage_left' => $rit_transaction->tonnage_left,
