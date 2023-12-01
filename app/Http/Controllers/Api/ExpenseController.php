@@ -118,6 +118,31 @@ class ExpenseController extends Controller
                 "toll" => $request->expense["trip"]["toll"],
                 "allowance" => $request->expense["trip"]["allowance"],
             ]);
+        } else if ($expense->type == "TB" || $expense->type == "TW" || $expense->type == "THR") {
+            $saving = $expense->savings;
+            $amount_difference = $request->expense["amount"] - $expense->amount;
+            $expense->update([
+                "amount" => $request->expense["amount"],
+                "note" => $request->expense["note"],
+                "time" => $request->expense["time"],
+            ]);
+
+            $saving->update([
+                "tb" => $expense->type == "TB" ? $request->expense["amount"] : $saving->tb,
+                "tw" => $expense->type == "TW" ? $request->expense["amount"] : $saving->tw,
+                "thr" => $expense->type == "THR" ? $request->expense["amount"] : $saving->thr,
+                "total_tb" => $expense->type == "TB" ? $saving->total_tb - $amount_difference : $saving->total_tb,
+                "total_tw" => $expense->type == "TW" ? $saving->total_tw - $amount_difference : $saving->total_tw,
+                "total_thr" => $expense->type == "THR" ? $saving->total_thr - $amount_difference : $saving->total_thr,
+            ]);
+
+            $customer = $saving->customer;
+
+            $customer->update([
+                "tb" => $saving->total_tb,
+                "tw" => $saving->total_tw,
+                "thr" => $saving->total_thr,
+            ]);
         } else {
             $expense->update([
                 "amount" => $request->expense["amount"],

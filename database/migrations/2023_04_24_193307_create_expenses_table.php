@@ -21,6 +21,8 @@ return new class extends Migration
             $table->string("type");
             $table->unsignedBigInteger('trip_id')->index()->nullable();
             $table->foreign('trip_id')->references('id')->on('trips')->onDelete('cascade');
+            $table->unsignedBigInteger('saving_id')->index()->nullable();
+            $table->foreign('saving_id')->references('id')->on('savings')->onDelete('cascade');
             $table->timestamps();
         });
     }

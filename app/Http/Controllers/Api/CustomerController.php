@@ -234,6 +234,7 @@ class CustomerController extends Controller
             "name" => $customer->name,
             "time" => Carbon::now(),
             "type" => $type,
+            "saving_id" => $saving->id,
         ]);
         $customer->update([
             "tb" => $saving->total_tb,
