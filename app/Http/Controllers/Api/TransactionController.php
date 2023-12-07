@@ -413,16 +413,20 @@ class TransactionController extends Controller
                 }
             }
             //NOTE - Ini update data tabungan yang sebelumnya jadi ke yang baru + id customer yang baru
+            $tonnage_transaction = 0;
+            foreach ($request->new_transaction["rits"] as $key => $rit) {
+                $tonnage_transaction += $rit["tonnage"];
+            }
             $old_savings = $transaction->savings;
             $old_savings->update([
                 "tb" => $transaction->tb ?? 0,
                 "tw" => $transaction->tw ?? 0,
                 "thr" => $transaction->thr ?? 0,
-                "tonnage" => $transaction->rits->sum("tonnage"),
+                "tonnage" => $tonnage_transaction,
                 "total_tb" => $transaction->customer->tb,
                 "total_tw" => $transaction->customer->tw,
                 "total_thr" => $transaction->customer->thr,
-                "total_tonnage" => $transaction->customer->tonnage + $transaction->rits->sum("tonnage"),
+                "total_tonnage" => $transaction->customer->tonnage + $tonnage_transaction,
                 "customer_id" => $transaction->customer_id,
             ]);
 
