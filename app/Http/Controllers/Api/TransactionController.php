@@ -325,7 +325,7 @@ class TransactionController extends Controller
             $newTonnage = 0;
             foreach ($request->new_transaction["rits"] as $item) {
                 if (isset($item['tonnage'])) {
-                    $newTonnage += $item['tonnage'];
+                    $newTonnage += ($item["tonnage"] * $item["masak"]);
                 }
             }
             $old_customer = Customer::find($transaction->customer_id);
@@ -415,7 +415,7 @@ class TransactionController extends Controller
             //NOTE - Ini update data tabungan yang sebelumnya jadi ke yang baru + id customer yang baru
             $tonnage_transaction = 0;
             foreach ($request->new_transaction["rits"] as $key => $rit) {
-                $tonnage_transaction += $rit["tonnage"];
+                $tonnage_transaction += $rit["tonnage"] * $rit["masak"];
             }
             $old_savings = $transaction->savings;
             $old_savings->update([
