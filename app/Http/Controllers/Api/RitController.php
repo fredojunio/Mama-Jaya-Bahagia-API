@@ -129,8 +129,8 @@ class RitController extends Controller
         } else {
             // NOTE - Owner - Laba Rugi
             $rits = Rit::whereNotNull("sold_date")
-                ->where("sold_date", ">=", Carbon::createFromFormat('D M d Y H:i:s e+', $request->start_date)->toDateTimeString())
-                ->where("sold_date", "<=", Carbon::createFromFormat('D M d Y H:i:s e+', $request->end_date)->toDateTimeString())
+                ->where("arrival_date", ">=", Carbon::createFromFormat('D M d Y H:i:s e+', $request->start_date)->toDateTimeString())
+                ->where("arrival_date", "<=", Carbon::createFromFormat('D M d Y H:i:s e+', $request->end_date)->toDateTimeString())
                 ->get();
         }
 

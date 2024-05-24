@@ -360,9 +360,6 @@ class TransactionController extends Controller
             // NOTE - Ini ngebalikin stok rit yang sebelumnya terjual
             foreach ($transaction->rits as $key => $rit) {
                 $rite = Rit::find($rit['rit_id']);
-                $rite->update([
-                    "tonnage_left" => $rite->tonnage_left + ($rit["tonnage"] * $rit["masak"]),
-                ]);
                 RitHistory::create([
                     "info" => "Stok rit kembali karena nota di edit oleh finance, Tonase asli: {$rite->tonnage_left}, Tambahan tonase karena direvisi: " . ($rit["tonnage"] * $rit["masak"]),
                     "rit_id" => $rite->id
@@ -376,6 +373,9 @@ class TransactionController extends Controller
                         "rit_id" => $rite->id
                     ]);
                 }
+                $rite->update([
+                    "tonnage_left" => $rite->tonnage_left + ($rit["tonnage"] * $rit["masak"]),
+                ]);
                 $rit->delete();
             }
 
@@ -481,7 +481,7 @@ class TransactionController extends Controller
             ]);
             $tonnage_transaction = 0;
             foreach ($transaction->rits as $key => $rit_transaction) {
-                $tonnage_transaction += $rit_transaction->tonnage;
+                $tonnage_transaction += ($rit_transaction->tonnage * $rit_transaction->masak);
             }
 
             if ($transaction->type != "Cas") {
@@ -532,17 +532,6 @@ class TransactionController extends Controller
             ]);
             $cas->delete();
         } else {
-            if ($transaction->trip_id) {
-                //NOTE - Ini kalo tipenya tadi buat nota
-                $trip = Trip::find($transaction->trip_id);
-                $vehicle = Vehicle::find($trip->vehicle_id);
-                $vehicle->update([
-                    "trip_count" => $vehicle->trip_count - 1,
-                    "toll" => $vehicle->toll - $trip->toll
-                ]);
-                $trip->expense->delete();
-                $trip->delete();
-            }
             $remainingSacks = $transaction->sack + $transaction->sack_free;
             $sack = Sack::where('amount', '>', 0)
                 ->orderBy('created_at', 'asc')
@@ -569,6 +558,18 @@ class TransactionController extends Controller
                 $rite->update([
                     'tonnage_left' => $rite->tonnage_left + ($rit["tonnage"] * $rit["masak"]),
                 ]);
+            }
+
+            if ($transaction->trip_id) {
+                //NOTE - Ini kalo tipenya tadi buat nota
+                $trip = Trip::find($transaction->trip_id);
+                $vehicle = Vehicle::find($trip->vehicle_id);
+                $vehicle->update([
+                    "trip_count" => $vehicle->trip_count - 1,
+                    "toll" => $vehicle->toll - $trip->toll
+                ]);
+                $trip->expense->delete();
+                $trip->delete();
             }
         }
 

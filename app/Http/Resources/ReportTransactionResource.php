@@ -19,7 +19,7 @@ class ReportTransactionResource extends JsonResource
             "created_at" => $this->created_at,
             "amount" => $this->amount,
             "transaction_date" => $this->transaction_date,
-            "settled_date" => $this->settled_date,
+            "settled_date" => $this->transaction->settled_date,
             "transaction" => [
                 "customer" => $this->transaction->customer_id ? ["nickname" => $this->transaction->customer->nickname] : null,
                 "type" => $this->transaction->type

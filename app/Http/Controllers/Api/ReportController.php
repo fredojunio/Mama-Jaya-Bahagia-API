@@ -82,12 +82,14 @@ class ReportController extends Controller
             ->sum('tb');
         $tb_savings = Saving::whereNull('transaction_id')
             ->whereDate('created_at', Carbon::today())
+            ->where('type', 'Pemasukan')
             ->sum('tb');
         $tw_income = Transaction::where('owner_approved', 1)
             ->whereDate('created_at', Carbon::today())
             ->sum('tw');
         $tw_savings = Saving::whereNull('transaction_id')
             ->whereDate('created_at', Carbon::today())
+            ->where('type', 'Pemasukan')
             ->sum('tw');
         $thr_income = Transaction::where('owner_approved', 1)
             ->whereDate('created_at', Carbon::today())
@@ -98,6 +100,9 @@ class ReportController extends Controller
         $sack_income = Transaction::where('owner_approved', 1)
             ->whereDate('created_at', Carbon::today())
             ->sum('sack_price');
+        $other_income = Transaction::where('owner_approved', 1)
+            ->whereDate('created_at', Carbon::today())
+            ->sum('other');
         $cas_income = Cas::whereDate('created_at', Carbon::today())
             ->sum('fee');
         $tb_expense = Expense::whereDate('time', Carbon::today())
@@ -128,7 +133,7 @@ class ReportController extends Controller
             "tb_income" => $tb_income + $tb_savings,
             "tw_income" => $tw_income + $tw_savings,
             "thr_income" => $thr_income + $thr_savings,
-            "other_income" => $sack_income + $cas_income,
+            "other_income" => $sack_income + $cas_income + $other_income,
             "tb_expense" => $tb_expense,
             "tw_expense" => $tw_expense,
             "thr_expense" => $thr_expense,
@@ -241,6 +246,9 @@ class ReportController extends Controller
         $sack_income = Transaction::where('owner_approved', 1)
             ->whereDate('created_at', Carbon::today())
             ->sum('sack_price');
+        $other_income = Transaction::where('owner_approved', 1)
+            ->whereDate('created_at', Carbon::today())
+            ->sum('other');
         $cas_income = Cas::whereDate('created_at', Carbon::today())
             ->sum('fee');
         $tb_expense = Expense::whereDate('time', Carbon::today())
@@ -270,7 +278,7 @@ class ReportController extends Controller
         $report->tb_income = $tb_income + $tb_savings;
         $report->tw_income = $tw_income + $tw_savings;
         $report->thr_income = $thr_income + $thr_savings;
-        $report->other_income = $sack_income + $cas_income;
+        $report->other_income = $sack_income + $cas_income + $other_income;
         $report->tb_expense = $tb_expense;
         $report->tw_expense = $tw_expense;
         $report->thr_expense = $thr_expense;
@@ -390,6 +398,9 @@ class ReportController extends Controller
         $sack_income = Transaction::where('owner_approved', 1)
             ->whereDate('created_at', Carbon::now()->subDays($request->days))
             ->sum('sack_price');
+        $other_income = Transaction::where('owner_approved', 1)
+            ->whereDate('created_at', Carbon::today())
+            ->sum('other');
         $cas_income = Cas::whereDate('created_at', Carbon::now()->subDays($request->days))
             ->sum('fee');
         $tb_expense = Expense::whereDate('time', Carbon::now()->subDays($request->days))
@@ -419,7 +430,7 @@ class ReportController extends Controller
         $report->tb_income = $tb_income + $tb_savings;
         $report->tw_income = $tw_income + $tw_savings;
         $report->thr_income = $thr_income + $thr_savings;
-        $report->other_income = $sack_income + $cas_income;
+        $report->other_income = $sack_income + $cas_income + $other_income;
         $report->tb_expense = $tb_expense;
         $report->tw_expense = $tw_expense;
         $report->thr_expense = $thr_expense;

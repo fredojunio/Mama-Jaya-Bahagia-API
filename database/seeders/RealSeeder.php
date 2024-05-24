@@ -19,6 +19,7 @@ class RealSeeder extends Seeder
      */
     public function run(): void
     {
+
         DB::table('cas_deposits')->insert([
             "koin" => 0,
             "seribu" => 0,
@@ -122,22 +123,22 @@ class RealSeeder extends Seeder
         $role->type = "Kiriman";
         $role->tb = 0;
         $role->thr = 0;
-        $role->cashback_days = 5;
-        $role->tonnage = 5200;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
         $role = new Customer();
-        $role->nik = "3578202660700002";
+        $role->nik = "3578202606700002";
         $role->name = "Iskandar";
         $role->nickname = "ISKANDAR";
         $role->address = "Wiyung 4/100 RT 02/ RW 06";
-        $role->phone = "08123123123";
+        $role->phone = "085648360104";
         $role->birthdate = "1970-06-26";
         $role->type = "Eceran";
-        $role->tb = 0;
-        $role->thr = 2000000;
-        $role->cashback_days = 82;
-        $role->tonnage = 1257.5;
+        $role->tb = 220000;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
 
@@ -165,9 +166,9 @@ class RealSeeder extends Seeder
         $role->birthdate = "1961-06-06";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->thr = 2040000;
-        $role->cashback_days = 82;
-        $role->tonnage = 1473.85;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
 
@@ -203,13 +204,13 @@ class RealSeeder extends Seeder
         $role->name = "Agus Priyanto";
         $role->nickname = "KIPLI TAHU";
         $role->address = "Kedungboto RT 17 / RW 03, Taman";
-        $role->phone = "08123123123";
+        $role->phone = "08523253910";
         $role->birthdate = "1982-08-18";
         $role->type = "Eceran";
-        $role->tb = 0;
-        $role->thr = 703100;
-        $role->cashback_days = 91;
-        $role->tonnage = 3451.3;
+        $role->tb = 400000;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
 
@@ -218,13 +219,13 @@ class RealSeeder extends Seeder
         $role->name = "Agus Sutamaji";
         $role->nickname = "AJI YAYAK";
         $role->address = "Dsn. Krembangan RT 03 / RW 01, Taman";
-        $role->phone = "08123123123";
+        $role->phone = "085733465086";
         $role->birthdate = "1986-11-10";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->thr = 2600000;
-        $role->cashback_days = 10;
-        $role->tonnage = 14300;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
 
@@ -233,13 +234,13 @@ class RealSeeder extends Seeder
         $role->name = "Agustinus";
         $role->nickname = "AGUS JINGGO";
         $role->address = "Legok RT 16 / RW 06, Sukodono";
-        $role->phone = "08123123123";
+        $role->phone = "081290902528";
         $role->birthdate = "1974-09-13";
         $role->type = "Eceran";
-        $role->tb = 0;
-        $role->thr = 6300000;
-        $role->cashback_days = 103;
-        $role->tonnage = 14782.5;
+        $role->tb = 700000;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
         $role = new Customer();
@@ -253,9 +254,8 @@ class RealSeeder extends Seeder
         $role->tb = 0;
         $role->tw = 0;
         $role->thr = 0;
-        $role->cashback_days = 44;
-        $role->tonnage = 1441;
-
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
         $role = new Customer();
@@ -263,13 +263,13 @@ class RealSeeder extends Seeder
         $role->name = "Aji Parminardi";
         $role->nickname = "DIDIK TAHU";
         $role->address = "Dsn. Sambisari RT 26/RW 05, Taman";
-        $role->phone = "08123123123";
+        $role->phone = "081321759980";
         $role->birthdate = "1978-11-19";
         $role->type = "Eceran";
         $role->tb = 0;
         $role->thr = 0;
-        $role->cashback_days = 71;
-        $role->tonnage = 1989;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
         $role = new Customer();
@@ -277,13 +277,13 @@ class RealSeeder extends Seeder
         $role->name = "Alfin Ariyanto";
         $role->nickname = "ALPIN";
         $role->address = "Jelok RT 03/ RW 02, Kayen- Pacitan";
-        $role->phone = "08123123123";
+        $role->phone = "085645759953";
         $role->birthdate = "1979-05-10";
         $role->type = "Eceran";
-        $role->tb = 0;
-        $role->thr = 20000;
-        $role->cashback_days = 74;
-        $role->tonnage = 2169;
+        $role->tb = 120000;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
         $role = new Customer();
@@ -291,13 +291,13 @@ class RealSeeder extends Seeder
         $role->name = "Amat Marulah";
         $role->nickname = "MARUL";
         $role->address = "Dk. Werdi Tengah RT 10/ RW 05, Wonokerto";
-        $role->phone = "08123123123";
+        $role->phone = "081556846928";
         $role->birthdate = "1994-05-22";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->thr = 3000000;
-        $role->cashback_days = 93;
-        $role->tonnage = 7521;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
         $role = new Customer();
@@ -308,7 +308,7 @@ class RealSeeder extends Seeder
         $role->phone = "085730034703";
         $role->birthdate = "2001-03-14";
         $role->type = "Eceran";
-        $role->tb = 1650000;
+        $role->tb = 18400000;
         $role->thr = 0;
         $role->cashback_days = 0;
         $role->tonnage = 0;
@@ -319,10 +319,10 @@ class RealSeeder extends Seeder
         $role->name = "Meilidya Purnamasari";
         $role->nickname = "MEILING";
         $role->address = "Perum, Taman Permata Indah E5";
-        $role->phone = "085730034703";
+        $role->phone = "081281371762";
         $role->birthdate = "2004-05-13";
         $role->type = "Eceran";
-        $role->tb = 4500;
+        $role->tb = 0;
         $role->thr = 0;
         $role->cashback_days = 0;
         $role->tonnage = 0;
@@ -336,7 +336,7 @@ class RealSeeder extends Seeder
         $role->phone = "085730034703";
         $role->birthdate = "2010-10-09";
         $role->type = "Eceran";
-        $role->tb = 1345000;
+        $role->tb = 320000;
         $role->thr = 0;
         $role->cashback_days = 0;
         $role->tonnage = 0;
@@ -349,13 +349,13 @@ class RealSeeder extends Seeder
         $role->name = "Andis Dwi Suranto";
         $role->nickname = "DWI";
         $role->address = "Dsn. Kevling Kalibader RT 21/ RW 03, Taman ";
-        $role->phone = "08123123123";
+        $role->phone = "085850852426";
         $role->birthdate = "1975-02-24";
         $role->type = "Eceran";
-        $role->tb = 2440000;
-        $role->thr = 1210000;
-        $role->cashback_days = 97;
-        $role->tonnage = 1632;
+        $role->tb = 0;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
 
@@ -369,9 +369,9 @@ class RealSeeder extends Seeder
         $role->type = "Eceran";
         $role->tb = 0;
         $role->tw = 0;
-        $role->thr = 400000;
-        $role->cashback_days = 8;
-        $role->tonnage = 384;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
         $role = new Customer();
@@ -379,14 +379,33 @@ class RealSeeder extends Seeder
         $role->name = "Andi Yulefi";
         $role->nickname = "ANDI WIYUNG";
         $role->address = "Wiyung RT 02/ RW 06";
-        $role->phone = "08123123123";
+        $role->phone = "08971799946";
         $role->birthdate = "1986-10-30";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->thr = 3075000;
-        $role->cashback_days = 81;
-        $role->tonnage = 2566;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
+
+        $role = new Customer();
+        $role->nik = "3515161308730004";
+        $role->name = "Kusnanto";
+        $role->nickname = "KUS";
+        $role->address = "Bangah RT 16 / RW 03, Bangah- Gedangan";
+        $role->phone = "xxxxxxxxxxx";
+        $role->birthdate = "1973-08-13";
+        $role->type = "Eceran";
+        $role->tb = 0;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
+        $role->save();
+
+
+
+
+
 
         $role = new Customer();
         $role->nik = "3525131406800001";
@@ -399,38 +418,73 @@ class RealSeeder extends Seeder
         $role->type = "Kiriman";
         $role->tb = 0;
         $role->thr = 0;
-        $role->cashback_days = 3;
-        $role->tonnage = 3000;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
+
+        $role = new Customer();
+        $role->nik = "XXXXXXXXXXXXX";
+        $role->name = "MAISA";
+        $role->nickname = "MAISA";
+        $role->address = "BENDUL MERISI ";
+        $role->phone = "08123123123";
+        $role->ongkir = 125000;
+        $role->birthdate = "1980-06-14";
+        $role->type = "Kiriman";
+        $role->tb = 25812500;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
+        $role->save();
+
+        $role = new Customer();
+        $role->nik = "XXXXXXXXXXXXX";
+        $role->name = "BISRI";
+        $role->nickname = "BISRI";
+        $role->address = "BHAYANGKARA ";
+        $role->phone = "08123123123";
+        $role->ongkir = 100000;
+        $role->birthdate = "1980-06-14";
+        $role->type = "Kiriman";
+        $role->tb = 0;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
+        $role->save();
+
+
+
+
 
         $role = new Customer();
         $role->nik = "3525156012670001";
         $role->name = "Arnasih";
         $role->nickname = "ARNASIH";
         $role->address = "Dsn. Lopang RT 01/ RW 04, Driyorejo";
-        $role->phone = "08123123123";
+        $role->phone = "085702095014";
         $role->birthdate = "1967-12-06";
         $role->type = "Eceran";
-        $role->tb = 0;
-        $role->thr = 7313100;
-        $role->cashback_days = 93;
-        $role->tonnage = 2679;
+        $role->tb = 13800;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
         $role = new Customer();
-        $role->nik = "0000000000000000";
+        $role->nik = "3515132303720009";
         $role->name = "Abas";
         $role->nickname = "ABAS";
-        $role->address = "xxxxxxxxxxxxxxxxxx";
-        $role->phone = "0000000000000000";
-        $role->birthdate = "1967-01-07";
+        $role->address = "Taman Barat RT 01/ RW 01, Taman - Sidoarjo";
+        $role->phone = "0881012898138";
+        $role->birthdate = "1972-03-23";
         $role->type = "Eceran";
         $role->tb = 0;
         $role->thr = 0;
-        $role->cashback_days = 34;
-        $role->tonnage = 3380;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
+        $role = new Customer();
         $role->nik = "0000000000000000";
         $role->name = "Abah";
         $role->nickname = "ABAH";
@@ -440,7 +494,7 @@ class RealSeeder extends Seeder
         $role->type = "Eceran";
         $role->tb = 0;
         $role->thr = 0;
-        $role->cashback_days = 2;
+        $role->cashback_days = 0;
         $role->tonnage = 0;
         $role->save();
 
@@ -449,13 +503,13 @@ class RealSeeder extends Seeder
         $role->name = "Aseh";
         $role->nickname = "BU ASIH";
         $role->address = "Jl. Merapi RT 07/ RW 02, Bambe- Driyorejo";
-        $role->phone = "08123123123";
+        $role->phone = "082139234016";
         $role->birthdate = "1974-04-14";
         $role->type = "Eceran";
         $role->tb = 0;
         $role->thr = 0;
-        $role->cashback_days = 93;
-        $role->tonnage = 965.8;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
 
@@ -464,27 +518,13 @@ class RealSeeder extends Seeder
         $role->name = "Astoi";
         $role->nickname = "TOIN";
         $role->address = "Jl. Sawunggaling I RT 15/ RW 03, Jemundo - Taman";
-        $role->phone = "08123123123";
+        $role->phone = "08977321114";
         $role->birthdate = "1971-11-24";
         $role->type = "Eceran";
-        $role->tb = 0;
-        $role->thr = 2200000;
-        $role->cashback_days = 16;
-        $role->tonnage = 1700;
-        $role->save();
-
-
-
-        $role->name = "Benu";
-        $role->nickname = "BENU 1212";
-        $role->address = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
-        $role->phone = "000000000000";
-        $role->birthdate = "1971-09-17";
-        $role->type = "Eceran";
-        $role->tb = 0;
-        $role->thr = 30000;
-        $role->cashback_days = 30;
-        $role->tonnage = 560;
+        $role->tb = 200000;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
 
@@ -493,14 +533,14 @@ class RealSeeder extends Seeder
         $role->name = "BAKRI";
         $role->nickname = "BAKRI JUANDA";
         $role->address = "Bondansari RT 06/ RW 03, Wiradesa";
-        $role->phone = "08123123123";
+        $role->phone = "087704818333";
         $role->ongkir = 150000;
         $role->birthdate = "1971-11-24";
         $role->type = "Kiriman";
         $role->tb = 0;
-        $role->thr = 4800000;
-        $role->cashback_days = 11;
-        $role->tonnage = 18000;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
         $role = new Customer();
@@ -508,27 +548,15 @@ class RealSeeder extends Seeder
         $role->name = "Bambang Junaedi";
         $role->nickname = "JUNED";
         $role->address = "Bondansari RT 06/ RW 03, Wiradesa";
-        $role->phone = "08123123123";
+        $role->phone = "087850892172";
         $role->birthdate = "1975-06-13";
         $role->type = "Eceran";
-        $role->tb = 0;
-        $role->thr = 1100000;
-        $role->cashback_days = 104;
-        $role->tonnage = 13249;
+        $role->tb = 140000;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
-        $role = new Customer();
-        $role->nik = "3515132303720009";
-        $role->name = "Basuki";
-        $role->nickname = "ABAS";
-        $role->address = "Taman Barat RT 01/ RW 01, Taman";
-        $role->phone = "08123123123";
-        $role->birthdate = "1972-03-23";
-        $role->type = "Eceran";
-        $role->tb = 0;
-        $role->tw = 0;
-        $role->thr = 0;
-        $role->save();
 
 
         $role = new Customer();
@@ -536,13 +564,13 @@ class RealSeeder extends Seeder
         $role->name = "Bayu Aditama";
         $role->nickname = "BAYU";
         $role->address = "Kedungboto RT 17/ RW 03, Taman";
-        $role->phone = "08123123123";
+        $role->phone = "081229715070";
         $role->birthdate = "1990-10-02";
         $role->type = "Eceran";
-        $role->tb = 0;
-        $role->thr = 480000;
-        $role->cashback_days = 48;
-        $role->tonnage = 1454.35;
+        $role->tb = 230000;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
         $role = new Customer();
@@ -550,14 +578,30 @@ class RealSeeder extends Seeder
         $role->name = "Budiaji";
         $role->nickname = "PAK JI AFIF";
         $role->address = "Jl. Bintan 2 RT 01/ RW 10, Palem - Pare";
-        $role->phone = "08123123123";
+        $role->phone = "00000000000";
         $role->birthdate = "1967-08-15";
+        $role->type = "Eceran";
+        $role->tb = 60000;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
+        $role->save();
+
+        $role = new Customer();
+        $role->nik = "XXXXXXXXXXXXXXXX";
+        $role->name = "PAK DARR";
+        $role->nickname = "DARR";
+        $role->address = "XXXXXXXXXXXXXXXXX";
+        $role->phone = "082245421966";
+        $role->birthdate = "1986-10-30";
         $role->type = "Eceran";
         $role->tb = 0;
         $role->thr = 0;
-        $role->cashback_days = 31;
-        $role->tonnage = 481;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
+
+
 
         $role = new Customer();
         $role->nik = "3326083006650006";
@@ -568,36 +612,54 @@ class RealSeeder extends Seeder
         $role->birthdate = "1965-06-30";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->tw = 0;
         $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
         $role = new Customer();
-        $role->nik = "3515130304680005";
-        $role->name = "Dadan Suryanda";
-        $role->nickname = "DADAN";
-        $role->address = "Taman RT 17/ RW 03, Taman";
-        $role->phone = "08123123123";
-        $role->birthdate = "1968-04-03";
+        $role->nik = "XXXXXXXXXXXXXXX";
+        $role->name = "Kasirin";
+        $role->nickname = "KASIRIN";
+        $role->address = "XXXXXXXXXXXXXXXXXXXXXX";
+        $role->phone = "XXXXXXXXXXXXXXX";
+        $role->birthdate = "1965-06-30";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->thr = 264300;
-        $role->cashback_days = 85;
-        $role->tonnage = 1659.9;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
+
+
+        $role = new Customer();
+        $role->nik = "XXXXXXXXXXXXXXX";
+        $role->name = "ARUKIN";
+        $role->nickname = "ARUKIN";
+        $role->address = "XXXXXXXXXXXXXXXXXXXXXX";
+        $role->phone = "XXXXXXXXXXXXXXX";
+        $role->birthdate = "1965-06-30";
+        $role->type = "Eceran";
+        $role->tb = 0;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
+        $role->save();
+
+
 
         $role = new Customer();
         $role->nik = "3326171903780001";
         $role->name = "Dama";
         $role->nickname = "DAMAK";
         $role->address = "Jl. Bagus Santri RT 04/ RW 02, Bohar- Taman";
-        $role->phone = "08123123123";
+        $role->phone = "081370826219";
         $role->birthdate = "1978-03-19";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->thr = 16500000;
-        $role->cashback_days = 94;
-        $role->tonnage = 12625;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
         $role = new Customer();
@@ -605,13 +667,13 @@ class RealSeeder extends Seeder
         $role->name = "Dewi Wahyuni";
         $role->nickname = "KHOLIS";
         $role->address = "Taman RT 17/ RW 03, Taman";
-        $role->phone = "08123123123";
+        $role->phone = "0881026671031";
         $role->birthdate = "1977-02-14";
         $role->type = "Eceran";
-        $role->tb = 380000;
-        $role->thr = 2650000;
-        $role->cashback_days = 96;
-        $role->tonnage = 8305;
+        $role->tb = 1100000;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
         $role = new Customer();
@@ -660,13 +722,13 @@ class RealSeeder extends Seeder
         $role->name = "Edi Pramono";
         $role->nickname = "PRAMONO";
         $role->address = "Pekuncen RT 03/ RW 07, Wiradesa";
-        $role->phone = "08123123123";
+        $role->phone = "085731715000";
         $role->birthdate = "1987-07-15";
         $role->type = "Eceran";
-        $role->tb = 2460000;
-        $role->thr = 1640000;
-        $role->cashback_days = 64;
-        $role->tonnage = 4650;
+        $role->tb = 300000;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
 
@@ -688,13 +750,13 @@ class RealSeeder extends Seeder
         $role->name = "Edi Waluyo";
         $role->nickname = "WWALUYO BHR";
         $role->address = "Dk. Keludan RT 02/ RW 01, Werdi- Wonokerto";
-        $role->phone = "08123123123";
+        $role->phone = "000000000000";
         $role->birthdate = "1975-01-30";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->thr = 3510000;
-        $role->cashback_days = 89;
-        $role->tonnage = 3400;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
 
@@ -703,13 +765,13 @@ class RealSeeder extends Seeder
         $role->name = "EKO ADI W";
         $role->nickname = "ADI ABI";
         $role->address = "Kedungboto RT 17/ RW 03, Taman";
-        $role->phone = "08123123123";
+        $role->phone = "085704174850";
         $role->birthdate = "1982-09-19";
         $role->type = "Eceran";
-        $role->tb = 0;
-        $role->thr = 11800000;
-        $role->cashback_days = 86;
-        $role->tonnage = 5151;
+        $role->tb = 40000;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
 
@@ -718,14 +780,14 @@ class RealSeeder extends Seeder
         $role->name = "Elijas Boediono";
         $role->nickname = "PAK YAS";
         $role->address = "Sambisari Perintis 4 RT 36/ RW 07, Taman";
-        $role->phone = "08123123123";
-        $role->ongkir = 75000;
+        $role->phone = "0818518956";
+        $role->ongkir = 0;
         $role->birthdate = "1969-10-10";
         $role->type = "Kiriman";
         $role->tb = 0;
         $role->thr = 0;
-        $role->cashback_days = 4;
-        $role->tonnage = 8400;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
         $role = new Customer();
@@ -733,13 +795,13 @@ class RealSeeder extends Seeder
         $role->name = "Erma Purnama ";
         $role->nickname = "KLIWON";
         $role->address = "Kemlaten 8/24 RT 01/ RW 06, Kebraon - Karangpilang";
-        $role->phone = "08123123123";
+        $role->phone = "082137526581";
         $role->birthdate = "1989-11-11";
         $role->type = "Eceran";
-        $role->tb = 0;
-        $role->thr = 4500000;
-        $role->cashback_days = 97;
-        $role->tonnage = 4029;
+        $role->tb = 1800000;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
 
@@ -748,14 +810,14 @@ class RealSeeder extends Seeder
         $role->name = "Eman Sulaeman";
         $role->nickname = "EMAN";
         $role->address = "Dsn. Sukamulya RT 05/ RW 01, Gunungsari";
-        $role->phone = "08123123123";
+        $role->phone = "082140043846";
         $role->birthdate = "1970-02-12";
         $role->type = "Eceran";
         $role->tb = 0;
         $role->tw = 0;
         $role->thr = 0;
-        $role->cashback_days = 87;
-        $role->tonnage = 4420;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
 
@@ -770,8 +832,8 @@ class RealSeeder extends Seeder
         $role->type = "Kiriman";
         $role->tb = 0;
         $role->thr = 0;
-        $role->cashback_days = 5;
-        $role->tonnage = 10000;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
         $role = new Customer();
@@ -779,13 +841,13 @@ class RealSeeder extends Seeder
         $role->name = "Ernamawati, S.PD.";
         $role->nickname = "ERNA";
         $role->address = "Jl. Sawunggaling 1 RT 15/ RW 02, Jemundo -  Taman";
-        $role->phone = "08123123123";
+        $role->phone = "0895393600547";
         $role->birthdate = "1971-06-19";
         $role->type = "Eceran";
-        $role->tb = 0;
-        $role->thr = 144200;
-        $role->cashback_days = 100;
-        $role->tonnage = 930;
+        $role->tb = 130000;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
 
@@ -794,28 +856,28 @@ class RealSeeder extends Seeder
         $role->name = "Giyanto";
         $role->nickname = "GIANTO";
         $role->address = "Sukolegok RT 16 / RW 06, Sukodono";
-        $role->phone = "08123123123";
+        $role->phone = "085331518134";
         $role->birthdate = "1980-01-06";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->thr = 3500000;
-        $role->cashback_days = 70;
-        $role->tonnage = 3883;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
 
         $role = new Customer();
-        $role->nik = "0000000000000000";
+        $role->nik = "3517193011670006";
         $role->name = "Gatot";
         $role->nickname = "GATOT";
-        $role->address = "xxxxxxxxxxxxxxxxxxxxxxxxxxxx";
-        $role->phone = "08123123123";
-        $role->birthdate = "1980-01-07";
+        $role->address = "Raya Kebonsari 7B RT 01/ RW 01, Jambangan";
+        $role->phone = "081216198684";
+        $role->birthdate = "1967-11-30";
         $role->type = "Eceran";
         $role->tb = 0;
         $role->thr = 0;
-        $role->cashback_days = 60;
-        $role->tonnage = 2891.5;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
         $role = new Customer();
@@ -828,8 +890,8 @@ class RealSeeder extends Seeder
         $role->type = "Eceran";
         $role->tb = 0;
         $role->thr = 0;
-        $role->cashback_days = 12;
-        $role->tonnage = 224;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
         $role = new Customer();
@@ -848,17 +910,17 @@ class RealSeeder extends Seeder
 
 
         $role = new Customer();
-        $role->nik = "3515130711670001";
-        $role->name = "H. Nur. Kholiq";
-        $role->nickname = "H. KHOLIK";
+        $role->nik = "3515131403040002";
+        $role->name = "Achmad Yazid Baihaqi";
+        $role->nickname = "KHOLIK YAZID";
         $role->address = "Geluran RT 11/ RW 03, Taman";
-        $role->phone = "08123123123";
-        $role->birthdate = "1967-11-07";
+        $role->phone = "087852213936";
+        $role->birthdate = "2004-03-14";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->thr = 4000000;
-        $role->cashback_days = 100;
-        $role->tonnage = 11646.5;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
 
@@ -876,17 +938,18 @@ class RealSeeder extends Seeder
         $role->save();
 
         $role = new Customer();
-        $role->nik = "00000000000000000";
+        $role->nik = "3326171105870002";
         $role->name = "Hadi";
         $role->nickname = "HADI KEPUTIH";
-        $role->address = "XXXXXXXXXXXXXXXXXXXXXX";
-        $role->phone = "0000000000000";
-        $role->birthdate = "1990-07-05";
-        $role->type = "Eceran";
+        $role->address = "Keputih";
+        $role->phone = "085231187266";
+        $role->ongkir = 125000;
+        $role->birthdate = "1987-05-11";
+        $role->type = "Kiriman";
         $role->tb = 0;
         $role->thr = 0;
-        $role->cashback_days = 4;
-        $role->tonnage = 3000;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
         $role = new Customer();
@@ -894,13 +957,13 @@ class RealSeeder extends Seeder
         $role->name = "Haryanto";
         $role->nickname = "HARR";
         $role->address = "Dukuh Sawi RT 02/ RW 07, Klunjukan - Sragi";
-        $role->phone = "08123123123";
+        $role->phone = "085731571712";
         $role->birthdate = "1986-07-15";
         $role->type = "Eceran";
-        $role->tb = 3500000;
-        $role->thr = 1000000;
-        $role->cashback_days = 94;
-        $role->tonnage = 5025;
+        $role->tb = 800000;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
 
@@ -915,8 +978,8 @@ class RealSeeder extends Seeder
         $role->type = "Kiriman";
         $role->tb = 0;
         $role->thr = 0;
-        $role->cashback_days = 8;
-        $role->tonnage = 5300;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
         $role = new Customer();
@@ -924,13 +987,13 @@ class RealSeeder extends Seeder
         $role->name = "Imam Afandi";
         $role->nickname = "IMAM";
         $role->address = "Sukodono RT 05/ RW 01";
-        $role->phone = "08123123123";
+        $role->phone = "085707512272";
         $role->birthdate = "1979-12-20";
         $role->type = "Eceran";
         $role->tb = 0;
         $role->thr = 0;
-        $role->cashback_days = 13;
-        $role->tonnage = 500;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
 
@@ -939,28 +1002,29 @@ class RealSeeder extends Seeder
         $role->name = "Iin Sugiarini";
         $role->nickname = "IIN SAIMBANG";
         $role->address = "Saimbang RT 14/ RW 04, Kebon Agung - Sukodono";
-        $role->phone = "08123123123";
+        $role->phone = "081231099722";
         $role->ongkir = 100000;
         $role->birthdate = "1974-10-07";
         $role->type = "Kiriman";
-        $role->tb = 0;
+        $role->tb = 600000;
         $role->thr = 0;
-        $role->cashback_days = 20;
-        $role->tonnage = 39950;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
+        $role = new Customer();
         $role->nik = "XXXXXXXXXXXXXXXX";
         $role->name = "Ruhiyat";
         $role->nickname = "RUHIYAT SEMAMBUNG";
         $role->address = "Semambung";
-        $role->phone = "08123123123";
+        $role->phone = "081231231123";
         $role->ongkir = 125000;
         $role->birthdate = "2023-10-07";
         $role->type = "Kiriman";
         $role->tb = 0;
         $role->thr = 0;
-        $role->cashback_days = 15;
-        $role->tonnage = 19100;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
 
@@ -974,38 +1038,42 @@ class RealSeeder extends Seeder
         $role->type = "Eceran";
         $role->tb = 0;
         $role->thr = 0;
-        $role->cashback_days = 10;
-        $role->tonnage = 421;
-        $role->save();
-
-        $role = new Customer();
-        $role->nik = "XXXXXXXXXXXXXXXX";
-        $role->name = "Mahmudi";
-        $role->nickname = "MAHMUDI";
-        $role->address = "xxxxxxxxxxxxxxxxxxxxxx";
-        $role->phone = "08123123123";
-        $role->birthdate = "2023-04-10";
-        $role->type = "Eceran";
-        $role->tb = 0;
-        $role->thr = 0;
-        $role->cashback_days = 20;
-        $role->tonnage = 1809.5;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
 
+
+
         $role = new Customer();
-        $role->nik = "3505152404930001";
+        $role->nik = "350515240430001";
         $role->name = "Indra Kurniawan";
         $role->nickname = "INDRA PAIJO";
         $role->address = "Terik RT 13 / RW 06, Krian";
-        $role->phone = "08123123123";
+        $role->phone = "089687665402";
         $role->birthdate = "1993-04-24";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->thr = 2700000;
-        $role->cashback_days = 90;
-        $role->tonnage = 3866;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
+
+
+        $role = new Customer();
+        $role->nik = "XXXXXXXXXXXX";
+        $role->name = "Indra Kurniawan";
+        $role->nickname = "MAS INDRA KURNIAWAN";
+        $role->address = "XXXXXXXXXXXXXXXXXXXXXX";
+        $role->phone = "08XXXXXXXXX2";
+        $role->birthdate = "1993-04-24";
+        $role->type = "Eceran";
+        $role->tb = 185000;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
+        $role->save();
+
 
 
         $role = new Customer();
@@ -1025,14 +1093,14 @@ class RealSeeder extends Seeder
         $role->nik = "3515131507590002";
         $role->name = "Jemakir";
         $role->nickname = "BAKIR";
-        $role->address = "Dsn. Sambisaei Kav. Selatan blok E-13, Sambibulu- Taman";
-        $role->phone = "08123123123";
+        $role->address = "Dsn. Sambisari Kav. Selatan blok E-13, Sambibulu- Taman";
+        $role->phone = "082132410642";
         $role->birthdate = "1959-07-15";
         $role->type = "Eceran";
-        $role->tb = 0;
-        $role->thr = 2150000;
-        $role->cashback_days = 79;
-        $role->tonnage = 3241;
+        $role->tb = 1750000;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
 
@@ -1046,22 +1114,41 @@ class RealSeeder extends Seeder
         $role->birthdate = "1984-11-21";
         $role->type = "Kiriman";
         $role->tb = 0;
-        $role->tw = 0;
         $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
+
+
+        $role = new Customer();
+        $role->nik = "XXXXXXXXXXXXXX";
+        $role->name = "SAMURI";
+        $role->nickname = "SAMURI LAKARSANTRI";
+        $role->address = "LAKARSANTRI";
+        $role->phone = "08123123123";
+        $role->ongkir = 125000;
+        $role->birthdate = "1984-11-21";
+        $role->type = "Kiriman";
+        $role->tb = 0;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
+        $role->save();
+
+
 
         $role = new Customer();
         $role->nik = "3578010605860002";
         $role->name = "Joko Vitono";
         $role->nickname = "JOKO TAHU";
         $role->address = "Kemlaten 10/2 RT 03/ RW 06, Kebraon – Karangpilang";
-        $role->phone = "08123123123";
+        $role->phone = "082333959215";
         $role->birthdate = "1986-05-06";
         $role->type = "Eceran";
-        $role->tb = 0;
-        $role->thr = 4200000;
-        $role->cashback_days = 98;
-        $role->tonnage = 4504;
+        $role->tb = 650000;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
 
@@ -1070,13 +1157,13 @@ class RealSeeder extends Seeder
         $role->name = "Joni Winarno Hadi W";
         $role->nickname = "JONI";
         $role->address = "Taman RT 18/ RW 03, Taman- Sidoarjo";
-        $role->phone = "08123123123";
+        $role->phone = "085850222804";
         $role->birthdate = "1979-01-05";
         $role->type = "Eceran";
-        $role->tb = 750000;
-        $role->thr = 840000;
-        $role->cashback_days = 86;
-        $role->tonnage = 2904;
+        $role->tb = 240000;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
 
@@ -1085,14 +1172,13 @@ class RealSeeder extends Seeder
         $role->name = "Kusyono";
         $role->nickname = "AGUS K";
         $role->address = "Jl. Nanas RT 10/ RW 03, Geluran - Taman";
-        $role->phone = "08123123123";
+        $role->phone = "082331339343";
         $role->birthdate = "1968-01-21";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->tw = 0;
         $role->thr = 0;
-        $role->cashback_days = 42;
-        $role->tonnage = 2140;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
         $role = new Customer();
@@ -1104,11 +1190,61 @@ class RealSeeder extends Seeder
         $role->birthdate = "2023-07-30";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->tw = 0;
         $role->thr = 0;
-        $role->cashback_days = 23;
-        $role->tonnage = 1017;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
+
+
+        $role = new Customer();
+        $role->nik = "Xxxxxxxxxx";
+        $role->name = "PARLAN";
+        $role->nickname = "PARLAN";
+        $role->address = "XXXXXXXXXXXXXXXX";
+        $role->phone = "XXXXXXXXXX";
+        $role->birthdate = "2023-07-30";
+        $role->type = "Eceran";
+        $role->tb = 0;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
+        $role->save();
+
+        $role = new Customer();
+        $role->nik = "Xxxxxxxxxx";
+        $role->name = "AINUN";
+        $role->nickname = "AINUN";
+        $role->address = "XXXXXXXXXXXXXXXX";
+        $role->phone = "XXXXXXXXXX";
+        $role->birthdate = "2023-07-30";
+        $role->type = "Eceran";
+        $role->tb = 100000;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
+        $role->save();
+
+
+        $role = new Customer();
+        $role->nik = "Xxxxxxxxxx";
+        $role->name = "HENDRIK SARI DELE";
+        $role->nickname = "HENDRIK";
+        $role->address = "XXXXXXXXXXXXXXXX";
+        $role->phone = "XXXXXXXXXX";
+        $role->birthdate = "2023-07-30";
+        $role->type = "Eceran";
+        $role->tb = 100000;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
+        $role->save();
+
+
+
+
+
+
+
 
 
         $role = new Customer();
@@ -1120,23 +1256,23 @@ class RealSeeder extends Seeder
         $role->birthdate = "1977-05-21";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->thr = 7500;
-        $role->cashback_days = 79;
-        $role->tonnage = 4255;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
         $role = new Customer();
-        $role->nik = "3515136409800002";
-        $role->name = "Kartini";
+        $role->nik = "3506195608770003";
+        $role->name = "Agustini";
         $role->nickname = "BU TINI";
-        $role->address = "Jl. Ubi 2 Margomulyo RT 04/ RW 10, Wage - Taman";
-        $role->phone = "08123123123";
-        $role->birthdate = "1980-09-24";
+        $role->address = "Jl. Malang RT 01 / RW 07, Kandangan";
+        $role->phone = "082231113588";
+        $role->birthdate = "1977-08-12";
         $role->type = "Eceran";
-        $role->tb = 0;
-        $role->thr = 1900000;
-        $role->cashback_days = 14;
-        $role->tonnage = 700;
+        $role->tb = 800000;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
         $role = new Customer();
@@ -1144,13 +1280,13 @@ class RealSeeder extends Seeder
         $role->name = "Kisbandi";
         $role->nickname = "KISBANDI";
         $role->address = "Werdi RT 17/ RW 08, Wonokerto";
-        $role->phone = "08123123123";
+        $role->phone = "081231917909";
         $role->birthdate = "1985-09-29";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->thr = 2560000;
-        $role->cashback_days = 100;
-        $role->tonnage = 5880;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
 
@@ -1159,14 +1295,14 @@ class RealSeeder extends Seeder
         $role->name = "Kinto Surono";
         $role->nickname = "KINTO";
         $role->address = "Dsn. Dukuh RT 08/ RW 03, Bangsri – Sukodono ";
-        $role->phone = "08123123123";
+        $role->phone = "081231231123";
         $role->ongkir = 100000;
         $role->birthdate = "1992-07-04";
         $role->type = "Kiriman";
         $role->tb = 0;
-        $role->thr = 10000000;
-        $role->cashback_days = 9;
-        $role->tonnage = 19900;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
         $role = new Customer();
@@ -1192,10 +1328,10 @@ class RealSeeder extends Seeder
         $role->ongkir = 100000;
         $role->birthdate = "1977-10-12";
         $role->type = "Kiriman";
-        $role->tb = 60000;
-        $role->thr = 50000;
-        $role->cashback_days = 7;
-        $role->tonnage = 7000;
+        $role->tb = 0;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
         $role = new Customer();
@@ -1203,13 +1339,13 @@ class RealSeeder extends Seeder
         $role->name = "Lia Fanani";
         $role->nickname = "RIDHO";
         $role->address = "Sambisari RT 31/ RW 06";
-        $role->phone = "08123123123";
+        $role->phone = "082233092145";
         $role->birthdate = "1984-05-13";
         $role->type = "Eceran";
         $role->tb = 0;
         $role->thr = 0;
-        $role->cashback_days = 95;
-        $role->tonnage = 3078;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
         $role = new Customer();
@@ -1234,13 +1370,11 @@ class RealSeeder extends Seeder
         $role->birthdate = "2023-07-30";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->thr = 250000;
-        $role->cashback_days = 5;
-        $role->tonnage = 240;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
-
-        $role->save();
 
 
         $role = new Customer();
@@ -1248,11 +1382,15 @@ class RealSeeder extends Seeder
         $role->name = "Mahmudi ";
         $role->nickname = "MAHMUDI";
         $role->address = "Dsn. Mulung RT 07/ RW 04, Driyorejo";
-        $role->phone = "08123123123";
+        $role->phone = "085746039880";
         $role->birthdate = "1984-11-28";
         $role->type = "Eceran";
+        $role->tb = 0;
         $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
+
 
         $role = new Customer();
         $role->nik = "3515132205990004";
@@ -1264,6 +1402,8 @@ class RealSeeder extends Seeder
         $role->type = "Eceran";
         $role->tb = 0;
         $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
         $role = new Customer();
@@ -1274,10 +1414,10 @@ class RealSeeder extends Seeder
         $role->phone = "08123123123";
         $role->birthdate = "1966-03-01";
         $role->type = "Eceran";
-        $role->tb = 0;
-        $role->thr = 1900000;
-        $role->cashback_days = 64;
-        $role->tonnage = 2776;
+        $role->tb = 900000;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
         $role = new Customer();
@@ -1289,8 +1429,9 @@ class RealSeeder extends Seeder
         $role->birthdate = "1963-06-02";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->tw = 0;
         $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
         $role = new Customer();
@@ -1303,9 +1444,10 @@ class RealSeeder extends Seeder
         $role->type = "Eceran";
         $role->tb = 0;
         $role->thr = 0;
-        $role->cashback_days = 83;
-        $role->tonnage = 31305;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
+
         $role = new Customer();
         $role->nik = "000000000000000";
         $role->name = "GUDANG";
@@ -1314,55 +1456,28 @@ class RealSeeder extends Seeder
         $role->phone = "08123123123";
         $role->birthdate = "1990-10-06";
         $role->type = "Eceran";
-        $role->tb = 290000;
+        $role->tb = 380000;
         $role->thr = 0;
         $role->cashback_days = 0;
         $role->tonnage = 0;
         $role->save();
 
 
-
         $role = new Customer();
-        $role->nik = "0000000000000000";
-        $role->name = "Tifany M";
-        $role->nickname = "FANI";
-        $role->address = "xxxxxxxxxxxxxxxxxxxxxxxxxxx";
-        $role->phone = "0859171683244";
-        $role->birthdate = "1991-05-23";
-        $role->type = "Eceran";
-        $role->tb = 0;
-        $role->thr = 200000;
-        $role->cashback_days = 0;
-        $role->tonnage = 0;
-        $role->save();
-
-
-        $role = new Customer();
-        $role->nik = "0000000000000000";
+        $role->nik = "3515112712840002";
         $role->name = "Firman";
         $role->nickname = "FIRMAN";
-        $role->address = "xxxxxxxxxxxxxxxxxxxxxxxxxxx";
-        $role->phone = "000000000000";
-        $role->birthdate = "1991-04-20";
+        $role->address = "Dsn. Wadang RT 02/ RW 04, Tempel- Krian";
+        $role->phone = "081252235252";
+        $role->ongkir = 100000;
+        $role->birthdate = "1984-12-27";
         $role->type = "Eceran";
         $role->tb = 0;
         $role->thr = 0;
-        $role->cashback_days = 14;
-        $role->tonnage = 27885;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
-        $role = new Customer();
-        $role->nik = "3515132207600002";
-        $role->name = "Mugiono";
-        $role->nickname = "GOCO";
-        $role->address = "Taman RT 17/ RW 03, Taman";
-        $role->phone = "08123123123";
-        $role->birthdate = "1960-07-22";
-        $role->type = "Eceran";
-        $role->tb = 0;
-        $role->tw = 0;
-        $role->thr = 0;
-        $role->save();
 
         $role = new Customer();
         $role->nik = "0000000000000000";
@@ -1374,8 +1489,8 @@ class RealSeeder extends Seeder
         $role->type = "Eceran";
         $role->tb = 0;
         $role->thr = 0;
-        $role->cashback_days = 3;
-        $role->tonnage = 300;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
 
@@ -1384,29 +1499,31 @@ class RealSeeder extends Seeder
         $role->name = "Moh. Irfan Shodiq";
         $role->nickname = "IRFAN TENARU";
         $role->address = "Tenaru RT 03/ RW 01, Driyorejo";
-        $role->phone = "08123123123";
+        $role->phone = "087854683012";
         $role->ongkir = 100000;
         $role->birthdate = "1970-04-16";
         $role->type = "Kiriman";
         $role->tb = 0;
         $role->thr = 0;
-        $role->cashback_days = 4;
-        $role->tonnage = 4000;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
         $role = new Customer();
-        $role->nik = "3518122904930002";
-        $role->name = "Muh. Kamat Yajib";
-        $role->nickname = "YAJIB";
-        $role->address = "Dsn. Cangak RT 01/ RW 05, Krandang";
-        $role->phone = "08123123123";
-        $role->birthdate = "1993-04-29";
-        $role->type = "Eceran";
+        $role->nik = "XXXXXXXXXXXXXXXXXXXXXXX";
+        $role->name = "RIFAI TENARU";
+        $role->nickname = "RIFAI TENARU";
+        $role->address = "Tenaru ";
+        $role->phone = "XXXXXXXXXXXXXXXX";
+        $role->ongkir = 100000;
+        $role->birthdate = "1970-04-16";
+        $role->type = "Kiriman";
         $role->tb = 0;
-        $role->thr = 500000;
-        $role->cashback_days = 80;
-        $role->tonnage = 3616;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
+
 
 
         $role = new Customer();
@@ -1414,13 +1531,13 @@ class RealSeeder extends Seeder
         $role->name = "Muhammad Roni";
         $role->nickname = "RONI";
         $role->address = "Dk. Saren RT 02/ RW 06, Blimbing Wuluh- Siwalan";
-        $role->phone = "08123123123";
+        $role->phone = "085704115868";
         $role->birthdate = "1990-06-15";
         $role->type = "Eceran";
-        $role->tb = 0;
-        $role->thr = 2360000;
-        $role->cashback_days = 96;
-        $role->tonnage = 4057;
+        $role->tb = 3190000;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
 
@@ -1435,9 +1552,9 @@ class RealSeeder extends Seeder
         $role->birthdate = "1991-10-26";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->thr = 7000000;
-        $role->cashback_days = 76;
-        $role->tonnage = 2910;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
         $role = new Customer();
@@ -1451,8 +1568,8 @@ class RealSeeder extends Seeder
         $role->type = "Kiriman";
         $role->tb = 0;
         $role->thr = 0;
-        $role->cashback_days = 3;
-        $role->tonnage = 1417.1;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
         $role = new Customer();
@@ -1460,13 +1577,13 @@ class RealSeeder extends Seeder
         $role->name = "Muslikin";
         $role->nickname = "LIKIN";
         $role->address = "Sambisari RT 34/ RW 07, Sambibulu -  Taman";
-        $role->phone = "08123123123";
+        $role->phone = "0895322452727";
         $role->birthdate = "1990-10-06";
         $role->type = "Eceran";
-        $role->tb = 0;
-        $role->thr = 2700000;
-        $role->cashback_days = 101;
-        $role->tonnage = 5956;
+        $role->tb = 140000;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
         $role = new Customer();
@@ -1474,13 +1591,13 @@ class RealSeeder extends Seeder
         $role->name = "Moh. Juwari";
         $role->nickname = "JUHARI";
         $role->address = "Sadang Taman RT 02/ RW 01";
-        $role->phone = "08123123123";
+        $role->phone = "081515585249";
         $role->birthdate = "1972-12-05";
         $role->type = "Eceran";
-        $role->tb = 3810000;
-        $role->thr = 3810000;
-        $role->cashback_days = 99;
-        $role->tonnage = 3430;
+        $role->tb = 600000;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
         $role = new Customer();
@@ -1492,7 +1609,7 @@ class RealSeeder extends Seeder
         $role->birthdate = "1991-05-23";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->thr = 400000;
+        $role->thr = 0;
         $role->cashback_days = 0;
         $role->tonnage = 0;
         $role->save();
@@ -1511,8 +1628,8 @@ class RealSeeder extends Seeder
         $role->type = "Eceran";
         $role->tb = 0;
         $role->thr = 0;
-        $role->cashback_days = 2;
-        $role->tonnage = 48;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
         $role = new Customer();
@@ -1520,13 +1637,13 @@ class RealSeeder extends Seeder
         $role->name = "Moh. Nurwahyudi";
         $role->nickname = "MASYUDI";
         $role->address = "Sepande RT 07/ RW 02, Candi - Sidoarjo";
-        $role->phone = "08123123123";
+        $role->phone = "085731437322";
         $role->birthdate = "1987-07-11";
         $role->type = "Eceran";
         $role->tb = 0;
         $role->thr = 0;
-        $role->cashback_days = 99;
-        $role->tonnage = 2449;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
 
@@ -1535,27 +1652,27 @@ class RealSeeder extends Seeder
         $role->name = "Muhajirin";
         $role->nickname = "MUHAJIRIN";
         $role->address = "Plabuhan RT 06/ RW 02, Plabuhan Rejo- Lamongan";
-        $role->phone = "08123123123";
+        $role->phone = "085748906912";
         $role->birthdate = "1981-12-24";
         $role->type = "Eceran";
         $role->tb = 0;
         $role->thr = 0;
-        $role->cashback_days = 74;
-        $role->tonnage = 5333.75;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
         $role = new Customer();
-        $role->nik = "XXXXXXXXXXXXXXXX";
-        $role->name = "Mimi";
+        $role->nik = "3578041009760011";
+        $role->name = "Yohanes Adri Hariyanto";
         $role->nickname = "MIMI";
-        $role->address = "xxxxxxxxxxxxxxxxxxxxxxxxxxx";
-        $role->phone = "08123123123";
+        $role->address = "Bratang Gede 3H/ 34 RT 12 / RW 07, Ngagel";
+        $role->phone = "085232367234";
         $role->birthdate = "2023-12-24";
         $role->type = "Eceran";
         $role->tb = 0;
         $role->thr = 0;
-        $role->cashback_days = 23;
-        $role->tonnage = 1370;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
 
@@ -1564,13 +1681,13 @@ class RealSeeder extends Seeder
         $role->name = "Muhamat Gunawan";
         $role->nickname = "AWAN";
         $role->address = "Dk. Gendogo Bondansari RT 06/ RW 03, Bondansari";
-        $role->phone = "08123123123";
+        $role->phone = "0859171628305";
         $role->birthdate = "1988-01-08";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->thr = 4500000;
-        $role->cashback_days = 151;
-        $role->tonnage = 10485;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
 
@@ -1584,9 +1701,9 @@ class RealSeeder extends Seeder
         $role->birthdate = "1985-11-18";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->thr = 2340000;
-        $role->cashback_days = 88;
-        $role->tonnage = 2860;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
         $role = new Customer();
@@ -1594,13 +1711,13 @@ class RealSeeder extends Seeder
         $role->name = "Moh. Maufiqur Rohman";
         $role->nickname = "MOUFIQUR";
         $role->address = "Medaeng Kulon RT 19/ RW 07, Kedungturi- Taman";
-        $role->phone = "08123123123";
+        $role->phone = "0881026798552";
         $role->birthdate = "2001-03-02";
         $role->type = "Eceran";
-        $role->tb = 0;
-        $role->thr = 1900000;
-        $role->cashback_days = 15;
-        $role->tonnage = 800;
+        $role->tb = 200000;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
         $role = new Customer();
@@ -1612,22 +1729,23 @@ class RealSeeder extends Seeder
         $role->birthdate = "1972-03-22";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->tw = 0;
         $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
         $role = new Customer();
-        $role->nik = "XXXXXXXXXXXXXXXX";
+        $role->nik = "3326172103010001";
         $role->name = "Nur Sait";
-        $role->nickname = "NUR SAIT";
-        $role->address = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
-        $role->phone = "08123123123";
-        $role->birthdate = "2023-03-22";
+        $role->nickname = "NURSAIT";
+        $role->address = "Dk. Lorong RT 01/ RW 03, Siwalan";
+        $role->phone = "085792498252";
+        $role->birthdate = "2001-03-21";
         $role->type = "Eceran";
-        $role->tb = 0;
+        $role->tb = 230000;
         $role->thr = 0;
-        $role->cashback_days = 74;
-        $role->tonnage = 2920;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
 
@@ -1640,9 +1758,11 @@ class RealSeeder extends Seeder
         $role->birthdate = "1978-11-11";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->tw = 0;
         $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
+
 
         $role = new Customer();
         $role->nik = "3326170410840001";
@@ -1658,16 +1778,17 @@ class RealSeeder extends Seeder
         $role->save();
 
         $role = new Customer();
-        $role->nik = "3523170906740005";
-        $role->name = "Moh. Yusuf";
-        $role->nickname = "YUSUF TENGGILIS";
-        $role->address = "Dsn. Kesamben Barat RT 01/ RW 03, Plumpang";
-        $role->phone = "08123123123";
-        $role->birthdate = "1974-06-09";
+        $role->nik = "3517111909790003";
+        $role->name = "Heri Siswoyo";
+        $role->nickname = "HERI IPAN";
+        $role->address = "Dsn. Kloso Kerep RT 06/ RW 02, Sumobito";
+        $role->phone = "088991178280";
+        $role->birthdate = "1979-09-19";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->tw = 0;
         $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
         $role = new Customer();
@@ -1679,8 +1800,9 @@ class RealSeeder extends Seeder
         $role->birthdate = "1984-06-15";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->tw = 0;
         $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
         $role = new Customer();
@@ -1691,10 +1813,10 @@ class RealSeeder extends Seeder
         $role->phone = "08123123123";
         $role->birthdate = "1968-02-17";
         $role->type = "Eceran";
-        $role->tb = 550000;
-        $role->thr = 325000;
-        $role->cashback_days = 9;
-        $role->tonnage = 502;
+        $role->tb = 0;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
         $role = new Customer();
@@ -1702,13 +1824,13 @@ class RealSeeder extends Seeder
         $role->name = "Nur Cahyo";
         $role->nickname = "NURCY";
         $role->address = "Medaeng Kulon RT 20/ RW 07, Kedungturi - Taman";
-        $role->phone = "08123123123";
+        $role->phone = "088235646097";
         $role->birthdate = "1969-08-06";
         $role->type = "Eceran";
         $role->tb = 0;
         $role->thr = 0;
-        $role->cashback_days = 59;
-        $role->tonnage = 1462;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
         $role = new Customer();
@@ -1721,8 +1843,8 @@ class RealSeeder extends Seeder
         $role->type = "Eceran";
         $role->tb = 0;
         $role->thr = 0;
-        $role->cashback_days = 14;
-        $role->tonnage = 600;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
         $role = new Customer();
@@ -1730,13 +1852,13 @@ class RealSeeder extends Seeder
         $role->name = "Pudjut Sujarwanto";
         $role->nickname = "JARWANTO";
         $role->address = "Sambibulu RT 29/ RW 05, Taman";
-        $role->phone = "08123123123";
+        $role->phone = "085257575561";
         $role->birthdate = "1971-01-01";
         $role->type = "Eceran";
-        $role->tb = 0;
-        $role->thr = 14000000;
-        $role->cashback_days = 88;
-        $role->tonnage = 4410;
+        $role->tb = 500000;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
         $role = new Customer();
@@ -1744,13 +1866,13 @@ class RealSeeder extends Seeder
         $role->name = "Panut";
         $role->nickname = "PANUT";
         $role->address = "Druju RT 05/ RW 01, Druju";
-        $role->phone = "08123123123";
+        $role->phone = "085935362976";
         $role->birthdate = "1973-04-14";
         $role->type = "Eceran";
         $role->tb = 0;
         $role->thr = 0;
-        $role->cashback_days = 88;
-        $role->tonnage = 3486.5;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
         $role = new Customer();
@@ -1758,13 +1880,13 @@ class RealSeeder extends Seeder
         $role->name = "Purwanto";
         $role->nickname = "PUR TAHU";
         $role->address = "Dsn. Melik RT 05/ RW 05, Bedah Lawak - Tembelang";
-        $role->phone = "08123123123";
+        $role->phone = "085745222316";
         $role->birthdate = "1983-04-29";
         $role->type = "Eceran";
-        $role->tb = 0;
-        $role->thr = 5000000;
-        $role->cashback_days = 72;
-        $role->tonnage = 4400;
+        $role->tb = 450000;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
         $role = new Customer();
@@ -1775,7 +1897,7 @@ class RealSeeder extends Seeder
         $role->phone = "000000000000";
         $role->birthdate = "1983-04-13";
         $role->type = "Eceran";
-        $role->tb = 220000;
+        $role->tb = 0;
         $role->thr = 0;
         $role->cashback_days = 0;
         $role->tonnage = 0;
@@ -1791,8 +1913,9 @@ class RealSeeder extends Seeder
         $role->birthdate = "1980-12-23";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->tw = 0;
         $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
         $role = new Customer();
@@ -1800,26 +1923,43 @@ class RealSeeder extends Seeder
         $role->name = "Reno Rela Hendrawan";
         $role->nickname = "HENDRA";
         $role->address = "Dsn. Sambisari Kav. Selatan Blok D19 RT 37/ RW 07, Sambibulu";
-        $role->phone = "08123123123";
+        $role->phone = "0881026923258";
         $role->birthdate = "1986-02-27";
         $role->type = "Eceran";
-        $role->tb = 5150000;
-        $role->thr = 6150000;
-        $role->cashback_days = 94;
-        $role->tonnage = 2858;
+        $role->tb = 0;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
+
+        $role = new Customer();
+        $role->nik = "3578080205860001";
+        $role->name = "HENDRA SARI KEDELAI";
+        $role->nickname = "HENDRA SK";
+        $role->address = "Jl. Nusa Kambangan 139, Dauh Puri Kauh, Denpasar Barat";
+        $role->phone = "082340606058";
+        $role->birthdate = "1986-05-02";
+        $role->type = "Eceran";
+        $role->tb = 0;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
+        $role->save();
+
+
 
         $role = new Customer();
         $role->nik = "3515131908630011";
         $role->name = "Rochmad";
-        $role->nickname = "ROHMAT";
+        $role->nickname = "PAK ROHMAT";
         $role->address = "Jl. Nangka 1C RT 15/ RW 03, Geluran";
         $role->phone = "08123123123";
         $role->birthdate = "1963-08-19";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->tw = 0;
         $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
         $role = new Customer();
@@ -1827,14 +1967,34 @@ class RealSeeder extends Seeder
         $role->name = "Sadali";
         $role->nickname = "SADELI";
         $role->address = "Legok RT 18/ RW06, Taman";
-        $role->phone = "08123123123";
+        $role->phone = "081556854139";
         $role->birthdate = "1974-05-04";
         $role->type = "Eceran";
-        $role->tb = 1350000;
-        $role->thr = 1350000;
-        $role->cashback_days = 96;
-        $role->tonnage = 13960;
+        $role->tb = 650000;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
+
+        $role = new Customer();
+        $role->nik = "xxxxxxxxxxxxx";
+        $role->name = "ALI Gondrong";
+        $role->nickname = "ALI";
+        $role->address = "XXXXXXXXXXXXXXX";
+        $role->phone = "XXXXXXXXXXXX";
+        $role->birthdate = "1986-10-30";
+        $role->type = "Eceran";
+        $role->tb = 0;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
+        $role->save();
+
+
+
+
+
+
 
         $role = new Customer();
         $role->nik = "3326172104820005";
@@ -1846,8 +2006,8 @@ class RealSeeder extends Seeder
         $role->type = "Eceran";
         $role->tb = 0;
         $role->thr = 0;
-        $role->cashback_days = 12;
-        $role->tonnage = 770;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
 
@@ -1861,9 +2021,9 @@ class RealSeeder extends Seeder
         $role->birthdate = "1984-01-17";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->thr = 415000;
-        $role->cashback_days = 78;
-        $role->tonnage = 4405;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
 
@@ -1872,13 +2032,13 @@ class RealSeeder extends Seeder
         $role->name = "Sanaji";
         $role->nickname = "SANAJI";
         $role->address = "Jl. Pagesangan Gg. Tambangan No.36 RT.01/RW.02, Jambangan";
-        $role->phone = "08123123123";
+        $role->phone = "089609254622";
         $role->birthdate = "1994-01-15";
         $role->type = "Eceran";
-        $role->tb = 0;
-        $role->thr = 1050000;
-        $role->cashback_days = 91;
-        $role->tonnage = 8246;
+        $role->tb = 750000;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
 
@@ -1887,27 +2047,28 @@ class RealSeeder extends Seeder
         $role->name = "Senen";
         $role->nickname = "SENEN";
         $role->address = "Sobo Widoro RT.01/RW.07 Trosobo, Taman";
-        $role->phone = "08123123123";
+        $role->phone = "082139436616";
         $role->birthdate = "1978-06-02";
         $role->type = "Eceran";
-        $role->tb = 0;
-        $role->thr = 1220000;
-        $role->cashback_days = 52;
-        $role->tonnage = 2745;
+        $role->tb = 250000;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
 
         $role = new Customer();
-        $role->nik = "3578162510750010";
-        $role->name = "Seger Purnomo";
-        $role->nickname = "MINO";
+        $role->nik = "3515134102770001";
+        $role->name = "Dewi Wahyuni";
+        $role->nickname = "DEWI WAHYUNI";
         $role->address = "Simo Gunung Baru Jaya Blok E/02 RT.003/RW.15, Putat Jaya, Sawahan";
-        $role->phone = "08123123123";
+        $role->phone = "0881026671031";
         $role->birthdate = "1975-10-25";
         $role->type = "Eceran";
-        $role->tb = 0;
-        $role->tw = 0;
+        $role->tb = 360000;
         $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
 
@@ -1921,8 +2082,8 @@ class RealSeeder extends Seeder
         $role->type = "Eceran";
         $role->tb = 0;
         $role->thr = 0;
-        $role->cashback_days = 29;
-        $role->tonnage = 588;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
 
@@ -1933,13 +2094,13 @@ class RealSeeder extends Seeder
         $role->name = "Siaman";
         $role->nickname = "SIAMAN";
         $role->address = "Pagesangan III-A/26-A RT.04/RW.03. Jambangan";
-        $role->phone = "08123123123";
+        $role->phone = "082132045156";
         $role->birthdate = "1974-10-16";
         $role->type = "Eceran";
-        $role->tb = 0;
-        $role->thr = 50750000;
-        $role->cashback_days = 109;
-        $role->tonnage = 28811.9;
+        $role->tb = 8000000;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
 
@@ -1948,14 +2109,30 @@ class RealSeeder extends Seeder
         $role->name = "Siti Fatimah";
         $role->nickname = "BU SALI";
         $role->address = "Kalijaten RT.23/RW.03, Taman";
-        $role->phone = "08123123123";
+        $role->phone = "085704148286";
         $role->birthdate = "1975-08-25";
         $role->type = "Eceran";
-        $role->tb = 1000000;
-        $role->thr = 10600000;
-        $role->cashback_days = 93;
-        $role->tonnage = 5497.5;
+        $role->tb = 2800000;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
+
+        $role = new Customer();
+        $role->nik = "XXXXXXXXXXXXXXXX";
+        $role->name = "FATIMAH";
+        $role->nickname = "BU FATIMAH";
+        $role->address = "KARANGPILANG";
+        $role->phone = "08971799946";
+        $role->birthdate = "1986-02-02";
+        $role->type = "Eceran";
+        $role->tb = 70000;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
+        $role->save();
+
+
 
 
         $role = new Customer();
@@ -1969,8 +2146,8 @@ class RealSeeder extends Seeder
         $role->type = "Kiriman";
         $role->tb = 0;
         $role->thr = 0;
-        $role->cashback_days = 5;
-        $role->tonnage = 11000;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
 
@@ -1985,8 +2162,9 @@ class RealSeeder extends Seeder
         $role->birthdate = "1978-10-16";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->tw = 0;
         $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
         $role = new Customer();
@@ -1999,8 +2177,8 @@ class RealSeeder extends Seeder
         $role->type = "Eceran";
         $role->tb = 0;
         $role->thr = 0;
-        $role->cashback_days = 24;
-        $role->tonnage = 411;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
         $role = new Customer();
@@ -2008,13 +2186,13 @@ class RealSeeder extends Seeder
         $role->name = "TRY NANDA EFENDI";
         $role->nickname = "TRY NANDA";
         $role->address = "GEDUNG BOTO - TAMAN";
-        $role->phone = "XXXXXXXXXX";
+        $role->phone = "089631267711";
         $role->birthdate = "1996-03-01";
         $role->type = "Eceran";
-        $role->tb = 0;
-        $role->thr = 51600;
-        $role->cashback_days = 6;
-        $role->tonnage = 96;
+        $role->tb = 152000;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
 
@@ -2025,13 +2203,13 @@ class RealSeeder extends Seeder
         $role->name = "Singgih Prasetiyo";
         $role->nickname = "SINGGIH";
         $role->address = "Taman RT.15/RW.03";
-        $role->phone = "08123123123";
+        $role->phone = "085730200260";
         $role->birthdate = "1992-07-16";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->thr = 429000;
-        $role->cashback_days = 63;
-        $role->tonnage = 1192;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
 
@@ -2041,11 +2219,13 @@ class RealSeeder extends Seeder
         $role->nickname = "RESTU";
         $role->address = "Dsn. Keben, RT.05/RW.01, Cangkringsari";
         $role->phone = "08123123123";
+        $role->ongkir = 100000;
         $role->birthdate = "1984-09-09";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->tw = 0;
         $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
 
@@ -2054,15 +2234,15 @@ class RealSeeder extends Seeder
         $role = new Customer();
         $role->nik = "3515130609840005";
         $role->name = "Slamet Hariadi";
-        $role->nickname = "HARI S";
+        $role->nickname = "HARI MEIDAYANTI";
         $role->address = "Bebekan Timur RT.09/RW.03 Taman-Sidoarjo";
-        $role->phone = "08123123123";
+        $role->phone = "08885577914 / 0881036461744";
         $role->birthdate = "1984-09-06";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->thr = 1700000;
-        $role->cashback_days = 80;
-        $role->tonnage = 2129;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
 
@@ -2075,8 +2255,9 @@ class RealSeeder extends Seeder
         $role->birthdate = "1981-03-03";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->tw = 0;
         $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
 
@@ -2088,10 +2269,10 @@ class RealSeeder extends Seeder
         $role->phone = "08123123123";
         $role->birthdate = "1983-02-17";
         $role->type = "Eceran";
-        $role->tb = 0;
-        $role->thr = 2900000;
-        $role->cashback_days = 89;
-        $role->tonnage = 5218;
+        $role->tb = 300000;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
 
@@ -2104,8 +2285,9 @@ class RealSeeder extends Seeder
         $role->birthdate = "1979-03-17";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->tw = 0;
         $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
 
@@ -2114,13 +2296,13 @@ class RealSeeder extends Seeder
         $role->name = "Sodiq Arianto";
         $role->nickname = "SODIK";
         $role->address = "Sambisari RT.032/RW.006, Taman";
-        $role->phone = "08123123123";
+        $role->phone = "085732838139";
         $role->birthdate = "1960-07-15";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->thr = 940000;
-        $role->cashback_days = 37;
-        $role->tonnage = 1332;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
 
@@ -2129,28 +2311,16 @@ class RealSeeder extends Seeder
         $role->name = "Sri Wahono";
         $role->nickname = "WAHONO";
         $role->address = "Kedungturi RT.47/RW.13, Taman";
-        $role->phone = "08123123123";
+        $role->phone = "088226081470";
         $role->birthdate = "1969-11-08";
         $role->type = "Eceran";
-        $role->tb = 520000;
-        $role->thr = 1110000;
-        $role->cashback_days = 43;
-        $role->tonnage = 2364.5;
-        $role->save();
-
-
-        $role = new Customer();
-        $role->nik = "3523050305770001";
-        $role->name = "Subur Fauzi";
-        $role->nickname = "Fauzi";
-        $role->address = "Dsn. Tulung RT.05/RW.04 Rayung, Senori";
-        $role->phone = "08123123123";
-        $role->birthdate = "1977-05-03";
-        $role->type = "Eceran";
-        $role->tb = 0;
-        $role->tw = 0;
+        $role->tb = 135000;
         $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
+
+
 
 
         $role = new Customer();
@@ -2158,30 +2328,14 @@ class RealSeeder extends Seeder
         $role->name = "Sugeng Hariyadi";
         $role->nickname = "HARI EDY";
         $role->address = "Ketegan Barat Gg.03 RT05/RW.01, Taman";
-        $role->phone = "08123123123";
+        $role->phone = "089665634944";
         $role->birthdate = "1989-05-07";
         $role->type = "Eceran";
-        $role->tb = 0;
-        $role->thr = 1590000;
-        $role->cashback_days = 92;
-        $role->tonnage = 1631;
-        $role->save();
-
-
-        $role = new Customer();
-        $role->nik = "3515133011740009";
-        $role->name = "Suherman Mahmudi";
-        $role->nickname = "Mahmudi";
-        $role->address = "Dsn. Kletek RT.10/RW.05 Taman";
-        $role->phone = "08123123123";
-        $role->birthdate = "1974-11-30";
-        $role->type = "Eceran";
-        $role->tb = 0;
-        $role->tw = 0;
+        $role->tb = 300000;
         $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
-
-
 
 
 
@@ -2197,8 +2351,9 @@ class RealSeeder extends Seeder
         $role->birthdate = "1981-06-19";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->tw = 0;
         $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
 
@@ -2211,25 +2366,10 @@ class RealSeeder extends Seeder
         $role->birthdate = "1985-01-21";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->tw = 0;
         $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
-
-
-        $role = new Customer();
-        $role->nik = "3515131206660007";
-        $role->name = "SUMADI";
-        $role->nickname = "SUMADI";
-        $role->address = "SAMBISARI KAV.UTARA, RT.35/RW.06 SAMBIBULU, TAMAN";
-        $role->phone = "08123123123";
-        $role->birthdate = "1966-06-12";
-        $role->type = "Eceran";
-        $role->tb = 0;
-        $role->tw = 0;
-        $role->thr = 0;
-        $role->save();
-
-
 
 
         $role = new Customer();
@@ -2237,13 +2377,13 @@ class RealSeeder extends Seeder
         $role->name = "SUMADI";
         $role->nickname = "SUMADI TEMPE";
         $role->address = "WONOTUNGGAL";
-        $role->phone = "08123123123";
+        $role->phone = "085730645217";
         $role->birthdate = "1976-08-01";
         $role->type = "Eceran";
-        $role->tb = 0;
-        $role->thr = 3270000;
-        $role->cashback_days = 89;
-        $role->tonnage = 9030;
+        $role->tb = 700000;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
 
@@ -2252,14 +2392,14 @@ class RealSeeder extends Seeder
         $role->name = "SUMADJI";
         $role->nickname = "PAK JI JEMUNDO ";
         $role->address = "JL.SAWUNGGALING I RT.15/RW.03 JEMUNDO, TAMAN ";
-        $role->phone = "08123123123";
+        $role->phone = "089613010213";
         $role->ongkir = 100000;
         $role->birthdate = "1958-01-01";
         $role->type = "Kiriman";
-        $role->tb = 0;
+        $role->tb = 5000000;
         $role->thr = 0;
-        $role->cashback_days = 9;
-        $role->tonnage = 5912;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
 
@@ -2273,38 +2413,12 @@ class RealSeeder extends Seeder
         $role->type = "Eceran";
         $role->tb = 0;
         $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
 
 
-        $role = new Customer();
-        $role->nik = "3515132508930005";
-        $role->name = "SUNARDI";
-        $role->nickname = "SUNARDI";
-        $role->address = "JL.SAWUNGGALING III RT.20/RW.04 JEMUNDO - TAMAN";
-        $role->phone = "08123123123";
-        $role->birthdate = "1993-08-25";
-        $role->type = "Eceran";
-        $role->tb = 0;
-        $role->tw = 0;
-        $role->thr = 0;
-        $role->save();
-
-
-        $role = new Customer();
-        $role->nik = "3515132702760005";
-        $role->name = "SUNARDI";
-        $role->nickname = "NARDI";
-        $role->address = "BEBEKAN SELATAN, RT.24/RW.07, TAMAN";
-        $role->phone = "08123123123";
-        $role->ongkir = 100000;
-        $role->birthdate = Carbon::now();
-        $role->type = "Kiriman";
-        $role->tb = 0;
-        $role->thr = 0;
-        $role->cashback_days = 11;
-        $role->tonnage = 22000;
-        $role->save();
 
 
         $role = new Customer();
@@ -2314,10 +2428,11 @@ class RealSeeder extends Seeder
         $role->address = "JL.DR.SOETOMO , RT.05 NABARLIA NABIRE";
         $role->phone = "08123123123";
         $role->birthdate = "1969-12-26";
-        $role->type = "Eceran";
+        $role->type = "Owner";
         $role->tb = 0;
-        $role->tw = 0;
         $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
 
@@ -2327,14 +2442,49 @@ class RealSeeder extends Seeder
         $role->name = "SUNARTO";
         $role->nickname = "NARTO";
         $role->address = "JL.PAGESANGAN RAYA NO.99 RT.04/RW.02, JAMBANGAN";
-        $role->phone = "08123123123";
+        $role->phone = "085850100943";
         $role->birthdate = "1967-02-01";
         $role->type = "Eceran";
-        $role->tb = 360000;
-        $role->thr = 40000;
-        $role->cashback_days = 109;
-        $role->tonnage = 4702.5;
+        $role->tb = 400000;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
+
+
+        $role = new Customer();
+        $role->nik = "3515132508930005";
+        $role->name = "Sunardi";
+        $role->nickname = "SUNAR";
+        $role->address = "Jl. Sawunggaling III RT 20/ RW 044, Jemundo- Taman";
+        $role->phone = "089687665402";
+        $role->birthdate = "1993-08-25";
+        $role->type = "Eceran";
+        $role->tb = 0;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
+        $role->save();
+
+        $role = new Customer();
+        $role->nik = "XXXXXXXXXXXXXXXXXX";
+        $role->name = "Zaini";
+        $role->nickname = "ZAINI";
+        $role->address = "XXXXXXXXXXXXXXXXXXXX";
+        $role->phone = "XXXXXXXXXXXX";
+        $role->birthdate = "1993-04-24";
+        $role->type = "Eceran";
+        $role->tb = 0;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
+        $role->save();
+
+
+
+
+
+
 
         $role = new Customer();
         $role->nik = "3525151008750003";
@@ -2346,8 +2496,8 @@ class RealSeeder extends Seeder
         $role->type = "Eceran";
         $role->tb = 0;
         $role->thr = 0;
-        $role->cashback_days = 36;
-        $role->tonnage = 1650;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
         $role = new Customer();
@@ -2360,8 +2510,8 @@ class RealSeeder extends Seeder
         $role->type = "Eceran";
         $role->tb = 0;
         $role->thr = 0;
-        $role->cashback_days = 4;
-        $role->tonnage = 15;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
 
@@ -2373,13 +2523,13 @@ class RealSeeder extends Seeder
         $role->name = "SUPRIANIK";
         $role->nickname = "ANIK";
         $role->address = "BOHAR TIMUR RT.12/RW.07";
-        $role->phone = "08123123123";
+        $role->phone = "085707146108";
         $role->birthdate = "1973-02-11";
         $role->type = "Eceran";
-        $role->tb = 0;
-        $role->thr = 50000;
-        $role->cashback_days = 91;
-        $role->tonnage = 4691;
+        $role->tb = 300000;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
 
@@ -2394,8 +2544,9 @@ class RealSeeder extends Seeder
         $role->birthdate = "1982-02-05";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->tw = 0;
         $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
 
@@ -2404,13 +2555,13 @@ class RealSeeder extends Seeder
         $role->name = "TIKNO";
         $role->nickname = "TIKNO";
         $role->address = "KALIJATEN RT.17/RW.03, TAMAN";
-        $role->phone = "08123123123";
+        $role->phone = "083833856945";
         $role->birthdate = "1973-05-23";
         $role->type = "Eceran";
-        $role->tb = 0;
-        $role->thr = 8330000;
-        $role->cashback_days = 90;
-        $role->tonnage = 2486;
+        $role->tb = 900000;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
 
@@ -2420,13 +2571,13 @@ class RealSeeder extends Seeder
         $role->name = "PAK DAR";
         $role->nickname = "PAK DAR";
         $role->address = "xxxxxxxxxxxxxxxxxxxxxxxxx";
-        $role->phone = "08123123123";
+        $role->phone = "082245421966";
         $role->birthdate = "2023-05-23";
         $role->type = "Eceran";
-        $role->tb = 0;
-        $role->thr = 100000;
-        $role->cashback_days = 4;
-        $role->tonnage = 3951;
+        $role->tb = 500000;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
 
@@ -2440,8 +2591,9 @@ class RealSeeder extends Seeder
         $role->birthdate = "1987-08-01";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->tw = 0;
         $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
 
@@ -2456,37 +2608,37 @@ class RealSeeder extends Seeder
         $role->birthdate = "1973-01-01";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->tw = 0;
         $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
-
 
         $role = new Customer();
         $role->nik = "3515141009680007";
         $role->name = "SUWARNO";
         $role->nickname = "SUWARNO";
         $role->address = "BANGSRI RT.17/RW.02 SUKODONO";
-        $role->phone = "08123123123";
+        $role->phone = "08563113725";
         $role->birthdate = "1968-09-10";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->thr = 1230000;
-        $role->cashback_days = 92;
-        $role->tonnage = 4275;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
         $role = new Customer();
-        $role->nik = "XXXXXXXXXXXXXXXX";
+        $role->nik = "355143107760004";
         $role->name = "SAMSURI";
         $role->nickname = "SAMSURI";
-        $role->address = "xxxxxxxxxxxxxxxxxxxxxxxxxxx";
-        $role->phone = "08123123123";
+        $role->address = "Panjunan RT 09/ RW 03, Sukodono";
+        $role->phone = "081999724397";
         $role->birthdate = "2023-09-10";
         $role->type = "Eceran";
         $role->tb = 0;
         $role->thr = 0;
-        $role->cashback_days = 29;
-        $role->tonnage = 1332;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
 
@@ -2499,10 +2651,10 @@ class RealSeeder extends Seeder
         $role->birthdate = "1975-10-25";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->tw = 0;
         $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
-
 
 
 
@@ -2515,10 +2667,9 @@ class RealSeeder extends Seeder
         $role->birthdate = "1969-05-01";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->tw = 0;
-        $role->thr = 500000;
-        $role->cashback_days = 65;
-        $role->tonnage = 1168.8;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
 
@@ -2527,13 +2678,13 @@ class RealSeeder extends Seeder
         $role->name = "SYAIFUL ANAM";
         $role->nickname = "ANAM";
         $role->address = "DSN. CUMPLENG RT 14/ RW 05, BANGSRI - SUKODONO";
-        $role->phone = "08123123123";
+        $role->phone = "085607666441";
         $role->birthdate = "1984-03-10";
         $role->type = "Eceran";
-        $role->tb = 2240000;
-        $role->thr = 1120000;
-        $role->cashback_days = 87;
-        $role->tonnage = 7874.5;
+        $role->tb = 100000;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
 
@@ -2546,8 +2697,9 @@ class RealSeeder extends Seeder
         $role->birthdate = "1975-05-25";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->tw = 0;
         $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
 
@@ -2558,13 +2710,13 @@ class RealSeeder extends Seeder
         $role->name = "TARYONO";
         $role->nickname = "YONO";
         $role->address = "DUKUH GEMURUH RT 02/ RW 05, SIWALAN ";
-        $role->phone = "08123123123";
+        $role->phone = "085642666553";
         $role->birthdate = "1980-09-08";
         $role->type = "Eceran";
-        $role->tb = 0;
-        $role->thr = 2520000;
-        $role->cashback_days = 92;
-        $role->tonnage = 2665;
+        $role->tb = 360000;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
 
@@ -2573,28 +2725,28 @@ class RealSeeder extends Seeder
         $role->name = "TUNAS PRASETYO HADI";
         $role->nickname = "PRASS";
         $role->address = "DSN. SAMBIBULU RT 09/ RW 02, TAMAN";
-        $role->phone = "08123123123";
+        $role->phone = "087864573160";
         $role->birthdate = "1981-01-07";
         $role->type = "Eceran";
-        $role->tb = 0;
-        $role->thr = 555200;
-        $role->cashback_days = 60;
-        $role->tonnage = 1937;
+        $role->tb = 650000;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
 
         $role = new Customer();
         $role->nik = "3519151805700001";
         $role->name = "UMAN ARIGONG";
-        $role->nickname = "UMAN";
+        $role->nickname = "RUSLI";
         $role->address = "WONOSARI RT 02/ RW 01";
-        $role->phone = "08123123123";
+        $role->phone = "085655658010";
         $role->birthdate = "1970-05-18";
         $role->type = "Eceran";
-        $role->tb = 0;
-        $role->thr = 4000000;
-        $role->cashback_days = 86;
-        $role->tonnage = 5095;
+        $role->tb = 700000;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
 
@@ -2605,13 +2757,13 @@ class RealSeeder extends Seeder
         $role->name = "UMRIYAH";
         $role->nickname = "UMRIYAH";
         $role->address = "WONOCOLO RT 04/ RW 02, TAMAN";
-        $role->phone = "08123123123";
+        $role->phone = "085850123831";
         $role->birthdate = "1973-04-26";
         $role->type = "Eceran";
-        $role->tb = 4600000;
-        $role->thr = 3900000;
-        $role->cashback_days = 100;
-        $role->tonnage = 6030;
+        $role->tb = 600000;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
 
@@ -2620,13 +2772,13 @@ class RealSeeder extends Seeder
         $role->name = "WAHYU SETIAWAN";
         $role->nickname = "WAONE";
         $role->address = "WONOCOLO SELATAN RT 16/ RW 06, TAMAN";
-        $role->phone = "08123123123";
+        $role->phone = "089677327744";
         $role->birthdate = "1976-04-23";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->thr = 1700000;
-        $role->cashback_days = 68;
-        $role->tonnage = 2173;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
 
@@ -2634,17 +2786,19 @@ class RealSeeder extends Seeder
 
 
         $role = new Customer();
-        $role->nik = "3326172404990002";
-        $role->name = "WAKHIDI RIYONO";
-        $role->nickname = "DIDIK TEMPE";
-        $role->address = "DK. CANGKRING KULON RT 01/ RW 08, TENGENGWETAN - SIWALAN";
-        $role->phone = "08123123123";
-        $role->birthdate = "1999-04-24";
+        $role->nik = "352506064750004";
+        $role->name = "SUTIYONO";
+        $role->nickname = "YANTO";
+        $role->address = "Kesamben Kulon RT 05/ RW 06, Wringinanom";
+        $role->phone = "085895403582";
+        $role->birthdate = "1975-04-06";
         $role->type = "Eceran";
-        $role->tb = 0;
-        $role->tw = 0;
+        $role->tb = 50000;
         $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
+
 
         $role = new Customer();
         $role->nik = "3515133012640006";
@@ -2654,10 +2808,10 @@ class RealSeeder extends Seeder
         $role->phone = "08123123123";
         $role->birthdate = "1964-12-30";
         $role->type = "Eceran";
-        $role->tb = 6200000;
-        $role->thr = 3200000;
-        $role->cashback_days = 34;
-        $role->tonnage = 6962;
+        $role->tb = 0;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
 
@@ -2672,8 +2826,8 @@ class RealSeeder extends Seeder
         $role->type = "Kiriman";
         $role->tb = 0;
         $role->thr = 0;
-        $role->cashback_days = 3;
-        $role->tonnage = 3000;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
         $role = new Customer();
@@ -2687,26 +2841,26 @@ class RealSeeder extends Seeder
         $role->type = "Kiriman";
         $role->tb = 0;
         $role->thr = 0;
-        $role->cashback_days = 4;
-        $role->tonnage = 3080;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
 
 
 
         $role = new Customer();
-        $role->nik = "3515131003710005";
-        $role->name = "WARDOYO";
-        $role->nickname = "WANDA";
-        $role->address = "TAMAN RT 17/ RW 03, TAMAN";
-        $role->phone = "08123123123";
-        $role->birthdate = "1971-03-10";
+        $role->nik = "3515132210780006";
+        $role->name = "TATANG SUGIARTO";
+        $role->nickname = "TATANG";
+        $role->address = "JENEK WETAN RT 13/ RW03, Krembangan - Taman";
+        $role->phone = "082337177803";
+        $role->birthdate = "1978-10-22";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->tw = 0;
         $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
-
 
 
 
@@ -2716,27 +2870,27 @@ class RealSeeder extends Seeder
         $role->name = "WASJURI";
         $role->nickname = "BAJURI";
         $role->address = "DUKUH BANTARAN RT 15/ RW 04, KETANGGAN";
-        $role->phone = "08123123123";
+        $role->phone = "087782074279";
         $role->birthdate = "1981-07-09";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->thr = 950000;
-        $role->cashback_days = 61;
-        $role->tonnage = 4237;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
         $role = new Customer();
-        $role->nik = "0000000000000000";
-        $role->name = "Barokah";
+        $role->nik = "3577013008990001";
+        $role->name = "MUH. ALI JAHYADI";
         $role->nickname = "BAROKAH";
-        $role->address = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
-        $role->phone = "000000000000";
-        $role->birthdate = "1981-06-08";
+        $role->address = "Jl. Makam Islam Gg Paguyuban RT 18/ RW 04, Tawangsari";
+        $role->phone = "087852075763";
+        $role->birthdate = "1999-08-30";
         $role->type = "Eceran";
         $role->tb = 0;
         $role->thr = 0;
-        $role->cashback_days = 27;
-        $role->tonnage = 9495.55;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
         $role = new Customer();
@@ -2749,8 +2903,8 @@ class RealSeeder extends Seeder
         $role->type = "Eceran";
         $role->tb = 0;
         $role->thr = 0;
-        $role->cashback_days = 2;
-        $role->tonnage = 200;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
 
@@ -2760,14 +2914,14 @@ class RealSeeder extends Seeder
         $role->name = "WIYONO";
         $role->nickname = "WIYONO BOHAR";
         $role->address = "JL. BAGUS SANTRI RT 04/ RW 02, BOHAR-TAMAN";
-        $role->phone = "08123123123";
+        $role->phone = "085335740747";
         $role->ongkir = 100000;
         $role->birthdate = "1977-06-25";
         $role->type = "Kiriman";
         $role->tb = 0;
-        $role->thr = 550000;
-        $role->cashback_days = 4;
-        $role->tonnage = 4000;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
 
@@ -2778,13 +2932,13 @@ class RealSeeder extends Seeder
         $role->name = "WONO SUTRIMO";
         $role->nickname = "TRIMO";
         $role->address = "DSN. SAMBISARI KAV. SELATAN BLOK B/20 RT 38/ RW 07, TAMAN";
-        $role->phone = "08123123123";
+        $role->phone = "082233922026";
         $role->birthdate = "1964-05-05";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->thr = 1650000;
-        $role->cashback_days = 91;
-        $role->tonnage = 5745.5;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
         $role = new Customer();
@@ -2792,13 +2946,13 @@ class RealSeeder extends Seeder
         $role->name = "YUDO ADI NUGROHO";
         $role->nickname = "YUDHO";
         $role->address = "DUSUN KRAJAN RT 01/ RW 01, TERBIS";
-        $role->phone = "08123123123";
+        $role->phone = "082132507485";
         $role->birthdate = "1979-07-02";
         $role->type = "Eceran";
-        $role->tb = 0;
-        $role->thr = 330000;
-        $role->cashback_days = 60;
-        $role->tonnage = 2323;
+        $role->tb = 180000;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
 
@@ -2808,13 +2962,13 @@ class RealSeeder extends Seeder
         $role->name = "IMAM ARIFIN";
         $role->nickname = "IMAM ARIFIN";
         $role->address = "JL. TERATAI RT 01/ RW 01, KETAJEN - GEDANGAN ";
-        $role->phone = "08123123123";
+        $role->phone = "083854781901";
         $role->birthdate = "1991-01-21";
         $role->type = "Eceran";
-        $role->tb = 950000;
+        $role->tb = 600000;
         $role->thr = 0;
-        $role->cashback_days = 19;
-        $role->tonnage = 2273;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
 
@@ -2828,8 +2982,9 @@ class RealSeeder extends Seeder
         $role->birthdate = "1975-10-12";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->tw = 0;
         $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
 
@@ -2843,9 +2998,9 @@ class RealSeeder extends Seeder
         $role->birthdate = "1980-01-22";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->thr = 190000;
-        $role->cashback_days = 90;
-        $role->tonnage = 2359;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
         $role = new Customer();
@@ -2854,12 +3009,13 @@ class RealSeeder extends Seeder
         $role->nickname = "P. ALI TENGGILIS";
         $role->address = "TENGGILIS LAMA III/ 39, TENGGILIS MEJOYO, SURABAYA";
         $role->phone = "08123123123";
-        $role->ongkir = 100000;
+        $role->ongkir = 0;
         $role->birthdate = "1970-04-30";
-        $role->type = "Eceran";
+        $role->type = "Owner";
         $role->tb = 0;
-        $role->tw = 0;
         $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
         $role = new Customer();
@@ -2867,57 +3023,57 @@ class RealSeeder extends Seeder
         $role->name = "IMAM HANAFI";
         $role->nickname = "HANAFI";
         $role->address = "TAMAN UTARA RT.007/RW.002, TAMAN";
-        $role->phone = "08123123123";
+        $role->phone = "085607643099";
         $role->birthdate = "1985-01-09";
         $role->type = "Eceran";
         $role->tb = 0;
         $role->thr = 0;
-        $role->cashback_days = 29;
-        $role->tonnage = 1504;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
         $role = new Customer();
         $role->nik = "3518081612690002";
-        $role->name = "HUDIN";
+        $role->name = "SAIFUDIN";
         $role->nickname = "UDIN WAKIDI";
         $role->address = "DSN.SAMBIJAJAR RT.001/RW.022 DRENGES, KERTOSONO";
-        $role->phone = "08123123123";
+        $role->phone = "08983821355";
         $role->birthdate = "1969-12-16";
         $role->type = "Eceran";
-        $role->tb = 0;
-        $role->thr = 6500000;
-        $role->cashback_days = 23;
-        $role->tonnage = 3033;
+        $role->tb = 800000;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
         $role = new Customer();
         $role->nik = "xxxxxxxxxxxxxxxx";
         $role->name = "HUDIN";
-        $role->nickname = "HUDIN";
+        $role->nickname = "UDIN";
         $role->address = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
         $role->phone = "08123123123";
         $role->birthdate = "2023-12-16";
         $role->type = "Eceran";
         $role->tb = 0;
         $role->thr = 0;
-        $role->cashback_days = 49;
-        $role->tonnage = 797;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
 
         $role = new Customer();
         $role->nik = "3326172103010001";
-        $role->name = "NUR SAIT";
-        $role->nickname = "NUR SAIT";
-        $role->address = "DK.LOROG RT.001/ RW.003 SIWALAN, PEKALONGAN";
+        $role->name = "KUSAIRI";
+        $role->nickname = "KUSAIRI";
+        $role->address = "Tropodo I Gg, Masjid RT 85 /  RW 02, Waru";
         $role->phone = "08123123123";
         $role->birthdate = "2001-03-21";
         $role->type = "Eceran";
-        $role->tb = 0;
-        $role->tw = 0;
+        $role->tb = 300000;
         $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
-
 
 
         $role = new Customer();
@@ -2926,12 +3082,12 @@ class RealSeeder extends Seeder
         $role->nickname = "AKEMAT";
         $role->address = "DUKUH MENANGGAL 6/61 RT.001 RW.002 GAYUNGAN";
         $role->phone = "08123123123";
-        $role->birthdate = Carbon::now();
+        $role->birthdate = "1986-12-07";
         $role->type = "Eceran";
         $role->tb = 0;
         $role->thr = 0;
-        $role->cashback_days = 51;
-        $role->tonnage = 1455;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
 
@@ -2942,42 +3098,57 @@ class RealSeeder extends Seeder
         $role->name = "ABD AZIZ";
         $role->nickname = "AZIZ";
         $role->address = "DSN SUDIMORO UTARA RT.002/RW.001 TULANGAN";
-        $role->phone = "08123123123";
+        $role->phone = "085856271796";
+        $role->birthdate = "1968-09-12";
+        $role->type = "Eceran";
+        $role->tb = 650000;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
+        $role->save();
+
+        $role = new Customer();
+        $role->nik = "XXXXXXXXXXXXXXXX";
+        $role->name = "ABD AZIZ";
+        $role->nickname = "ABDUL AZIZ";
+        $role->address = "XXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        $role->phone = "085856271796";
         $role->birthdate = "1968-09-12";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->thr = 600000;
-        $role->cashback_days = 30;
-        $role->tonnage = 1954;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
 
+
         $role = new Customer();
-        $role->nik = "xxxxxxxxxxxxxxxx";
+        $role->nik = "3515133112840002";
         $role->name = "Desuki";
         $role->nickname = "DESUKI";
-        $role->address = "xxxxxxxxxxxxxxxxx";
-        $role->phone = "08123123123";
-        $role->birthdate = Carbon::now();
+        $role->address = "Kampung Majid, Pancetan, Tanah Merah";
+        $role->phone = "083130083505";
+        $role->birthdate = "1984-12-31";
         $role->type = "Eceran";
-        $role->tb = 0;
-        $role->thr = 3865000;
-        $role->cashback_days = 95;
-        $role->tonnage = 2919.5;
+        $role->tb = 463700;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
         $role = new Customer();
-        $role->nik = "xxxxxxxxxxxxxxxx";
-        $role->name = "Herman";
+        $role->nik = "3515133011740009";
+        $role->name = "SUHERMAN MAHMUD";
         $role->nickname = "HERMAN";
-        $role->address = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ";
-        $role->phone = "08123123123";
-        $role->birthdate = Carbon::now();
+        $role->address = "Dsn. Kletek RT 10/ RW 05, Taman";
+        $role->phone = "081939543167";
+        $role->birthdate = "1974-11-30";
         $role->type = "Eceran";
-        $role->tb = 0;
-        $role->thr = 1600000;
-        $role->cashback_days = 63;
-        $role->tonnage = 3150;
+        $role->tb = 200000;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
         $role = new Customer();
@@ -2986,12 +3157,12 @@ class RealSeeder extends Seeder
         $role->nickname = "IMRON";
         $role->address = "xxxxxxxxxxxxxxxxxxxxxxxx";
         $role->phone = "08123123123";
-        $role->birthdate = Carbon::now();
+        $role->birthdate = "1964-10-15";
         $role->type = "Eceran";
         $role->tb = 0;
-        $role->thr = 495000;
-        $role->cashback_days = 17;
-        $role->tonnage = 520;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
         $role = new Customer();
@@ -3002,10 +3173,10 @@ class RealSeeder extends Seeder
         $role->phone = "08123123123";
         $role->birthdate = Carbon::now();
         $role->type = "Eceran";
-        $role->tb = 0;
-        $role->thr = 900000;
-        $role->cashback_days = 17;
-        $role->tonnage = 652;
+        $role->tb = 100000;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
         $role = new Customer();
@@ -3014,12 +3185,12 @@ class RealSeeder extends Seeder
         $role->nickname = "SODIKAN";
         $role->address = "xxxxxxxxxxxxxxxxxxxxxxxx";
         $role->phone = "08123123123";
-        $role->birthdate = Carbon::now();
+        $role->birthdate = "1964-10-15";
         $role->type = "Eceran";
-        $role->tb = 0;
-        $role->thr = 120000;
-        $role->cashback_days = 29;
-        $role->tonnage = 831;
+        $role->tb = 60000;
+        $role->thr = 0;
+        $role->cashback_days = 0;
+        $role->tonnage = 0;
         $role->save();
 
         $item = new Item();
@@ -3087,6 +3258,26 @@ class RealSeeder extends Seeder
         $item = new Item();
         $item->code = 'LK';
         $item->brand = 'LOKAL';
+        $item->save();
+
+        $item = new Item();
+        $item->code = 'MRB';
+        $item->brand = 'MR. BEAN';
+        $item->save();
+
+        $item = new Item();
+        $item->code = 'SB';
+        $item->brand = 'SUPER BEAN';
+        $item->save();
+
+        $item = new Item();
+        $item->code = 'WYG';
+        $item->brand = 'WAYANG';
+        $item->save();
+
+        $item = new Item();
+        $item->code = 'GJH';
+        $item->brand = 'GAJAH';
         $item->save();
 
 
@@ -3196,7 +3387,7 @@ class RealSeeder extends Seeder
         $role = new Vehicle();
         $role->name = 'Truk A';
         $role->type = "Truk";
-        $role->toll = 0;
+        $role->toll = 162900;
         $role->save();
 
         $role = new Vehicle();
