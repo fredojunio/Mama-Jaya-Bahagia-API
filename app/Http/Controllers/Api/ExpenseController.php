@@ -139,9 +139,9 @@ class ExpenseController extends Controller
             $customer = $saving->customer;
 
             $customer->update([
-                "tb" => $saving->total_tb,
-                "tw" => $saving->total_tw,
-                "thr" => $saving->total_thr,
+                "tb" => $expense->type == "TB" ? $customer->tb - $amount_difference : $customer->tb,
+                "tw" => $expense->type == "TW" ? $customer->tw - $amount_difference : $customer->tw,
+                "thr" => $expense->type == "THR" ? $customer->thr - $amount_difference : $customer->thr,
             ]);
         } else {
             $expense->update([

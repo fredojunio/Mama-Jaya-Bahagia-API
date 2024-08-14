@@ -368,10 +368,10 @@ class TransactionController extends Controller
                     $rite->update([
                         "sold_date" => null
                     ]);
-                    RitHistory::create([
-                        "info" => "Rit tidak jadi terjual karena nota di edit oleh finance, Tonase asli: {$rite->tonnage_left}, Tambahan tonase karena direvisi: " . ($rit["tonnage"] * $rit["masak"]),
-                        "rit_id" => $rite->id
-                    ]);
+                    // RitHistory::create([
+                    //     "info" => "Rit tidak jadi terjual karena nota di edit oleh finance, Tonase asli: {$rite->tonnage_left}, Tambahan tonase karena direvisi: " . ($rit["tonnage"] * $rit["masak"]),
+                    //     "rit_id" => $rite->id
+                    // ]);
                 }
                 $rite->update([
                     "tonnage_left" => $rite->tonnage_left + ($rit["tonnage"] * $rit["masak"]),
@@ -826,13 +826,13 @@ class TransactionController extends Controller
                     "rit_id" => $rite->id
                 ]);
             }
-            RitHistory::create([
-                "info" => "Rit di approve untuk revisi, Tonase asli: {$rite->tonnage_left}, Tambahan tonase karena direvisi: " . ($rit["tonnage"] * $rit["masak"]),
-                "rit_id" => $rite->id
-            ]);
-            $rite->update([
-                'tonnage_left' => $rite->tonnage_left + ($rit["tonnage"] * $rit["masak"]),
-            ]);
+            // RitHistory::create([
+            //     "info" => "Rit di approve untuk revisi, Tonase asli: {$rite->tonnage_left}, Tambahan tonase karena direvisi: " . ($rit["tonnage"] * $rit["masak"]),
+            //     "rit_id" => $rite->id
+            // ]);
+            // $rite->update([
+            //     'tonnage_left' => $rite->tonnage_left + ($rit["tonnage"] * $rit["masak"]),
+            // ]);
         }
 
         $return = [
