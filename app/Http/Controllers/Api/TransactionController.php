@@ -482,8 +482,13 @@ class TransactionController extends Controller
                 "settled_date" => Carbon::now(),
             ]);
             $tonnage_transaction = 0;
+
+            $exceptionItemCode = [18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 39, 30, 31, 32, 33, 34, 35, 36, 38, 39];
             foreach ($transaction->rits as $key => $rit_transaction) {
-                $tonnage_transaction += ($rit_transaction->tonnage * $rit_transaction->masak);
+                // Exclude non dele ton
+                if (!in_array($rit_transaction->rit->item_id, $exceptionItemCode, true)) {
+                    $tonnage_transaction += ($rit_transaction->tonnage * $rit_transaction->masak);
+                }
             }
 
             if ($transaction->type != "Cas") {
