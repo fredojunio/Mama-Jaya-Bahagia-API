@@ -413,8 +413,12 @@ class TransactionController extends Controller
         }
         //NOTE - Ini update data tabungan yang sebelumnya jadi ke yang baru + id customer yang baru
         $tonnage_transaction = 0;
+        $exceptionItemCode = [18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 39, 30, 31, 32, 33, 34, 35, 36, 38, 39];
         foreach ($request->new_transaction["rits"] as $key => $rit) {
-            $tonnage_transaction += $rit["tonnage"] * $rit["masak"];
+            // Exclude non dele ton
+            if (!in_array($rit["rit"]["masak"], $exceptionItemCode, true)) {
+                $tonnage_transaction += $rit["tonnage"] * $rit["masak"];
+            }
         }
 
         // NOTE - Ini update yang dilakuin kalo udah di approve sama finance
