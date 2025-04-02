@@ -64,4 +64,8 @@ class Rit extends Model
     {
         return $this->hasMany(RitHistory::class, 'rit_id', 'id');
     }
+    public function reports()
+    {
+        return $this->hasMany(ReportRit::class, 'rit_id', 'id');
+    }
 }
