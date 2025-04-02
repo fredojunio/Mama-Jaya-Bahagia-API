@@ -95,6 +95,7 @@ class ReportController extends Controller
         //     ->whereDate('created_at', Carbon::today())
         //     ->sum('thr');
         $thr_savings = Saving::whereDate('created_at', Carbon::today())
+            ->where('type', 'Pemasukan')
             ->sum('thr');
         $sack_income = Transaction::where('owner_approved', 1)
             ->whereDate('created_at', Carbon::today())
@@ -232,6 +233,7 @@ class ReportController extends Controller
         //     ->whereDate('created_at', Carbon::today())
         //     ->sum('tb');
         $tb_savings = Saving::whereDate('created_at', Carbon::today())
+            ->where('type', 'Pemasukan')
             ->sum('tb');
         $tw_income = Transaction::where('owner_approved', 1)
             ->whereDate('created_at', Carbon::today())
@@ -246,6 +248,7 @@ class ReportController extends Controller
         //     ->whereDate('created_at', Carbon::today())
         //     ->sum('thr');
         $thr_savings = Saving::whereDate('created_at', Carbon::today())
+            ->where('type', 'Pemasukan')
             ->sum('thr');
         $sack_income = Transaction::where('owner_approved', 1)
             ->whereDate('created_at', Carbon::today())
