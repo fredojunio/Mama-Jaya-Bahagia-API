@@ -149,7 +149,9 @@ class TransactionController extends Controller
             ->exists();
         if (!$hasTransactionToday) {
             $customer->update([
-                "cashback_days" => $customer->cashback_days + 1
+                // todo periode april
+                // "cashback_days" => $customer->cashback_days + 1
+                "cashback_days" => 0
             ]);
         }
         $customer = Customer::find($request->customer_id);
@@ -413,8 +415,12 @@ class TransactionController extends Controller
         }
         //NOTE - Ini update data tabungan yang sebelumnya jadi ke yang baru + id customer yang baru
         $tonnage_transaction = 0;
+        $exclude_code = ["RO", "RLP", "ROJ", "K.ONYOR", "P28", "P29", "P37", "P38", "P39", "P310", "P311", "P312", "P225", "P230", "P1224", "P1830", "KRESEK ( 25 )", "KRESEK ( 28 )", "KRESEK (32)", "K", "Bk", "SB"];
         foreach ($request->new_transaction["rits"] as $key => $rit) {
-            $tonnage_transaction += $rit["tonnage"] * $rit["masak"];
+            $itemCode = data_get($rit, 'rit.item.code');
+            if (!in_array($itemCode, $exclude_code)) {
+                $tonnage_transaction += $rit["tonnage"] * $rit["masak"];
+            }
         }
 
         // NOTE - Ini update yang dilakuin kalo udah di approve sama finance
@@ -428,7 +434,9 @@ class TransactionController extends Controller
                 "total_tb" => $transaction->customer->tb,
                 "total_tw" => $transaction->customer->tw,
                 "total_thr" => $transaction->customer->thr,
-                "total_tonnage" => $transaction->customer->tonnage + $tonnage_transaction,
+                // todo command sementara untuk periode april
+                // "total_tonnage" => $transaction->customer->tonnage + $tonnage_transaction,
+                "total_tonnage" => 0,
                 "customer_id" => $transaction->customer_id,
             ]);
         }
@@ -482,8 +490,12 @@ class TransactionController extends Controller
                 "settled_date" => Carbon::now(),
             ]);
             $tonnage_transaction = 0;
+
+            $exclude_code = ["RO", "RLP", "ROJ", "K.ONYOR", "P28", "P29", "P37", "P38", "P39", "P310", "P311", "P312", "P225", "P230", "P1224", "P1830", "KRESEK ( 25 )", "KRESEK ( 28 )", "KRESEK (32)", "K", "Bk", "SB"];
             foreach ($transaction->rits as $key => $rit_transaction) {
-                $tonnage_transaction += ($rit_transaction->tonnage * $rit_transaction->masak);
+                if (!in_array($rit_transaction->rit->item->code, $exclude_code)) {
+                    $tonnage_transaction += ($rit_transaction->tonnage * $rit_transaction->masak);
+                }
             }
 
             if ($transaction->type != "Cas") {
@@ -495,7 +507,9 @@ class TransactionController extends Controller
                     "total_tw" => $customer->tw + $transaction->tw,
                     "total_tb" => $customer->tb + $transaction->tb,
                     "total_thr" => $customer->thr + $transaction->thr,
-                    "total_tonnage" => $customer->tonnage + $tonnage_transaction,
+                    // todo command sementara untuk periode april
+                    // "total_tonnage" => $transaction->customer->tonnage + $tonnage_transaction,
+                    "total_tonnage" => 0,
                     "type" => "Pemasukan",
                     "customer_id" => $transaction->customer_id,
                     "transaction_id" => $transaction->id,
@@ -722,6 +736,7 @@ class TransactionController extends Controller
             $rite = Rit::find($ritTransaction->rit_id);
             $rite->update([
                 "customer_transaction_id" => null,
+                'tonnage_left' => $rite->tonnage_left + ($ritTransaction["tonnage"] * $ritTransaction["masak"]),
             ]);
             $ritTransaction->delete();
         }
