@@ -32,6 +32,12 @@ return new class extends Migration
             $table->integer("revision_allowed")->default(0)->nullable();
             $table->text("revision_note")->nullable();
             $table->string("type");
+
+            $table->unsignedBigInteger('customer_id')->index()->nullable();
+            $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
+            $table->unsignedBigInteger('trip_id')->index()->nullable();
+            $table->foreign('trip_id')->references('id')->on('trips')->onDelete('cascade');
+
             $table->timestamps();
         });
     }
@@ -41,6 +47,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('transactions');
+        Schema::dropIfExists('reject_transactions');
     }
 };

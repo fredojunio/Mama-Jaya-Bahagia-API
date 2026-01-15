@@ -23,6 +23,7 @@ use App\Models\Transaction;
 use App\Models\Trip;
 use App\Models\User;
 use App\Models\Vehicle;
+use App\Models\RejectTransaction;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -621,6 +622,27 @@ class TransactionController extends Controller
                 $trip->delete();
             }
         }
+
+        $newRejectTransaction = RejectTransaction::create([
+            "daily_id" => $transaction->daily_id,
+            // "daily_id" => $transaction->daily_id,
+            "sack_free" => $transaction->sack_free,
+            "sack_price" => $transaction->sack_price,
+            "item_price" => $transaction->item_price,
+            "discount" =>  $transaction->discount,
+            "ongkir" => $transaction->ongkir,
+            "total_price" => $transaction->total_price,
+            "owner_approved" => $transaction->owner_approved,
+            "finance_approved" => $transaction->finance_approved,
+            "customer_id" => $transaction->customer_id,
+            "trip_id" => $transaction->trip_id ?? null,
+            "type" => $transaction->type,
+            "created_at" => Carbon::now(),
+            // "created_at" => $transaction->created_at,
+            "updated_at" => $transaction->created_at,
+            // "settled_date" => Carbon::now(),
+            "settled_date" => $transaction->settled_date,
+        ]);
 
         $return = [
             'api_code' => 200,
