@@ -14,11 +14,18 @@ class SuccessResource extends JsonResource
      */
     public function toArray($request)
     {
-        return [
+        $response = [
             'code' => $this['api_code'],
             'status' => $this['api_status'],
             'message' => $this['api_message'],
             'results' => $this['api_results'],
         ];
+
+        // Include pagination data if it exists
+        if (isset($this['pagination'])) {
+            $response['pagination'] = $this['pagination'];
+        }
+
+        return $response;
     }
 }

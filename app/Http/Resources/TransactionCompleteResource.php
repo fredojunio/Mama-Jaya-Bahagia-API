@@ -17,6 +17,7 @@ class TransactionCompleteResource extends JsonResource
         return [
             "id" => $this->id,
             "created_at" => $this->created_at,
+            "updated_at" => $this->updated_at,
             "daily_id" => $this->daily_id,
             "total_price" => $this->total_price,
             "finance_approved" => $this->finance_approved,
@@ -27,6 +28,7 @@ class TransactionCompleteResource extends JsonResource
             "payments" => $this->payments,
             "cas" => $this->cas,
             "type" => $this->type,
+            "rits" => RitTransactionResource::collection($this->rits),
         ];
     }
 }

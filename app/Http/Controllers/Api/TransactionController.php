@@ -106,19 +106,52 @@ class TransactionController extends Controller
         return SuccessResource::make($return);
     }
 
+    // public function get_completed_transactions(Request $request)
+    // {
+    //     $transactions = Transaction::where("created_at", ">=", Carbon::createFromFormat('D M d Y H:i:s e+', $request->start_date)->toDateTimeString())
+    //         ->where("created_at", "<=", Carbon::createFromFormat('D M d Y H:i:s e+', $request->end_date)->toDateTimeString())
+    //         ->where("owner_approved", 1)
+    //         ->where("daily_id", "<", 90000)
+    //         ->get();
+    //     $return = [
+    //         'api_code' => 200,
+    //         'api_status' => true,
+    //         'api_message' => 'Sukses',
+    //         'api_results' => TransactionCompleteResource::collection($transactions)
+    //     ];
+    //     return SuccessResource::make($return);
+    // }
+
     public function get_completed_transactions(Request $request)
     {
-        $transactions = Transaction::where("created_at", ">=", Carbon::createFromFormat('D M d Y H:i:s e+', $request->start_date)->toDateTimeString())
+        $perPage = $request->get('per_page', 20);
+        $page = $request->get('page', 1);
+
+        $query = Transaction::where("created_at", ">=", Carbon::createFromFormat('D M d Y H:i:s e+', $request->start_date)->toDateTimeString())
             ->where("created_at", "<=", Carbon::createFromFormat('D M d Y H:i:s e+', $request->end_date)->toDateTimeString())
             ->where("owner_approved", 1)
             ->where("daily_id", "<", 90000)
-            ->get();
+            ->orderBy('daily_id', 'desc') // Order by daily_id descending (100, 99, 98...)
+            ->orderBy('created_at', 'desc'); // Then by created_at as secondary sort
+
+        $transactions = $query->paginate($perPage, ['*'], 'page', $page);
+
         $return = [
             'api_code' => 200,
             'api_status' => true,
             'api_message' => 'Sukses',
-            'api_results' => TransactionCompleteResource::collection($transactions)
+            'api_results' => TransactionCompleteResource::collection($transactions->items()),
+            'pagination' => [
+                'current_page' => $transactions->currentPage(),
+                'last_page' => $transactions->lastPage(),
+                'per_page' => $transactions->perPage(),
+                'total' => $transactions->total(),
+                'has_more' => $transactions->hasMorePages(),
+                'from' => $transactions->firstItem(),
+                'to' => $transactions->lastItem()
+            ]
         ];
+
         return SuccessResource::make($return);
     }
 
@@ -149,9 +182,9 @@ class TransactionController extends Controller
             ->exists();
         if (!$hasTransactionToday) {
             $customer->update([
-                // todo periode april
-                // "cashback_days" => $customer->cashback_days + 1
-                "cashback_days" => 0
+                // hold periode april
+                "cashback_days" => $customer->cashback_days + 1
+                // "cashback_days" => 0
             ]);
         }
         $customer = Customer::find($request->customer_id);
@@ -434,9 +467,9 @@ class TransactionController extends Controller
                 "total_tb" => $transaction->customer->tb,
                 "total_tw" => $transaction->customer->tw,
                 "total_thr" => $transaction->customer->thr,
-                // todo command sementara untuk periode april
-                // "total_tonnage" => $transaction->customer->tonnage + $tonnage_transaction,
-                "total_tonnage" => 0,
+                // hold command sementara untuk periode april
+                "total_tonnage" => $transaction->customer->tonnage + $tonnage_transaction,
+                // "total_tonnage" => 0,
                 "customer_id" => $transaction->customer_id,
             ]);
         }
@@ -507,9 +540,9 @@ class TransactionController extends Controller
                     "total_tw" => $customer->tw + $transaction->tw,
                     "total_tb" => $customer->tb + $transaction->tb,
                     "total_thr" => $customer->thr + $transaction->thr,
-                    // todo command sementara untuk periode april
-                    // "total_tonnage" => $transaction->customer->tonnage + $tonnage_transaction,
-                    "total_tonnage" => 0,
+                    // hold command sementara untuk periode april
+                    "total_tonnage" => $transaction->customer->tonnage + $tonnage_transaction,
+                    // "total_tonnage" => 0,
                     "type" => "Pemasukan",
                     "customer_id" => $transaction->customer_id,
                     "transaction_id" => $transaction->id,
@@ -857,6 +890,158 @@ class TransactionController extends Controller
             'api_status' => true,
             'api_message' => 'Sukses',
             'api_results' => TransactionResource::make($transaction)
+        ];
+        return SuccessResource::make($return);
+    }
+
+    public function return(Request $request, Transaction $transaction)
+    {
+        $rit_transaction = RitTransaction::find($request->rit_id);
+        $rit = $rit_transaction->rit;
+
+        $trip = Trip::create([
+            "allowance" => $request->allowance,
+            "toll" => $request->toll,
+            "gas" => $request->gas,
+            "note" => "Retur Rit " . $rit->item->code,
+            "finance_approved" => 1,
+            "vehicle_id" => $request->vehicle_id,
+        ]);
+        $vehicle = Vehicle::find($trip->vehicle_id);
+        $vehicle->update([
+            "toll" => $vehicle->toll + $request->toll
+        ]);
+        if ($trip->gas > 0) {
+            $vehicle->update([
+                "trip_count" => 1,
+            ]);
+        } else {
+            $vehicle->update([
+                "trip_count" => $vehicle->trip_count + 1,
+            ]);
+        }
+
+        Expense::create([
+            "amount" => $request->allowance + $request->toll + $request->gas,
+            "note" => "Retur Rit " . $rit->item->code,
+            "time" => Carbon::now(),
+            "type" => "Kendaraan",
+            "trip_id" => $trip->id
+        ]);
+
+        $rit->update([
+            'retur_tonnage' => $request->tonnage,
+            // 'tonnage_left' => $rit->tonnage_left - $request->tonnage,
+            'retur_trip_id' => $trip->id
+        ]);
+
+        RitHistory::create([
+            "info" => "Rit di retur. " . " Jumlah Tonase retur: {$request->tonnage}, Trip ID: {$trip->id}, Sisa Tonase setelah retur: {$rit->tonnage_left}",
+            "rit_id" => $rit->id
+        ]);
+
+        // $downPrice = $rit_transaction->rit->sell_price * $request->tonnage;
+        // $rit_transaction->update([
+        //     "tonnage" => ($rit_transaction->tonnage * $rit_transaction->masak) - $request->tonnage,
+        //     "masak" => 1,
+        //     "total_price" => $rit_transaction->total_price - $downPrice
+        //     // "tonnage_left" => $request->tonnage_left,
+        // ]);
+
+        $transaction->update([
+            // "total_price" => $transaction->total_price - $downPrice,
+            "revision_requested" => 0,
+            "revision_allowed" => 0,
+        ]);
+
+        //NOTE - Ini update data tabungan yang sebelumnya jadi ke yang baru + id customer yang baru
+        // $tonnage_transaction = 0;
+        // $exclude_code = ["RO", "RLP", "ROJ", "K.ONYOR", "P28", "P29", "P37", "P38", "P39", "P310", "P311", "P312", "P225", "P230", "P1224", "P1830", "KRESEK ( 25 )", "KRESEK ( 28 )", "KRESEK (32)", "K", "Bk", "SB"];
+        // foreach ($transaction->rits as $key => $rit_transaction) {
+        //     if (!in_array($rit_transaction->rit->item->code, $exclude_code)) {
+        //         $tonnage_transaction += ($rit_transaction->tonnage * $rit_transaction->masak);
+        //     }
+        // }
+
+        // NOTE - Ini update yang dilakuin kalo udah di approve sama finance
+        // if ($transaction->finance_approved == 1) {
+        //     $old_savings = $transaction->savings;
+        //     $old_savings->update([
+        //         "tb" => $transaction->tb ?? 0,
+        //         "tw" => $transaction->tw ?? 0,
+        //         "thr" => $transaction->thr ?? 0,
+        //         "tonnage" => $tonnage_transaction,
+        //         "total_tb" => $transaction->customer->tb,
+        //         "total_tw" => $transaction->customer->tw,
+        //         "total_thr" => $transaction->customer->thr,
+        //         // hold command sementara untuk periode april
+        //         "total_tonnage" => $transaction->customer->tonnage + $tonnage_transaction,
+        //         // "total_tonnage" => 0,
+        //         "customer_id" => $transaction->customer_id,
+        //     ]);
+        // }
+
+        // NOTE - Ini update data payment yang sebelumnya jadi ke id customer yang baru
+        // $old_payments = $transaction->payments;
+        // foreach ($old_payments as $key => $old_payment) {
+        //     $old_payment->update([
+        //         "amount" => $transaction->total_price,
+        //         "customer_id" => $transaction->customer_id,
+        //     ]);
+        // }
+
+        // $payment = Payment::create([
+        //     'amount' => $downPrice,
+        //     'type' => 'Cash',
+        //     'customer_id' => $transaction->customer_id,
+        //     'transaction_id' => $transaction->id,
+        //     'tw' => 0
+        // ]);
+
+        // create transaction retur by request
+        $newTransaction = Transaction::create([
+            "daily_id" => Transaction::whereDate('created_at', now()->toDateString())->where('daily_id', '<', 90000)->get()->count() + 1,
+            // "daily_id" => $transaction->daily_id,
+            "sack_free" => 0,
+            "sack_price" => 0,
+            "item_price" => 0,
+            "discount" =>  0,
+            "ongkir" => 0,
+            "total_price" => 0,
+            "owner_approved" => 1,
+            "finance_approved" => 2,
+            "customer_id" => $transaction->customer_id,
+            "trip_id" => $transaction->trip_id ?? null,
+            "type" => $transaction->type,
+            "created_at" => Carbon::now(),
+            // "created_at" => $transaction->created_at,
+            "updated_at" => $transaction->created_at,
+            // "settled_date" => Carbon::now(),
+            "settled_date" => $transaction->settled_date,
+        ]);
+
+        try {
+            $new_rit_transaction = RitTransaction::create([
+                "daily_id" => $newTransaction->daily_id,
+                "customer_name" => $transaction->customer->nickname,
+                "tonnage" => $request->tonnage,
+                "masak" => 1,
+                "item_price" => 0,
+                "total_price" => 0,
+                "tonnage_left" => $request->tonnage,
+                "actual_tonnage" => $request->tonnage,
+                "rit_id" => $rit->id,
+                "transaction_id" => $newTransaction->id,
+                "created_at" => $newTransaction->created_at,
+            ]);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+        $return = [
+            'api_code' => 200,
+            'api_status' => true,
+            'api_message' => 'Sukses',
+            'api_results' => TransactionCompleteResource::make($transaction)
         ];
         return SuccessResource::make($return);
     }
