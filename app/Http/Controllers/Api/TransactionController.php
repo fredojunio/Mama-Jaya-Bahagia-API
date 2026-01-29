@@ -476,13 +476,13 @@ class TransactionController extends Controller
         }
 
         // NOTE - Ini update data payment yang sebelumnya jadi ke id customer yang baru
-        $old_payments = $transaction->payments;
-        foreach ($old_payments as $key => $old_payment) {
-            $old_payment->update([
-                "amount" => $transaction->total_price,
-                "customer_id" => $transaction->customer_id,
-            ]);
-        }
+        // $old_payments = $transaction->payments;
+        // foreach ($old_payments as $key => $old_payment) {
+        //     $old_payment->update([
+        //         "amount" => $transaction->total_price,
+        //         "customer_id" => $transaction->customer_id,
+        //     ]);
+        // }
         $return = [
             'api_code' => 200,
             'api_status' => true,
