@@ -15,6 +15,7 @@ class Report extends Model
         "expense",
         "tonnage",
         "item_income",
+        "kedelai_income",
         "tb_income",
         "tw_income",
         "thr_income",

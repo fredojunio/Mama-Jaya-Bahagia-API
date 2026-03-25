@@ -23,6 +23,7 @@ class ReportResource extends JsonResource
             "expense" => $this->expense,
             "tonnage" => $this->tonnage,
             "item_income" => $this->item_income,
+            "kedelai_income" => $this->kedelai_income,
             "tb_income" => $this->tb_income,
             "tw_income" => $this->tw_income,
             "thr_income" => $this->thr_income,

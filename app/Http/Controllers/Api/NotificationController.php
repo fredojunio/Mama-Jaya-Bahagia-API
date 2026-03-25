@@ -7,6 +7,8 @@ use App\Http\Resources\SuccessResource;
 use App\Models\Rit;
 use App\Models\RitBranch;
 use App\Models\Transaction;
+use App\Models\Customer;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class NotificationController extends Controller
@@ -34,6 +36,21 @@ class NotificationController extends Controller
             ->get();
         if ($unapprovedTransactions->isNotEmpty()) {
             array_push($notifications, ["title" => "Input Pemasukan", "description" => "Ada penjualan yang sudah dikirim namun pemasukan yang didapat belum dicatat."]);
+        }
+        // Recall Customer: check customers with type 'kiriman' and compare their last two transactions
+        $recallCustomers = Customer::where('type', 'kiriman')->get();
+        foreach ($recallCustomers as $customer) {
+            $txs = $customer->transactions()->orderBy('created_at', 'desc')->take(2)->get();
+            if ($txs->count() >= 2) {
+                $last = $txs[0];
+                $prev = $txs[1];
+                $gapDays = Carbon::parse($last->created_at)->diffInDays(Carbon::parse($prev->created_at));
+                $sinceLast = Carbon::now()->diffInDays(Carbon::parse($last->created_at));
+                // trigger 1 day before the expected recall (one day prior)
+                if ($gapDays == ($sinceLast + 1)) {
+                    array_push($notifications, ["title" => "Recall Customer", "description" => $customer->name]);
+                }
+            }
         }
         $return = [
             'api_code' => 200,

@@ -78,6 +78,18 @@ class ReportController extends Controller
             ->whereDate('created_at', Carbon::today())
             ->whereNotIn('type', ['Owner', 'Cabang'])
             ->sum('item_price');
+        $excludedCodes = ["RO", "RLP", "ROJ", "K.ONYOR", "P28", "P29", "P37", "P38", "P39", "P310", "P311", "P312", "P225", "P230", "P1224", "P1830", "KRESEK ( 25 )", "KRESEK ( 28 )", "KRESEK (32)", "K", "Bk", "SB", "KCm", "KCs", "KCl", "KCxl", "BTG"];
+        $kedelai_income = Transaction::where('owner_approved', 1)
+            ->whereDate('created_at', Carbon::today())
+            ->whereNotIn('type', ['Owner', 'Cabang'])
+            ->whereDoesntHave('rits', function ($q) use ($excludedCodes) {
+                $q->whereHas('rit', function ($q2) use ($excludedCodes) {
+                    $q2->whereHas('item', function ($q3) use ($excludedCodes) {
+                        $q3->whereIn('code', $excludedCodes);
+                    });
+                });
+            })
+            ->sum('item_price');
         // $tb_income = Transaction::where('owner_approved', 1)
         //     ->whereDate('created_at', Carbon::today())
         //     ->sum('tb');
@@ -130,6 +142,7 @@ class ReportController extends Controller
             "expense" => $expense,
             "tonnage" => $tonnage,
             "item_income" => $item_income,
+            "kedelai_income" => $kedelai_income,
             "tb_income" => $tb_savings,
             "tw_income" => $tw_income + $tw_savings,
             "thr_income" => $thr_savings,
@@ -226,6 +239,18 @@ class ReportController extends Controller
             ->whereDate('created_at', Carbon::today())
             ->whereNotIn('type', ['Owner', 'Cabang'])
             ->sum('item_price');
+        $excludedCodes = ["RO", "RLP", "ROJ", "K.ONYOR", "P28", "P29", "P37", "P38", "P39", "P310", "P311", "P312", "P225", "P230", "P1224", "P1830", "KRESEK ( 25 )", "KRESEK ( 28 )", "KRESEK (32)", "K", "Bk", "SB", "KCm", "KCs", "KCl", "KCxl", "BTG"];
+        $kedelai_income = Transaction::where('owner_approved', 1)
+            ->whereDate('created_at', Carbon::today())
+            ->whereNotIn('type', ['Owner', 'Cabang'])
+            ->whereDoesntHave('rits', function ($q) use ($excludedCodes) {
+                $q->whereHas('rit', function ($q2) use ($excludedCodes) {
+                    $q2->whereHas('item', function ($q3) use ($excludedCodes) {
+                        $q3->whereIn('code', $excludedCodes);
+                    });
+                });
+            })
+            ->sum('item_price');
         // $tb_income = Transaction::where('owner_approved', 1)
         //     ->whereDate('created_at', Carbon::today())
         //     ->sum('tb');
@@ -282,6 +307,7 @@ class ReportController extends Controller
         $report->expense = $expense;
         $report->tonnage = $tonnage;
         $report->item_income = $item_income;
+        $report->kedelai_income = $kedelai_income;
         // $report->tb_income = $tb_income + $tb_savings;
         $report->tb_income =  $tb_savings;
         $report->tw_income = $tw_income + $tw_savings;
@@ -387,6 +413,17 @@ class ReportController extends Controller
         $item_income = Transaction::where('owner_approved', 1)
             ->whereDate('created_at', Carbon::now()->subDays($request->days))
             ->sum('item_price');
+        $excludedCodes = ["RO", "RLP", "ROJ", "K.ONYOR", "P28", "P29", "P37", "P38", "P39", "P310", "P311", "P312", "P225", "P230", "P1224", "P1830", "KRESEK ( 25 )", "KRESEK ( 28 )", "KRESEK (32)", "K", "Bk", "SB", "KCm", "KCs", "KCl", "KCxl", "BTG"];
+        $kedelai_income = Transaction::where('owner_approved', 1)
+            ->whereDate('created_at', Carbon::now()->subDays($request->days))
+            ->whereDoesntHave('rits', function ($q) use ($excludedCodes) {
+                $q->whereHas('rit', function ($q2) use ($excludedCodes) {
+                    $q2->whereHas('item', function ($q3) use ($excludedCodes) {
+                        $q3->whereIn('code', $excludedCodes);
+                    });
+                });
+            })
+            ->sum('item_price');
         // $tb_income = Transaction::where('owner_approved', 1)
         //     ->whereDate('created_at', Carbon::now()->subDays($request->days))
         //     ->sum('tb');
@@ -441,6 +478,7 @@ class ReportController extends Controller
         $report->expense = $expense;
         $report->tonnage = $tonnage;
         $report->item_income = $item_income;
+        $report->kedelai_income = $kedelai_income;
         // $report->tb_income = $tb_income + $tb_savings;
         $report->tb_income = $tb_savings;
         $report->tw_income = $tw_income + $tw_savings;
@@ -548,6 +586,7 @@ class ReportController extends Controller
             "expense" => $request->expense,
             "tonnage" => $request->tonnage,
             "item_income" => $request->item_income,
+            "kedelai_income" => $request->kedelai_income,
             "tb_income" => $request->tb_income,
             "tw_income" => $request->tw_income,
             "thr_income" => $request->thr_income,
@@ -591,6 +630,7 @@ class ReportController extends Controller
             "expense" => $request->expense,
             "tonnage" => $request->tonnage,
             "item_income" => $request->item_income,
+            "kedelai_income" => $request->kedelai_income,
             "tb_income" => $request->tb_income,
             "tw_income" => $request->tw_income,
             "thr_income" => $request->thr_income,
