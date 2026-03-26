@@ -14,6 +14,7 @@ class Trip extends Model
         "gas",
         "note",
         "toll_used",
+        "bbm_used",
         "branch_to_main_tonnage",
         "finance_approved",
         "vehicle_id",

@@ -21,7 +21,8 @@ class VehicleResource extends JsonResource
             'type' => $this->type,
             'trip_count' => $this->trip_count,
             'trips' => $this->trips,
-            'toll' => $this->toll
+            'toll' => $this->toll,
+            'bbm' => $this->bbm
         ];
     }
 }

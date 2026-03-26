@@ -353,11 +353,13 @@ class RitController extends Controller
         }
         $trip = Trip::find($rit->trip_id);
         $trip->update([
-            "toll_used" => $request->toll_used
+            "toll_used" => $request->toll_used,
+            "bbm_used" => $request->bbm_used
         ]);
         $vehicle = Vehicle::find($trip->vehicle_id);
         $vehicle->update([
-            "toll" => $vehicle->toll - $request->toll_used
+            "toll" => $vehicle->toll - $request->toll_used,
+            "bbm" => $vehicle->bbm + $request->bbm_used
         ]);
         $sack = Sack::create([
             "amount" => $request->sack,
@@ -411,7 +413,7 @@ class RitController extends Controller
             "note" => "Pengiriman ke " . $request->branch_name,
             "finance_approved" => 1,
             "vehicle_id" => $request->vehicle_id,
-            "plate_number" => $request->plate_number
+            "plate_number" => $request->plate_number,
         ]);
         $vehicle = Vehicle::find($request->vehicle_id);
         $vehicle->update([

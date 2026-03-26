@@ -22,6 +22,7 @@ class TripBranchResource extends JsonResource
             "gas" => $this->gas,
             "note" => $this->note,
             "toll_used" => $this->toll_used,
+            "bbm_used" => $this->bbm_used,
             "branch_to_main_tonnage" => $this->branch_to_main_tonnage,
             "finance_approved" => $this->finance_approved,
             "vehicle" => $this->vehicle,

@@ -12,7 +12,8 @@ class Vehicle extends Model
         'name',
         'trip_count',
         'type',
-        'toll'
+        'toll',
+        'bbm'
     ];
     public function trips()
     {

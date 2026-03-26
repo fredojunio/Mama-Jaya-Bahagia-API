@@ -37,6 +37,7 @@ class TripController extends Controller
             "gas" => $request->gas,
             "note" => $request->note,
             "toll_used" => $request->toll_used,
+            "bbm_used" => $request->bbm_used,
             "branch_to_main_tonnage" => $request->branch_to_main_tonnage,
             "vehicle_id" => $request->vehicle_id,
         ]);
@@ -62,7 +63,8 @@ class TripController extends Controller
         ];
         return SuccessResource::make($return);
     }
-    public function surat_jalan(Trip $trip){
+    public function surat_jalan(Trip $trip)
+    {
         $return = [
             'api_code' => 200,
             'api_status' => true,
@@ -83,6 +85,7 @@ class TripController extends Controller
             "gas" => $request->gas,
             "note" => $request->note,
             "toll_used" => $request->toll_used,
+            "bbm_used" => $request->bbm_used,
             "branch_to_main_tonnage" => $request->branch_to_main_tonnage,
             "vehicle_id" => $request->vehicle_id,
         ]);
