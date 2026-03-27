@@ -359,7 +359,7 @@ class RitController extends Controller
         $vehicle = Vehicle::find($trip->vehicle_id);
         $vehicle->update([
             "toll" => $vehicle->toll - $request->toll_used,
-            "bbm" => $vehicle->bbm + $request->bbm_used
+            "bbm" => $vehicle->bbm - $request->bbm_used
         ]);
         $sack = Sack::create([
             "amount" => $request->sack,

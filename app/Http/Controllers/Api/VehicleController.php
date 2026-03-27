@@ -37,6 +37,7 @@ class VehicleController extends Controller
         $vehicle = Vehicle::create([
             'name' => $request->name,
             'type' => $request->type,
+            'bbm' => $request->bbm ?? 0,
         ]);
         $return = [
             'api_code' => 200,
@@ -69,6 +70,7 @@ class VehicleController extends Controller
         $vehicle->update([
             'name' => $request->name,
             'type' => $request->type,
+            'bbm' => $request->bbm ?? 0,
         ]);
         $return = [
             'api_code' => 200,
