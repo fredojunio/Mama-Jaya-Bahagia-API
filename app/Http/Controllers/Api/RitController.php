@@ -120,19 +120,30 @@ class RitController extends Controller
     }
     public function get_empty_stock(Request $request)
     {
-        if ($request->item_id) {
-            $rits = Rit::whereNotNull("sold_date")
-                ->where("arrival_date", ">=", Carbon::createFromFormat('D M d Y H:i:s e+', $request->start_date)->toDateTimeString())
-                ->where("arrival_date", "<=", Carbon::createFromFormat('D M d Y H:i:s e+', $request->end_date)->toDateTimeString())
-                ->where("item_id", $request->item_id)
-                ->get();
-        } else {
-            // NOTE - Owner - Laba Rugi
-            $rits = Rit::whereNotNull("sold_date")
-                ->where("arrival_date", ">=", Carbon::createFromFormat('D M d Y H:i:s e+', $request->start_date)->toDateTimeString())
-                ->where("arrival_date", "<=", Carbon::createFromFormat('D M d Y H:i:s e+', $request->end_date)->toDateTimeString())
-                ->get();
-        }
+        $startDate = Carbon::createFromFormat('D M d Y H:i:s e+', $request->start_date);
+        $endDate = Carbon::createFromFormat('D M d Y H:i:s e+', $request->end_date);
+        $lastDateOfPreviousMonth = $startDate->copy()->subDay()->toDateString();
+
+        $rits = Rit::whereNotNull("sold_date")
+            ->where(function ($query) use ($startDate, $endDate, $lastDateOfPreviousMonth) {
+                $query->where(function ($q) use ($startDate, $endDate) {
+                    $q->where("arrival_date", ">=", $startDate->toDateTimeString())
+                        ->where("arrival_date", "<=", $endDate->toDateTimeString());
+                })->orWhereHas('reports', function ($q) use ($lastDateOfPreviousMonth) {
+                    $q->whereHas('report', function ($q2) use ($lastDateOfPreviousMonth) {
+                        $q2->whereDate('created_at', $lastDateOfPreviousMonth);
+                    })->where('tonnage_left', '>', 0);
+                });
+            })
+            ->when($request->item_id, function ($query) use ($request) {
+                $query->where("item_id", $request->item_id);
+            })
+            ->with(['reports' => function ($query) use ($lastDateOfPreviousMonth) {
+                $query->whereHas('report', function ($q) use ($lastDateOfPreviousMonth) {
+                    $q->whereDate('created_at', $lastDateOfPreviousMonth);
+                });
+            }])
+            ->get();
 
         $return = [
             'api_code' => 200,

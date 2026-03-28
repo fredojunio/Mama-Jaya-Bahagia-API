@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class TransactionCompleteResource extends JsonResource
+class TransactionPaymentResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -28,13 +28,6 @@ class TransactionCompleteResource extends JsonResource
             "payments" => $this->payments,
             "cas" => $this->cas,
             "type" => $this->type,
-            "discount" => $this->discount,
-            "tb" => $this->tb,
-            "tw" => $this->tw,
-            "thr" => $this->thr,
-            "sack" => $this->sack,
-            "sack_price" => $this->sack_price,
-            "rits" => RitTransactionResource::collection($this->rits),
         ];
     }
 }

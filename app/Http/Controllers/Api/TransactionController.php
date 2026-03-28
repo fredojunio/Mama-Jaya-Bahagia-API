@@ -196,6 +196,79 @@ class TransactionController extends Controller
 
         return SuccessResource::make($return);
     }
+    public function get_completed_transactions_buku(Request $request)
+    {
+        $perPage = $request->get('per_page', 20);
+        $page = $request->get('page', 1);
+
+        $query = Transaction::where("created_at", ">=", Carbon::createFromFormat('D M d Y H:i:s e+', $request->start_date)->toDateTimeString())
+            ->where("created_at", "<=", Carbon::createFromFormat('D M d Y H:i:s e+', $request->end_date)->toDateTimeString())
+            ->where("owner_approved", 1)
+            ->where("daily_id", "<", 90000)
+            ->orderBy('daily_id') // Order by daily_id descending (100, 99, 98...)
+            ->orderBy('created_at'); // Then by created_at as secondary sort
+
+        $transactions = $query->paginate($perPage, ['*'], 'page', $page);
+
+        $return = [
+            'api_code' => 200,
+            'api_status' => true,
+            'api_message' => 'Sukses',
+            'api_results' => TransactionCompleteResource::collection($transactions->items()),
+            'pagination' => [
+                'current_page' => $transactions->currentPage(),
+                'last_page' => $transactions->lastPage(),
+                'per_page' => $transactions->perPage(),
+                'total' => $transactions->total(),
+                'has_more' => $transactions->hasMorePages(),
+                'from' => $transactions->firstItem(),
+                'to' => $transactions->lastItem()
+            ]
+        ];
+
+        return SuccessResource::make($return);
+    }
+
+    public function get_completed_transaction_search_buku(Request $request)
+    {
+        $perPage = $request->get('per_page', 20);
+        $page = $request->get('page', 1);
+
+        $query = Transaction::where("created_at", ">=", Carbon::createFromFormat('D M d Y H:i:s e+', $request->start_date)->toDateTimeString())
+            ->where("created_at", "<=", Carbon::createFromFormat('D M d Y H:i:s e+', $request->end_date)->toDateTimeString())
+            ->where("owner_approved", 1)
+            ->where("daily_id", "<", 90000)
+            ->orderBy('daily_id') // Order by daily_id descending (100, 99, 98...)
+            ->orderBy('created_at'); // Then by created_at as secondary sort
+
+        // If a search string is provided, filter by customer nickname
+        if ($request->filled('search_query')) {
+            $search = $request->get('search_query');
+            $query = $query->whereHas('customer', function ($q) use ($search) {
+                $q->where('nickname', 'like', '%' . $search . '%');
+            });
+        }
+
+        $transactions = $query->paginate($perPage, ['*'], 'page', $page);
+
+        $return = [
+            'api_code' => 200,
+            'api_status' => true,
+            'api_message' => 'Sukses',
+            'api_results' => TransactionCompleteResource::collection($transactions->items()),
+            'pagination' => [
+                'current_page' => $transactions->currentPage(),
+                'last_page' => $transactions->lastPage(),
+                'per_page' => $transactions->perPage(),
+                'total' => $transactions->total(),
+                'has_more' => $transactions->hasMorePages(),
+                'from' => $transactions->firstItem(),
+                'to' => $transactions->lastItem()
+            ]
+        ];
+
+        return SuccessResource::make($return);
+    }
 
     public function get_completed_owner_transactions(Request $request)
     {

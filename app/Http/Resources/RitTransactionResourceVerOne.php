@@ -25,7 +25,7 @@ class RitTransactionResourceVerOne extends JsonResource
             "total_price" => $this->total_price,
             "tonnage_left" => $this->tonnage_left,
             "rit" => $this->rit,
-            "transaction" => $this->transaction,
+            "transaction" => TransactionPaymentResource::make($this->transaction),
         ];
     }
 }
