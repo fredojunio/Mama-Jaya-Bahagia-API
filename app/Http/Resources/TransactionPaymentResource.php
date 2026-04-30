@@ -28,6 +28,7 @@ class TransactionPaymentResource extends JsonResource
             "payments" => $this->payments,
             "cas" => $this->cas,
             "type" => $this->type,
+            "owner_approved" => $this->owner_approved,
         ];
     }
 }

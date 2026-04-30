@@ -34,6 +34,7 @@ class TransactionCompleteResource extends JsonResource
             "thr" => $this->thr,
             "sack" => $this->sack,
             "sack_price" => $this->sack_price,
+            "other" => $this->other,
             "rits" => RitTransactionResource::collection($this->rits),
         ];
     }
