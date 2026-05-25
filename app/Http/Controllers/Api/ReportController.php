@@ -79,17 +79,17 @@ class ReportController extends Controller
             ->whereNotIn('type', ['Owner', 'Cabang'])
             ->sum('item_price');
         $excludedCodes = ["RO", "RLP", "ROJ", "K.ONYOR", "P28", "P29", "P37", "P38", "P39", "P310", "P311", "P312", "P225", "P230", "P1224", "P1830", "KRESEK ( 25 )", "KRESEK ( 28 )", "KRESEK (32)", "K", "Bk", "SB", "KCm", "KCs", "KCl", "KCxl", "BTG"];
-        $kedelai_income = Transaction::where('owner_approved', 1)
+        $kedelai_income = RitTransaction::whereHas('transaction', function ($q) {
+                $q->where('owner_approved', 1)
+                    ->whereNotIn('type', ['Owner', 'Cabang']);
+            })
             ->whereDate('created_at', Carbon::today())
-            ->whereNotIn('type', ['Owner', 'Cabang'])
-            ->whereDoesntHave('rits', function ($q) use ($excludedCodes) {
-                $q->whereHas('rit', function ($q2) use ($excludedCodes) {
-                    $q2->whereHas('item', function ($q3) use ($excludedCodes) {
-                        $q3->whereIn('code', $excludedCodes);
-                    });
+            ->whereDoesntHave('rit', function ($q) use ($excludedCodes) {
+                $q->whereHas('item', function ($q2) use ($excludedCodes) {
+                    $q2->whereIn('code', $excludedCodes);
                 });
             })
-            ->sum('item_price');
+            ->sum('total_price');
         // $tb_income = Transaction::where('owner_approved', 1)
         //     ->whereDate('created_at', Carbon::today())
         //     ->sum('tb');
@@ -240,17 +240,17 @@ class ReportController extends Controller
             ->whereNotIn('type', ['Owner', 'Cabang'])
             ->sum('item_price');
         $excludedCodes = ["RO", "RLP", "ROJ", "K.ONYOR", "P28", "P29", "P37", "P38", "P39", "P310", "P311", "P312", "P225", "P230", "P1224", "P1830", "KRESEK ( 25 )", "KRESEK ( 28 )", "KRESEK (32)", "K", "Bk", "SB", "KCm", "KCs", "KCl", "KCxl", "BTG"];
-        $kedelai_income = Transaction::where('owner_approved', 1)
+        $kedelai_income = RitTransaction::whereHas('transaction', function ($q) {
+                $q->where('owner_approved', 1)
+                    ->whereNotIn('type', ['Owner', 'Cabang']);
+            })
             ->whereDate('created_at', Carbon::today())
-            ->whereNotIn('type', ['Owner', 'Cabang'])
-            ->whereDoesntHave('rits', function ($q) use ($excludedCodes) {
-                $q->whereHas('rit', function ($q2) use ($excludedCodes) {
-                    $q2->whereHas('item', function ($q3) use ($excludedCodes) {
-                        $q3->whereIn('code', $excludedCodes);
-                    });
+            ->whereDoesntHave('rit', function ($q) use ($excludedCodes) {
+                $q->whereHas('item', function ($q2) use ($excludedCodes) {
+                    $q2->whereIn('code', $excludedCodes);
                 });
             })
-            ->sum('item_price');
+            ->sum('total_price');
         // $tb_income = Transaction::where('owner_approved', 1)
         //     ->whereDate('created_at', Carbon::today())
         //     ->sum('tb');
@@ -414,16 +414,17 @@ class ReportController extends Controller
             ->whereDate('created_at', Carbon::now()->subDays($request->days))
             ->sum('item_price');
         $excludedCodes = ["RO", "RLP", "ROJ", "K.ONYOR", "P28", "P29", "P37", "P38", "P39", "P310", "P311", "P312", "P225", "P230", "P1224", "P1830", "KRESEK ( 25 )", "KRESEK ( 28 )", "KRESEK (32)", "K", "Bk", "SB", "KCm", "KCs", "KCl", "KCxl", "BTG"];
-        $kedelai_income = Transaction::where('owner_approved', 1)
+        $kedelai_income = RitTransaction::whereHas('transaction', function ($q) {
+                $q->where('owner_approved', 1)
+                    ->whereNotIn('type', ['Owner', 'Cabang']);
+            })
             ->whereDate('created_at', Carbon::now()->subDays($request->days))
-            ->whereDoesntHave('rits', function ($q) use ($excludedCodes) {
-                $q->whereHas('rit', function ($q2) use ($excludedCodes) {
-                    $q2->whereHas('item', function ($q3) use ($excludedCodes) {
-                        $q3->whereIn('code', $excludedCodes);
-                    });
+            ->whereDoesntHave('rit', function ($q) use ($excludedCodes) {
+                $q->whereHas('item', function ($q2) use ($excludedCodes) {
+                    $q2->whereIn('code', $excludedCodes);
                 });
             })
-            ->sum('item_price');
+            ->sum('total_price');
         // $tb_income = Transaction::where('owner_approved', 1)
         //     ->whereDate('created_at', Carbon::now()->subDays($request->days))
         //     ->sum('tb');
