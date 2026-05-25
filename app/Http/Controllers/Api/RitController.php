@@ -96,6 +96,7 @@ class RitController extends Controller
             //         ->orWhere("tonnage_left", ">", 0)
             //         ->orWhere("tonnage_left", "<", 0);
             // })
+            ->orderByDesc('id')
             ->get();
 
         $return = [

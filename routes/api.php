@@ -48,6 +48,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/rit/get_owner_stock', [RitController::class, 'get_owner_stock']);
     Route::get('/rit/get_hold_stock', [RitController::class, 'get_hold_stock']);
     Route::post('/rit/get_empty_stock', [RitController::class, 'get_empty_stock']);
+    Route::post('/item/{item}/update_rit_prices', [ItemController::class, 'update_rit_prices']);
     Route::apiResource('item', ItemController::class);
     Route::apiResource('cashback', CashbackController::class);
     Route::get('/customer/get_lean_data', [CustomerController::class, 'get_lean_data']);
