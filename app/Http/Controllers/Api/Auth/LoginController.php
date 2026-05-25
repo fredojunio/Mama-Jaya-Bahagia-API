@@ -46,12 +46,17 @@ class LoginController extends Controller
             'password' => $request->password,
             'role_id' => 3,
         ];
+        $viewer = [
+            'email' => $request->email,
+            'password' => $request->password,
+            'role_id' => 4,
+        ];
 
         $check = User::where('email', $request->email)->first();
 
         if ($check != null) {
             // if ($check->email_verified_at != null) {
-            if (Auth::attempt($owner) || Auth::attempt($admin) || Auth::attempt($finance)) {
+            if (Auth::attempt($owner) || Auth::attempt($admin) || Auth::attempt($finance) || Auth::attempt($viewer)) {
                 $response = Http::asForm()->post(URL::to('/') . '/oauth/token', [
                     'grant_type' => 'password',
                     'client_id' => $this->client->id,

@@ -38,5 +38,13 @@ class UserSeeder extends Seeder
         $user->password = Hash::make('wars1234');
         $user->role_id = 3;
         $user->save();
+
+        $user = new User();
+        $user->name = "Viewer";
+        $user->email = "viewer@gmail.com";
+        $user->email_verified_at = Carbon::now();
+        $user->password = Hash::make('wars1234');
+        $user->role_id = 4;
+        $user->save();
     }
 }
