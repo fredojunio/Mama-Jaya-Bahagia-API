@@ -36,6 +36,10 @@ class Rit extends Model
     {
         return $this->belongsTo(Item::class, 'item_id', 'id');
     }
+    public function purchaseOrderGrab()
+    {
+        return $this->hasOne(PurchaseOrderGrab::class, 'rit_id', 'id');
+    }
     public function customer()
     {
         return $this->belongsTo(Customer::class, 'customer_id', 'id');

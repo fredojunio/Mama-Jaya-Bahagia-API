@@ -64,6 +64,9 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('/vehicle/{vehicle}/get_vehicle_trips', [VehicleController::class, 'get_vehicle_trips']);
     Route::post('/vehicle/search', [VehicleController::class, 'search']);
     Route::apiResource('rit', RitController::class);
+    Route::post('/purchase_order/{purchase_order}/ambil', [\App\Http\Controllers\Api\PurchaseOrderController::class, 'ambil']);
+    Route::put('/purchase_order_grab/{purchase_order_grab}', [\App\Http\Controllers\Api\PurchaseOrderController::class, 'updateGrab']);
+    Route::apiResource('purchase_order', \App\Http\Controllers\Api\PurchaseOrderController::class);
     Route::get('/rit/{rit}/reject_finance', [RitController::class, 'reject_finance']);
     Route::get('/rit/{rit}/approve_finance', [RitController::class, 'approve_finance']);
     Route::post('/rit/{rit}/arrived', [RitController::class, 'arrived']);
