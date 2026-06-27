@@ -123,7 +123,7 @@ class RitController extends Controller
     {
         $startDate = Carbon::createFromFormat('D M d Y H:i:s e+', $request->start_date);
         $endDate = Carbon::createFromFormat('D M d Y H:i:s e+', $request->end_date);
-        $lastDateOfPreviousMonth = $startDate->copy()->subDay()->toDateString();
+        $lastDateOfPreviousMonth = $startDate->copy()->startOfMonth()->subDay()->toDateString();
 
         $rits = Rit::whereNotNull("sold_date")
             ->where(function ($query) use ($startDate, $endDate, $lastDateOfPreviousMonth) {

@@ -56,6 +56,7 @@ class ExpenseController extends Controller
             $expenses = Expense::where("type", "Gaji")
                 ->where("time", ">=", Carbon::createFromFormat('D M d Y H:i:s e+', $request->start_date)->toDateTimeString())
                 ->where("time", "<=", Carbon::createFromFormat('D M d Y H:i:s e+', $request->end_date)->toDateTimeString())
+                ->whereRaw('LOWER(note) != ?', ['bulanan'])
                 ->get();
         }
         $return = [
