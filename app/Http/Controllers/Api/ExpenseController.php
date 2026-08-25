@@ -28,7 +28,11 @@ class ExpenseController extends Controller
 
     public function filter(Request $request)
     {
-        if ($request->filter == "Kendaraan") {
+        if ($request->filter == "All") {
+            $expenses = Expense::where("time", ">=", Carbon::createFromFormat('D M d Y H:i:s e+', $request->start_date)->toDateTimeString())
+                ->where("time", "<=", Carbon::createFromFormat('D M d Y H:i:s e+', $request->end_date)->toDateTimeString())
+                ->get();
+        } else if ($request->filter == "Kendaraan") {
             $expenses = Expense::where("type", "Kendaraan")
                 ->where("time", ">=", Carbon::createFromFormat('D M d Y H:i:s e+', $request->start_date)->toDateTimeString())
                 ->where("time", "<=", Carbon::createFromFormat('D M d Y H:i:s e+', $request->end_date)->toDateTimeString())
@@ -56,7 +60,7 @@ class ExpenseController extends Controller
             $expenses = Expense::where("type", "Gaji")
                 ->where("time", ">=", Carbon::createFromFormat('D M d Y H:i:s e+', $request->start_date)->toDateTimeString())
                 ->where("time", "<=", Carbon::createFromFormat('D M d Y H:i:s e+', $request->end_date)->toDateTimeString())
-                ->whereRaw('LOWER(note) != ?', ['bulanan'])
+                ->whereRaw('(LOWER(note) != ? OR note IS NULL)', ['bulanan'])
                 ->get();
         }
         $return = [

@@ -63,7 +63,7 @@ class TransactionController extends Controller
     public function get_owner_nota()
     {
         $transactions = Transaction::where('owner_approved', 0)
-            ->where('type', 'Kiriman')
+            // ->where('type', 'Kiriman')
             ->get();
 
         $return = [
@@ -330,7 +330,7 @@ class TransactionController extends Controller
             "discount" => $request->discount ?? 0,
             "ongkir" => $request->ongkir,
             "total_price" => $request->total_price,
-            "owner_approved" => $customer->type == "Kiriman" ? 0 : 1,
+            "owner_approved" => $customer->type == "Kiriman" || $request->discount > 0 ? 0 : 1,
             "customer_id" => $request->customer_id,
             "trip_id" => $trip ? $trip->id : null,
             "type" => $customer->type,
@@ -505,6 +505,28 @@ class TransactionController extends Controller
             "revision_allowed" => 0,
         ]);
 
+        $total_payments = Payment::where("transaction_id", $transaction->id)->sum("amount");
+        if ($total_payments > $transaction->total_price) {
+            $excess = $total_payments - $transaction->total_price;
+            $payments = Payment::where("transaction_id", $transaction->id)->orderBy('id', 'desc')->get();
+            foreach ($payments as $payment) {
+                if ($excess <= 0) break;
+                if ($payment->amount <= $excess) {
+                    $excess -= $payment->amount;
+                    $payment->delete();
+                } else {
+                    $payment->update(["amount" => $payment->amount - $excess]);
+                    $excess = 0;
+                }
+            }
+            // Update total_payments after adjustment
+            $total_payments = $transaction->total_price;
+        }
+
+        if ($transaction->finance_approved == 1 && $transaction->total_price > $total_payments) {
+            $transaction->update(["finance_approved" => 0]);
+        }
+
 
         // NOTE - Ini ngebalikin stok rit yang sebelumnya terjual
         foreach ($transaction->rits as $key => $rit) {
@@ -647,28 +669,31 @@ class TransactionController extends Controller
             }
 
             if ($transaction->type != "Cas") {
-                $saving = Saving::create([
-                    "tb" => $transaction->tb ?? 0,
-                    "tw" => $transaction->tw ?? 0,
-                    "thr" => $transaction->thr ?? 0,
-                    "tonnage" => $tonnage_transaction,
-                    "total_tw" => $customer->tw + $transaction->tw,
-                    "total_tb" => $customer->tb + $transaction->tb,
-                    "total_thr" => $customer->thr + $transaction->thr,
-                    // hold command sementara untuk periode april
-                    "total_tonnage" => $transaction->customer->tonnage + $tonnage_transaction,
-                    // "total_tonnage" => 0,
-                    "type" => "Pemasukan",
-                    "customer_id" => $transaction->customer_id,
-                    "transaction_id" => $transaction->id,
-                ]);
+                $savingExists = Saving::where('transaction_id', $transaction->id)->exists();
+                if (!$savingExists) {
+                    $saving = Saving::create([
+                        "tb" => $transaction->tb ?? 0,
+                        "tw" => $transaction->tw ?? 0,
+                        "thr" => $transaction->thr ?? 0,
+                        "tonnage" => $tonnage_transaction,
+                        "total_tw" => $customer->tw + $transaction->tw,
+                        "total_tb" => $customer->tb + $transaction->tb,
+                        "total_thr" => $customer->thr + $transaction->thr,
+                        // hold command sementara untuk periode april
+                        "total_tonnage" => $transaction->customer->tonnage + $tonnage_transaction,
+                        // "total_tonnage" => 0,
+                        "type" => "Pemasukan",
+                        "customer_id" => $transaction->customer_id,
+                        "transaction_id" => $transaction->id,
+                    ]);
 
-                $customer->update([
-                    "tb" => $saving->total_tb,
-                    "tw" => $saving->total_tw,
-                    "thr" => $saving->total_thr,
-                    "tonnage" => $saving->total_tonnage,
-                ]);
+                    $customer->update([
+                        "tb" => $saving->total_tb,
+                        "tw" => $saving->total_tw,
+                        "thr" => $saving->total_thr,
+                        "tonnage" => $saving->total_tonnage,
+                    ]);
+                }
             }
         }
 
@@ -832,12 +857,12 @@ class TransactionController extends Controller
                         "sold_date" => null
                     ]);
                     RitHistory::create([
-                        "info" => "Rit tidak jadi habis terjual karena nota di reject oleh owner.",
+                        "info" => "Rit tidak jadi habis terjual karena nota di reject oleh " . auth()->user()->name . ".",
                         "rit_id" => $rite->id
                     ]);
                 }
                 RitHistory::create([
-                    "info" => "Rit di reject oleh owner, Tonase asli: {$rite->tonnage_left}, Tambahan tonase karena direject: " . ($rit["tonnage"] * $rit["masak"]),
+                    "info" => "Rit di reject oleh " . auth()->user()->name . ". Tonase asli: {$rite->tonnage_left}, Tambahan tonase karena direject: " . ($rit["tonnage"] * $rit["masak"]),
                     "rit_id" => $rite->id
                 ]);
                 $rite->update([
@@ -863,18 +888,27 @@ class TransactionController extends Controller
             "total_price" => $request->total_price,
             "owner_approved" => 1,
         ]);
-        $users = User::where("role_id", 1)->get();
-        $emailArray = $users->pluck('email')->toArray();
-        Mail::to($emailArray)->send(new NotificationMail("Input Pemasukan", "Ada penjualan yang sudah dikirim namun pemasukan yang didapat belum dicatat."));
+        if (transaction->ongkir > 0) {
+            $users = User::where("role_id", 1)->get();
+            $emailArray = $users->pluck('email')->toArray();
+            Mail::to($emailArray)->send(new NotificationMail("Input Pemasukan", "Ada penjualan yang sudah dikirim namun pemasukan yang didapat belum dicatat."));
+        }
         foreach ($request->rits as $key => $rit) {
             $rite = Rit::find($rit['item']['id']);
             $rite->update([
                 "customer_transaction_id" => $transaction->id,
             ]);
-            RitHistory::create([
-                "info" => "Rit untuk customer sudah terjual. Harga: " . $request->item_prices,
-                "rit_id" => $rite->id
-            ]);
+            if (transaction->ongkir > 0) {
+                RitHistory::create([
+                    "info" => "Rit untuk customer sudah terjual. Harga: " . $request->item_prices,
+                    "rit_id" => $rite->id
+                ]);
+            } else {
+                RitHistory::create([
+                    "info" => "Rit dibeli oleh: {$customer->nickname}, Jumlah tonase: " . ($rit["tonnage"] * $rit["masak"]) . " Tonase sisa: {$rite->tonnage_left}",
+                    "rit_id" => $rite->id
+                ]);
+            }
             $rit_transaction = RitTransaction::create([
                 "daily_id" => $transaction->daily_id,
                 "customer_name" => $customer->nickname,

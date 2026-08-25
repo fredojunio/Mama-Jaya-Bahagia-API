@@ -29,7 +29,7 @@ class RitController extends Controller
      */
     public function get_all_stock()
     {
-        $rits = Rit::whereNotNull("arrival_date")->where("sell_price", ">", 0)->where("is_hold", 0)->whereNull("sold_date")->get();
+        $rits = Rit::whereNotNull("arrival_date")->where("sell_price", ">", 0)->where("is_hold", 0)->whereNull("sold_date")->orderBy('arrival_date', 'desc')->get();
 
         $return = [
             'api_code' => 200,
@@ -389,7 +389,7 @@ class RitController extends Controller
     public function priced(Request $request, Rit $rit)
     {
         RitHistory::create([
-            "info" => "Rit pengubahan status dari owner. " . " Harga Jual: {$request->sell_price}, Harga Beli: {$request->buy_price}, Hold: {$request->is_hold}, Tonase sisa baru: {$request->tonnage}, Tonase sisa sebelumnya: {$rit->tonnage_left}",
+            "info" => "Rit pengubahan status dari " . auth()->user()->name . ". Harga Jual: {$request->sell_price}, Harga Beli: {$request->buy_price}, Hold: {$request->is_hold}, Tonase sisa baru: {$request->tonnage}, Tonase sisa sebelumnya: {$rit->tonnage_left}",
             "rit_id" => $rit->id
         ]);
         $rit->update([

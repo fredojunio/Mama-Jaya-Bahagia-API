@@ -42,7 +42,7 @@ class RealSeeder extends Seeder
         $user->name = "Meiling";
         $user->email = "meiling.lidyaa@gmail.com";
         $user->email_verified_at = Carbon::now();
-        $user->password = Hash::make('meli1305');
+        $user->password = Hash::make('meiling1305');
         $user->role_id = 1;
         $user->save();
 
