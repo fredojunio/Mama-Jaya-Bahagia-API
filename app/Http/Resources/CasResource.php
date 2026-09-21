@@ -23,6 +23,7 @@ class CasResource extends JsonResource
             "limaribu" => $this->limaribu,
             "sepuluhribu" => $this->sepuluhribu,
             "duapuluhribu" => $this->duapuluhribu,
+            "transfer" => $this->transfer ?? 0,
             "fee" => $this->fee,
             "total" => $this->total,
         ];

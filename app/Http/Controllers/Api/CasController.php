@@ -39,28 +39,34 @@ class CasController extends Controller
      */
     public function store(Request $request)
     {
+        $isTransfer = $request->type === 'Transfer';
         $cas = Cas::create([
-            "koin" => $request->koin,
-            "seribu" => $request->seribu,
-            "duaribu" => $request->duaribu,
-            "limaribu" => $request->limaribu,
-            "sepuluhribu" => $request->sepuluhribu,
-            "duapuluhribu" => $request->duapuluhribu,
-            "fee" => $request->fee,
-            "total" => $request->total + $request->fee,
+            "koin" => $isTransfer ? 0 : ($request->koin ?? 0),
+            "seribu" => $isTransfer ? 0 : ($request->seribu ?? 0),
+            "duaribu" => $isTransfer ? 0 : ($request->duaribu ?? 0),
+            "limaribu" => $isTransfer ? 0 : ($request->limaribu ?? 0),
+            "sepuluhribu" => $isTransfer ? 0 : ($request->sepuluhribu ?? 0),
+            "duapuluhribu" => $isTransfer ? 0 : ($request->duapuluhribu ?? 0),
+            "transfer" => $isTransfer ? ($request->transfer ?? $request->total) : ($request->transfer ?? 0),
+            "fee" => $request->fee ?? 0,
+            "total" => $request->total + ($request->fee ?? 0),
         ]);
-        $deposit = CasDeposit::first();
-        $deposit->update([
-            "koin" => $deposit["koin"] - $request["koin"],
-            "seribu" => $deposit["seribu"] - $request["seribu"],
-            "duaribu" => $deposit["duaribu"] - $request["duaribu"],
-            "limaribu" => $deposit["limaribu"] - $request["limaribu"],
-            "sepuluhribu" => $deposit["sepuluhribu"] - $request["sepuluhribu"],
-            "duapuluhribu" => $deposit["duapuluhribu"] - $request["duapuluhribu"],
-        ]);
+        if (!$isTransfer) {
+            $deposit = CasDeposit::first();
+            if ($deposit) {
+                $deposit->update([
+                    "koin" => $deposit["koin"] - ($request["koin"] ?? 0),
+                    "seribu" => $deposit["seribu"] - ($request["seribu"] ?? 0),
+                    "duaribu" => $deposit["duaribu"] - ($request["duaribu"] ?? 0),
+                    "limaribu" => $deposit["limaribu"] - ($request["limaribu"] ?? 0),
+                    "sepuluhribu" => $deposit["sepuluhribu"] - ($request["sepuluhribu"] ?? 0),
+                    "duapuluhribu" => $deposit["duapuluhribu"] - ($request["duapuluhribu"] ?? 0),
+                ]);
+            }
+        }
         $transaction = Transaction::create([
             "daily_id" => Transaction::whereDate('created_at', now()->toDateString())->get()->count() + 1,
-            "total_price" => $request->fee,
+            "total_price" => $request->fee ?? 0,
             "owner_approved" => 1,
             "type" => "Cas",
             "cas_id" => $cas->id

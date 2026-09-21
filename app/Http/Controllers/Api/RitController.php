@@ -388,8 +388,9 @@ class RitController extends Controller
 
     public function priced(Request $request, Rit $rit)
     {
+        $userName = auth()->user() ? auth()->user()->name : 'User';
         RitHistory::create([
-            "info" => "Rit pengubahan status dari " . auth()->user()->name . ". Harga Jual: {$request->sell_price}, Harga Beli: {$request->buy_price}, Hold: {$request->is_hold}, Tonase sisa baru: {$request->tonnage}, Tonase sisa sebelumnya: {$rit->tonnage_left}",
+            "info" => "Rit pengubahan status dari " . $userName . ". Harga Jual: {$request->sell_price}, Harga Beli: {$request->buy_price}, Hold: {$request->is_hold}, Tonase sisa baru: {$request->tonnage}, Tonase sisa sebelumnya: {$rit->tonnage_left}",
             "rit_id" => $rit->id
         ]);
         $rit->update([

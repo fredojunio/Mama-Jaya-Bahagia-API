@@ -38,8 +38,7 @@ Route::group(['middleware' => 'auth:api', 'as' => 'api.user.'], function () {
     Route::post('/logout', [LoginController::class, 'logout']);
 });
 
-//TODO - KASIH MIDDLEWARE AUTH:API KALAU UDAH SELESAI
-Route::group(['prefix' => 'admin'], function () {
+Route::group(['prefix' => 'admin', 'middleware' => 'auth:api'], function () {
     Route::get('get_notification', [NotificationController::class, 'get_notification']);
     Route::get('/rit/get_all_stock', [RitController::class, 'get_all_stock']);
     Route::get('/rit/get_sell_owner_stock', [RitController::class, 'get_sell_owner_stock']);
@@ -98,6 +97,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('/transaction/{transaction}/approve_owner', [TransactionController::class, 'approve_owner']);
     Route::get('/transaction/{transaction}/reject_owner', [TransactionController::class, 'reject_owner']);
     Route::post('/transaction/{rit}/branch', [TransactionController::class, 'branch']);
+    Route::get('/buku_besar', [\App\Http\Controllers\Api\BukuBesarController::class, 'index']);
     Route::post('/saving/get_savings_incomes', [SavingController::class, 'get_savings_incomes']);
     Route::apiResource('saving', SavingController::class);
     Route::post('/report/create_daily_report', [ReportController::class, 'create_daily_report']);

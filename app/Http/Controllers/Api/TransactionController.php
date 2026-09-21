@@ -585,7 +585,7 @@ class TransactionController extends Controller
         }
         //NOTE - Ini update data tabungan yang sebelumnya jadi ke yang baru + id customer yang baru
         $tonnage_transaction = 0;
-        $excludedCodes = ["RO", "RLP", "ROJ", "K.ONYOR", "P28", "P29", "P37", "P38", "P39", "P310", "P311", "P312", "P225", "P230", "P1224", "P1830", "KRESEK ( 25 )", "KRESEK ( 28 )", "KRESEK (32)", "K", "Bk", "SB", "KCm", "KCs", "KCl", "KCxl", "BTG"];
+        $excludedCodes = ["RO", "RLP", "ROJ", "K.ONYOR", "P28", "P29", "P37", "P38", "P39", "P310", "P311", "P312", "P225", "P230", "P1224", "P1830", "KRESEK ( 25 )", "KRESEK ( 28 )", "KRESEK (32)", "K", "Bk", "KCm", "KCs", "KCl", "KCxl", "BTG"];
         foreach ($request->new_transaction["rits"] as $key => $rit) {
             $itemCode = data_get($rit, 'rit.item.code');
             if (!in_array($itemCode, $excludedCodes)) {
@@ -633,34 +633,144 @@ class TransactionController extends Controller
      */
     public function destroy(Transaction $transaction)
     {
+        // 1. Revert Savings & Customer balances
+        if ($transaction->type != "Cas") {
+            $saving = Saving::where('transaction_id', $transaction->id)->first();
+            if ($saving) {
+                $customer = Customer::find($transaction->customer_id);
+                if ($customer) {
+                    $customer->update([
+                        "tb" => $customer->tb - ($transaction->tb ?? 0),
+                        "tw" => $customer->tw - ($transaction->tw ?? 0),
+                        "thr" => $customer->thr - ($transaction->thr ?? 0),
+                        "tonnage" => $customer->tonnage - $saving->tonnage,
+                    ]);
+                }
+                $saving->delete();
+            }
+        }
+
+        // 2. Delete Payments
+        Payment::where("transaction_id", $transaction->id)->delete();
+
+        // 3. Revert Rits
+        foreach ($transaction->rits as $key => $rit) {
+            $rite = Rit::find($rit->rit_id);
+            if ($rite) {
+                if ($rite->tonnage_left == 0) {
+                    $rite->update([
+                        "sold_date" => null
+                    ]);
+                    RitHistory::create([
+                        "info" => "Rit tidak jadi habis terjual karena transaksi dihapus.",
+                        "rit_id" => $rite->id
+                    ]);
+                }
+                RitHistory::create([
+                    "info" => "Transaksi dihapus, Tonase asli: {$rite->tonnage_left}, Tambahan tonase: " . ($rit["tonnage"] * $rit["masak"]),
+                    "rit_id" => $rite->id
+                ]);
+                $rite->update([
+                    'tonnage_left' => $rite->tonnage_left + ($rit["tonnage"] * $rit["masak"]),
+                ]);
+            }
+            $rit->delete();
+        }
+
+        // 4. Return Sacks
+        if ($transaction->type != "Cas") {
+            $remainingSacks = $transaction->sack + $transaction->sack_free;
+            if ($remainingSacks > 0) {
+                $sack = Sack::where('amount', '>', 0)->orderBy('created_at', 'asc')->first();
+                if (!$sack) {
+                    $sack = Sack::latest()->first();
+                }
+                if ($sack) {
+                    $sack->update([
+                        "amount" => $sack->amount + $remainingSacks
+                    ]);
+                }
+            }
+        } else {
+            // Revert CAS deposit if it's CAS transaction
+            $cas = Cas::find($transaction->cas_id);
+            if ($cas) {
+                $deposit = CasDeposit::first();
+                if ($deposit) {
+                    $deposit->update([
+                        "koin" => $deposit->koin + $cas->koin,
+                        "seribu" => $deposit->seribu + $cas->seribu,
+                        "duaribu" => $deposit->duaribu + $cas->duaribu,
+                        "limaribu" => $deposit->limaribu + $cas->limaribu,
+                        "sepuluhribu" => $deposit->sepuluhribu + $cas->sepuluhribu,
+                        "duapuluhribu" => $deposit->duapuluhribu + $cas->duapuluhribu,
+                    ]);
+                }
+                $cas->delete();
+            }
+        }
+
+        // 5. Revert Trip & Expense
+        if ($transaction->trip_id) {
+            $trip = Trip::find($transaction->trip_id);
+            if ($trip) {
+                $vehicle = Vehicle::find($trip->vehicle_id);
+                if ($vehicle) {
+                    $vehicle->update([
+                        "trip_count" => $vehicle->trip_count - 1,
+                        "toll" => $vehicle->toll - $trip->toll
+                    ]);
+                }
+                if ($trip->expense) {
+                    $trip->expense->delete();
+                }
+                $trip->delete();
+            }
+        }
+
+        // 6. Delete Transaction
+        $transaction->delete();
+
         $return = [
             'api_code' => 200,
             'api_status' => true,
             'api_message' => 'Sukses Terhapus.',
-            'api_results' => TransactionResource::make($transaction)
+            'api_results' => null
         ];
-        // $transaction->delete();
         return SuccessResource::make($return);
     }
 
     public function approve_finance(Transaction $transaction, Request $request)
     {
         $customer = Customer::find($transaction->customer_id);
-        $payment = Payment::create([
-            'amount' => $request->amount,
-            'type' => $request->transfer ? 'Transfer' : 'Cash',
-            'customer_id' => $customer ? $customer->id : null,
-            'transaction_id' => $transaction->id
-        ]);
-        $total_payments = Payment::where("transaction_id", $transaction->id)
-            ->sum("amount");
-        if ($total_payments == $transaction->total_price) {
+
+        // Calculate remaining balance before creating payment
+        $current_total_payments = Payment::where("transaction_id", $transaction->id)->sum("amount");
+        $remaining_balance = $transaction->total_price - $current_total_payments;
+
+        if ($remaining_balance > 0) {
+            $amount_to_pay = $request->amount;
+            if ($amount_to_pay > $remaining_balance) {
+                $amount_to_pay = $remaining_balance;
+            }
+
+            $payment = Payment::create([
+                'amount' => $amount_to_pay,
+                'type' => $request->transfer ? 'Transfer' : 'Cash',
+                'customer_id' => $customer ? $customer->id : null,
+                'transaction_id' => $transaction->id
+            ]);
+        }
+
+        $total_payments = Payment::where("transaction_id", $transaction->id)->sum("amount");
+
+        if ($total_payments >= $transaction->total_price && $transaction->finance_approved == 0) {
             $transaction->update([
                 "finance_approved" => 1,
                 "settled_date" => Carbon::now(),
             ]);
             $tonnage_transaction = 0;
-            $excludedCodes = ["RO", "RLP", "ROJ", "K.ONYOR", "P28", "P29", "P37", "P38", "P39", "P310", "P311", "P312", "P225", "P230", "P1224", "P1830", "KRESEK ( 25 )", "KRESEK ( 28 )", "KRESEK (32)", "K", "Bk", "SB", "KCm", "KCs", "KCl", "KCxl", "BTG"];
+            $excludedCodes = ["RO", "RLP", "ROJ", "K.ONYOR", "P28", "P29", "P37", "P38", "P39", "P310", "P311", "P312", "P225", "P230", "P1224", "P1830", "KRESEK ( 25 )", "KRESEK ( 28 )", "KRESEK (32)", "K", "Bk", "KCm", "KCs", "KCl", "KCxl", "BTG"];
 
             foreach ($transaction->rits as $key => $rit_transaction) {
                 if (!in_array($rit_transaction->rit->item->code, $excludedCodes)) {
@@ -856,13 +966,15 @@ class TransactionController extends Controller
                     $rite->update([
                         "sold_date" => null
                     ]);
+                    $userName = auth()->user() ? auth()->user()->name : 'Owner';
                     RitHistory::create([
-                        "info" => "Rit tidak jadi habis terjual karena nota di reject oleh " . auth()->user()->name . ".",
+                        "info" => "Rit tidak jadi habis terjual karena nota di reject oleh " . $userName . ".",
                         "rit_id" => $rite->id
                     ]);
                 }
+                $userName = auth()->user() ? auth()->user()->name : 'Owner';
                 RitHistory::create([
-                    "info" => "Rit di reject oleh " . auth()->user()->name . ". Tonase asli: {$rite->tonnage_left}, Tambahan tonase karena direject: " . ($rit["tonnage"] * $rit["masak"]),
+                    "info" => "Rit di reject oleh " . $userName . ". Tonase asli: {$rite->tonnage_left}, Tambahan tonase karena direject: " . ($rit["tonnage"] * $rit["masak"]),
                     "rit_id" => $rite->id
                 ]);
                 $rite->update([

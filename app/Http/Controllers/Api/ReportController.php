@@ -78,11 +78,11 @@ class ReportController extends Controller
             ->whereDate('created_at', Carbon::today())
             ->whereNotIn('type', ['Owner', 'Cabang'])
             ->sum('item_price');
-        $excludedCodes = ["RO", "RLP", "ROJ", "K.ONYOR", "P28", "P29", "P37", "P38", "P39", "P310", "P311", "P312", "P225", "P230", "P1224", "P1830", "KRESEK ( 25 )", "KRESEK ( 28 )", "KRESEK (32)", "K", "Bk", "SB", "KCm", "KCs", "KCl", "KCxl", "BTG"];
+        $excludedCodes = ["RO", "RLP", "ROJ", "K.ONYOR", "P28", "P29", "P37", "P38", "P39", "P310", "P311", "P312", "P225", "P230", "P1224", "P1830", "KRESEK ( 25 )", "KRESEK ( 28 )", "KRESEK (32)", "K", "Bk", "KCm", "KCs", "KCl", "KCxl", "BTG"];
         $kedelai_income = RitTransaction::whereHas('transaction', function ($q) {
-                $q->where('owner_approved', 1)
-                    ->whereNotIn('type', ['Owner', 'Cabang']);
-            })
+            $q->where('owner_approved', 1)
+                ->whereNotIn('type', ['Owner', 'Cabang']);
+        })
             ->whereDate('created_at', Carbon::today())
             ->whereDoesntHave('rit', function ($q) use ($excludedCodes) {
                 $q->whereHas('item', function ($q2) use ($excludedCodes) {
@@ -135,8 +135,10 @@ class ReportController extends Controller
         $vehicle_expense = Expense::whereDate('time', Carbon::today())
             ->where('type', "Kendaraan")
             ->sum('amount');
+        $cas_transfer = Cas::whereDate('created_at', Carbon::today())
+            ->sum('transfer');
         $report = Report::create([
-            "money" => $income - $expense,
+            "money" => $income - $expense - $cas_transfer,
             "income" => $allincome,
             "real_income" => $request->real_income,
             "expense" => $expense,
@@ -239,11 +241,11 @@ class ReportController extends Controller
             ->whereDate('created_at', Carbon::today())
             ->whereNotIn('type', ['Owner', 'Cabang'])
             ->sum('item_price');
-        $excludedCodes = ["RO", "RLP", "ROJ", "K.ONYOR", "P28", "P29", "P37", "P38", "P39", "P310", "P311", "P312", "P225", "P230", "P1224", "P1830", "KRESEK ( 25 )", "KRESEK ( 28 )", "KRESEK (32)", "K", "Bk", "SB", "KCm", "KCs", "KCl", "KCxl", "BTG"];
+        $excludedCodes = ["RO", "RLP", "ROJ", "K.ONYOR", "P28", "P29", "P37", "P38", "P39", "P310", "P311", "P312", "P225", "P230", "P1224", "P1830", "KRESEK ( 25 )", "KRESEK ( 28 )", "KRESEK (32)", "K", "Bk", "KCm", "KCs", "KCl", "KCxl", "BTG"];
         $kedelai_income = RitTransaction::whereHas('transaction', function ($q) {
-                $q->where('owner_approved', 1)
-                    ->whereNotIn('type', ['Owner', 'Cabang']);
-            })
+            $q->where('owner_approved', 1)
+                ->whereNotIn('type', ['Owner', 'Cabang']);
+        })
             ->whereDate('created_at', Carbon::today())
             ->whereDoesntHave('rit', function ($q) use ($excludedCodes) {
                 $q->whereHas('item', function ($q2) use ($excludedCodes) {
@@ -301,8 +303,10 @@ class ReportController extends Controller
         $vehicle_expense = Expense::whereDate('time', Carbon::today())
             ->where('type', "Kendaraan")
             ->sum('amount');
+        $cas_transfer = Cas::whereDate('created_at', Carbon::today())
+            ->sum('transfer');
         $report = new Report;
-        $report->money = $income - $expense;
+        $report->money = $income - $expense - $cas_transfer;
         $report->income = $allincome;
         $report->expense = $expense;
         $report->tonnage = $tonnage;
@@ -413,11 +417,11 @@ class ReportController extends Controller
         $item_income = Transaction::where('owner_approved', 1)
             ->whereDate('created_at', Carbon::now()->subDays($request->days))
             ->sum('item_price');
-        $excludedCodes = ["RO", "RLP", "ROJ", "K.ONYOR", "P28", "P29", "P37", "P38", "P39", "P310", "P311", "P312", "P225", "P230", "P1224", "P1830", "KRESEK ( 25 )", "KRESEK ( 28 )", "KRESEK (32)", "K", "Bk", "SB", "KCm", "KCs", "KCl", "KCxl", "BTG"];
+        $excludedCodes = ["RO", "RLP", "ROJ", "K.ONYOR", "P28", "P29", "P37", "P38", "P39", "P310", "P311", "P312", "P225", "P230", "P1224", "P1830", "KRESEK ( 25 )", "KRESEK ( 28 )", "KRESEK (32)", "K", "Bk", "KCm", "KCs", "KCl", "KCxl", "BTG"];
         $kedelai_income = RitTransaction::whereHas('transaction', function ($q) {
-                $q->where('owner_approved', 1)
-                    ->whereNotIn('type', ['Owner', 'Cabang']);
-            })
+            $q->where('owner_approved', 1)
+                ->whereNotIn('type', ['Owner', 'Cabang']);
+        })
             ->whereDate('created_at', Carbon::now()->subDays($request->days))
             ->whereDoesntHave('rit', function ($q) use ($excludedCodes) {
                 $q->whereHas('item', function ($q2) use ($excludedCodes) {
@@ -473,8 +477,10 @@ class ReportController extends Controller
         $vehicle_expense = Expense::whereDate('time', Carbon::now()->subDays($request->days))
             ->where('type', "Kendaraan")
             ->sum('amount');
+        $cas_transfer = Cas::whereDate('created_at', Carbon::now()->subDays($request->days))
+            ->sum('transfer');
         $report = new Report;
-        $report->money = $income - $expense;
+        $report->money = $income - $expense - $cas_transfer;
         $report->income = $allincome;
         $report->expense = $expense;
         $report->tonnage = $tonnage;
