@@ -1213,7 +1213,7 @@ class TransactionController extends Controller
 
         $rit->update([
             'retur_tonnage' => $request->tonnage,
-            // 'tonnage_left' => $rit->tonnage_left - $request->tonnage,
+            'tonnage_left' => $rit->tonnage_left + $request->tonnage,
             'retur_trip_id' => $trip->id
         ]);
 
