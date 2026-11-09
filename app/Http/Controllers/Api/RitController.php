@@ -305,6 +305,7 @@ class RitController extends Controller
             "note" => "Pengambilan Rit " . $rit->item->code,
             "time" => Carbon::now(),
             "type" => "Kendaraan",
+            "coa_id" => \App\Models\Coa::idFor(\App\Models\Coa::KENDARAAN),
             "trip_id" => $trip->id
         ]);
         if ($rit->customer_tonnage > 0) {
@@ -449,6 +450,7 @@ class RitController extends Controller
             "note" => "Pengiriman ke " . $request->branch_name,
             "time" => Carbon::now(),
             "type" => "Kendaraan",
+            "coa_id" => \App\Models\Coa::idFor(\App\Models\Coa::KENDARAAN),
             "trip_id" => $trip->id
         ]);
 
@@ -515,6 +517,7 @@ class RitController extends Controller
             "note" => "Retur Rit " . $rit->item->code,
             "time" => Carbon::now(),
             "type" => "Kendaraan",
+            "coa_id" => \App\Models\Coa::idFor(\App\Models\Coa::KENDARAAN),
             "trip_id" => $trip->id
         ]);
 
@@ -575,6 +578,7 @@ class RitController extends Controller
             "note" => "Pengiriman ke Pusat dari Cabang",
             "time" => Carbon::now(),
             "type" => "Kendaraan",
+            "coa_id" => \App\Models\Coa::idFor(\App\Models\Coa::KENDARAAN),
             "trip_id" => $trip->id
         ]);
 

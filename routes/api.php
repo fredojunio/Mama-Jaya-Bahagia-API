@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\Auth\LoginController;
 use App\Http\Controllers\Api\CasController;
 use App\Http\Controllers\Api\CasDepositController;
 use App\Http\Controllers\Api\CashbackController;
+use App\Http\Controllers\Api\CoaController;
 use App\Http\Controllers\Api\CustomerController;
 use App\Http\Controllers\Api\ExpenseController;
 use App\Http\Controllers\Api\IncomeController;
@@ -108,6 +109,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:api'], function () {
     Route::apiResource('report', ReportController::class);
     Route::apiResource('income', IncomeController::class);
     Route::post('/expense/filter', [ExpenseController::class, 'filter']);
+    Route::get('/coa', [CoaController::class, 'index']);
     Route::apiResource('expense', ExpenseController::class);
     Route::apiResource('report_rit', ReportRitController::class);
     Route::apiResource('cas_deposit', CasDepositController::class);

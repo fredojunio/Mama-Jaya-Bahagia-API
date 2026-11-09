@@ -121,6 +121,7 @@ class PurchaseOrderController extends Controller
             "note" => "Pengambilan Rit PO " . $purchase_order->po_code,
             "time" => \Carbon\Carbon::now(),
             "type" => "Kendaraan",
+            "coa_id" => \App\Models\Coa::idFor(\App\Models\Coa::KENDARAAN),
             "trip_id" => $trip->id
         ]);
 

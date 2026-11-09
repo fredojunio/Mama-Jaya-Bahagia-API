@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ExpenseResource;
 use App\Http\Resources\SuccessResource;
+use App\Models\Coa;
 use App\Models\Expense;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -16,7 +17,7 @@ class ExpenseController extends Controller
      */
     public function index()
     {
-        $expenses = Expense::all();
+        $expenses = Expense::with('coa')->get();
         $return = [
             'api_code' => 200,
             'api_status' => true,
@@ -28,41 +29,48 @@ class ExpenseController extends Controller
 
     public function filter(Request $request)
     {
-        if ($request->filter == "All") {
-            $expenses = Expense::where("time", ">=", Carbon::createFromFormat('D M d Y H:i:s e+', $request->start_date)->toDateTimeString())
-                ->where("time", "<=", Carbon::createFromFormat('D M d Y H:i:s e+', $request->end_date)->toDateTimeString())
-                ->get();
-        } else if ($request->filter == "Kendaraan") {
-            $expenses = Expense::where("type", "Kendaraan")
-                ->where("time", ">=", Carbon::createFromFormat('D M d Y H:i:s e+', $request->start_date)->toDateTimeString())
-                ->where("time", "<=", Carbon::createFromFormat('D M d Y H:i:s e+', $request->end_date)->toDateTimeString())
-                ->get();
-        } else if ($request->filter == "Tabungan") {
-            $expenses = Expense::where(function ($query) {
-                $query->where("type", "TW")
-                    ->orWhere("type", "TB")
-                    ->orWhere("type", "THR");
-            })
-                ->where("time", ">=", Carbon::createFromFormat('D M d Y H:i:s e+', $request->start_date)->toDateTimeString())
-                ->where("time", "<=", Carbon::createFromFormat('D M d Y H:i:s e+', $request->end_date)->toDateTimeString())
-                ->get();
-        } else if ($request->filter == "Cashback") {
-            $expenses = Expense::where("type", "Cashback")
-                ->where("time", ">=", Carbon::createFromFormat('D M d Y H:i:s e+', $request->start_date)->toDateTimeString())
-                ->where("time", "<=", Carbon::createFromFormat('D M d Y H:i:s e+', $request->end_date)->toDateTimeString())
-                ->get();
-        } else if ($request->filter == "Operasional") {
-            $expenses = Expense::where("type", "Operasional")
-                ->where("time", ">=", Carbon::createFromFormat('D M d Y H:i:s e+', $request->start_date)->toDateTimeString())
-                ->where("time", "<=", Carbon::createFromFormat('D M d Y H:i:s e+', $request->end_date)->toDateTimeString())
-                ->get();
-        } else if ($request->filter == "Gaji") {
-            $expenses = Expense::where("type", "Gaji")
-                ->where("time", ">=", Carbon::createFromFormat('D M d Y H:i:s e+', $request->start_date)->toDateTimeString())
-                ->where("time", "<=", Carbon::createFromFormat('D M d Y H:i:s e+', $request->end_date)->toDateTimeString())
-                ->whereRaw('(LOWER(note) != ? OR note IS NULL)', ['bulanan'])
-                ->get();
+        $start = Carbon::createFromFormat('D M d Y H:i:s e+', $request->start_date)->toDateTimeString();
+        $end = Carbon::createFromFormat('D M d Y H:i:s e+', $request->end_date)->toDateTimeString();
+
+        $query = Expense::with('coa')
+            ->where("time", ">=", $start)
+            ->where("time", "<=", $end);
+
+        if ($request->filled('coa_id')) {
+            $query->where('coa_id', $request->coa_id);
+
+            // Keep the existing Gaji tab behaviour: hide monthly salary rows.
+            if (Coa::where('id', $request->coa_id)->value('code') === Coa::GAJI) {
+                $this->hideMonthlySalary($query);
+            }
+        } else {
+            switch ($request->filter) {
+                case "Kendaraan":
+                    $query->where("type", "Kendaraan");
+                    break;
+                case "Tabungan":
+                    $query->whereIn("type", ["TW", "TB", "THR"]);
+                    break;
+                case "Cashback":
+                    $query->where("type", "Cashback");
+                    break;
+                case "Operasional":
+                    $query->where("type", "Operasional");
+                    break;
+                case "Gaji":
+                    $query->where("type", "Gaji");
+                    $this->hideMonthlySalary($query);
+                    break;
+                case "All":
+                    break;
+                default:
+                    // Unknown filter: return nothing rather than every expense.
+                    $query->whereRaw('1 = 0');
+                    break;
+            }
         }
+
+        $expenses = $query->get();
         $return = [
             'api_code' => 200,
             'api_status' => true,
@@ -72,17 +80,37 @@ class ExpenseController extends Controller
         return SuccessResource::make($return);
     }
 
+    private function hideMonthlySalary($query): void
+    {
+        $query->whereRaw('(LOWER(note) != ? OR note IS NULL)', ['bulanan']);
+    }
+
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
+        $coaId = $request->coa_id;
+
+        if (!$coaId) {
+            $defaultCoaCode = [
+                'Kendaraan' => Coa::KENDARAAN,
+                'Gaji' => Coa::GAJI,
+                'Operasional' => Coa::OPERASIONAL,
+            ][$request->type] ?? null;
+
+            if ($defaultCoaCode) {
+                $coaId = Coa::idFor($defaultCoaCode);
+            }
+        }
+
         $expense = Expense::create([
             "amount" => $request->amount,
             "note" => $request->note,
             "name" => $request->name,
             "time" => $request->time,
             "type" => $request->type,
+            "coa_id" => $coaId,
         ]);
         $return = [
             'api_code' => 200,
@@ -154,6 +182,7 @@ class ExpenseController extends Controller
                 "note" => $request->expense["note"],
                 "name" => $request->expense["name"],
                 "time" => $request->expense["time"],
+                "coa_id" => $request->expense["coa_id"] ?? $expense->coa_id,
             ]);
         }
         $return = [

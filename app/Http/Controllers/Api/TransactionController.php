@@ -930,6 +930,7 @@ class TransactionController extends Controller
                     "note" => "Penjualan Ke " . $customer->name,
                     "time" => Carbon::now(),
                     "type" => "Kendaraan",
+                    "coa_id" => \App\Models\Coa::idFor(\App\Models\Coa::KENDARAAN),
                     "trip_id" => $trip->id
                 ]);
             }
@@ -1210,6 +1211,7 @@ class TransactionController extends Controller
             "note" => "Retur Rit " . $rit->item->code,
             "time" => Carbon::now(),
             "type" => "Kendaraan",
+            "coa_id" => \App\Models\Coa::idFor(\App\Models\Coa::KENDARAAN),
             "trip_id" => $trip->id
         ]);
 

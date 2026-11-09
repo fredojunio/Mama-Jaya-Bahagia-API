@@ -14,9 +14,15 @@ class Expense extends Model
         "name",
         "time",
         "type",
+        "coa_id",
         "trip_id",
         "saving_id"
     ];
+
+    public function coa()
+    {
+        return $this->belongsTo(Coa::class, 'coa_id', 'id');
+    }
 
     public function trip()
     {

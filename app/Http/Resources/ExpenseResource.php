@@ -23,6 +23,12 @@ class ExpenseResource extends JsonResource
             "name" => $this->name,
             "time" => $this->time,
             "type" => $this->type,
+            "coa_id" => $this->coa_id,
+            "coa" => $this->coa ? [
+                "id" => $this->coa->id,
+                "code" => $this->coa->code,
+                "name" => $this->coa->name,
+            ] : null,
             "trip" => $this->trip_id ? TripResource::make($this->trip) : null,
         ];
     }
