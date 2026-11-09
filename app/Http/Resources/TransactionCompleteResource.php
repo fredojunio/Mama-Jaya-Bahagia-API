@@ -24,6 +24,10 @@ class TransactionCompleteResource extends JsonResource
             "revision_requested" => $this->revision_requested,
             "revision_allowed" => $this->revision_allowed,
             "revision_note" => $this->revision_note,
+            "user" => $this->user ? [
+                "id" => $this->user->id,
+                "name" => $this->user->name,
+            ] : null,
             "customer" => $this->customer,
             "payments" => $this->payments,
             "cas" => $this->cas,

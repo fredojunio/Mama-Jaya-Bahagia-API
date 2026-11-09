@@ -69,7 +69,8 @@ class CasController extends Controller
             "total_price" => $request->fee ?? 0,
             "owner_approved" => 1,
             "type" => "Cas",
-            "cas_id" => $cas->id
+            "cas_id" => $cas->id,
+            "user_id" => auth()->id()
         ]);
         $return = [
             'api_code' => 200,

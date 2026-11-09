@@ -128,7 +128,7 @@ class TransactionController extends Controller
         $perPage = $request->get('per_page', 20);
         $page = $request->get('page', 1);
 
-        $query = Transaction::where("created_at", ">=", Carbon::createFromFormat('D M d Y H:i:s e+', $request->start_date)->toDateTimeString())
+        $query = Transaction::with('user')->where("created_at", ">=", Carbon::createFromFormat('D M d Y H:i:s e+', $request->start_date)->toDateTimeString())
             ->where("created_at", "<=", Carbon::createFromFormat('D M d Y H:i:s e+', $request->end_date)->toDateTimeString())
             ->where("owner_approved", 1)
             ->where("daily_id", "<", 90000)
@@ -161,7 +161,7 @@ class TransactionController extends Controller
         $perPage = $request->get('per_page', 20);
         $page = $request->get('page', 1);
 
-        $query = Transaction::where("created_at", ">=", Carbon::createFromFormat('D M d Y H:i:s e+', $request->start_date)->toDateTimeString())
+        $query = Transaction::with('user')->where("created_at", ">=", Carbon::createFromFormat('D M d Y H:i:s e+', $request->start_date)->toDateTimeString())
             ->where("created_at", "<=", Carbon::createFromFormat('D M d Y H:i:s e+', $request->end_date)->toDateTimeString())
             ->where("owner_approved", 1)
             ->where("daily_id", "<", 90000)
@@ -201,7 +201,7 @@ class TransactionController extends Controller
         $perPage = $request->get('per_page', 20);
         $page = $request->get('page', 1);
 
-        $query = Transaction::where("created_at", ">=", Carbon::createFromFormat('D M d Y H:i:s e+', $request->start_date)->toDateTimeString())
+        $query = Transaction::with('user')->where("created_at", ">=", Carbon::createFromFormat('D M d Y H:i:s e+', $request->start_date)->toDateTimeString())
             ->where("created_at", "<=", Carbon::createFromFormat('D M d Y H:i:s e+', $request->end_date)->toDateTimeString())
             ->where("owner_approved", 1)
             ->where("daily_id", "<", 90000)
@@ -234,7 +234,7 @@ class TransactionController extends Controller
         $perPage = $request->get('per_page', 20);
         $page = $request->get('page', 1);
 
-        $query = Transaction::where("created_at", ">=", Carbon::createFromFormat('D M d Y H:i:s e+', $request->start_date)->toDateTimeString())
+        $query = Transaction::with('user')->where("created_at", ">=", Carbon::createFromFormat('D M d Y H:i:s e+', $request->start_date)->toDateTimeString())
             ->where("created_at", "<=", Carbon::createFromFormat('D M d Y H:i:s e+', $request->end_date)->toDateTimeString())
             ->where("owner_approved", 1)
             ->where("daily_id", "<", 90000)
@@ -334,6 +334,7 @@ class TransactionController extends Controller
             "customer_id" => $request->customer_id,
             "trip_id" => $trip ? $trip->id : null,
             "type" => $customer->type,
+            "user_id" => auth()->id(),
             "created_at" => $customer->type != "Kiriman" ? $request->date : Carbon::now()
         ]);
         $remainingSacks = $transaction->sack + $transaction->sack_free;
@@ -1084,7 +1085,8 @@ class TransactionController extends Controller
                 "finance_approved" => 1,
                 "settled_date" => Carbon::now(),
                 "trip_id" => $branch["trip"]["id"],
-                "type" => "Cabang"
+                "type" => "Cabang",
+                "user_id" => auth()->id()
             ]);
             $rit_transaction = RitTransaction::create([
                 "daily_id" => $transaction->daily_id,
@@ -1295,6 +1297,7 @@ class TransactionController extends Controller
             "customer_id" => $transaction->customer_id,
             "trip_id" => $transaction->trip_id ?? null,
             "type" => $transaction->type,
+            "user_id" => $transaction->user_id,
             "created_at" => Carbon::now(),
             // "created_at" => $transaction->created_at,
             "updated_at" => $transaction->created_at,

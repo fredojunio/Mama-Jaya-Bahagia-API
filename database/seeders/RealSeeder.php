@@ -55,34 +55,34 @@ class RealSeeder extends Seeder
         $user->save();
 
         $user = new User();
-        $user->name = "Owner 2 ";
-        $user->email = "owner2@gmail.com";
+        $user->name = "Yeri";
+        $user->email = "yeriww@gmail.com";
         $user->email_verified_at = Carbon::now();
         $user->password = Hash::make('MJBAHAGIA');
         $user->role_id = 1;
         $user->save();
 
         $user = new User();
-        $user->name = "Admin Pusat";
-        $user->email = "admin1@gmail.com";
+        $user->name = "Adelia";
+        $user->email = "adminpenjualan@gmail.com";
         $user->email_verified_at = Carbon::now();
-        $user->password = Hash::make('admin123');
+        $user->password = Hash::make('PENJUALAN888');
         $user->role_id = 2;
         $user->save();
 
         $user = new User();
-        $user->name = "Admin Cabang";
-        $user->email = "admin2@gmail.com";
+        $user->name = "Indah";
+        $user->email = "adminutama@gmail.com";
         $user->email_verified_at = Carbon::now();
-        $user->password = Hash::make('admin456');
+        $user->password = Hash::make('admin999');
         $user->role_id = 2;
         $user->save();
 
         $user = new User();
-        $user->name = "Admin 3";
-        $user->email = "admin3@gmail.com";
+        $user->name = "Linda";
+        $user->email = "adminkasir@gmail.com";
         $user->email_verified_at = Carbon::now();
-        $user->password = Hash::make('admin789');
+        $user->password = Hash::make('ADMIN777');
         $user->role_id = 2;
         $user->save();
 

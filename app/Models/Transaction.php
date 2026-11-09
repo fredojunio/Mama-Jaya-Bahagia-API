@@ -30,8 +30,13 @@ class Transaction extends Model
         "customer_id", "cas_id",
         "trip_id",
         "type",
-        "created_at"
+        "created_at",
+        "user_id"
     ];
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
     public function customer()
     {
         return $this->belongsTo(Customer::class, 'customer_id', 'id');

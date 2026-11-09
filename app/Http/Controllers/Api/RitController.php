@@ -313,7 +313,8 @@ class RitController extends Controller
                 "owner_approved" => 0,
                 "customer_id" => $rit->customer_id,
                 "trip_id" => $trip->id,
-                "type" => "Owner"
+                "type" => "Owner",
+                "user_id" => auth()->id()
             ]);
         }
         $users = User::where("role_id", 1)->get();
