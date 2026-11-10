@@ -75,12 +75,16 @@ case "$MODE" in
             --no-interaction \
             --no-progress
 
-        test -f "$HOME/.mamajaya-baselined" || {
-            echo "migrations blocked: the one-time baseline marker is missing (docs/deploy.md step 4)"
-            exit 1
-        }
+        if [ "${SKIP_MIGRATIONS:-0}" = "1" ]; then
+            echo "migrations skipped by request (first cutover before baseline)"
+        else
+            test -f "$HOME/.mamajaya-baselined" || {
+                echo "migrations blocked: the one-time baseline marker is missing (docs/deploy.md step 4)"
+                exit 1
+            }
 
-        "$PHP_BIN" artisan migrate --force
+            "$PHP_BIN" artisan migrate --force
+        fi
 
         [ -L public/storage ] || "$PHP_BIN" artisan storage:link
 

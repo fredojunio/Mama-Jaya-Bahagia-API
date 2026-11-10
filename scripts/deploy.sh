@@ -5,6 +5,7 @@
 #   scripts/deploy.sh --check     read-only preflight
 #   scripts/deploy.sh             dry run: print the plan, change nothing
 #   scripts/deploy.sh --apply     deploy
+#   scripts/deploy.sh --apply --skip-migrations   first cutover only, before baseline
 #
 # Required environment:
 #   DEPLOY_HOST  DEPLOY_USER  DEPLOY_PATH
@@ -17,15 +18,17 @@ REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$REPO_ROOT"
 
 usage() {
-    sed -n '2,12p' "$0" | sed 's/^# \{0,1\}//'
+    sed -n '2,13p' "$0" | sed 's/^# \{0,1\}//'
 }
 
 MODE="dry-run"
+SKIP_MIGRATIONS=0
 
 for argument in "$@"; do
     case "$argument" in
         --apply) MODE="apply" ;;
         --check) MODE="check" ;;
+        --skip-migrations) SKIP_MIGRATIONS=1 ;;
         -h|--help) usage; exit 0 ;;
         *)
             echo "Unknown option: $argument" >&2
@@ -97,10 +100,11 @@ command -v rsync >/dev/null 2>&1 || {
     exit 1
 }
 
-if ! remote 'test -f "$HOME/.mamajaya-baselined"'; then
+if [[ "$SKIP_MIGRATIONS" != "1" ]] && ! remote 'test -f "$HOME/.mamajaya-baselined"'; then
     echo "Refusing to deploy: the one-time migration baseline has not been done." >&2
     echo "Follow docs/deploy.md step 4, then create the marker:" >&2
     echo "  ssh ... 'touch ~/.mamajaya-baselined'" >&2
+    echo "For the first code-only cutover, use --apply --skip-migrations." >&2
     exit 1
 fi
 
@@ -146,7 +150,7 @@ rsync -az --delete \
     ./ "$REMOTE:$DEPLOY_PATH/"
 
 echo "==> Installing dependencies and running migrations"
-remote_script "post" "$SHA"
+REMOTE_ENV="SKIP_MIGRATIONS=$SKIP_MIGRATIONS" remote_script "post" "$SHA"
 
 STARTED=0
 

@@ -57,9 +57,21 @@ DEPLOY_HOST=<host> DEPLOY_PORT=<port> DEPLOY_USER=<user> DEPLOY_PATH=<path> \
 
 If it reports a missing `artisan` or `public/`, stop and fix `DEPLOY_PATH` before deploying. The deploy script does not support a flattened layout where `public/` contents were copied directly into the web root.
 
-### 4. Baseline the existing database (one time)
+### 4. First, code-only deploy
 
-Production was built partly outside Laravel's migration system. Reconcile the bookkeeping **after** taking a dump, and **before** the first automated deploy runs migrations:
+The baseline command has to exist on the server before you can run it, so the first deploy ships code but skips migrations:
+
+```bash
+DEPLOY_HOST=<host> DEPLOY_PORT=<port> DEPLOY_USER=<user> DEPLOY_PATH=<path> \
+DEPLOY_SSH_KEY=~/.ssh/mamajaya_deploy_ed25519 \
+  scripts/deploy.sh --apply --skip-migrations
+```
+
+This backs up, syncs, installs dependencies, and rebuilds caches, but leaves the database untouched. The workflow refuses to deploy until the marker exists, which is why this first cutover is manual.
+
+### 5. Baseline the existing database (one time)
+
+Production was built partly outside Laravel's migration system. Reconcile the bookkeeping **after** taking a dump, and **before** any deploy runs migrations:
 
 ```bash
 # On the server, from the application root
@@ -88,9 +100,9 @@ touch ~/.mamajaya-baselined
 
 Both the local deploy script and the remote step refuse to run migrations without this marker. It lives outside the application, so deploys cannot remove it.
 
-### 5. Rehearse a deploy
+### 6. First automated deploy
 
-Run the workflow manually from the Actions tab (`workflow_dispatch`) and watch it. The first run installs dependencies, runs migrations, and rebuilds caches.
+Run the workflow manually from the Actions tab (`workflow_dispatch` with `action: deploy`) and watch it. This run installs dependencies, runs migrations, and rebuilds caches.
 
 ## Daily flow
 

@@ -45,8 +45,13 @@ remote() {
 remote_script() {
     local mode="$1"
     local argument="${2:-}"
+    local prefix=""
 
-    remote "bash ~/.mamajaya-remote-deploy.sh $(q "$mode") $(q "$DEPLOY_PATH") $(q "$argument")"
+    if [[ -n "${REMOTE_ENV:-}" ]]; then
+        prefix="${REMOTE_ENV} "
+    fi
+
+    remote "${prefix}bash ~/.mamajaya-remote-deploy.sh $(q "$mode") $(q "$DEPLOY_PATH") $(q "$argument")"
 }
 
 upload_remote_script() {
