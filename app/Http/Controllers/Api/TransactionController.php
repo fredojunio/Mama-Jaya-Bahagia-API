@@ -819,6 +819,8 @@ class TransactionController extends Controller
 
     public function reject_finance(Transaction $transaction)
     {
+        $userName = auth()->user() ? auth()->user()->name : 'Finance';
+
         if ($transaction->type == "Cas") {
             $cas = Cas::find($transaction->cas_id);
             $deposit = CasDeposit::first();
@@ -847,12 +849,12 @@ class TransactionController extends Controller
                         "sold_date" => null
                     ]);
                     RitHistory::create([
-                        "info" => "Rit tidak jadi habis terjual karena nota di reject oleh finance.",
+                        "info" => "Rit tidak jadi habis terjual karena nota di reject oleh " . $userName . ".",
                         "rit_id" => $rite->id
                     ]);
                 }
                 RitHistory::create([
-                    "info" => "Rit di reject oleh finance, Tonase asli: {$rite->tonnage_left}, Tambahan tonase karena direject: " . ($rit["tonnage"] * $rit["masak"]),
+                    "info" => "Rit di reject oleh " . $userName . ". Tonase asli: {$rite->tonnage_left}, Tambahan tonase karena direject: " . ($rit["tonnage"] * $rit["masak"]),
                     "rit_id" => $rite->id
                 ]);
                 $rite->update([
