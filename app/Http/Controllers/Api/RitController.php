@@ -124,6 +124,7 @@ class RitController extends Controller
         $startDate = Carbon::createFromFormat('D M d Y H:i:s e+', $request->start_date);
         $endDate = Carbon::createFromFormat('D M d Y H:i:s e+', $request->end_date);
         $lastDateOfPreviousMonth = $startDate->copy()->startOfMonth()->subDay()->toDateString();
+        $filterTransactions = $request->boolean('filter_transactions');
 
         $rits = Rit::whereNotNull("sold_date")
             ->where(function ($query) use ($startDate, $endDate, $lastDateOfPreviousMonth) {
@@ -139,11 +140,21 @@ class RitController extends Controller
             ->when($request->item_id, function ($query) use ($request) {
                 $query->where("item_id", $request->item_id);
             })
-            ->with(['reports' => function ($query) use ($lastDateOfPreviousMonth) {
-                $query->whereHas('report', function ($q) use ($lastDateOfPreviousMonth) {
-                    $q->whereDate('created_at', $lastDateOfPreviousMonth);
-                });
-            }])
+            ->with([
+                'transactions' => function ($query) use ($startDate, $endDate, $filterTransactions) {
+                    if ($filterTransactions) {
+                        $query->whereBetween('created_at', [
+                            $startDate->toDateTimeString(),
+                            $endDate->toDateTimeString(),
+                        ]);
+                    }
+                },
+                'reports' => function ($query) use ($lastDateOfPreviousMonth) {
+                    $query->whereHas('report', function ($q) use ($lastDateOfPreviousMonth) {
+                        $q->whereDate('created_at', $lastDateOfPreviousMonth);
+                    });
+                },
+            ])
             ->get();
 
         $return = [

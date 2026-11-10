@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\CustomerController;
 use App\Http\Controllers\Api\ExpenseController;
 use App\Http\Controllers\Api\IncomeController;
 use App\Http\Controllers\Api\ItemController;
+use App\Http\Controllers\Api\LabaRugiController;
 use App\Http\Controllers\Api\NotificationController;
 use App\Http\Controllers\Api\ReportController;
 use App\Http\Controllers\Api\ReportRitController;
@@ -109,6 +110,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:api'], function () {
     Route::apiResource('report', ReportController::class);
     Route::apiResource('income', IncomeController::class);
     Route::post('/expense/filter', [ExpenseController::class, 'filter']);
+    Route::post('/laba_rugi/get_report', [LabaRugiController::class, 'get_report']);
     Route::get('/coa', [CoaController::class, 'index']);
     Route::apiResource('expense', ExpenseController::class);
     Route::apiResource('report_rit', ReportRitController::class);
