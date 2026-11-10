@@ -17,7 +17,7 @@ REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$REPO_ROOT"
 
 usage() {
-    sed -n '2,14p' "$0" | sed 's/^# \{0,1\}//'
+    sed -n '2,12p' "$0" | sed 's/^# \{0,1\}//'
 }
 
 MODE="dry-run"
@@ -35,51 +35,8 @@ for argument in "$@"; do
     esac
 done
 
-: "${DEPLOY_HOST:?DEPLOY_HOST is required}"
-: "${DEPLOY_USER:?DEPLOY_USER is required}"
-: "${DEPLOY_PATH:?DEPLOY_PATH is required}"
-
-DEPLOY_PORT="${DEPLOY_PORT:-22}"
-DEPLOY_SSH_KEY="${DEPLOY_SSH_KEY:-}"
-REMOTE="${DEPLOY_USER}@${DEPLOY_HOST}"
-
-case "$DEPLOY_PATH" in
-    /|/home|/home/|"$HOME")
-        echo "Refusing unsafe DEPLOY_PATH: $DEPLOY_PATH" >&2
-        exit 2
-        ;;
-esac
-
-if [[ "$DEPLOY_PATH" != /* ]]; then
-    echo "DEPLOY_PATH must be absolute: $DEPLOY_PATH" >&2
-    exit 2
-fi
-
-SSH_OPTIONS=(
-    -p "$DEPLOY_PORT"
-    -o BatchMode=yes
-    -o StrictHostKeyChecking=yes
-    -o ConnectTimeout=15
-)
-
-if [[ -n "$DEPLOY_SSH_KEY" ]]; then
-    SSH_OPTIONS+=(-i "$DEPLOY_SSH_KEY")
-fi
-
-q() {
-    printf '%q' "$1"
-}
-
-remote() {
-    ssh "${SSH_OPTIONS[@]}" "$REMOTE" "$@"
-}
-
-remote_script() {
-    local mode="$1"
-    local argument="${2:-}"
-
-    remote "bash ~/.mamajaya-remote-deploy.sh $(q "$mode") $(q "$DEPLOY_PATH") $(q "$argument")"
-}
+# shellcheck source=lib/remote.sh
+source "$REPO_ROOT/scripts/lib/remote.sh"
 
 preflight() {
     remote "bash -s" <<EOF
@@ -89,13 +46,18 @@ cd $(q "$DEPLOY_PATH")
 test -f artisan || { echo "missing artisan in $DEPLOY_PATH"; exit 1; }
 test -d public || { echo "missing public/ in $DEPLOY_PATH"; exit 1; }
 
+php -v | head -n 1
+php -r 'exit(version_compare(PHP_VERSION, "8.1.0", ">=") ? 0 : 1);' \
+    || { echo "PHP 8.1 or newer is required"; exit 1; }
+
 if [ -f "\$HOME/.mamajaya-baselined" ]; then
     echo "baseline marker: present"
 else
     echo "baseline marker: MISSING — migrations stay blocked until docs/deploy.md step 4 is done"
 fi
 
-php -v | head -n 1
+deployed="\$(cat "\$HOME/.mamajaya-deployed" 2>/dev/null || echo unknown)"
+echo "deployed: \$deployed"
 
 for binary in composer mysqldump gzip tar; do
     command -v "\$binary" >/dev/null 2>&1 || { echo "missing required binary: \$binary"; exit 1; }
@@ -103,10 +65,6 @@ done
 
 composer --version
 EOF
-}
-
-upload_remote_script() {
-    remote "cat > ~/.mamajaya-remote-deploy.sh && chmod 700 ~/.mamajaya-remote-deploy.sh" < scripts/remote-deploy.sh
 }
 
 echo "==> Preflight ${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_PORT} ${DEPLOY_PATH}"
@@ -188,7 +146,7 @@ rsync -az --delete \
     ./ "$REMOTE:$DEPLOY_PATH/"
 
 echo "==> Installing dependencies and running migrations"
-remote_script "post"
+remote_script "post" "$SHA"
 
 STARTED=0
 

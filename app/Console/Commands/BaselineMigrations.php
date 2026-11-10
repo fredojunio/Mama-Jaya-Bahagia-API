@@ -11,7 +11,6 @@ class BaselineMigrations extends Command
 {
     protected $signature = 'deploy:baseline-migrations
         {--path= : Directory containing migration files}
-        {--through= : Only baseline up to and including this migration name}
         {--apply : Record the migrations as applied (default is a dry run)}';
 
     protected $description = 'Record migrations that already ran outside Laravel without executing any schema change';
@@ -39,20 +38,6 @@ class BaselineMigrations extends Command
             ->sort()
             ->values();
 
-        $through = $this->option('through');
-
-        if ($through !== null) {
-            $index = $files->search($through);
-
-            if ($index === false) {
-                $this->error("Migration not found in {$path}: {$through}");
-
-                return self::FAILURE;
-            }
-
-            $files = $files->slice(0, $index + 1)->values();
-        }
-
         $recorded = DB::table($table)->pluck('migration')->all();
 
         $missing = $files
@@ -69,7 +54,7 @@ class BaselineMigrations extends Command
         $blocked = [];
 
         foreach ($missing as $name) {
-            $createdTable = $this->createdTable($name);
+            $createdTable = $this->tableCreatedByMigration($name);
 
             if ($createdTable !== null && ! Schema::hasTable($createdTable)) {
                 $blocked[$name] = $createdTable;
@@ -113,7 +98,7 @@ class BaselineMigrations extends Command
         return self::SUCCESS;
     }
 
-    private function createdTable(string $migration): ?string
+    private function tableCreatedByMigration(string $migration): ?string
     {
         if (preg_match('/(?:^|_)create_(.+)_table$/', $migration, $matches) === 1) {
             return $matches[1];

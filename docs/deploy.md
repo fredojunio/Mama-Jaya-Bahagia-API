@@ -123,6 +123,12 @@ DEPLOY_SSH_KEY=~/.ssh/mamajaya_deploy_ed25519 \
 
 ## Rollback
 
+### From GitHub Actions
+
+Run the workflow manually with `action: rollback`, the archive name, and optionally the matching database dump. This requires the same secrets as a deploy and does not need your laptop.
+
+### From your machine
+
 List what is available:
 
 ```bash
@@ -144,7 +150,9 @@ If a migration caused the problem, restore the matching dump as well:
 ... scripts/rollback.sh --archive <timestamp>-<sha> --db <timestamp>-<sha>.sql.gz --apply
 ```
 
-The rollback restores the archive over the application (keeping `.env` and `storage`), reinstalls dependencies, rebuilds caches, and brings the site back up.
+The rollback restores the archive over the application (keeping `.env`, `storage`, and the installed `vendor`), reinstalls dependencies, rebuilds caches, and brings the site back up.
+
+The server records the last deployed commit in `~/.mamajaya-deployed`, and the preflight prints it. That is the durable answer to "what is live?".
 
 ## Data repairs
 

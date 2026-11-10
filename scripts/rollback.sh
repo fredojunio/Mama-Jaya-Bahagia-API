@@ -38,39 +38,8 @@ while [[ $# -gt 0 ]]; do
     shift
 done
 
-: "${DEPLOY_HOST:?DEPLOY_HOST is required}"
-: "${DEPLOY_USER:?DEPLOY_USER is required}"
-: "${DEPLOY_PATH:?DEPLOY_PATH is required}"
-
-DEPLOY_PORT="${DEPLOY_PORT:-22}"
-DEPLOY_SSH_KEY="${DEPLOY_SSH_KEY:-}"
-REMOTE="${DEPLOY_USER}@${DEPLOY_HOST}"
-
-SSH_OPTIONS=(
-    -p "$DEPLOY_PORT"
-    -o BatchMode=yes
-    -o StrictHostKeyChecking=yes
-    -o ConnectTimeout=15
-)
-
-if [[ -n "$DEPLOY_SSH_KEY" ]]; then
-    SSH_OPTIONS+=(-i "$DEPLOY_SSH_KEY")
-fi
-
-q() {
-    printf '%q' "$1"
-}
-
-remote() {
-    ssh "${SSH_OPTIONS[@]}" "$REMOTE" "$@"
-}
-
-remote_script() {
-    local mode="$1"
-    local argument="${2:-}"
-
-    remote "bash ~/.mamajaya-remote-deploy.sh $(q "$mode") $(q "$DEPLOY_PATH") $(q "$argument")"
-}
+# shellcheck source=lib/remote.sh
+source "$REPO_ROOT/scripts/lib/remote.sh"
 
 if [[ "$LIST" == "1" ]]; then
     remote_script "list-backups"
@@ -98,8 +67,6 @@ if [[ "$MODE" != "apply" ]]; then
     exit 0
 fi
 
-remote "cat > ~/.mamajaya-remote-deploy.sh && chmod 700 ~/.mamajaya-remote-deploy.sh" < scripts/remote-deploy.sh
-
 cleanup() {
     local status=$?
 
@@ -110,6 +77,8 @@ cleanup() {
 }
 
 trap cleanup EXIT
+
+upload_remote_script
 
 remote_script "down"
 

@@ -32,34 +32,8 @@ prune() {
 }
 
 case "$MODE" in
-    check)
-        echo "app_dir: $(pwd)"
-        echo "php: $("$PHP_BIN" -v | head -n 1)"
-
-        for binary in "$PHP_BIN" "$COMPOSER_BIN" mysqldump gzip tar; do
-            command -v "$binary" >/dev/null 2>&1 || {
-                echo "missing required binary: $binary"
-                exit 1
-            }
-        done
-
-        "$COMPOSER_BIN" --version
-        command -v rsync >/dev/null 2>&1 || echo "warning: rsync is missing (rollback needs it)"
-
-        test -f artisan || {
-            echo "missing artisan in $APP_DIR (is DEPLOY_PATH the Laravel application root?)"
-            exit 1
-        }
-        test -d public || {
-            echo "missing public/ in $APP_DIR (unsupported layout)"
-            exit 1
-        }
-
-        echo "layout: standard (application root contains public/)"
-        ;;
-
     down)
-        "$PHP_BIN" artisan down --retry=15 || true
+        "$PHP_BIN" artisan down --retry=15
         ;;
 
     up)
@@ -118,6 +92,10 @@ case "$MODE" in
         fi
 
         chmod -R ug+rwX storage bootstrap/cache
+
+        if [ -n "$ARG" ]; then
+            printf '%s\n' "$ARG" > "$HOME/.mamajaya-deployed"
+        fi
         ;;
 
     rollback)
@@ -136,8 +114,11 @@ case "$MODE" in
 
         rsync -a --delete \
             --exclude=.env \
+            --exclude=.git \
             --exclude=storage \
             --exclude=public/storage \
+            --exclude=vendor \
+            --exclude=bootstrap/cache \
             "$workdir/" "$APP_DIR/"
 
         rm -rf "$workdir"
@@ -156,6 +137,10 @@ case "$MODE" in
         fi
 
         chmod -R ug+rwX storage bootstrap/cache
+
+        deployed="${ARG##*-}"
+        deployed="${deployed%.tar.gz}"
+        printf '%s\n' "$deployed" > "$HOME/.mamajaya-deployed"
         ;;
 
     restore-db)

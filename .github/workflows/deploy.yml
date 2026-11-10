@@ -6,6 +6,21 @@ on:
       - main
   pull_request:
   workflow_dispatch:
+    inputs:
+      action:
+        description: 'deploy or rollback'
+        required: true
+        default: deploy
+        type: choice
+        options:
+          - deploy
+          - rollback
+      archive:
+        description: 'Code archive name (rollback only, use scripts/rollback.sh --list to find one)'
+        required: false
+      dump:
+        description: 'Database dump name (rollback only, optional)'
+        required: false
 
 permissions:
   contents: read
@@ -69,7 +84,7 @@ jobs:
   deploy:
     name: Deploy
     needs: test
-    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main' && (github.event_name != 'workflow_dispatch' || inputs.action != 'rollback')
     runs-on: ubuntu-latest
     timeout-minutes: 20
 
@@ -108,4 +123,59 @@ jobs:
             echo "The site may be in maintenance mode. From the server run \`php artisan up\`, or re-run the workflow."
             echo ""
             echo "See \`docs/deploy.md\` for the rollback procedure."
+          } >> "$GITHUB_STEP_SUMMARY"
+
+  rollback:
+    name: Rollback
+    if: github.event_name == 'workflow_dispatch' && inputs.action == 'rollback' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install SSH key
+        env:
+          DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+          DEPLOY_KNOWN_HOSTS: ${{ secrets.DEPLOY_KNOWN_HOSTS }}
+        run: |
+          install -d -m 700 "$HOME/.ssh"
+          printf '%s\n' "$DEPLOY_SSH_KEY" > "$HOME/.ssh/mamajaya_deploy"
+          chmod 600 "$HOME/.ssh/mamajaya_deploy"
+          printf '%s\n' "$DEPLOY_KNOWN_HOSTS" > "$HOME/.ssh/known_hosts"
+          chmod 644 "$HOME/.ssh/known_hosts"
+
+      - name: Roll back
+        env:
+          ARCHIVE: ${{ inputs.archive }}
+          DUMP: ${{ inputs.dump }}
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_PORT: ${{ secrets.DEPLOY_PORT }}
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+          DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}
+        run: |
+          if [ -z "$ARCHIVE" ]; then
+            echo "::error::The archive input is required for a rollback."
+            exit 1
+          fi
+
+          export DEPLOY_SSH_KEY="$HOME/.ssh/mamajaya_deploy"
+
+          args=(--archive "$ARCHIVE" --apply)
+
+          if [ -n "$DUMP" ]; then
+            args=(--archive "$ARCHIVE" --db "$DUMP" --apply)
+          fi
+
+          bash scripts/rollback.sh "${args[@]}"
+
+      - name: Report failure
+        if: failure()
+        run: |
+          echo "::error title=Rollback failed::Check the log; the site may be in maintenance mode."
+          {
+            echo "### Rollback failed"
+            echo ""
+            echo "From the server run \`php artisan up\`, then retry or restore manually."
           } >> "$GITHUB_STEP_SUMMARY"

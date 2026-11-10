@@ -9,6 +9,8 @@ use Throwable;
 
 class MysqlDump
 {
+    private ?string $helpOutput = null;
+
     public function __construct(
         private Connection $connection,
         private string $mysqldump = 'mysqldump',
@@ -128,14 +130,18 @@ class MysqlDump
 
     private function supports(string $flag): bool
     {
-        $name = strtok($flag, '=');
+        $name = (string) strtok($flag, '=');
 
         try {
-            $process = new Process([$this->mysqldump, '--help']);
-            $process->setTimeout(30);
-            $process->run();
+            if ($this->helpOutput === null) {
+                $process = new Process([$this->mysqldump, '--help']);
+                $process->setTimeout(30);
+                $process->run();
 
-            return $process->isSuccessful() && str_contains($process->getOutput(), (string) $name);
+                $this->helpOutput = $process->isSuccessful() ? $process->getOutput() : '';
+            }
+
+            return str_contains($this->helpOutput, $name);
         } catch (Throwable) {
             return false;
         }
