@@ -361,16 +361,11 @@ class RitController extends Controller
 
     public function arrived(Request $request, Rit $rit)
     {
-        $request->validate([
-            'buy_price' => ['required', 'numeric', 'min:1'],
-        ]);
-
         $rit->update([
             'sack' => $request->sack,
             'arrival_date' => Carbon::now(),
             'arrived_tonnage' => $request->tonnage,
             'tonnage_left' => $request->tonnage,
-            'buy_price' => $request->buy_price,
         ]);
         RitHistory::create([
             "info" => "Rit sudah datang, Tonase datang: $request->tonnage",

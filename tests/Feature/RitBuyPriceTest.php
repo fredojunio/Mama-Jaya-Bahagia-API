@@ -19,42 +19,6 @@ class RitBuyPriceTest extends TestCase
         Passport::actingAs(User::first());
     }
 
-    public function test_arrival_requires_buy_price(): void
-    {
-        $rit = $this->makeRit();
-
-        $this->postJson("/api/admin/rit/{$rit->id}/arrived", $this->arrivalPayload())
-            ->assertStatus(422);
-
-        $this->assertNull(DB::table('rits')->where('id', $rit->id)->value('arrival_date'));
-        $this->assertNull(DB::table('rits')->where('id', $rit->id)->value('tonnage_left'));
-        $this->assertNull(DB::table('rits')->where('id', $rit->id)->value('arrived_tonnage'));
-    }
-
-    public function test_arrival_rejects_zero_buy_price(): void
-    {
-        $rit = $this->makeRit();
-
-        $this->postJson("/api/admin/rit/{$rit->id}/arrived", $this->arrivalPayload([
-            'buy_price' => 0,
-        ]))->assertStatus(422);
-    }
-
-    public function test_arrival_stores_buy_price(): void
-    {
-        $rit = $this->makeRit();
-
-        $this->postJson("/api/admin/rit/{$rit->id}/arrived", $this->arrivalPayload([
-            'buy_price' => 1250,
-        ]))->assertOk();
-
-        $stored = DB::table('rits')->where('id', $rit->id)->first();
-
-        $this->assertEqualsWithDelta(1250, $stored->buy_price, 0.001);
-        $this->assertNotNull($stored->arrival_date);
-        $this->assertEqualsWithDelta(100, $stored->tonnage_left, 0.001);
-    }
-
     public function test_pricing_rejects_missing_buy_price(): void
     {
         $rit = $this->makeRit();
@@ -249,16 +213,6 @@ class RitBuyPriceTest extends TestCase
             'created_at' => now(),
             'updated_at' => now(),
         ]);
-    }
-
-    private function arrivalPayload(array $overrides = []): array
-    {
-        return array_merge([
-            'tonnage' => 100,
-            'sack' => 10,
-            'toll_used' => 0,
-            'bbm_used' => 0,
-        ], $overrides);
     }
 
     private function makeRit(array $overrides = []): object
