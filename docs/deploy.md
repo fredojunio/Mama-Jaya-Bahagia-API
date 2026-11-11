@@ -48,7 +48,7 @@ Verify the host fingerprints before trusting them. Compare `ssh-keyscan` output 
 
 ### 3. Confirm the server layout
 
-`DEPLOY_PATH` must be the Laravel application root: the directory containing `artisan` and `public/`. Run the read-only preflight:
+`DEPLOY_PATH` must be the Laravel application root: the directory containing `artisan` and `public/`. On this Hostinger account that is `.../public_html/api`, not `public_html`. Run the read-only preflight:
 
 ```bash
 DEPLOY_HOST=<host> DEPLOY_PORT=<port> DEPLOY_USER=<user> DEPLOY_PATH=<path> \
@@ -182,6 +182,8 @@ php artisan <your-repair-command> --apply
 - **Site is down after a failed deploy**: `ssh` into the server, `cd` to the application root, run `php artisan up`.
 - **Migration fails mid-deploy**: the site is brought back up. Restore the dump from that release with `scripts/rollback.sh --db <dump> --apply` after fixing the code.
 - **Composer runs out of memory**: set `COMPOSER_MEMORY_LIMIT=-1` in the remote script environment.
+- **Composer complains about `ext-sodium`**: Hostinger's PHP 8.1 CLI does not ship it. The deploy passes `--ignore-platform-req=ext-sodium`; Passport uses RSA keys, so the extension is not required at runtime. Remove the flag if the extension is enabled later.
+- **`storage:link` fails with `Call to undefined function symlink()`**: Hostinger disables `symlink()` in CLI. The deploy detects this and skips the link; the API does not serve public storage.
 
 ## Out of scope
 

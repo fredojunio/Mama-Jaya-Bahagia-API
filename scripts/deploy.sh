@@ -142,6 +142,7 @@ rsync -az --delete \
     --exclude 'tests/' \
     --exclude 'vendor/' \
     --exclude 'node_modules/' \
+    --exclude '__MACOSX/' \
     --exclude '.env' \
     --exclude '.DS_Store' \
     --exclude 'storage/' \

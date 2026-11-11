@@ -45,10 +45,14 @@ case "$MODE" in
 
         timestamp="$(date +%Y%m%d-%H%M%S)"
 
-        "$PHP_BIN" artisan deploy:db-dump \
-            --path="$BACKUP_ROOT/db" \
-            --name="$timestamp-$ARG.sql.gz" \
-            --keep="$KEEP"
+        if "$PHP_BIN" artisan list --raw 2>/dev/null | grep -q 'deploy:db-dump'; then
+            "$PHP_BIN" artisan deploy:db-dump \
+                --path="$BACKUP_ROOT/db" \
+                --name="$timestamp-$ARG.sql.gz" \
+                --keep="$KEEP"
+        else
+            echo "warning: deploy:db-dump is not installed yet; skipping the database dump for this cutover"
+        fi
 
         tar -czf "$BACKUP_ROOT/code/$timestamp-$ARG.tar.gz" \
             --exclude=./vendor \
@@ -56,6 +60,7 @@ case "$MODE" in
             --exclude=./storage \
             --exclude=./.env \
             --exclude=./node_modules \
+            --exclude=./__MACOSX \
             --exclude=./.DS_Store \
             -C "$APP_DIR" .
 
@@ -68,12 +73,15 @@ case "$MODE" in
     post)
         trap '"$PHP_BIN" artisan up >/dev/null 2>&1 || true' EXIT
 
+        # Hostinger's PHP 8.1 CLI does not ship ext-sodium. Passport uses RSA
+        # keys, so the platform check can be ignored here safely.
         "$COMPOSER_BIN" install \
             --no-dev \
             --prefer-dist \
             --optimize-autoloader \
             --no-interaction \
-            --no-progress
+            --no-progress \
+            --ignore-platform-req=ext-sodium
 
         if [ "${SKIP_MIGRATIONS:-0}" = "1" ]; then
             echo "migrations skipped by request (first cutover before baseline)"
@@ -86,7 +94,13 @@ case "$MODE" in
             "$PHP_BIN" artisan migrate --force
         fi
 
-        [ -L public/storage ] || "$PHP_BIN" artisan storage:link
+        if [ -L public/storage ]; then
+            :
+        elif "$PHP_BIN" -r 'exit(function_exists("symlink") ? 0 : 1);'; then
+            "$PHP_BIN" artisan storage:link
+        else
+            echo "warning: symlink() is disabled on this PHP; skipping storage:link"
+        fi
 
         "$PHP_BIN" artisan config:cache
 
