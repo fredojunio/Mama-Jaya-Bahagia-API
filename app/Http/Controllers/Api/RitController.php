@@ -361,11 +361,16 @@ class RitController extends Controller
 
     public function arrived(Request $request, Rit $rit)
     {
+        $request->validate([
+            'buy_price' => ['required', 'numeric', 'min:1'],
+        ]);
+
         $rit->update([
             'sack' => $request->sack,
             'arrival_date' => Carbon::now(),
             'arrived_tonnage' => $request->tonnage,
             'tonnage_left' => $request->tonnage,
+            'buy_price' => $request->buy_price,
         ]);
         RitHistory::create([
             "info" => "Rit sudah datang, Tonase datang: $request->tonnage",
@@ -401,6 +406,10 @@ class RitController extends Controller
 
     public function priced(Request $request, Rit $rit)
     {
+        $request->validate([
+            'buy_price' => ['required', 'numeric', 'min:1'],
+        ]);
+
         $userName = auth()->user() ? auth()->user()->name : 'User';
         RitHistory::create([
             "info" => "Rit pengubahan status dari " . $userName . ". Harga Jual: {$request->sell_price}, Harga Beli: {$request->buy_price}, Hold: {$request->is_hold}, Tonase sisa baru: {$request->tonnage}, Tonase sisa sebelumnya: {$rit->tonnage_left}",

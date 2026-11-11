@@ -291,6 +291,12 @@ class TransactionController extends Controller
      */
     public function store(Request $request)
     {
+        $unpricedRit = $this->firstUnpricedRit((array) $request->input('rits', []));
+
+        if ($unpricedRit) {
+            return $this->unpricedRitResponse($unpricedRit);
+        }
+
         $customer = Customer::find($request->customer_id);
         $hasTransactionToday = $customer->transactions()
             ->whereDate('created_at', Carbon::today())
@@ -414,6 +420,12 @@ class TransactionController extends Controller
      */
     public function update(Request $request, Transaction $transaction)
     {
+        $unpricedRit = $this->firstUnpricedRit((array) $request->input('new_transaction.rits', []));
+
+        if ($unpricedRit) {
+            return $this->unpricedRitResponse($unpricedRit);
+        }
+
         $customer = Customer::find($request->new_transaction["customer_id"]);
         if ($transaction->trip_id && $customer->type == "Kiriman") {
             // Sebelumnya kiriman, sekarang tetep kiriman
@@ -1333,5 +1345,26 @@ class TransactionController extends Controller
             'api_results' => TransactionCompleteResource::make($transaction)
         ];
         return SuccessResource::make($return);
+    }
+
+    /**
+     * The first RIT in the payload that cannot be valued because it has no buy price.
+     */
+    private function firstUnpricedRit(array $rits): ?Rit
+    {
+        return Rit::with('item')
+            ->whereIn('id', collect($rits)->pluck('item.id')->filter()->all())
+            ->where(function ($query) {
+                $query->whereNull('buy_price')->orWhere('buy_price', '<=', 0);
+            })
+            ->first();
+    }
+
+    private function unpricedRitResponse(Rit $rit)
+    {
+        return response()->json([
+            'message' => 'RIT ' . ($rit->item->code ?? $rit->id)
+                . ' belum memiliki harga beli. Lengkapi harga beli di Edit Rit sebelum menjual.',
+        ], 422);
     }
 }
