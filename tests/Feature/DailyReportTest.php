@@ -73,6 +73,8 @@ class DailyReportTest extends TestCase
 
     public function test_an_unknown_rit_is_rejected(): void
     {
+        $this->rit('TEST-UNKNOWN-RIT');
+
         $payload = $this->payloadFrom($this->previewRows(), []);
         $payload[] = ['rit_id' => 999999999, 'real_tonnage' => 1];
 
@@ -88,6 +90,8 @@ class DailyReportTest extends TestCase
 
     public function test_a_duplicate_rit_is_rejected(): void
     {
+        $this->rit('TEST-DUPLICATE-RIT');
+
         $payload = $this->payloadFrom($this->previewRows(), []);
         $payload[] = $payload[0];
 
@@ -103,6 +107,8 @@ class DailyReportTest extends TestCase
 
     public function test_a_negative_physical_count_is_rejected(): void
     {
+        $this->rit('TEST-NEGATIVE-RIT');
+
         $payload = $this->payloadFrom($this->previewRows(), []);
         $payload[0]['real_tonnage'] = -1;
 
@@ -118,6 +124,8 @@ class DailyReportTest extends TestCase
 
     public function test_a_rejected_save_keeps_the_existing_daily_report(): void
     {
+        $this->rit('TEST-KEEP-REPORT');
+
         $payload = $this->payloadFrom($this->previewRows(), []);
 
         $reportId = $this->postJson('/api/admin/report/create_daily_report', [
