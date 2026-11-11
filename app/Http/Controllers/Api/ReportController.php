@@ -20,7 +20,9 @@ use App\Models\Saving;
 use App\Models\Transaction;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\ValidationException;
 
 class ReportController extends Controller
 {
@@ -54,11 +56,9 @@ class ReportController extends Controller
 
     public function create_daily_report(Request $request)
     {
-        $old_report = Report::whereDate('created_at', Carbon::today())
-            ->first();
-        if ($old_report) {
-            $old_report->delete();
-        }
+        $rits = $this->dailyReportRits();
+        $realTonnageByRit = $this->realTonnageByRit($request, $rits);
+
         $income = Payment::whereDate('created_at', Carbon::today())
             ->where('type', 'Cash')
             ->sum('amount');
@@ -137,7 +137,7 @@ class ReportController extends Controller
             ->sum('amount');
         $cas_transfer = Cas::whereDate('created_at', Carbon::today())
             ->sum('transfer');
-        $report = Report::create([
+        $reportAttributes = [
             "money" => $income - $expense - $cas_transfer,
             "income" => $allincome,
             "real_income" => $request->real_income,
@@ -154,61 +154,70 @@ class ReportController extends Controller
             "thr_expense" => $thr_expense,
             "salary_expense" => $salary_expense,
             "operational_expense" => $operational_expense + $vehicle_expense,
-        ]);
-        $rits = Rit::where("tonnage_left", ">", 0)->orWhere("sold_date", Carbon::today())->get();
-        foreach ($rits as $key => $rit) {
-            $todayTransactions = DB::table('transactions')
-                ->whereDate('transactions.created_at', Carbon::today())
-                ->whereNotIn('transactions.type', ['Owner', 'Cabang'])
-                ->join('rit_transactions', 'transactions.id', '=', 'rit_transactions.transaction_id')
-                ->where('rit_transactions.rit_id', $rit->id)
-                ->select(DB::raw('SUM(rit_transactions.tonnage * rit_transactions.masak) AS total_tonnage_times_masak'))
-                ->first();
-            $totalTonnageTimesMasakToday = $todayTransactions->total_tonnage_times_masak;
-            $totalItemPrice = RitTransaction::where('rit_id', $rit->id)
-                ->whereHas('transaction', function ($query) {
-                    $query->whereNotIn('type', ['Owner', 'Cabang']);
-                })
-                ->whereDate('created_at', Carbon::today())
-                ->sum('total_price');
-            $transactions = DB::table('transactions')
-                ->whereNotIn('transactions.type', ['Owner', 'Cabang'])
-                ->join('rit_transactions', 'transactions.id', '=', 'rit_transactions.transaction_id')
-                ->where('rit_transactions.rit_id', $rit->id)
-                ->select(DB::raw('SUM(rit_transactions.tonnage * rit_transactions.masak) AS total_tonnage_times_masak'))
-                ->first();
-            $totalTonnageTimesMasak = $transactions->total_tonnage_times_masak;
+        ];
+        $report = DB::transaction(function () use ($rits, $realTonnageByRit, $reportAttributes) {
+            Report::whereDate('created_at', Carbon::today())->delete();
 
-            $report_rit = ReportRit::create([
-                "tonnage_left" => $rit->tonnage_left,
-                "tonnage_sold" => $totalTonnageTimesMasakToday,
-                "tonnage_sold_price" => $totalItemPrice,
-                "real_tonnage" => $request->rits[$key]["real_tonnage"],
-                "total_tonnage_sold" => $totalTonnageTimesMasak,
-                "rit_id" => $rit->id,
-                "report_id" => $report->id
-            ]);
-        }
-        $transactions = Transaction::whereNull("settled_date")
-            ->where(function ($query) {
-                $query
-                    ->where('owner_approved', '<>', 2)
-                    ->where('owner_approved', '<>', 3)
-                    ->orWhereNull('owner_approved');
-            })
-            ->where(function ($query) {
-                $query->whereNotNull('total_price');
-            })
-            ->get();
-        foreach ($transactions as $key => $transaction) {
-            ReportTransaction::create([
-                "amount" => $transaction->total_price,
-                "transaction_date" => $transaction->created_at,
-                "settled_date" => $transaction->settled_date,
-                "transaction_id" => $transaction->id,
-                "report_id" => $report->id,
-            ]);
-        }
+            $report = Report::create($reportAttributes);
+
+            foreach ($rits as $rit) {
+                $todayTransactions = DB::table('transactions')
+                    ->whereDate('transactions.created_at', Carbon::today())
+                    ->whereNotIn('transactions.type', ['Owner', 'Cabang'])
+                    ->join('rit_transactions', 'transactions.id', '=', 'rit_transactions.transaction_id')
+                    ->where('rit_transactions.rit_id', $rit->id)
+                    ->select(DB::raw('SUM(rit_transactions.tonnage * rit_transactions.masak) AS total_tonnage_times_masak'))
+                    ->first();
+                $totalTonnageTimesMasakToday = $todayTransactions->total_tonnage_times_masak;
+                $totalItemPrice = RitTransaction::where('rit_id', $rit->id)
+                    ->whereHas('transaction', function ($query) {
+                        $query->whereNotIn('type', ['Owner', 'Cabang']);
+                    })
+                    ->whereDate('created_at', Carbon::today())
+                    ->sum('total_price');
+                $transactions = DB::table('transactions')
+                    ->whereNotIn('transactions.type', ['Owner', 'Cabang'])
+                    ->join('rit_transactions', 'transactions.id', '=', 'rit_transactions.transaction_id')
+                    ->where('rit_transactions.rit_id', $rit->id)
+                    ->select(DB::raw('SUM(rit_transactions.tonnage * rit_transactions.masak) AS total_tonnage_times_masak'))
+                    ->first();
+                $totalTonnageTimesMasak = $transactions->total_tonnage_times_masak;
+
+                ReportRit::create([
+                    "tonnage_left" => $rit->tonnage_left,
+                    "tonnage_sold" => $totalTonnageTimesMasakToday,
+                    "tonnage_sold_price" => $totalItemPrice,
+                    "real_tonnage" => $realTonnageByRit[$rit->id],
+                    "total_tonnage_sold" => $totalTonnageTimesMasak,
+                    "rit_id" => $rit->id,
+                    "report_id" => $report->id
+                ]);
+            }
+
+            $transactions = Transaction::whereNull("settled_date")
+                ->where(function ($query) {
+                    $query
+                        ->where('owner_approved', '<>', 2)
+                        ->where('owner_approved', '<>', 3)
+                        ->orWhereNull('owner_approved');
+                })
+                ->where(function ($query) {
+                    $query->whereNotNull('total_price');
+                })
+                ->get();
+
+            foreach ($transactions as $transaction) {
+                ReportTransaction::create([
+                    "amount" => $transaction->total_price,
+                    "transaction_date" => $transaction->created_at,
+                    "settled_date" => $transaction->settled_date,
+                    "transaction_id" => $transaction->id,
+                    "report_id" => $report->id,
+                ]);
+            }
+
+            return $report;
+        });
         $return = [
             'api_code' => 200,
             'api_status' => true,
@@ -216,6 +225,73 @@ class ReportController extends Controller
             'api_results' => ReportResource::make($report)
         ];
         return SuccessResource::make($return);
+    }
+
+    private function dailyReportRits(): Collection
+    {
+        return Rit::where("tonnage_left", ">", 0)
+            ->orWhere("sold_date", Carbon::today())
+            ->get();
+    }
+
+    /**
+     * Map each RIT taking part in today's report to its physical tonnage,
+     * matched by rit_id so the payload order never matters.
+     */
+    private function realTonnageByRit(Request $request, Collection $rits): array
+    {
+        $entries = $request->input('rits');
+
+        if (!is_array($entries)) {
+            throw ValidationException::withMessages([
+                'rits' => 'Daftar RIT wajib diisi.',
+            ]);
+        }
+
+        $knownRitIds = $rits->pluck('id')->map(fn ($id) => (int) $id)->all();
+        $byRit = [];
+
+        foreach ($entries as $entry) {
+            $ritId = isset($entry['rit_id']) ? (int) $entry['rit_id'] : null;
+
+            if ($ritId === null) {
+                throw ValidationException::withMessages([
+                    'rits' => 'Setiap baris RIT wajib menyertakan rit_id.',
+                ]);
+            }
+
+            if (!in_array($ritId, $knownRitIds, true)) {
+                throw ValidationException::withMessages([
+                    'rits' => "RIT {$ritId} tidak termasuk dalam laporan harian hari ini.",
+                ]);
+            }
+
+            if (array_key_exists($ritId, $byRit)) {
+                throw ValidationException::withMessages([
+                    'rits' => "RIT {$ritId} dikirim lebih dari sekali.",
+                ]);
+            }
+
+            $realTonnage = $entry['real_tonnage'] ?? null;
+
+            if ($realTonnage === null || $realTonnage === '' || !is_numeric($realTonnage) || (float) $realTonnage < 0) {
+                throw ValidationException::withMessages([
+                    'rits' => "Tonase fisik untuk RIT {$ritId} tidak valid.",
+                ]);
+            }
+
+            $byRit[$ritId] = (float) $realTonnage;
+        }
+
+        foreach ($knownRitIds as $ritId) {
+            if (!array_key_exists($ritId, $byRit)) {
+                throw ValidationException::withMessages([
+                    'rits' => "Tonase fisik untuk RIT {$ritId} belum diisi.",
+                ]);
+            }
+        }
+
+        return $byRit;
     }
 
     public function get_today_report()
@@ -324,7 +400,7 @@ class ReportController extends Controller
         $report->salary_expense = $salary_expense;
         $report->operational_expense = $operational_expense + $vehicle_expense;
 
-        $rits = Rit::where("tonnage_left", ">", 0)->orWhere("sold_date", Carbon::today())->get();
+        $rits = $this->dailyReportRits();
         $report_rits = [];
         foreach ($rits as $key => $rit) {
             $todayTransactions = DB::table('transactions')

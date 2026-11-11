@@ -29,19 +29,17 @@ class LabaRugiController extends Controller
         $stokAkhir = $this->stockAt($end);
         $beliBarang = $this->purchasesBetween($start, $end);
 
-        $stokAwalTotal = round($this->sumColumn($stokAwal, 'nominal'), 2);
-        $stokAkhirTotal = round($this->sumColumn($stokAkhir, 'nominal'), 2);
-        $beliBarangTotal = round($this->sumColumn($beliBarang, 'nominal'), 2);
+        $stokAwalBlock = $this->stockBlock($stokAwal);
+        $stokAkhirBlock = $this->stockBlock($stokAkhir);
 
-        $stokAwalTonnage = round($this->sumColumn($stokAwal, 'tonnage'), 2);
-        $stokAkhirTonnage = round($this->sumColumn($stokAkhir, 'tonnage'), 2);
+        $beliBarangTotal = round($this->sumColumn($beliBarang, 'nominal'), 2);
         $beliBarangTonnage = round($this->sumColumn($beliBarang, 'tonnage'), 2);
 
         $salesQuery = DB::table('rit_transactions')
             ->whereNotNull('created_at')
             ->whereBetween('created_at', [$start->toDateTimeString(), $end->toDateTimeString()]);
 
-        $hpp = round($stokAwalTotal + $beliBarangTotal - $stokAkhirTotal, 2);
+        $hpp = round($stokAwalBlock['total'] + $beliBarangTotal - $stokAkhirBlock['total'], 2);
         $omset = round((float) (clone $salesQuery)->sum('total_price'), 2);
         $omsetTonnage = round((float) (clone $salesQuery)->sum('tonnage'), 2);
         $biaya = round($this->operationalExpense($start, $end), 2);
@@ -55,14 +53,10 @@ class LabaRugiController extends Controller
                 'month' => $start->format('Y-m'),
                 'stok_awal' => [
                     'rows' => $stokAwal,
-                    'total' => $stokAwalTotal,
-                    'total_tonnage' => $stokAwalTonnage,
-                ],
+                ] + $stokAwalBlock,
                 'stok_akhir' => [
                     'rows' => $stokAkhir,
-                    'total' => $stokAkhirTotal,
-                    'total_tonnage' => $stokAkhirTonnage,
-                ],
+                ] + $stokAkhirBlock,
                 'beli_barang' => [
                     'rows' => $beliBarang,
                     'total' => $beliBarangTotal,
@@ -87,7 +81,7 @@ class LabaRugiController extends Controller
         $rows = DB::select(
             "
             WITH ranked AS (
-                SELECT rr.rit_id, rr.tonnage_left,
+                SELECT rr.rit_id, rr.tonnage_left, rr.real_tonnage,
                        ROW_NUMBER() OVER (
                            PARTITION BY rr.rit_id
                            ORDER BY rep.created_at DESC, rr.id DESC
@@ -97,8 +91,7 @@ class LabaRugiController extends Controller
                 WHERE rep.created_at <= ?
             )
             SELECT r.id AS rit_id, i.code AS item_code, r.arrival_date, r.buy_price,
-                   ranked.tonnage_left,
-                   (ranked.tonnage_left * COALESCE(r.buy_price, 0)) AS nominal
+                   ranked.tonnage_left, ranked.real_tonnage
             FROM rits r
             JOIN ranked ON ranked.rit_id = r.id AND ranked.rn = 1
             LEFT JOIN items i ON i.id = r.item_id
@@ -109,13 +102,33 @@ class LabaRugiController extends Controller
         );
 
         return array_map(function ($row) {
+            // The basis rule runs at the report's 2-decimal precision so the
+            // returned tonnage, badge, and shrinkage totals always agree.
+            $systemTonnage = round((float) $row->tonnage_left, 2);
+            $physicalTonnage = $row->real_tonnage === null
+                ? null
+                : round((float) $row->real_tonnage, 2);
+            $usesPhysical = $physicalTonnage !== null
+                && $physicalTonnage < $systemTonnage;
+            $tonnage = $usesPhysical ? $physicalTonnage : $systemTonnage;
+            $buyPrice = (float) $row->buy_price;
+
             return [
                 'rit_id' => $row->rit_id,
                 'item_code' => $row->item_code,
                 'arrival_date' => $row->arrival_date,
-                'tonnage' => (float) $row->tonnage_left,
-                'buy_price' => (float) $row->buy_price,
-                'nominal' => (float) $row->nominal,
+                'tonnage' => $tonnage,
+                'tonnage_sistem' => $systemTonnage,
+                'tonnage_fisik' => $physicalTonnage,
+                'selisih' => $physicalTonnage === null
+                    ? null
+                    : round($physicalTonnage - $systemTonnage, 2),
+                'selisih_nominal' => $physicalTonnage === null
+                    ? null
+                    : round(($physicalTonnage - $systemTonnage) * $buyPrice, 2),
+                'basis' => $usesPhysical ? 'fisik' : 'sistem',
+                'buy_price' => $buyPrice,
+                'nominal' => round($tonnage * $buyPrice, 2),
             ];
         }, $rows);
     }
@@ -180,6 +193,51 @@ class LabaRugiController extends Controller
         }
 
         return $total;
+    }
+
+    /**
+     * Totals for a stock block, including the informational shrinkage impact.
+     */
+    private function stockBlock(array $rows): array
+    {
+        $total = 0;
+        $totalTonnage = 0;
+        $totalSystemTonnage = 0;
+        $totalPhysicalTonnage = 0;
+        $totalSelisihTonnage = 0;
+        $shrinkageTonnage = 0;
+        $shrinkageNominal = 0;
+
+        foreach ($rows as $row) {
+            $total += $row['nominal'];
+            $totalTonnage += $row['tonnage'];
+            $totalSystemTonnage += $row['tonnage_sistem'];
+
+            if ($row['tonnage_fisik'] === null) {
+                continue;
+            }
+
+            $totalPhysicalTonnage += $row['tonnage_fisik'];
+            $totalSelisihTonnage += $row['selisih'];
+
+            if ($row['selisih'] < 0) {
+                $shortage = $row['tonnage_sistem'] - $row['tonnage_fisik'];
+                $shrinkageTonnage += $shortage;
+                $shrinkageNominal += $shortage * $row['buy_price'];
+            }
+        }
+
+        return [
+            'total' => round($total, 2),
+            'total_tonnage' => round($totalTonnage, 2),
+            'total_sistem_tonnage' => round($totalSystemTonnage, 2),
+            'total_fisik_tonnage' => round($totalPhysicalTonnage, 2),
+            'total_selisih_tonnage' => round($totalSelisihTonnage, 2),
+            'penyusutan' => [
+                'tonnage' => round($shrinkageTonnage, 2),
+                'nominal' => round($shrinkageNominal, 2),
+            ],
+        ];
     }
 
     private function sumColumn(array $rows, string $column): float
