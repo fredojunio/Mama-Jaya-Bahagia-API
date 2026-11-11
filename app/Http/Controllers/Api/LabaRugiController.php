@@ -29,15 +29,21 @@ class LabaRugiController extends Controller
         $stokAkhir = $this->stockAt($end);
         $beliBarang = $this->purchasesBetween($start, $end);
 
-        $stokAwalTotal = round($this->sumNominal($stokAwal), 2);
-        $stokAkhirTotal = round($this->sumNominal($stokAkhir), 2);
-        $beliBarangTotal = round($this->sumNominal($beliBarang), 2);
+        $stokAwalTotal = round($this->sumColumn($stokAwal, 'nominal'), 2);
+        $stokAkhirTotal = round($this->sumColumn($stokAkhir, 'nominal'), 2);
+        $beliBarangTotal = round($this->sumColumn($beliBarang, 'nominal'), 2);
+
+        $stokAwalTonnage = round($this->sumColumn($stokAwal, 'tonnage'), 2);
+        $stokAkhirTonnage = round($this->sumColumn($stokAkhir, 'tonnage'), 2);
+        $beliBarangTonnage = round($this->sumColumn($beliBarang, 'tonnage'), 2);
+
+        $salesQuery = DB::table('rit_transactions')
+            ->whereNotNull('created_at')
+            ->whereBetween('created_at', [$start->toDateTimeString(), $end->toDateTimeString()]);
 
         $hpp = round($stokAwalTotal + $beliBarangTotal - $stokAkhirTotal, 2);
-        $omset = round((float) DB::table('rit_transactions')
-            ->whereNotNull('created_at')
-            ->whereBetween('created_at', [$start->toDateTimeString(), $end->toDateTimeString()])
-            ->sum('total_price'), 2);
+        $omset = round((float) (clone $salesQuery)->sum('total_price'), 2);
+        $omsetTonnage = round((float) (clone $salesQuery)->sum('tonnage'), 2);
         $biaya = round($this->operationalExpense($start, $end), 2);
         $laba = round($omset - $biaya - $hpp, 2);
 
@@ -50,17 +56,21 @@ class LabaRugiController extends Controller
                 'stok_awal' => [
                     'rows' => $stokAwal,
                     'total' => $stokAwalTotal,
+                    'total_tonnage' => $stokAwalTonnage,
                 ],
                 'stok_akhir' => [
                     'rows' => $stokAkhir,
                     'total' => $stokAkhirTotal,
+                    'total_tonnage' => $stokAkhirTonnage,
                 ],
                 'beli_barang' => [
                     'rows' => $beliBarang,
                     'total' => $beliBarangTotal,
+                    'total_tonnage' => $beliBarangTonnage,
                 ],
                 'hpp' => $hpp,
                 'omset' => $omset,
+                'omset_tonnage' => $omsetTonnage,
                 'biaya' => $biaya,
                 'laba' => $laba,
             ],
@@ -172,8 +182,8 @@ class LabaRugiController extends Controller
         return $total;
     }
 
-    private function sumNominal(array $rows): float
+    private function sumColumn(array $rows, string $column): float
     {
-        return array_sum(array_column($rows, 'nominal'));
+        return array_sum(array_column($rows, $column));
     }
 }
